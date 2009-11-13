@@ -812,11 +812,6 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     active Maven profiles, display an effective <acronym>POM</acronym>, print
     the effective settings, or list the attributes of a Maven plugin.</para>
 
-    <note>
-      <para>For a conceptual overview of the POM and plugins see <xref
-      linkend="simple-project" xrefstyle="style:title" />.</para>
-    </note>
-
     <para>The Maven Help plugin has four goals. The first three
     goals—<varname>active-profiles</varname>,
     <varname>effective-pom</varname>, and

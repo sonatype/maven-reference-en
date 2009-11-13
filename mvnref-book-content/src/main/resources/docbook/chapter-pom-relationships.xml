@@ -488,25 +488,20 @@
     <section id="pom-relationships-sect-real-poms">
       <title>Real POMs</title>
 
-      <para>Instead of typing up a contrived set of <acronym>POM</acronym>s to
-      <indexterm>
-          <primary>real POMs</primary>
-        </indexterm>walk you through step-by-step, you should take a look at
-      the examples in <xref linkend="part-example" />. Maven is something of a
-      chameleon; you can pick and choose the features you want to take
-      advantage of. Some open source projects may value the ability to list
-      developers and contributors, generate clean project documentation, and
-      manage releases automatically using the Maven Release plugin. On the
-      other hand, someone working in a corporate environment on a small team
-      might not be interested in the distribution management capabilities of
-      Maven nor the ability to list developers. The remainder of this chapter
-      is going to discuss features of the <acronym>POM</acronym> in isolation.
-      Instead of bombarding you with a 10-page listing of a set of related
-      <acronym>POM</acronym>s, we’re going to focus on creating a good
-      reference for specific sections of the <acronym>POM</acronym>. In this
-      chapter, we discuss relationships between <acronym>POM</acronym>s, but
-      we don’t illustrate such a project here. If you are looking for such an
-      illustration, refer to <xref linkend="multimodule-web-spring" />.</para>
+      <para>Maven is something of a chameleon; you can pick and choose the
+      features you want to take advantage of. Some open source projects may
+      value the ability to list developers and contributors, generate clean
+      project documentation, and manage releases automatically using the Maven
+      Release plugin. On the other hand, someone working in a corporate
+      environment on a small team might not be interested in the distribution
+      management capabilities of Maven nor the ability to list developers. The
+      remainder of this chapter is going to discuss features of the
+      <acronym>POM</acronym> in isolation. Instead of bombarding you with a
+      10-page listing of a set of related <acronym>POM</acronym>s, we’re going
+      to focus on creating a good reference for specific sections of the
+      <acronym>POM</acronym>. In this chapter, we discuss relationships
+      between <acronym>POM</acronym>s, but we don’t illustrate such a project
+      here.</para>
     </section>
   </section>
 
@@ -969,9 +964,7 @@
 
                 <secondary>using test-scoped dependencies</secondary>
               </indexterm> operation of an application, and they are available
-            only during test compilation and execution phases. The
-            <literal>test</literal> scope was previously introduced in <xref
-            linkend="customizing-sect-test-scope" />.</para>
+            only during test compilation and execution phases.</para>
           </listitem>
         </varlistentry>
 
@@ -1609,8 +1602,7 @@
     <section id="pom-relationships-sect-more-coordinates">
       <title>More on Coordinates</title>
 
-      <para>Coordinates define a unique location for a project. They were
-      first introduced in <xref linkend="simple-project" />. Projects are
+      <para>Coordinates define a unique location for a project. Projects are
       related to one another using Maven Coordinates.
       <varname>project-a</varname> doesn't just depend on
       <varname>project-b</varname>; a project with a

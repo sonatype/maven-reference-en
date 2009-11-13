@@ -51,16 +51,6 @@
       </author>
 
       <author>
-        <firstname>Bruce</firstname>
-
-        <surname>Snyder</surname>
-
-        <affiliation>
-          <orgname>${project.organization.name}</orgname>
-        </affiliation>
-      </author>
-
-      <author>
         <firstname>Jason</firstname>
 
         <surname>Van Zyl</surname>
@@ -88,7 +78,6 @@
     <abstract role="description-short">
       <para>Maven: The Definitive Guide is a book about Apache Maven.</para>
     </abstract>
-
   </bookinfo>
 
   <xi:include href="chapter-copyright.xml"
@@ -106,41 +95,41 @@
   <xi:include href="chapter-installation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-pom-relationships.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-pom-relationships.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-lifecycle.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-lifecycle.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-profiles.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-profiles.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-running.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-running.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-configuring.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-configuring.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-assemblies.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-assemblies.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-resource-filtering.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-resource-filtering.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-site-generation.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-site-generation.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <!--    <xi:include href="chapter-reporting.xml"
+  <!--    <xi:include href="chapter-reporting.xml"
        xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
 
-    <xi:include href="chapter-writing-plugins.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-writing-plugins.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-archetypes.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-archetypes.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="chapter-flex-dev.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="chapter-flex-dev.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
   <xi:include href="appendix-settings-details.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />

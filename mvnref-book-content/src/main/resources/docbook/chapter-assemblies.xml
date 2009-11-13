@@ -351,13 +351,11 @@ Hello, World!</screen>
 
       <para>Once you’ve deployed an assembly alongside your main project
       artifact, how can you use that assembly as a dependency in another
-      project? The answer is fairly straightforward. Recall the discussions in
-      <xref linkend="simple-project-sect-maven-coordinates" /> and <xref
-      linkend="pom-relationships-sect-more-coordinates" /> about project
-      dependencies in Maven, projects depend on other projects using a
-      combination of four basic elements, referred to as a project’s
-      coordinates: <varname>groupId</varname>, <varname>artifactId</varname>,
-      <varname>version</varname>, and <varname>packaging</varname>. In <xref
+      project? The answer is fairly straightforward. Projects depend on other
+      projects using a combination of four basic elements, referred to as a
+      project’s coordinates: <varname>groupId</varname>,
+      <varname>artifactId</varname>, <varname>version</varname>, and
+      <varname>packaging</varname>. In <xref
       linkend="profiles-sect-platform-classifier" />, multiple
       platform-specific variants of a project’s artifact and available, and
       the project specifies a <varname>classifier</varname> element with a
