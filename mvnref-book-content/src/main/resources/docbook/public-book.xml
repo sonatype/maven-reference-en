@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book id="book-hibernate3devNotebook">
+  <title>${book.title}</title>
+
+  <bookinfo>
+    <isbn>9780984243341</isbn>
+
+    <edition>${project.version}</edition>
+
+    <editor>
+      <firstname>Tim</firstname>
+
+      <surname>O'Brien</surname>
+
+      <affiliation>
+        <orgname>Sonatype</orgname>
+      </affiliation>
+    </editor>
+
+    <authorgroup role="Primary Authors">
+      <author>
+        <firstname>Tim</firstname>
+
+        <surname>O'Brien</surname>
+
+        <affiliation>
+          <orgname>${project.organization.name}</orgname>
+        </affiliation>
+      </author>
+
+      <author>
+        <firstname>John</firstname>
+
+        <surname>Casey</surname>
+
+        <affiliation>
+          <orgname>${project.organization.name}</orgname>
+        </affiliation>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+
+        <surname>Fox</surname>
+
+        <affiliation>
+          <orgname>${project.organization.name}</orgname>
+        </affiliation>
+      </author>
+
+      <author>
+        <firstname>Bruce</firstname>
+
+        <surname>Snyder</surname>
+
+        <affiliation>
+          <orgname>${project.organization.name}</orgname>
+        </affiliation>
+      </author>
+
+      <author>
+        <firstname>Jason</firstname>
+
+        <surname>Van Zyl</surname>
+
+        <affiliation>
+          <orgname>${project.organization.name}</orgname>
+        </affiliation>
+      </author>
+    </authorgroup>
+
+    <authorgroup role="Contributing Authors">
+      <author>
+        <firstname>Eric</firstname>
+
+        <surname>Redmond</surname>
+      </author>
+
+      <author>
+        <firstname>Larry</firstname>
+
+        <surname>Shatzer</surname>
+      </author>
+    </authorgroup>
+
+    <abstract role="description-short">
+      <para>Maven: The Definitive Guide is a book about Apache Maven.</para>
+    </abstract>
+
+  </bookinfo>
+
+  <xi:include href="chapter-copyright.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="public-foreword.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="chapter-public-preface.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="chapter-introduction.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="chapter-installation.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-pom-relationships.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-lifecycle.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-profiles.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-running.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-configuring.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-assemblies.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-resource-filtering.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-site-generation.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <!--    <xi:include href="chapter-reporting.xml"
+       xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
+
+    <xi:include href="chapter-writing-plugins.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-archetypes.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="chapter-flex-dev.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="appendix-settings-details.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="appendix-enterprise.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+</book>

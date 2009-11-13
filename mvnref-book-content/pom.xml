@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-	<groupId>org.sonatype.mavenbook</groupId>
-	<artifactId>mvnbook-parent</artifactId>
-	<version>0.9-SNAPSHOT</version>
+	<groupId>org.sonatype.mvnrefbook</groupId>
+	<artifactId>mvnref-book-parent</artifactId>
+	<version>0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>mvnbook-content</artifactId>
+  <artifactId>mvnref-book-content</artifactId>
   <packaging>jar</packaging>
-  <name>Maven: The Definitive Guide (XML, HTML, PDF, and Site)</name>
+  <name>Maven: The Complete Reference (XML, HTML, PDF, and Site)</name>
   <description>A book about Apache Maven 2.x</description>
   <organization>
     <name>Sonatype, Inc.</name>
@@ -16,7 +16,7 @@
   <url>http://sonatype.com/book</url>
   
   <properties>
-    <book.title>Maven: The Definitive Guide</book.title>
+    <book.title>Maven: The Complete Reference</book.title>
     <book.subtitle>A Comprehensive Guide to Apache Maven</book.subtitle>
     <organization.address>800 W. El Camino Real, Suite 400, Mountain View, CA, 94040</organization.address>
     <organization.slogan>Sonatype: The Maven Company</organization.slogan>
@@ -29,7 +29,7 @@
     <m2eclipse.book.title>Developing with Eclipse and Maven</m2eclipse.book.title>
     <flexmojos.version>3.3.0</flexmojos.version>
     <flexmojos.repository>http://repository.sonatype.org/content/groups/flexgroup/</flexmojos.repository>
-    <examples.download.url>http://www.sonatype.com/books/maven-book/mavenbook-examples-${project.version}-project.zip</examples.download.url>
+    <examples.download.url>http://www.sonatype.com/books/maven-book/mvnref-book-examples-${project.version}-project.zip</examples.download.url>
   </properties>
 
   <build>
@@ -174,7 +174,7 @@
                   <fileset dir="${basedir}/target/classes/docbook/images" />
                 </copy>
                 <copy todir="${project.build.directory}/site">
-                  <fileset dir="../mvnbook-examples/target">
+                  <fileset dir="../mvnref-book-examples/target">
                     <include name="*.tar.gz" />
                     <include name="*.zip" />
                   </fileset>
@@ -241,10 +241,12 @@
 	    </goals>
 	    <configuration>
 	      <outputDir>${basedir}/target</outputDir>
-	      <outputFilename>maven-guide-complete.pdf</outputFilename>
+	      <outputFilename>maven-reference-complete.pdf</outputFilename>
 	      <pdfs>
-		<pdf>${basedir}/src/main/resources/pdf/maven-cover.pdf</pdf>
-		<pdf>${basedir}/src/main/resources/pdf/maven-authors.pdf</pdf>
+		<pdf>${basedir}/src/main/resources/pdf/maven-reference-cover.pdf</pdf>
+		<pdf>${basedir}/src/main/resources/pdf/title-page.pdf</pdf>
+		<pdf>${basedir}/src/main/resources/pdf/copyright-page.pdf</pdf>
+		<pdf>${basedir}/src/main/resources/pdf/blank-page.pdf</pdf>
 		<pdf>${project.build.directory}/docbkx/pdf/public-book.pdf</pdf>
 	      </pdfs>	
 	    </configuration>
@@ -262,8 +264,8 @@
             </goals>
             <configuration>
               <tasks>
-                <copy tofile="${project.build.directory}/site/pdf/maven-definitive-guide.pdf">
-                  <fileset file="${project.build.directory}/maven-guide-complete.pdf" />
+                <copy tofile="${project.build.directory}/site/pdf/maven-reference.pdf">
+                  <fileset file="${project.build.directory}/maven-reference-complete.pdf" />
                 </copy>
               </tasks>
             </configuration>
@@ -300,14 +302,14 @@
         <site>
           <id>sonatype-site</id>
           <name>Sonatype Book Examples</name>
-          <url>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/maven-book/</url>
+          <url>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/mvnref-book/</url>
         </site>
       </distributionManagement>
       <properties>
         <sonatype.site>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/</sonatype.site>
         <nexus.book.baseurl>http://books.sonatype.com/nexus-book/</nexus.book.baseurl>
         <m2eclipse.book.baseurl>http://books.sonatype.com/m2eclipse-book/</m2eclipse.book.baseurl>
-	<scribd.doc.id>17574056</scribd.doc.id>
+	<scribd.doc.id>22508617</scribd.doc.id>
       </properties>
       <build>
 	<plugins>
@@ -325,7 +327,7 @@
 		<configuration>
 		  <apiKey>${scribd.api.key}</apiKey>
 		  <docId>${scribd.doc.id}</docId>
-		  <pdf>${basedir}/target/maven-guide-complete.pdf</pdf>
+		  <pdf>${basedir}/target/maven-reference-complete.pdf</pdf>
 		  <access>public</access>
 		  <downloadAndDrm>view-only</downloadAndDrm>
 		</configuration>
@@ -341,12 +343,12 @@
         <site>
           <id>sonatype-site</id>
           <name>Sonatype Book Examples</name>
-          <url>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/maven-book-stage/</url>
+          <url>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/mvnref-book-stage/</url>
         </site>
       </distributionManagement>
       <properties>
         <sonatype.site>scp://deployer@svn.sonatype.com/var/www/domains/sonatype.com/books/htdocs/</sonatype.site>
-	<scribd.doc.id>18083560</scribd.doc.id>
+	<scribd.doc.id>22508574</scribd.doc.id>
       </properties>
       <build>
 	<plugins>
@@ -364,7 +366,7 @@
 		<configuration>
 		  <apiKey>${scribd.api.key}</apiKey>
 		  <docId>${scribd.doc.id}</docId>
-		  <pdf>${basedir}/target/maven-guide-complete.pdf</pdf>
+		  <pdf>${basedir}/target/maven-reference-complete.pdf</pdf>
 		  <access>private</access>
 		  <downloadAndDrm>download-pdf</downloadAndDrm>
 		</configuration>
