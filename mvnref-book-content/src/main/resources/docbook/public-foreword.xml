@@ -67,19 +67,19 @@
         <listitem>
           <para>Created a new book cover for the downloadable PDF version of
           Maven: The Complete Reference. (<ulink
-          url="https://issues.sonatype.org/browse/MVNREF-5">MVNDEF-5</ulink>)</para>
+          url="https://issues.sonatype.org/browse/MVNREF-5">MVNREF-5</ulink>)</para>
         </listitem>
 
         <listitem>
           <para>Modified the title page for Maven: The Complete Reference.
           (<ulink
-          url="https://issues.sonatype.org/browse/MVNREF-6">MVNDEF-6</ulink>)</para>
+          url="https://issues.sonatype.org/browse/MVNREF-6">MVNREF-6</ulink>)</para>
         </listitem>
 
         <listitem>
           <para>Assigned new ISBN to Maven: The Complete Reference
           (978-0-9842433-4-1, 0-9842433-4-8). (<ulink
-          url="https://issues.sonatype.org/browse/MVNREF-8">MVNDEF-8</ulink>)</para>
+          url="https://issues.sonatype.org/browse/MVNREF-8">MVNREF-8</ulink>)</para>
         </listitem>
 
         <listitem>
@@ -87,7 +87,37 @@
           Reference, here: <ulink
           url="http://www.getsatisfaction.com/sonatype/products/sonatype_maven_the_complete_reference">http://www.getsatisfaction.com/sonatype/products/sonatype_maven_the_complete_reference</ulink>
           . (<ulink
-          url="https://issues.sonatype.org/browse/MVNREF-9">MVNDEF-9</ulink>)</para>
+          url="https://issues.sonatype.org/browse/MVNREF-9">MVNREF-9</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Created automated Hudson jobs for publishing to staging and
+          production. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-20">MVNREF-20</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Udpdated frontmatter and copyright to match other Sonatype
+          books. (<ulink type=""
+          url="https://issues.sonatype.org/browse/MVNREF-19"
+          userlevel="">MVNREF-19</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Modified the web site template for the book pages. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-7">MVNREF-7</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Add Maven: The Complete Reference to the Sonatype Books page.
+          (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-14">MVNREF-14</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Created a download form for Maven: The Complete Reference PDF.
+          (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-16">MVNREF-16</ulink>)</para>
         </listitem>
       </itemizedlist>
     </section>
