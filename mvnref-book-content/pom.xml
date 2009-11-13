@@ -3,7 +3,7 @@
   <parent>
 	<groupId>org.sonatype.mvnrefbook</groupId>
 	<artifactId>mvnref-book-parent</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
   </parent>
   <artifactId>mvnref-book-content</artifactId>
   <packaging>jar</packaging>
