@@ -7,9 +7,21 @@
   <section id="resource-filtering-sect-intro">
     <title>Introduction</title>
 
-    <para>Throughout this book, you will notice references to properties which
-    can be used in a <acronym>POM</acronym> file. Sibling dependencies in a
-    multi-project build can be referenced using the
+    <para><indexterm>
+        <primary>properites</primary>
+      </indexterm><indexterm>
+        <primary>resource filtering</primary>
+      </indexterm><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>properties</secondary>
+      </indexterm><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>resource filtering</secondary>
+      </indexterm>Throughout this book, you will notice references to
+    properties which can be used in a <acronym>POM</acronym> file. Sibling
+    dependencies in a multi-project build can be referenced using the
     <varname>\${project.groupId}</varname> and
     <varname>\${project.version}</varname> properties and any part of the
     <acronym>POM</acronym> can be referenced by prefixing the variable name
@@ -36,11 +48,14 @@
   <section id="resource-filtering-sect-properties">
     <title>Maven Properties</title>
 
-    <para>You can use Maven properties in a <filename>pom.xml</filename> file
-    or in any resource that is being processed by the Maven Resource plugin's
-    filtering features. A property is always surrounded by
-    <varname>\${</varname> and <varname>}</varname>. For example, to reference
-    the <varname>project.version</varname> property, one would write:</para>
+    <para><indexterm>
+        <primary>properites</primary>
+      </indexterm>You can use Maven properties in a
+    <filename>pom.xml</filename> file or in any resource that is being
+    processed by the Maven Resource plugin's filtering features. A property is
+    always surrounded by <varname>\${</varname> and <varname>}</varname>. For
+    example, to reference the <varname>project.version</varname> property, one
+    would write:</para>
 
     <programlisting language="java">\${project.version}</programlisting>
 
@@ -52,9 +67,13 @@
         <term><varname>project.*</varname></term>
 
         <listitem>
-          <para>Maven Project Object Model (<acronym>POM</acronym>). You can
-          use the <varname>project.*</varname> prefix to reference values in a
-          Maven <acronym>POM</acronym>.</para>
+          <para><indexterm>
+              <primary>properites</primary>
+
+              <secondary>project properties</secondary>
+            </indexterm>Maven Project Object Model (<acronym>POM</acronym>).
+          You can use the <varname>project.*</varname> prefix to reference
+          values in a Maven <acronym>POM</acronym>.</para>
         </listitem>
       </varlistentry>
 
@@ -62,9 +81,13 @@
         <term><varname>settings.*</varname></term>
 
         <listitem>
-          <para>Maven Settings. You use the <varname>settings.*</varname>
-          prefix to reference values from your Maven Settings in
-          <filename>~/.m2/settings.xml</filename>.</para>
+          <para><indexterm>
+              <primary>properites</primary>
+
+              <secondary>Maven settings</secondary>
+            </indexterm>Maven Settings. You use the
+          <varname>settings.*</varname> prefix to reference values from your
+          Maven Settings in <filename>~/.m2/settings.xml</filename>.</para>
         </listitem>
       </varlistentry>
 
@@ -72,7 +95,11 @@
         <term><varname>env.*</varname></term>
 
         <listitem>
-          <para>Environment variables like <varname>PATH</varname> and
+          <para><indexterm>
+              <primary>properites</primary>
+
+              <secondary>environment variables</secondary>
+            </indexterm>Environment variables like <varname>PATH</varname> and
           <varname>M2_HOME</varname> can be referenced using the
           <varname>env.*</varname> prefix.</para>
         </listitem>
@@ -82,7 +109,11 @@
         <term>System Properties</term>
 
         <listitem>
-          <para>Any property which can be retrieved from the
+          <para><indexterm>
+              <primary>properites</primary>
+
+              <secondary>System properties</secondary>
+            </indexterm>Any property which can be retrieved from the
           <methodname>System.getProperty()</methodname> method can be
           referenced as a Maven property.</para>
         </listitem>
@@ -97,8 +128,12 @@
     <section id="resource-filtering-sect-project-properties">
       <title>Maven Project Properties</title>
 
-      <para>When a Maven Project Property is referenced, the property name is
-      referencing a property of the Maven Project Object Model
+      <para><indexterm>
+          <primary>properites</primary>
+
+          <secondary>project properties</secondary>
+        </indexterm>When a Maven Project Property is referenced, the property
+      name is referencing a property of the Maven Project Object Model
       (<acronym>POM</acronym>). Specifically, you are referencing a property
       of the <classname>org.apache.maven.model.Model</classname> class which
       is being exposed as the implicit variable project. When you reference a
@@ -226,7 +261,7 @@
             your project is stored in the directory
             <filename>/tmp/simple</filename>,
             <varname>${project.baseUri}</varname> will resolve to
-            <uri>file:/private/tmp/simple/</uri>. </para>
+            <uri>file:/private/tmp/simple/</uri>.</para>
           </listitem>
         </varlistentry>
 
@@ -266,11 +301,16 @@
     <section id="resource-filtering-sect-settings-properties">
       <title>Maven Settings Properties</title>
 
-      <para>You can also reference any properties in the Maven Local Settings
-      file which is usually stored in <filename>~/.m2/settings.xml</filename>.
-      This file contains user-specific configuration such as the location of
-      the local repository and any servers, profiles, and mirrors configured
-      by a specific user.</para>
+      <para><indexterm>
+          <primary>properites</primary>
+
+          <secondary>Maven settings</secondary>
+        </indexterm>You can also reference any properties in the Maven Local
+      Settings file which is usually stored in
+      <filename>~/.m2/settings.xml</filename>. This file contains
+      user-specific configuration such as the location of the local repository
+      and any servers, profiles, and mirrors configured by a specific
+      user.</para>
 
       <para>A full reference for the Local Settings file and corresponding
       properties is available here <ulink
@@ -280,9 +320,13 @@
     <section id="resource-filtering-sect-enviroment-variable">
       <title>Environment Variable Properties</title>
 
-      <para>Environment variables can be referenced with the env.* prefix.
-      Some interesting environment variables are listed in the following
-      list:</para>
+      <para><indexterm>
+          <primary>properites</primary>
+
+          <secondary>environment variables</secondary>
+        </indexterm>Environment variables can be referenced with the env.*
+      prefix. Some interesting environment variables are listed in the
+      following list:</para>
 
       <variablelist>
         <varlistentry>
@@ -338,7 +382,11 @@
     <section id="resource-filtering-sect-system-properties">
       <title>Java System Properties</title>
 
-      <para>Maven exposes all properties from
+      <para><indexterm>
+          <primary>properites</primary>
+
+          <secondary>System properties</secondary>
+        </indexterm>Maven exposes all properties from
       <classname>java.lang.System</classname>. Anything you can retrieve from
       <methodname>System.getProperty()</methodname> you can reference in a
       Maven property. The following table lists available properties:</para>
@@ -513,7 +561,11 @@
     <section id="resource-filtering-sect-user-defined">
       <title>User-defined Properties</title>
 
-      <para>In addition to the implicit properties provided by the
+      <para><indexterm>
+          <primary>properites</primary>
+
+          <secondary>User-defined properties</secondary>
+        </indexterm>In addition to the implicit properties provided by the
       <acronym>POM</acronym>, Maven Settings, environment variables, and the
       Java System properties, you have the ability to define your own
       arbitrary properties. Properties can be defined in a
@@ -584,7 +636,13 @@
   <section id="resource-filtering-sect-description">
     <title>Resource Filtering</title>
 
-    <para>You can use Maven to perform variable replacement on project
+    <para><indexterm>
+        <primary>properites</primary>
+
+        <secondary>resource filtering</secondary>
+      </indexterm><indexterm>
+        <primary>resource filtering</primary>
+      </indexterm>You can use Maven to perform variable replacement on project
     resources. When resource filtering is activated, Maven will scan resources
     for references to Maven property references surrounded by
     <varname>\${</varname> and <varname>}</varname>. When it finds these
