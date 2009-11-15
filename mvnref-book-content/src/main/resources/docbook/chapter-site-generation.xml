@@ -1275,8 +1275,12 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-add-links">
       <title>Add Links under Your Site Logo</title>
 
-      <para>If you are working on a project which is being developed by an
-      organization, you may want to add links under your project's logo.
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>header links</secondary>
+        </indexterm>If you are working on a project which is being developed
+      by an organization, you may want to add links under your project's logo.
       Assume that your project is a part of the Apache Software Foundation,
       you might want to add a link to the Apache Software Foundation web site
       right below your logo, and you might want to add a link to a parent
@@ -1308,16 +1312,21 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-add-breadcumbs">
       <title>Add Breadcrumbs to Your Site</title>
 
-      <para>If your hierarchy exists within a logical hierarchy, you may want
-      to place a series of breadcrumbs to give the user a sense of context and
-      give them a way to navigate up the tree to projects which might contain
-      the current project as a subproject. To configure breadcrumbs, add a
-      <sgmltag>breadcrumbs</sgmltag> element to the <sgmltag>body</sgmltag>
-      element in the site descriptor. Each <sgmltag>item</sgmltag> element
-      will render a link, and the items in the <sgmltag>breadcrumbs</sgmltag>
-      element will be rendered in order. The breadcrumb items should be listed
-      from highest level to lowest level. In the following site descriptor,
-      the Codehaus item would be seen to contain the Mojo item.</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>breadcrumbs</secondary>
+        </indexterm>If your hierarchy exists within a logical hierarchy, you
+      may want to place a series of breadcrumbs to give the user a sense of
+      context and give them a way to navigate up the tree to projects which
+      might contain the current project as a subproject. To configure
+      breadcrumbs, add a <sgmltag>breadcrumbs</sgmltag> element to the
+      <sgmltag>body</sgmltag> element in the site descriptor. Each
+      <sgmltag>item</sgmltag> element will render a link, and the items in the
+      <sgmltag>breadcrumbs</sgmltag> element will be rendered in order. The
+      breadcrumb items should be listed from highest level to lowest level. In
+      the following site descriptor, the Codehaus item would be seen to
+      contain the Mojo item.</para>
 
       <para><example>
           <title>Configuring the Site's Breadcrumbs</title>
@@ -1340,10 +1349,15 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-add-project-version">
       <title>Add the Project Version</title>
 
-      <para>When you are documenting a project that has multiple versions, it
-      is often very helpful to list the project's version number on every
-      page. To display your project's version on the website, simply add the
-      <sgmltag>version</sgmltag> element to your site descriptor:</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>listing version in header</secondary>
+        </indexterm>When you are documenting a project that has multiple
+      versions, it is often very helpful to list the project's version number
+      on every page. To display your project's version on the website, simply
+      add the <sgmltag>version</sgmltag> element to your site
+      descriptor:</para>
 
       <para><example>
           <title>Positioning the Version Information</title>
@@ -1407,10 +1421,14 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-mod-pubdate">
       <title>Modify the Publication Date Format and Location</title>
 
-      <para>In some cases, you may wish to reformat or reposition the "Last
-      Published" date for your project website. Just like the project version
-      tip above, you can specify the position of the publication date by using
-      one of the following:</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>publication date</secondary>
+        </indexterm>In some cases, you may wish to reformat or reposition the
+      "Last Published" date for your project website. Just like the project
+      version tip above, you can specify the position of the publication date
+      by using one of the following:</para>
 
       <variablelist>
         <varlistentry>
@@ -1490,11 +1508,15 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-doxia-macros">
       <title>Using Doxia Macros</title>
 
-      <para>In addition to its advanced document rendering features, Doxia
-      also provides a macro engine that allows each input format to trigger
-      injection of dynamic content. An excellent example of this is the
-      snippet macro, which allows a document to pull a code snippet out of a
-      source file that's available via <acronym>HTTP</acronym>. Using this
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>doxia macros</secondary>
+        </indexterm>In addition to its advanced document rendering features,
+      Doxia also provides a macro engine that allows each input format to
+      trigger injection of dynamic content. An excellent example of this is
+      the snippet macro, which allows a document to pull a code snippet out of
+      a source file that's available via <acronym>HTTP</acronym>. Using this
       macro, a small fragment of <acronym>APT</acronym> can be rendered into
       <acronym>XHTML</acronym>. The following <acronym>APT</acronym> code
       calls out to the snippet macro. Please note that this code should be on
