@@ -7,16 +7,30 @@
   <section>
     <title>Configuring Maven Plugins</title>
 
-    <para>To customize the behavior of a Maven Plugin, you will need to
-    configure the plugin in a project's POM. The following sections outline
+    <para><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>configuration of</secondary>
+      </indexterm><indexterm>
+        <primary>plugin configuration</primary>
+      </indexterm>To customize the behavior of a Maven Plugin, you will need
+    to configure the plugin in a project's POM. The following sections outline
     the various methods available for customizing a Maven plugin's
-    configuration. </para>
+    configuration.</para>
 
     <section>
       <title>Plugin Configuration Parameters</title>
 
-      <para>Maven plugins are configured using properties that are defined by
-      goals within a plugin. If you look at a goal like the
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>parameters</secondary>
+        </indexterm><indexterm>
+          <primary>Help plugin</primary>
+
+          <secondary>describing plugins</secondary>
+        </indexterm>Maven plugins are configured using properties that are
+      defined by goals within a plugin. If you look at a goal like the
       <varname>compile</varname> goal in the Maven Compiler Plugin you will
       see a list of configuration parameters like <varname>source</varname>,
       <varname>target</varname>, <varname>compilerArgument</varname>,
@@ -202,8 +216,18 @@ compiler:testCompile
     <section>
       <title>Adding Plugin Dependencies</title>
 
-      <para>If you need to configure a plugin to use specific versions of
-      dependencies, you can define these dependencies under a dependencies
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>adding plugin dependencies</secondary>
+        </indexterm><indexterm>
+          <primary>plugin dependencies</primary>
+        </indexterm><indexterm>
+          <primary>dependency management</primary>
+
+          <secondary>plugin dependencies</secondary>
+        </indexterm>If you need to configure a plugin to use specific versions
+      of dependencies, you can define these dependencies under a dependencies
       element under plugin. When the plugin executes, it will execute with a
       classpath that contains these dependencies. <xref
       linkend="ex-plugin-dependencies" /> is an example of a plugin
@@ -248,7 +272,11 @@ compiler:testCompile
     <section>
       <title>Setting Global Plugin Parameters</title>
 
-      <para>To set a value for a plugin configuration parameter in a
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>global parameters</secondary>
+        </indexterm>To set a value for a plugin configuration parameter in a
       particular project, use the XML shown in <xref
       linkend="ex-config-global-plugin-param" />. Unless this configuration is
       overridden by a more specific plugin parameter configuration, Maven will
@@ -272,11 +300,18 @@ compiler:testCompile
     <section>
       <title>Setting Execution Specific Parameters</title>
 
-      <para>You can configure plugin parameters for specific executions of a
-      plugin goal. <xref linkend="ex-config-plugin-exec-params" /> shows an
-      example of configuration parameters being passed to the execution of the
-      run goal of the AntRun plugin during the validate phase. This specific
-      execution will inherit the configuration parameters from the plugin's
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>execution-specific parameters</secondary>
+        </indexterm><indexterm>
+          <primary>goal execution</primary>
+        </indexterm>You can configure plugin parameters for specific
+      executions of a plugin goal. <xref
+      linkend="ex-config-plugin-exec-params" /> shows an example of
+      configuration parameters being passed to the execution of the run goal
+      of the AntRun plugin during the validate phase. This specific execution
+      will inherit the configuration parameters from the plugin's
       configuration element and merge them with the values defined for this
       particular execution.</para>
 
@@ -308,18 +343,22 @@ compiler:testCompile
     <section>
       <title>Setting Default Command Line Execution Parameters</title>
 
-      <para>Starting with Maven 2.2.0, you can now supply configuration
-      parameters for goals which are executed from the command-line. To do
-      this, use the special execution id value of "default-cli". <xref
-      linkend="ex-configure-plugin-default-cli" /> shows an example that binds
-      the single goal to the package phase of the lifecycle which produces a
-      binary distribution. This example also configures the
-      <varname>default-cli</varname> execution for the assembly plugin to use
-      the <varname>jar-with-dependencies</varname> assembly descriptor. The
-      <filename>bin.xml</filename> descriptor will be used during the
-      lifecycle, and <varname>jar-with-dependencies</varname> will be used
-      when you execute <command>mvn assembly:assembly</command> from the
-      command line.</para>
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>default command line parameters</secondary>
+        </indexterm>Starting with Maven 2.2.0, you can now supply
+      configuration parameters for goals which are executed from the
+      command-line. To do this, use the special execution id value of
+      "default-cli". <xref linkend="ex-configure-plugin-default-cli" /> shows
+      an example that binds the single goal to the package phase of the
+      lifecycle which produces a binary distribution. This example also
+      configures the <varname>default-cli</varname> execution for the assembly
+      plugin to use the <varname>jar-with-dependencies</varname> assembly
+      descriptor. The <filename>bin.xml</filename> descriptor will be used
+      during the lifecycle, and <varname>jar-with-dependencies</varname> will
+      be used when you execute <command>mvn assembly:assembly</command> from
+      the command line.</para>
 
       <example id="ex-configure-plugin-default-cli" label="" lang="">
         <title>Configuring Plugin Parameters for Command Line
@@ -360,13 +399,17 @@ compiler:testCompile
     <section>
       <title>Setting Parameters for Goals Bound to Default Lifecycle</title>
 
-      <para>Starting with Maven 2.2.0, if you need to customize the behavior
-      of a goal which is already bound to the default lifecycle, you can use
-      the execution id "default-&lt;goal&gt;". You can customize the behavior
-      of the Jar plugin's jar goal which is bound to the package phase in the
-      default lifecycle, and you can customize the configuration parameters of
-      a separate goal execution if you follow the example shown in <xref
-      linkend="ex-configure-default-param" />.</para>
+      <para><indexterm>
+          <primary>plugin configuration</primary>
+
+          <secondary>default lifecycle parameters</secondary>
+        </indexterm>Starting with Maven 2.2.0, if you need to customize the
+      behavior of a goal which is already bound to the default lifecycle, you
+      can use the execution id "default-&lt;goal&gt;". You can customize the
+      behavior of the Jar plugin's jar goal which is bound to the package
+      phase in the default lifecycle, and you can customize the configuration
+      parameters of a separate goal execution if you follow the example shown
+      in <xref linkend="ex-configure-default-param" />.</para>
 
       <example id="ex-configure-default-param" label="">
         <title>Setting a Parameter for a Default Goal Execution</title>
