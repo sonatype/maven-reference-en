@@ -4,13 +4,18 @@
 <appendix id="appendix-enterprise">
   <title>Appendix: Sun Specification Alternatives</title>
 
-  <para>The Apache Geronimo project maintains implementations of various
-  enterprise Java specifications. <xref linkend="table-spec-alternatives" />
-  lists the artifactId and artifact version for all of the specifications
-  implemented by the Geronimo project. To use one of these dependencies, use a
-  groupId of <varname>org.apache.geronimo.specs</varname>, locate the version
-  of the Specification you want to use and reference the dependency with the
-  Artifact Id and Artifact Version listed in <xref
+  <para><indexterm>
+      <primary>dependency management</primary>
+
+      <secondary>Sun speicification alternatives</secondary>
+    </indexterm>The Apache Geronimo project maintains implementations of
+  various enterprise Java specifications. <xref
+  linkend="table-spec-alternatives" /> lists the artifactId and artifact
+  version for all of the specifications implemented by the Geronimo project.
+  To use one of these dependencies, use a groupId of
+  <varname>org.apache.geronimo.specs</varname>, locate the version of the
+  Specification you want to use and reference the dependency with the Artifact
+  Id and Artifact Version listed in <xref
   linkend="table-spec-alternatives" />.</para>
 
   <note>
