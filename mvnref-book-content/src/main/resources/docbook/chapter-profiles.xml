@@ -7,9 +7,11 @@
   <section id="profiles-sect-what">
     <title>What Are They For?</title>
 
-    <para>Profiles allow for the ability to customize a particular build for a
-    particular environment; profiles enable portability between different
-    build environments.</para>
+    <para><indexterm>
+        <primary>build profiles</primary>
+      </indexterm>Profiles allow for the ability to customize a particular
+    build for a particular environment; profiles enable portability between
+    different build environments.</para>
 
     <para>What do we mean by different build environments? Two example build
     environments are production and development. When you are working in a
@@ -30,18 +32,24 @@
     <section id="profiles-sect-portability">
       <title>What is Build Portability</title>
 
-      <para>A build's "portability" is a measure of how easy it is to take a
-      particular project and build it in different environments. A build which
-      works without any custom configuration or customization of properties
-      files is more portable than a build which requires a great deal of work
-      to build from scratch. The most portable projects tend to be widely used
-      open source projects like Apache Commons of Apache Velocity which ship
-      with Maven builds which require little or no customization. Put simply,
-      the most portable project builds tend to just work, out of the box, and
-      the least portable builds require you to jump through hoops and
-      configure platform specific paths to locate build tools. Before we show
-      you how to achieve build portability, let's survey the different kinds
-      of portability we are talking about.</para>
+      <para><indexterm>
+          <primary>build portability</primary>
+        </indexterm><indexterm>
+          <primary>build profiles</primary>
+
+          <secondary>portability</secondary>
+        </indexterm>A build's "portability" is a measure of how easy it is to
+      take a particular project and build it in different environments. A
+      build which works without any custom configuration or customization of
+      properties files is more portable than a build which requires a great
+      deal of work to build from scratch. The most portable projects tend to
+      be widely used open source projects like Apache Commons of Apache
+      Velocity which ship with Maven builds which require little or no
+      customization. Put simply, the most portable project builds tend to just
+      work, out of the box, and the least portable builds require you to jump
+      through hoops and configure platform specific paths to locate build
+      tools. Before we show you how to achieve build portability, let's survey
+      the different kinds of portability we are talking about.</para>
 
       <section id="profiles-sect-non-portable">
         <title>Non-Portable Builds</title>
@@ -65,15 +73,19 @@
       <section id="profiles-sect-environment-portability">
         <title>Environment Portability</title>
 
-        <para>A build exhibits environment portability if it has a mechanism
-        for customizing behavior and configuration when targeting different
-        environments. A project that contains a reference to a test database
-        in a test environment, for example, and a production database in a
-        production environment, is environmentally portable. It is likely that
-        this build has a different set of properties for each environment.
-        When you move to a different environment, one that is not defined and
-        has no profile created for it, the project will not work. Hence, it is
-        only portable between defined environments.</para>
+        <para><indexterm>
+            <primary>build portability</primary>
+
+            <secondary>environment portability</secondary>
+          </indexterm>A build exhibits environment portability if it has a
+        mechanism for customizing behavior and configuration when targeting
+        different environments. A project that contains a reference to a test
+        database in a test environment, for example, and a production database
+        in a production environment, is environmentally portable. It is likely
+        that this build has a different set of properties for each
+        environment. When you move to a different environment, one that is not
+        defined and has no profile created for it, the project will not work.
+        Hence, it is only portable between defined environments.</para>
 
         <para>When a new developer gets the source for an environmentally
         portable project, they will have to run the build within a defined
@@ -84,7 +96,11 @@
       <section id="profiles-sect-org-portability">
         <title>Organizational (In-House) Portability</title>
 
-        <para>The center of this level of portability is a project's
+        <para><indexterm>
+            <primary>build portability</primary>
+
+            <secondary>organizational portability</secondary>
+          </indexterm>The center of this level of portability is a project's
         requirement that only a select few may access internal resources such
         as source control or an internally-maintained Maven repository. A
         project at a large corporation may depend on a database available only
@@ -104,13 +120,17 @@
       <section id="profiles-sect-wide-portability">
         <title>Wide (Universal) Portability</title>
 
-        <para>Anyone may download a widely portable project's source, compile,
-        and install it without customizing a build for a specific environment.
-        This is the highest level of portability; anything less requires extra
-        work for those who wish to build your project. This level of
-        portability is especially important for open source projects, which
-        depend on the ability for would-be contributors to easily download and
-        build from source.</para>
+        <para><indexterm>
+            <primary>build portability</primary>
+
+            <secondary>universal portability</secondary>
+          </indexterm>Anyone may download a widely portable project's source,
+        compile, and install it without customizing a build for a specific
+        environment. This is the highest level of portability; anything less
+        requires extra work for those who wish to build your project. This
+        level of portability is especially important for open source projects,
+        which depend on the ability for would-be contributors to easily
+        download and build from source.</para>
 
         <para>Any developer could download the source for a widely portable
         project.</para>
@@ -120,16 +140,20 @@
     <section id="profiles-sect-select-level">
       <title>Selecting an Appropriate Level of Portability</title>
 
-      <para>Clearly, you'll want to avoid creating the worst-case scenario:
-      the non-portable build. You may have had the misfortune to work or study
-      at an organization that had critical applications with non-portable
-      builds. In such organizations, you cannot deploy an application without
-      the help of a specific individual on a specific machine. In such an
-      organization, it is also very difficult to introduce new project
-      dependencies or changes without coordinating the change with the single
-      person who maintains such a non-portable build. Non-portable builds tend
-      to grow in highly political environments when one individual or group
-      needs to exert control over how and when a project is built and
+      <para><indexterm>
+          <primary>build portability</primary>
+
+          <secondary>selecting the appropriate level of</secondary>
+        </indexterm>Clearly, you'll want to avoid creating the worst-case
+      scenario: the non-portable build. You may have had the misfortune to
+      work or study at an organization that had critical applications with
+      non-portable builds. In such organizations, you cannot deploy an
+      application without the help of a specific individual on a specific
+      machine. In such an organization, it is also very difficult to introduce
+      new project dependencies or changes without coordinating the change with
+      the single person who maintains such a non-portable build. Non-portable
+      builds tend to grow in highly political environments when one individual
+      or group needs to exert control over how and when a project is built and
       deployed. "How do we build the system? Oh, we've got to call Jack and
       ask him to build it for us, no one else deploys to production." That is
       a dangerous situation which is more common that you would think. If you
@@ -177,11 +201,17 @@
   <section id="profiles-sect-maven-profiles">
     <title>Portability through Maven Profiles</title>
 
-    <para>A profile in Maven is an alternative set of configuration values
-    which set or override default values. Using a profile, you can customize a
-    build for different environments. Profiles are configured in the
-    <filename>pom.xml</filename> and are given an identifier. Then you can run
-    Maven with a command-line flag that tells Maven to execute goals in a
+    <para><indexterm>
+        <primary>build portability</primary>
+
+        <secondary>using profiles</secondary>
+      </indexterm><indexterm>
+        <primary>build profiles</primary>
+      </indexterm>A profile in Maven is an alternative set of configuration
+    values which set or override default values. Using a profile, you can
+    customize a build for different environments. Profiles are configured in
+    the <filename>pom.xml</filename> and are given an identifier. Then you can
+    run Maven with a command-line flag that tells Maven to execute goals in a
     specific profile. The following <filename>pom.xml</filename> uses a
     <literal>production</literal> profile to override the default settings of
     the Compiler plugin.</para>
@@ -237,7 +267,11 @@
     <para>In this example, we've added a profile named
     <literal>production</literal> that overrides the default configuration of
     the Maven Compiler plugin. Let's examine the syntax of this profile in
-    detail.</para>
+    detail.<indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>build profiles</secondary>
+      </indexterm></para>
 
     <calloutlist>
       <callout arearefs="coDef-profiles-compile-1"
@@ -315,13 +349,17 @@
     <section id="profiles-sect-overriding-pom">
       <title>Overriding a Project Object Model</title>
 
-      <para>While the previous example showed you how to override the default
-      configuration properties of a single Maven plugin, you still don't know
-      exactly what a Maven profile is allowed to override. The short-answer to
-      that question is that a Maven profile can override almost everything
-      that you would have in a <filename>pom.xml</filename>. The Maven
-      <acronym>POM</acronym> contains an element under project called
-      <sgmltag>profiles</sgmltag> containing a project's alternate
+      <para><indexterm>
+          <primary>build profiles</primary>
+
+          <secondary>overriding a POM profile</secondary>
+        </indexterm>While the previous example showed you how to override the
+      default configuration properties of a single Maven plugin, you still
+      don't know exactly what a Maven profile is allowed to override. The
+      short-answer to that question is that a Maven profile can override
+      almost everything that you would have in a <filename>pom.xml</filename>.
+      The Maven <acronym>POM</acronym> contains an element under project
+      called <sgmltag>profiles</sgmltag> containing a project's alternate
       configurations, and under this element are profile elements which define
       each profile. Each profile must have an <sgmltag>id</sgmltag>, and other
       than that, it can contain almost any of the elements one would expect to
@@ -369,11 +407,17 @@
   <section id="profiles-sect-activation">
     <title>Profile Activation</title>
 
-    <para>In the previous section we showed you how to create a profile that
-    overrides default behavior for a specific target environment. In the
-    previous build the default build was designed for development and the
-    <literal>production</literal> profile exists to provide configuration for
-    a production environment. What happens when you need to provide
+    <para><indexterm>
+        <primary>profile activation</primary>
+      </indexterm><indexterm>
+        <primary>build profile</primary>
+
+        <secondary>profile activation</secondary>
+      </indexterm>In the previous section we showed you how to create a
+    profile that overrides default behavior for a specific target environment.
+    In the previous build the default build was designed for development and
+    the <literal>production</literal> profile exists to provide configuration
+    for a production environment. What happens when you need to provide
     customizations based on variables like operating systems or
     <acronym>JDK</acronym> version? Maven provides a way to "activate" a
     profile for different environmental parameters, this is called profile
@@ -470,13 +514,17 @@
     <section id="profiles-sect-activation-config">
       <title>Activation Configuration</title>
 
-      <para>Activations can contain one of more selectors including JDK
-      versions, Operating System parameters, files, and properties. A profile
-      is activated when all activation criteria has been satisfied. For
-      example, a profile could list an Operating System family of Windows, and
-      a JDK version of 1.4, this profile will only be activated when the build
-      is executed on a Windows machine running Java 1.4. If the profile is
-      active then all elements override the corresponding project-level
+      <para><indexterm>
+          <primary>profile activiation</primary>
+
+          <secondary>configuration</secondary>
+        </indexterm>Activations can contain one of more selectors including
+      JDK versions, Operating System parameters, files, and properties. A
+      profile is activated when all activation criteria has been satisfied.
+      For example, a profile could list an Operating System family of Windows,
+      and a JDK version of 1.4, this profile will only be activated when the
+      build is executed on a Windows machine running Java 1.4. If the profile
+      is active then all elements override the corresponding project-level
       elements as if the profile were included with the <command>-P</command>
       command-line argument. The following example, lists a profile which is
       activated by a very specific combination of operating system parameters,
@@ -574,8 +622,12 @@
     <section id="profiles-sect-activation-by-absence">
       <title>Activation by the Absence of a Property</title>
 
-      <para>You can activate a profile based on the value of a property like
-      <varname>environment.type</varname>. You can activate a
+      <para><indexterm>
+          <primary>profile activiation</primary>
+
+          <secondary>property trigger</secondary>
+        </indexterm>You can activate a profile based on the value of a
+      property like <varname>environment.type</varname>. You can activate a
       <literal>development</literal> profile if
       <varname>environment.type</varname> equals <literal>dev</literal>, or a
       <literal>production</literal> profile if
@@ -614,7 +666,15 @@
   <section id="profiles-sect-listing-active-profiles">
     <title>Listing Active Profiles</title>
 
-    <para>Maven profiles can be defined in either
+    <para><indexterm>
+        <primary>profile activiation</primary>
+
+        <secondary>listing active profiles</secondary>
+      </indexterm><indexterm>
+        <primary>build profile</primary>
+
+        <secondary>listing active profiles</secondary>
+      </indexterm>Maven profiles can be defined in either
     <filename>pom.xml</filename>, <filename>profiles.xml</filename>,
     <filename>~/.m2/settings.xml</filename>, or
     <filename>\${M2_HOME}/conf/settings.xml</filename>. With these four
@@ -639,20 +699,28 @@ The following profiles are active:
   <section id="profiles-sect-tips-tricks">
     <title>Tips and Tricks</title>
 
-    <para>Profiles can encourage build portability. If your build needs subtle
-    customizations to work on different platforms or if you need your build to
-    produce different results for different target platforms, project profiles
-    increase build portability. Settings profiles generally decrease build
-    portability by adding extra-project information that must be communicated
-    from developer to developer. The following sections provide some
-    guidelines and some ideas for applying Maven profiles to your
+    <para><indexterm>
+        <primary>build profile</primary>
+
+        <secondary>tips and tricks</secondary>
+      </indexterm>Profiles can encourage build portability. If your build
+    needs subtle customizations to work on different platforms or if you need
+    your build to produce different results for different target platforms,
+    project profiles increase build portability. Settings profiles generally
+    decrease build portability by adding extra-project information that must
+    be communicated from developer to developer. The following sections
+    provide some guidelines and some ideas for applying Maven profiles to your
     project.</para>
 
     <section id="profiles-sect-common-envs">
       <title>Common Environments</title>
 
-      <para>One of the core motivations for Maven project profiles was to
-      provide for environment-specific configuration settings. In a
+      <para><indexterm>
+          <primary>build profile</primary>
+
+          <secondary>common environments</secondary>
+        </indexterm>One of the core motivations for Maven project profiles was
+      to provide for environment-specific configuration settings. In a
       development environment, you might want to produce bytecode with debug
       information and you might want to configure your system to use a
       development database instance. In a production environment you might
@@ -784,8 +852,16 @@ The following profiles are active:
     <section id="profiles-sect-protecting-secrets">
       <title>Protecting Secrets</title>
 
-      <para>This best practice builds upon the previous section. In <xref
-      linkend="ex-profile-envtype-pom" xrefstyle="select:title" />, the
+      <para><indexterm>
+          <primary>build profile</primary>
+
+          <secondary>protecting secrets</secondary>
+        </indexterm><indexterm>
+          <primary>maven settings</primary>
+
+          <secondary>storing passwords</secondary>
+        </indexterm>This best practice builds upon the previous section. In
+      <xref linkend="ex-profile-envtype-pom" xrefstyle="select:title" />, the
       production profile does not contain the
       <varname>database.password</varname> property. I've done this on purpose
       to illustrate the concept of putting secrets in you user-specific
@@ -841,17 +917,25 @@ The following profiles are active:
     <section id="profiles-sect-platform-classifier">
       <title>Platform Classifiers</title>
 
-      <para>Let's assume that you have a library or a project that produces
-      platform-specific customizations. Even though Java is platform-neutral,
-      there are times when you might need to write some code that invokes
-      platform-specific native code. Another possibility is that you've
-      written some C code which is compiled by the Maven Native plugin and you
-      want to produce a qualified artifact depending on the build platform.
-      You can set a classifier with the Maven Assembly plugin or with the
-      Maven Jar plugin. The following <filename>pom.xml</filename> produces a
-      qualified artifact using profiles which are activated by Operating
-      System parameters. For more information about the Maven Assembly plugin,
-      see <xref linkend="assemblies" />.</para>
+      <para><indexterm>
+          <primary>build profile</primary>
+
+          <secondary>platform classifiers</secondary>
+        </indexterm><indexterm>
+          <primary>profile activation</primary>
+
+          <secondary>platform classifiers</secondary>
+        </indexterm>Let's assume that you have a library or a project that
+      produces platform-specific customizations. Even though Java is
+      platform-neutral, there are times when you might need to write some code
+      that invokes platform-specific native code. Another possibility is that
+      you've written some C code which is compiled by the Maven Native plugin
+      and you want to produce a qualified artifact depending on the build
+      platform. You can set a classifier with the Maven Assembly plugin or
+      with the Maven Jar plugin. The following <filename>pom.xml</filename>
+      produces a qualified artifact using profiles which are activated by
+      Operating System parameters. For more information about the Maven
+      Assembly plugin, see <xref linkend="assemblies" />.</para>
 
       <para><example>
           <title>Qualifying Artifacts with Platform Activated Project
