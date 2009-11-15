@@ -7,16 +7,27 @@
   <section id="flex-dev-sect-intro">
     <title>Introduction</title>
 
-    <para>This chapter provides an overview of the Flexmojos project for
-    people interested in using Maven to develop Flex applications and
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+      </indexterm><indexterm>
+        <primary>Adobe Flex</primary>
+      </indexterm><indexterm>
+        <primary>Flexmojos plugin</primary>
+      </indexterm>This chapter provides an overview of the Flexmojos project
+    for people interested in using Maven to develop Flex applications and
     libraries.</para>
   </section>
 
   <section id="flex-dev-sect-config-build">
     <title>Configuring Build Environment for Flexmojos</title>
 
-    <para>Before you attempt to compile Flex libraries and applications with
-    Maven, you will need to complete two configuration tasks:</para>
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>configuring build environment</secondary>
+      </indexterm>Before you attempt to compile Flex libraries and
+    applications with Maven, you will need to complete two configuration
+    tasks:</para>
 
     <itemizedlist>
       <listitem>
@@ -38,10 +49,14 @@
     <section id="flex-dev-sect-referencing-repo-with-flex">
       <title>Referencing a Repository with the Flex Framework</title>
 
-      <para>To setup your Maven environment for Flexmojos, you have two
-      options: you can reference the Sonatype Flexmojos repository directly in
-      a <filename>pom.xml</filename>, or you can install Nexus and add the
-      Sonatype Flexmojos repository as a proxy repository in your own
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>referencing a remote repository</secondary>
+        </indexterm>To setup your Maven environment for Flexmojos, you have
+      two options: you can reference the Sonatype Flexmojos repository
+      directly in a <filename>pom.xml</filename>, or you can install Nexus and
+      add the Sonatype Flexmojos repository as a proxy repository in your own
       repository manager. While the most straightforward option is to
       reference the repository directly, downloading and installing Nexus will
       give you the control and flexibility you need to cache and manage
@@ -66,10 +81,14 @@
       <section id="flex-dev-sect-direct-repo">
         <title>Referencing Sonatype's Flexmojos Repository in a POM</title>
 
-        <para>Flexmojos depends on a few artifacts which are not currently
-        available from the Central Maven repository. These artifacts are
-        available from a Repository hosted by Sonatype. To use Flexmojos, you
-        will need to reference this repository from your project's
+        <para><indexterm>
+            <primary>Flexmojos</primary>
+
+            <secondary>referencing Sonatype's repository</secondary>
+          </indexterm>Flexmojos depends on a few artifacts which are not
+        currently available from the Central Maven repository. These artifacts
+        are available from a Repository hosted by Sonatype. To use Flexmojos,
+        you will need to reference this repository from your project's
         <filename>pom.xml</filename>. To do this, add the
         <sgmltag>repositories</sgmltag> element shown in <xref
         linkend="ex-flex-dev-repository" /> to your project's
@@ -111,7 +130,13 @@
       <section id="flex-dev-sect-proxy-nexus">
         <title>Proxying Sonatype's Flexmojos Repository with Nexus</title>
 
-        <para>Instead of pointing directly at the Sonatype Flexmojos
+        <para><indexterm>
+            <primary>Flexmojos</primary>
+
+            <secondary>proxying Sonatype's repository</secondary>
+          </indexterm><indexterm>
+            <primary>Nexus</primary>
+          </indexterm>Instead of pointing directly at the Sonatype Flexmojos
         repository, Sonatype recommends that you install a repository manager
         and proxy the Sonatype public repository. When you proxy a remote
         repository with a repository manager such as Nexus, you gain a level
@@ -300,12 +325,16 @@
     <section id="flex-dev-sect-configuring-unit-tests">
       <title>Configuring Environment to Support Flex Unit Tests</title>
 
-      <para>Flexmojos expects to be able to launch the stand-alone Flash Play
-      to execute unit tests. In order for this to work, you will need to add
-      the stand-alone Flash Player to your PATH, or you will need to pass the
-      location of the Flash Player executable to your build using the
-      <varname>-DflashPlayer.command</varname> options. When executing a unit
-      test, Flex Mojos expects to launch the following platform-specific
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>unit test environment</secondary>
+        </indexterm>Flexmojos expects to be able to launch the stand-alone
+      Flash Play to execute unit tests. In order for this to work, you will
+      need to add the stand-alone Flash Player to your PATH, or you will need
+      to pass the location of the Flash Player executable to your build using
+      the <varname>-DflashPlayer.command</varname> options. When executing a
+      unit test, Flex Mojos expects to launch the following platform-specific
       executables for the stand-alone Flash Player:</para>
 
       <variablelist>
@@ -404,10 +433,15 @@ $ <command>export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}</c
     <section id="flex-dev-sect-plugin-group">
       <title>Adding FlexMojos to Your Maven Settings' Plugin Groups</title>
 
-      <para>If you need to run FlexMojos goals from the command-line, it will
-      be more convenient if you add the Sonatype Plugin groups to your Maven
-      Settings. To do this, open up <filename>~/.m2/settings.xml</filename>
-      and add the following plugin groups:</para>
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>Maven settings</secondary>
+        </indexterm>If you need to run FlexMojos goals from the command-line,
+      it will be more convenient if you add the Sonatype Plugin groups to your
+      Maven Settings. To do this, open up
+      <filename>~/.m2/settings.xml</filename> and add the following plugin
+      groups:</para>
 
       <example>
         <title>Adding Sonatype Plugins to Maven Settings</title>
@@ -437,8 +471,12 @@ $ <command>export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}</c
   <section id="flex-dev-sect-creating-with-archetype">
     <title>Creating a Flex Mojos Project from an Archetype</title>
 
-    <para>Flexmojos has a set of archetypes which can be used to quickly
-    create a new Flex project. The following archetypes are all in the
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>archetype</secondary>
+      </indexterm>Flexmojos has a set of archetypes which can be used to
+    quickly create a new Flex project. The following archetypes are all in the
     <package>org.sonatype.flexmojos</package> group with a version of
     <varname>${flexmojos.version}</varname>:</para>
 
@@ -475,8 +513,12 @@ $ <command>export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}</c
     <section id="flex-dev-sect-library-archetype">
       <title>Creating a Flex Library</title>
 
-      <para>To create a Flex Library Project, execute the following command at
-      the command-line:</para>
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>Flex library</secondary>
+        </indexterm>To create a Flex Library Project, execute the following
+      command at the command-line:</para>
 
       <screen>$ <command>mvn archetype:generate \
     -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
@@ -727,8 +769,12 @@ See COPYRIGHT file
     <section id="flex-dev-sect-application-archetype">
       <title>Creating a Flex Application</title>
 
-      <para>To create a Flex application from a Maven archetype, execute the
-      following command:</para>
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>Flex application</secondary>
+        </indexterm>To create a Flex application from a Maven archetype,
+      execute the following command:</para>
 
       <screen>$ <command>mvn archetype:generate \
     -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
@@ -887,8 +933,12 @@ package: org.sonatype.test
       <title>Creating a Multi-module Project: Web Application with a Flex
       Dependency</title>
 
-      <para>To create a multi-module project consisting of a Flex Library
-      project referenced by a Flex Application, referenced by a Web
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>multi-module web application</secondary>
+        </indexterm>To create a multi-module project consisting of a Flex
+      Library project referenced by a Flex Application, referenced by a Web
       Application.</para>
 
       <screen>$ <command>mvn archetype:generate \
@@ -1210,8 +1260,12 @@ package: org.sonatype.test
   <section id="flex-dev-sect-custom-lifecycle">
     <title>The FlexMojos Lifecycle</title>
 
-    <para>The FlexMojos Maven plugin customizes the lifecycle based on the
-    packaging. If your project has a <varname>packaging</varname> of type
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>lifecycle</secondary>
+      </indexterm>The FlexMojos Maven plugin customizes the lifecycle based on
+    the packaging. If your project has a <varname>packaging</varname> of type
     <varname>swc</varname> or <varname>swf,</varname> the FlexMojos plugin
     with execute a customized lifecycle if your plugin configuration sets the
     extensions to true. <xref linkend="ex-flex-dev-extensions-true" /> shows
@@ -1244,10 +1298,15 @@ package: org.sonatype.test
     <section id="flex-dev-sect-lifecycle-swc">
       <title>The SWC Lifecycle</title>
 
-      <para>When the packaging is swc, FlexMojos will execute the lifecycle
-      shown in <xref linkend="fig-flex-dev-swc-lifecycle" />. The highlighted
-      goals are goals from the FlexMojos plugin, the goals which are not
-      highlights are standard goals from the Core Maven plugins.</para>
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>SWC lifecycle</secondary>
+        </indexterm>When the packaging is swc, FlexMojos will execute the
+      lifecycle shown in <xref linkend="fig-flex-dev-swc-lifecycle" />. The
+      highlighted goals are goals from the FlexMojos plugin, the goals which
+      are not highlights are standard goals from the Core Maven
+      plugins.</para>
 
       <figure id="fig-flex-dev-swc-lifecycle">
         <title>The FlexMojos SWC Lifecycle</title>
@@ -1304,10 +1363,15 @@ package: org.sonatype.test
     <section id="flex-dev-sect-lifecycle-swf">
       <title>The SWF Lifecycle</title>
 
-      <para>When the packaging is swf, FlexMojos will execute the lifecycle
-      shown in <xref linkend="fig-flex-dev-swf-lifecycle" />. The highlighted
-      goals are goals from the FlexMojos plugin, the goals which are not
-      highlights are standard goals from the Core Maven plugins.</para>
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>SWF lifecycle</secondary>
+        </indexterm>When the packaging is swf, FlexMojos will execute the
+      lifecycle shown in <xref linkend="fig-flex-dev-swf-lifecycle" />. The
+      highlighted goals are goals from the FlexMojos plugin, the goals which
+      are not highlights are standard goals from the Core Maven
+      plugins.</para>
 
       <figure id="fig-flex-dev-swf-lifecycle">
         <title>The FlexMojos SWF Lifecycle</title>
@@ -1365,7 +1429,12 @@ package: org.sonatype.test
   <section id="flex-dev-sect-goals">
     <title>FlexMojos Plugin Goals</title>
 
-    <para>The FlexMojos Maven Plugin contains the following goals:</para>
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>plugin goals</secondary>
+      </indexterm>The FlexMojos Maven Plugin contains the following
+    goals:</para>
 
     <variablelist>
       <varlistentry>
@@ -1483,7 +1552,11 @@ package: org.sonatype.test
     <section id="flex-dev-sect-gen-asdoc">
       <title>Generating Actionscript Documentation</title>
 
-      <para>You can run the asdoc or asdoc-report goals to generate
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>generating Actionscript documentation</secondary>
+        </indexterm>You can run the asdoc or asdoc-report goals to generate
       documentation for Actionscript. Once the goals has completed, the
       documentation will be saved to
       <filename>\${basedir}/target/asdoc</filename> as HTML. <xref
@@ -1512,14 +1585,18 @@ package: org.sonatype.test
     <section id="flex-dev-sect-compiling">
       <title>Compiling Flex Source</title>
 
-      <para>FlexMojos contains a number of goals which compile Actionscript
-      and MXML into SWCs and SWFs. The compile-swc and compile-swf goals are
-      used to generate output from a project's source, and test-compile is
-      used to compile unit tests. In the simple projects created by the
-      FlexMojos archetypes, the compile-swc and compile-swf goals are called
-      because the project customizes the lifecycle and binds either
-      compile-swc or compile-swf to the compile phase and test-compile to the
-      test-compile phase. If you need to configure the options for the
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>compiling Flex source</secondary>
+        </indexterm>FlexMojos contains a number of goals which compile
+      Actionscript and MXML into SWCs and SWFs. The compile-swc and
+      compile-swf goals are used to generate output from a project's source,
+      and test-compile is used to compile unit tests. In the simple projects
+      created by the FlexMojos archetypes, the compile-swc and compile-swf
+      goals are called because the project customizes the lifecycle and binds
+      either compile-swc or compile-swf to the compile phase and test-compile
+      to the test-compile phase. If you need to configure the options for the
       FlexMojos compiler, you would configure the FlexMojos plugin
       configuration. For example, if you wanted the application with the POM
       shown in <xref linkend="ex-flex-dev-app-pom" /> to ignore certain
@@ -1570,8 +1647,12 @@ package: org.sonatype.test
     <section id="flex-dev-sect-flexbuilder">
       <title>Generating Flex Builder Project Files</title>
 
-      <para>To generate Flex Builder project files for a FlexMojos project,
-      configure the plugin groups as described in <xref
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>generating Flex Builder project files</secondary>
+        </indexterm>To generate Flex Builder project files for a FlexMojos
+      project, configure the plugin groups as described in <xref
       linkend="flex-dev-sect-plugin-group" />, and run the
       <varname>flexbuilder</varname> goal:</para>
 
@@ -1587,7 +1668,12 @@ package: org.sonatype.test
   <section id="flex-dev-sect-reports">
     <title>FlexMojos Plugin Reports</title>
 
-    <para>The FlexMojos Maven Plugin contains the following report:</para>
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>generating reports</secondary>
+      </indexterm>The FlexMojos Maven Plugin contains the following
+    report:</para>
 
     <variablelist>
       <varlistentry>
@@ -1686,18 +1772,26 @@ package: org.sonatype.test
   <section id="flex-dev-sect-dev">
     <title>Developing and Customizing Flexmojos</title>
 
-    <para>The following sections guide you through some of first steps toward
-    customizing or contributing to the Flexmojos project. Flexmojos is more
-    than just a tool for people who are interested in compiling Actionscript
-    into SWF and SWC artifacts, it is a community of developers. This section
-    isn't for everyone, but, if you have an itch to scratch and you wish to
-    participate, come on in.</para>
+    <para><indexterm>
+        <primary>Flexmojos</primary>
+
+        <secondary>developing Flexmojos</secondary>
+      </indexterm>The following sections guide you through some of first steps
+    toward customizing or contributing to the Flexmojos project. Flexmojos is
+    more than just a tool for people who are interested in compiling
+    Actionscript into SWF and SWC artifacts, it is a community of developers.
+    This section isn't for everyone, but, if you have an itch to scratch and
+    you wish to participate, come on in.</para>
 
     <section id="flex-dev-sect-get-source">
       <title>Get the Flexmojos Source Code</title>
 
-      <para>Flexmojos is an open source project hosted on the Sonatype Forge,
-      and the source code for Flexmojos is stored in the Sonatype Forge
+      <para><indexterm>
+          <primary>Flexmojos</primary>
+
+          <secondary>Flexmojos source repository</secondary>
+        </indexterm>Flexmojos is an open source project hosted on the Sonatype
+      Forge, and the source code for Flexmojos is stored in the Sonatype Forge
       Subversion repository. You can browse the contents of the Flexmojos
       Subversion repository by opening <ulink
       url="http://svn.sonatype.org/flexmojos/trunk">http://svn.sonatype.org/flexmojos/trunk</ulink>
