@@ -28,7 +28,7 @@
       </indexterm>The following sections detail Maven's command line
     options.</para>
 
-    <section id="running-sect-define-prop" label="">
+    <section id="running-sect-define-prop">
       <title>Defining Properties</title>
 
       <para><indexterm>
@@ -65,7 +65,7 @@ $ <command>mvn install -Dmaven.test.skip=true</command></screen>
       linkend="profiles" />.</para>
     </section>
 
-    <section id="running-sect-help-option" label="">
+    <section id="running-sect-help-option">
       <title>Getting Help</title>
 
       <para><indexterm>
@@ -227,7 +227,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       </example>
     </section>
 
-    <section id="running-sect-offline-option" label="">
+    <section id="running-sect-offline-option">
       <title>Running in Offline Mode</title>
 
       <para><indexterm>
@@ -297,7 +297,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       </variablelist>
     </section>
 
-    <section id="running-sect-encrypt-option" label="">
+    <section id="running-sect-encrypt-option">
       <title>Encrypting Passwords</title>
 
       <para><indexterm>
@@ -430,7 +430,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       <command>-e</command> options to your Maven process.</para>
     </section>
 
-    <section id="running-sect-batch-option" label="">
+    <section id="running-sect-batch-option">
       <title>Running Maven in Batch Mode</title>
 
       <para><indexterm>
@@ -581,7 +581,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       url="http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html">http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html</ulink>.</para>
     </section>
 
-    <section id="running-sect-norecurse-option" label="">
+    <section id="running-sect-norecurse-option">
       <title>Non-recursive Builds</title>
 
       <para><indexterm>
@@ -713,8 +713,8 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       linkend="fig-running-aro-depends" /> captures the dependencies between
       each of these sample modules.</para>
 
-      <figure id="fig-running-aro-depends" label="">
-        <title>Dependencies withing Sample Multi-module Project</title>
+      <figure id="fig-running-aro-depends">
+        <title>Dependencies within Sample Multi-module Project</title>
 
         <mediaobject>
           <imageobject role="web">
@@ -733,7 +733,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       the following build order for these projects as shown in <xref
       linkend="ex-running-aro-order" />.</para>
 
-      <example id="ex-running-aro-order" label="">
+      <example id="ex-running-aro-order">
         <title>Order of Project Builds in Maven Reactor</title>
 
         <screen>[INFO] Reactor build order: 
@@ -879,7 +879,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
 </screen></para>
     </section>
 
-    <section>
+    <section id="running-sect-resuming">
       <title>Resuming a "make" build</title>
 
       <para><indexterm>
@@ -891,7 +891,9 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       linkend="running-sect-make-subset" />. Combining
       <command>--project</command>, <command>--also-make</command>, and
       <command>--resume-from</command> provides you with the ability to refine
-      your build even further.</para>
+      your build even further. The <command>-rf</command> or
+      <command>--resume-from</command> resumes the build from a specific point
+      in the Reactor build order.</para>
 
       <screen>$ <command>mvn --projects sample-webapp --also-make \
       --resume-from sample-services install</command>

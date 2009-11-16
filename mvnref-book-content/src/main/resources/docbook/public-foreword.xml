@@ -45,6 +45,49 @@
           <para>Added a Table of Examples. (<ulink
           url="https://issues.sonatype.org/browse/MVNREF-96">MVNREF-96</ulink>)</para>
         </listitem>
+
+        <listitem>
+          <para>Expanded and improved the book index. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-79">MVNREF-79</ulink>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>The following errors and typos were addressed:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Fixed caption and labelling problem with <xref
+          linkend="fig-running-aro-depends" />. (<ulink
+          url="???">MVNREF-25</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Fixed missing label on <xref
+          linkend="ex-running-aro-order" />. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-30">MVNREF-30</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Fixed section title in <xref
+          linkend="running-sect-downloading-aro" />. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-22">MVNREF-22</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Fixed improper section label in <xref
+          linkend="installation-sect-common-interface" />, <xref
+          linkend="installation-sect-compare-ant-maven" />, and throughout
+          <xref linkend="running" />. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-89">MVNREF-89</ulink>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Added a mention of the short <command>-rf</command> version of
+          <command>--resume-from</command> to <xref
+          linkend="running-sect-resuming" />. (<ulink
+          url="https://issues.sonatype.org/browse/MVNREF-52"
+          userlevel="">MVNREF-52</ulink>)</para>
+        </listitem>
       </itemizedlist>
     </section>
 
