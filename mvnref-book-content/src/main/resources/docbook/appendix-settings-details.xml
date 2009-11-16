@@ -7,14 +7,18 @@
   <section id="appendix-settings-sect-quick-overview">
     <title>Quick Overview</title>
 
-    <para>The settings element in the <filename>settings.xml</filename> file
-    contains elements used to define values which configure Maven execution.
-    Settings in this file are settings which apply to many projects and which
-    should not be bundled to any specific project, or distributed to an
-    audience. These include values such as the local repository location,
-    alternate remote repository servers, and authentication information. There
-    are two locations where a <filename>settings.xml</filename> file may
-    live:</para>
+    <para><indexterm>
+        <primary>Maven settings</primary>
+
+        <secondary>overview</secondary>
+      </indexterm>The settings element in the
+    <filename>settings.xml</filename> file contains elements used to define
+    values which configure Maven execution. Settings in this file are settings
+    which apply to many projects and which should not be bundled to any
+    specific project, or distributed to an audience. These include values such
+    as the local repository location, alternate remote repository servers, and
+    authentication information. There are two locations where a
+    <filename>settings.xml</filename> file may live:</para>
 
     <itemizedlist>
       <listitem>
@@ -58,7 +62,11 @@
     <section id="appendix-settings-sect-simpleval">
       <title>Simple Values</title>
 
-      <para>Half of the top-level settings elements are simple values,
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>simple values</secondary>
+        </indexterm>Half of the top-level settings elements are simple values,
       representing a range of values which configure the core behavior of
       Maven:</para>
 
@@ -145,11 +153,15 @@
     <section id="appendix-settings-sect-servers">
       <title>Servers</title>
 
-      <para>The <sgmltag>distributionManagement</sgmltag> element of the
-      <acronym>POM</acronym> defines the repositories for deployment. However,
-      certain settings such as security credentials should not be distributed
-      along with the <filename>pom.xml</filename>. This type of information
-      should exist on the build server in the
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>servers</secondary>
+        </indexterm>The <sgmltag>distributionManagement</sgmltag> element of
+      the <acronym>POM</acronym> defines the repositories for deployment.
+      However, certain settings such as security credentials should not be
+      distributed along with the <filename>pom.xml</filename>. This type of
+      information should exist on the build server in the
       <filename>settings.xml</filename>.</para>
 
       <para><example>
@@ -261,8 +273,12 @@
             <term>id, name</term>
 
             <listitem>
-              <para>The unique identifier of this mirror. The id is used to
-              differentiate between mirror elements.</para>
+              <para><indexterm>
+                  <primary>Maven settings</primary>
+
+                  <secondary>mirrors</secondary>
+                </indexterm>The unique identifier of this mirror. The id is
+              used to differentiate between mirror elements.</para>
             </listitem>
           </varlistentry>
         </variablelist><variablelist>
@@ -325,8 +341,12 @@
             <term>id</term>
 
             <listitem>
-              <para>The unique identifier for this proxy. This is used to
-              differentiate between proxy elements.</para>
+              <para><indexterm>
+                  <primary>Maven settings</primary>
+
+                  <secondary>proxies</secondary>
+                </indexterm>The unique identifier for this proxy. This is used
+              to differentiate between proxy elements.</para>
             </listitem>
           </varlistentry>
 
@@ -374,7 +394,11 @@
     <section id="appendix-settings-sect-profiles">
       <title>Profiles</title>
 
-      <para>The <sgmltag>profile</sgmltag> element in the
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>profiles</secondary>
+        </indexterm>The <sgmltag>profile</sgmltag> element in the
       <filename>settings.xml</filename> is a truncated version of the
       <filename>pom.xml</filename> profile element. It consists of the
       <sgmltag>activation</sgmltag>, <sgmltag>repositories</sgmltag>,
@@ -392,7 +416,11 @@
     <section id="appendix-settings-sect-activation">
       <title>Activation</title>
 
-      <para>Activations are the key of a profile. Like the
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>activation</secondary>
+        </indexterm>Activations are the key of a profile. Like the
       <acronym>POM</acronym>'s profiles, the power of a profile comes from its
       ability to modify some values only under certain circumstances; those
       circumstances are specified via an activation element.</para>
@@ -495,11 +523,15 @@
     <section id="appendix-settings-sect-properties">
       <title>Properties</title>
 
-      <para>Maven properties are value placeholder, like properties in Ant.
-      Their values are accessible anywhere within a <acronym>POM</acronym> by
-      using the notation <varname>\${X}</varname>, where X is the property.
-      They come in five different styles, all accessible from the settings.xml
-      file:</para>
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>properties</secondary>
+        </indexterm>Maven properties are value placeholder, like properties in
+      Ant. Their values are accessible anywhere within a
+      <acronym>POM</acronym> by using the notation <varname>\${X}</varname>,
+      where X is the property. They come in five different styles, all
+      accessible from the settings.xml file:</para>
 
       <variablelist>
         <varlistentry>
@@ -609,9 +641,13 @@
     <section id="appendix-settings-sect-settings-repository">
       <title>Repositories</title>
 
-      <para>Repositories are remote collections of projects from which Maven
-      uses to populate the local repository of the build system. It is from
-      this local repository that Maven calls it plugins and dependencies.
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>repositories</secondary>
+        </indexterm>Repositories are remote collections of projects from which
+      Maven uses to populate the local repository of the build system. It is
+      from this local repository that Maven calls it plugins and dependencies.
       Different remote repositories may contain different projects, and under
       the active profile they may be searched for a matching release or
       snapshot artifact.</para>
@@ -725,9 +761,13 @@
     <section id="appendix-settings-sect-plugin-repositories">
       <title>Plugin Repositories</title>
 
-      <para>The structure of the <sgmltag>pluginRepositories</sgmltag> element
-      block is similar to the <sgmltag>repositories</sgmltag> element. The
-      <sgmltag>pluginRepository</sgmltag> elements each specify a remote
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>plugin repositories</secondary>
+        </indexterm>The structure of the <sgmltag>pluginRepositories</sgmltag>
+      element block is similar to the <sgmltag>repositories</sgmltag> element.
+      The <sgmltag>pluginRepository</sgmltag> elements each specify a remote
       location of where Maven can find plugins artifacts.</para>
 
       <example>
@@ -789,10 +829,14 @@
 </programlisting>
         </example></para>
 
-      <para>The final piece of the <filename>settings.xml</filename> puzzle is
-      the <sgmltag>activeProfiles</sgmltag> element. This contains a set of
-      <sgmltag>activeProfile</sgmltag> elements, which each have a value of a
-      profile id. Any profile id defined as an
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>active profiles</secondary>
+        </indexterm>The final piece of the <filename>settings.xml</filename>
+      puzzle is the <sgmltag>activeProfiles</sgmltag> element. This contains a
+      set of <sgmltag>activeProfile</sgmltag> elements, which each have a
+      value of a profile id. Any profile id defined as an
       <sgmltag>activeProfile</sgmltag> will be active, regardless of any
       environment settings. If no matching profile is found nothing will
       happen. For example, if <varname>env-test</varname> is an
@@ -805,7 +849,13 @@
     <section id="appendix-settings-sect-encrypting-passwords">
       <title>Encrypting Passwords in Maven Settings</title>
 
-      <para>Once you start to use Maven to deploy software to remote
+      <para><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>encrypting passwords</secondary>
+        </indexterm><indexterm>
+          <primary>encrypting passwords</primary>
+        </indexterm>Once you start to use Maven to deploy software to remote
       repositories and to interact with source control systems directly, you
       will start to collect a number of passwords in your Maven Settings and
       without a mechanism for encrypting these passwords, a developer's

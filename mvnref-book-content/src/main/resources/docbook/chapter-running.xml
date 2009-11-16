@@ -4,7 +4,13 @@
 <chapter id="running">
   <title>Running Maven</title>
 
-  <para>This chapter focuses on the various ways in which Maven can be
+  <para><indexterm>
+      <primary>running Maven</primary>
+    </indexterm><indexterm>
+      <primary>Apache Maven</primary>
+
+      <secondary>running</secondary>
+    </indexterm>This chapter focuses on the various ways in which Maven can be
   customized at runtime. It also provides some documentation of special
   features such as the ability to customize the behavior of the Maven Reactor
   and how to use the Maven Help plugin to obtain information about plugins and
@@ -13,13 +19,24 @@
   <section id="running-sect-options">
     <title>Maven Command Line Options</title>
 
-    <para>The following sections detail Maven's command line options.</para>
+    <para><indexterm>
+        <primary>command-line options</primary>
+      </indexterm><indexterm>
+        <primary>Apache Maven</primary>
 
-    <section id="running-sect-define-prop" label="">
+        <secondary>command-line options</secondary>
+      </indexterm>The following sections detail Maven's command line
+    options.</para>
+
+    <section id="running-sect-define-prop">
       <title>Defining Properties</title>
 
-      <para>To define a property use the following option on the command
-      line:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>defining properties</secondary>
+        </indexterm>To define a property use the following option on the
+      command line:</para>
 
       <variablelist>
         <varlistentry>
@@ -48,11 +65,15 @@ $ <command>mvn install -Dmaven.test.skip=true</command></screen>
       linkend="profiles" />.</para>
     </section>
 
-    <section id="running-sect-help-option" label="">
+    <section id="running-sect-help-option">
       <title>Getting Help</title>
 
-      <para>To list the available command line parameters, use the following
-      command line option:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>getting help</secondary>
+        </indexterm>To list the available command line parameters, use the
+      following command line option:</para>
 
       <variablelist>
         <varlistentry>
@@ -136,8 +157,12 @@ Options:
     <section id="running-sect-profile-option">
       <title>Using Build Profiles</title>
 
-      <para>To activate one or more build profiles from the command line, use
-      the following option:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>activating build profiles</secondary>
+        </indexterm>To activate one or more build profiles from the command
+      line, use the following option:</para>
 
       <variablelist>
         <varlistentry>
@@ -156,8 +181,12 @@ Options:
     <section id="running-sect-version-option">
       <title>Displaying Version Information</title>
 
-      <para>To display Maven version information, use one of the following
-      options on the command line:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>displaying version information</secondary>
+        </indexterm>To display Maven version information, use one of the
+      following options on the command line:</para>
 
       <variablelist>
         <varlistentry>
@@ -198,12 +227,18 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       </example>
     </section>
 
-    <section id="running-sect-offline-option" label="">
+    <section id="running-sect-offline-option">
       <title>Running in Offline Mode</title>
 
-      <para>If you ever need to use Maven without having access to a network,
-      you should use the following option to prevent any attempt to check for
-      updates to plugins or dependencies over a network:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>running in offline mode</secondary>
+        </indexterm><indexterm>
+          <primary>offline mode</primary>
+        </indexterm>If you ever need to use Maven without having access to a
+      network, you should use the following option to prevent any attempt to
+      check for updates to plugins or dependencies over a network:</para>
 
       <variablelist>
         <varlistentry>
@@ -222,10 +257,18 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="running-sect-custom-locations-option">
       <title>Using a Custom POM or Custom Settings File</title>
 
-      <para>If you don't like the <filename>pom.xml</filename> file name, the
-      location of your user-specific Maven settings, or the default location
-      of your global settings file, you can customize any of these things with
-      the following options:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>using custom POM</secondary>
+        </indexterm><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>using custom settings</secondary>
+        </indexterm>If you don't like the <filename>pom.xml</filename> file
+      name, the location of your user-specific Maven settings, or the default
+      location of your global settings file, you can customize any of these
+      things with the following options:</para>
 
       <variablelist>
         <varlistentry>
@@ -254,11 +297,17 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       </variablelist>
     </section>
 
-    <section id="running-sect-encrypt-option" label="">
+    <section id="running-sect-encrypt-option">
       <title>Encrypting Passwords</title>
 
-      <para>The following commands allow you to use Maven to encrypt passwords
-      for storage in a Maven settings file:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>encrypting passwords</secondary>
+        </indexterm><indexterm>
+          <primary>encrypting passwords</primary>
+        </indexterm>The following commands allow you to use Maven to encrypt
+      passwords for storage in a Maven settings file:</para>
 
       <variablelist>
         <varlistentry>
@@ -285,8 +334,12 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="running-sect-failure-option">
       <title>Dealing with Failure</title>
 
-      <para>The following options control how Maven reacts to a build failure
-      in the middle of a multi-module project build:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>failure modes</secondary>
+        </indexterm>The following options control how Maven reacts to a build
+      failure in the middle of a multi-module project build:</para>
 
       <variablelist>
         <varlistentry>
@@ -325,8 +378,14 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="running-sect-verbose-option">
       <title>Controlling Maven's Verbosity</title>
 
-      <para>If you want to control Maven's logging level, you can use one of
-      the following three command line options:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>verbosity</secondary>
+        </indexterm><indexterm>
+          <primary>verbose output</primary>
+        </indexterm>If you want to control Maven's logging level, you can use
+      one of the following three command line options:</para>
 
       <variablelist>
         <varlistentry>
@@ -371,10 +430,17 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       <command>-e</command> options to your Maven process.</para>
     </section>
 
-    <section id="running-sect-batch-option" label="">
+    <section id="running-sect-batch-option">
       <title>Running Maven in Batch Mode</title>
 
-      <para>To run Maven in batch mode use the following option:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>batch mode</secondary>
+        </indexterm><indexterm>
+          <primary>batch mode</primary>
+        </indexterm>To run Maven in batch mode use the following
+      option:</para>
 
       <variablelist>
         <varlistentry>
@@ -396,9 +462,17 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="running-sect-deps-option">
       <title>Downloading and Verifying Dependencies</title>
 
-      <para>The following command line options affect the way that Maven will
-      interact with remote reopsitories and how it verifies downloaded
-      artifacts:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>verifying checksums</secondary>
+        </indexterm><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>updating snapshots</secondary>
+        </indexterm>The following command line options affect the way that
+      Maven will interact with remote reopsitories and how it verifies
+      downloaded artifacts:</para>
 
       <variablelist>
         <varlistentry>
@@ -444,8 +518,13 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       <title id="running-sect-plugup-option">Controlling Plugin
       Updates</title>
 
-      <para>The following command line options tell Maven how it should update
-      (or not update) Maven plugins from remote repositories:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>plugin updates</secondary>
+        </indexterm>The following command line options tell Maven how it
+      should update (or not update) Maven plugins from remote
+      repositories:</para>
 
       <variablelist>
         <varlistentry>
@@ -502,12 +581,18 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       url="http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html">http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html</ulink>.</para>
     </section>
 
-    <section id="running-sect-norecurse-option" label="">
+    <section id="running-sect-norecurse-option">
       <title>Non-recursive Builds</title>
 
-      <para>There will be times when you simply want to run a Maven build
-      without having Maven descend into all of a project's submodules. You can
-      do this by using the following command line option:</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>non-recursive build</secondary>
+        </indexterm><indexterm>
+          <primary>non-recursive build</primary>
+        </indexterm>There will be times when you simply want to run a Maven
+      build without having Maven descend into all of a project's submodules.
+      You can do this by using the following command line option:</para>
 
       <variablelist>
         <varlistentry>
@@ -530,9 +615,17 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
   <section>
     <title>Using Advanced Reactor Options</title>
 
-    <para>Starting with the Maven 2.1 release, there are new Maven command
-    line options which allow you to manipulate the way that Maven will build
-    multimodule projects. These new options are:</para>
+    <para><indexterm>
+        <primary>command-line options</primary>
+
+        <secondary>advanced reactor options</secondary>
+      </indexterm><indexterm>
+        <primary>make-like builds</primary>
+      </indexterm><indexterm>
+        <primary>advanced reactor options</primary>
+      </indexterm>Starting with the Maven 2.1 release, there are new Maven
+    command line options which allow you to manipulate the way that Maven will
+    build multimodule projects. These new options are:</para>
 
     <variablelist>
       <varlistentry>
@@ -572,7 +665,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     </variablelist>
 
     <section id="running-sect-downloading-aro">
-      <title>Advanced Reaction Options Example Project</title>
+      <title>Advanced Reactor Options Example Project</title>
 
       <para>The example in this section is a skeleton of a complex multimodule
       project that is used to illustrate the advanced reactor options. While
@@ -620,8 +713,8 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       linkend="fig-running-aro-depends" /> captures the dependencies between
       each of these sample modules.</para>
 
-      <figure id="fig-running-aro-depends" label="">
-        <title>Dependencies withing Sample Multi-module Project</title>
+      <figure id="fig-running-aro-depends">
+        <title>Dependencies within Sample Multi-module Project</title>
 
         <mediaobject>
           <imageobject role="web">
@@ -640,7 +733,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
       the following build order for these projects as shown in <xref
       linkend="ex-running-aro-order" />.</para>
 
-      <example id="ex-running-aro-order" label="">
+      <example id="ex-running-aro-order">
         <title>Order of Project Builds in Maven Reactor</title>
 
         <screen>[INFO] Reactor build order: 
@@ -662,12 +755,17 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section>
       <title>Resuming Builds</title>
 
-      <para>The <command>-rf</command> or <command>--resume-from</command>
-      option can come in handy if you want to tell the Maven Reactor to resume
-      a build from a particular project. This can be useful if you are working
-      with a large multimodule project and you want to restart a build at a
-      particular project in the Reactor without running through all of the
-      projects that precede it in the build order.</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>resuming builds</secondary>
+        </indexterm>The <command>-rf</command> or
+      <command>--resume-from</command> option can come in handy if you want to
+      tell the Maven Reactor to resume a build from a particular project. This
+      can be useful if you are working with a large multimodule project and
+      you want to restart a build at a particular project in the Reactor
+      without running through all of the projects that precede it in the build
+      order.</para>
 
       <para>Assume that you are working on the multi-module project with the
       build order shown in <xref linkend="ex-running-aro-order" /> and that
@@ -691,11 +789,16 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section>
       <title>Specifying a Subset of Projects</title>
 
-      <para>The <command>-pl</command> or <command>--projects</command> option
-      allows you to select a list of projects from a multimodule project. This
-      option can be useful if you are working on a specific set of projects,
-      and you'd rather not wait through a full build of a multi-module project
-      during a development cycle.</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>building a subset of projects</secondary>
+        </indexterm>The <command>-pl</command> or
+      <command>--projects</command> option allows you to select a list of
+      projects from a multimodule project. This option can be useful if you
+      are working on a specific set of projects, and you'd rather not wait
+      through a full build of a multi-module project during a development
+      cycle.</para>
 
       <para>Assume that you are working on the multi-module project with the
       build order shown in <xref linkend="ex-running-aro-order" /> and that
@@ -717,14 +820,16 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="running-sect-make-subset">
       <title>Making a Subset of Projects</title>
 
-      <para>If you wanted to run a portion of the larger build, you would use
-      the <command>-pl</command> or <command>--projects</command> option with
-      the <command>-am</command> or <command>--also-make option</command>.
-      When you specify a project with the <command>-am</command> option, Maven
-      will build all of the projects that the specified project depends upon
-      (either directly or indirectly). Maven will examine the list of projects
-      and walk down the dependency tree, finding all of the projects that it
-      needs to build.</para>
+      <para><indexterm>
+          <primary>command-line options</primary>
+        </indexterm>making subsetsIf you wanted to run a portion of the larger
+      build, you would use the <command>-pl</command> or
+      <command>--projects</command> option with the <command>-am</command> or
+      <command>--also-make option</command>. When you specify a project with
+      the <command>-am</command> option, Maven will build all of the projects
+      that the specified project depends upon (either directly or indirectly).
+      Maven will examine the list of projects and walk down the dependency
+      tree, finding all of the projects that it needs to build.</para>
 
       <para>If you are working on the multi-module project with the build
       order shown in <xref linkend="ex-running-aro-order" /> and you were only
@@ -744,8 +849,12 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section>
       <title>Making Project Dependents</title>
 
-      <para>While the <command>-am</command> command makes all of the projects
-      required by a particular project in a multi-module build, the
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>making dependents</secondary>
+        </indexterm>While the <command>-am</command> command makes all of the
+      projects required by a particular project in a multi-module build, the
       <command>-amd</command> or <command>--also-make-dependents</command>
       option configures Maven to build a project and any project that depends
       on that project. When using <command>--also-make-dependents</command>,
@@ -770,15 +879,21 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
 </screen></para>
     </section>
 
-    <section>
+    <section id="running-sect-resuming">
       <title>Resuming a "make" build</title>
 
-      <para>When using <command>--also-make</command>, Maven will execute a
-      subset of the larger build as shown in <xref
+      <para><indexterm>
+          <primary>command-line options</primary>
+
+          <secondary>resuming a make-like build</secondary>
+        </indexterm>When using <command>--also-make</command>, Maven will
+      execute a subset of the larger build as shown in <xref
       linkend="running-sect-make-subset" />. Combining
       <command>--project</command>, <command>--also-make</command>, and
       <command>--resume-from</command> provides you with the ability to refine
-      your build even further.</para>
+      your build even further. The <command>-rf</command> or
+      <command>--resume-from</command> resumes the build from a specific point
+      in the Reactor build order.</para>
 
       <screen>$ <command>mvn --projects sample-webapp --also-make \
       --resume-from sample-services install</command>
@@ -804,13 +919,18 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
   <section id="installation-sect-help-plugin-install">
     <title>Using the Maven Help Plugin</title>
 
-    <para>Throughout this book, we introduce Maven plugins, talking about
-    Maven Project Object Model (<acronym>POM</acronym>) files, settings files,
-    and profiles. There are going to be times when you need a tool to help you
-    make sense of some of the models that Maven is using and what goals are
-    available on a specific plugin. The Maven Help plugin allows you to list
-    active Maven profiles, display an effective <acronym>POM</acronym>, print
-    the effective settings, or list the attributes of a Maven plugin.</para>
+    <para><indexterm>
+        <primary>Help plugin</primary>
+
+        <secondary>using</secondary>
+      </indexterm>Throughout this book, we introduce Maven plugins, talking
+    about Maven Project Object Model (<acronym>POM</acronym>) files, settings
+    files, and profiles. There are going to be times when you need a tool to
+    help you make sense of some of the models that Maven is using and what
+    goals are available on a specific plugin. The Maven Help plugin allows you
+    to list active Maven profiles, display an effective
+    <acronym>POM</acronym>, print the effective settings, or list the
+    attributes of a Maven plugin.</para>
 
     <para>The Maven Help plugin has four goals. The first three
     goals—<varname>active-profiles</varname>,
@@ -826,8 +946,14 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
         <term>help:active-profiles</term>
 
         <listitem>
-          <para>Lists the profiles (project, user, global) which are active
-          for the build.</para>
+          <para><indexterm>
+              <primary>Help plugin</primary>
+
+              <secondary>active-profiles goal</secondary>
+            </indexterm><indexterm>
+              <primary>listing active profiles</primary>
+            </indexterm>Lists the profiles (project, user, global) which are
+          active for the build.</para>
         </listitem>
       </varlistentry>
 
@@ -835,8 +961,14 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
         <term>help:effective-pom</term>
 
         <listitem>
-          <para>Displays the effective <acronym>POM</acronym> for the current
-          build, with the active profiles factored in.</para>
+          <para><indexterm>
+              <primary>Help plugin</primary>
+
+              <secondary>effective-pom goal</secondary>
+            </indexterm><indexterm>
+              <primary>effective POM</primary>
+            </indexterm>Displays the effective <acronym>POM</acronym> for the
+          current build, with the active profiles factored in.</para>
         </listitem>
       </varlistentry>
 
@@ -844,9 +976,15 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
         <term>help:effective-settings</term>
 
         <listitem>
-          <para>Prints out the calculated settings for the project, given any
-          profile enhancement and the inheritance of the global settings into
-          the user-level settings.</para>
+          <para><indexterm>
+              <primary>Help plugin</primary>
+
+              <secondary>effective-settings goal</secondary>
+            </indexterm><indexterm>
+              <primary>effective Maven settings</primary>
+            </indexterm>Prints out the calculated settings for the project,
+          given any profile enhancement and the inheritance of the global
+          settings into the user-level settings.</para>
         </listitem>
       </varlistentry>
 
@@ -854,8 +992,12 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
         <term>help:describe</term>
 
         <listitem>
-          <para>Describes the attributes of a plugin. This need not run under
-          an existing project directory. You must at least give the
+          <para><indexterm>
+              <primary>Help plugin</primary>
+
+              <secondary>describe goal</secondary>
+            </indexterm>Describes the attributes of a plugin. This need not
+          run under an existing project directory. You must at least give the
           <varname>groupId</varname> and <varname>artifactId</varname> of the
           plugin you wish to describe.</para>
         </listitem>
@@ -865,9 +1007,15 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
     <section id="installation-sect-describing-plugin">
       <title>Describing a Maven Plugin</title>
 
-      <para>Once you start using Maven, you'll spend most of your time trying
-      to get more information about Maven Plugins: How do plugins work? What
-      are the configuration parameters? What are the goals? The
+      <para><indexterm>
+          <primary>Help plugin</primary>
+
+          <secondary>describe goal</secondary>
+        </indexterm><indexterm>
+          <primary>plugin documentation</primary>
+        </indexterm>Once you start using Maven, you'll spend most of your time
+      trying to get more information about Maven Plugins: How do plugins work?
+      What are the configuration parameters? What are the goals? The
       <varname>help:describe</varname> goal is something you'll be using very
       frequently to retrieve this information. With the
       <varname>plugin</varname> parameter you can specify a plugin you wish to

@@ -7,9 +7,15 @@
   <section id="assemblies-sect-intro">
     <title>Introduction</title>
 
-    <para>Maven provides plugins that are used to create the most common
-    archive types, most of which are consumable as dependencies of other
-    projects. Some examples include the <acronym>JAR</acronym>,
+    <para><indexterm>
+        <primary>assemblies</primary>
+      </indexterm><indexterm>
+        <primary>Maven assemblies</primary>
+      </indexterm><indexterm>
+        <primary>Assembly plugin</primary>
+      </indexterm>Maven provides plugins that are used to create the most
+    common archive types, most of which are consumable as dependencies of
+    other projects. Some examples include the <acronym>JAR</acronym>,
     <acronym>WAR</acronym>, <acronym>EJB</acronym>, and <acronym>EAR</acronym>
     plugins. As discussed in <xref linkend="lifecycle" /> these plugins
     correspond to different project packaging types each with a slightly
@@ -51,8 +57,10 @@
   <section id="assemblies-sect-basics">
     <title>Assembly Basics</title>
 
-    <para>Before we go any further, it’s best to take a minute and talk about
-    the two main goals in the Assembly plugin:
+    <para><indexterm>
+        <primary>assemblies</primary>
+      </indexterm>Before we go any further, it’s best to take a minute and
+    talk about the two main goals in the Assembly plugin:
     <varname>assembly:assembly</varname>, and the <varname>single</varname>
     mojo. I list these two goals in different ways because it reflects the
     difference in how they’re used. The <varname>assembly:assembly</varname>
@@ -101,24 +109,36 @@
     <section id="assemblies-sect-predefined">
       <title>Predefined Assembly Descriptors</title>
 
-      <para>While many people opt to create their own archive recipes - called
-      assembly descriptors - this isn’t strictly necessary. The Assembly
-      plugin provides built-in descriptors for several common archive types
-      that you can use immediately without writing a line of configuration.
-      The following assembly descriptors are predefined in the Maven Assembly
-      plugin:</para>
+      <para><indexterm>
+          <primary>assembly descriptors</primary>
+        </indexterm><indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>descriptors</secondary>
+        </indexterm>While many people opt to create their own archive recipes
+      - called assembly descriptors - this isn’t strictly necessary. The
+      Assembly plugin provides built-in descriptors for several common archive
+      types that you can use immediately without writing a line of
+      configuration. The following assembly descriptors are predefined in the
+      Maven Assembly plugin:</para>
 
       <variablelist>
         <varlistentry>
           <term><varname>bin</varname></term>
 
           <listitem>
-            <para>The <varname>bin</varname> descriptor is used to bundle
-            project <filename>LICENSE</filename>, <filename>README</filename>,
-            and <filename>NOTICE</filename> files with the project’s main
-            artifact, assuming this project builds a jar as its main artifact.
-            Think of this as the smallest possible binary distribution for
-            completely self-contained projects.</para>
+            <para><indexterm>
+                <primary>assemblies</primary>
+
+                <secondary>descriptors</secondary>
+
+                <tertiary>bin</tertiary>
+              </indexterm>The <varname>bin</varname> descriptor is used to
+            bundle project <filename>LICENSE</filename>,
+            <filename>README</filename>, and <filename>NOTICE</filename> files
+            with the project’s main artifact, assuming this project builds a
+            jar as its main artifact. Think of this as the smallest possible
+            binary distribution for completely self-contained projects.</para>
           </listitem>
         </varlistentry>
 
@@ -126,14 +146,20 @@
           <term><varname>jar-with-dependencies</varname></term>
 
           <listitem>
-            <para>The <varname>jar-with-dependencies</varname> descriptor
-            builds a <acronym>JAR</acronym> archive with the contents of the
-            main project jar along with the unpacked contents of all the
-            project’s runtime dependencies. Coupled with an appropriate
-            <varname>Main-Class</varname> Manifest entry (discussed in “Plugin
-            Configuration” below), this descriptor can produce a
-            self-contained, executable jar for your project, even if the
-            project has dependencies.</para>
+            <para><indexterm>
+                <primary>assemblies</primary>
+
+                <secondary>descriptors</secondary>
+
+                <tertiary>jar-with-dependencies</tertiary>
+              </indexterm>The <varname>jar-with-dependencies</varname>
+            descriptor builds a <acronym>JAR</acronym> archive with the
+            contents of the main project jar along with the unpacked contents
+            of all the project’s runtime dependencies. Coupled with an
+            appropriate <varname>Main-Class</varname> Manifest entry
+            (discussed in “Plugin Configuration” below), this descriptor can
+            produce a self-contained, executable jar for your project, even if
+            the project has dependencies.</para>
           </listitem>
         </varlistentry>
 
@@ -141,14 +167,21 @@
           <term><varname>project</varname></term>
 
           <listitem>
-            <para>The <varname>project</varname> descriptor simply archives
-            the project directory structure as it exists in your file-system
-            and, most likely, in your version control system. Of course, the
-            target directory is omitted, as are any version-control metadata
-            files like the <filename>CVS</filename> and
-            <filename>.svn</filename> directories we’re all used to seeing.
-            Basically, the point of this descriptor is to create a project
-            archive that, when unpacked, can be built using Maven.</para>
+            <para><indexterm>
+                <primary>assemblies</primary>
+
+                <secondary>descriptors</secondary>
+
+                <tertiary>project</tertiary>
+              </indexterm>The <varname>project</varname> descriptor simply
+            archives the project directory structure as it exists in your
+            file-system and, most likely, in your version control system. Of
+            course, the target directory is omitted, as are any
+            version-control metadata files like the <filename>CVS</filename>
+            and <filename>.svn</filename> directories we’re all used to
+            seeing. Basically, the point of this descriptor is to create a
+            project archive that, when unpacked, can be built using
+            Maven.</para>
           </listitem>
         </varlistentry>
 
@@ -156,9 +189,15 @@
           <term><varname>src</varname></term>
 
           <listitem>
-            <para>The <varname>src</varname> descriptor produces an archive of
-            your project source and <filename>pom.xml</filename> files, along
-            with any <filename>LICENSE</filename>,
+            <para><indexterm>
+                <primary>assemblies</primary>
+
+                <secondary>descriptors</secondary>
+
+                <tertiary>src</tertiary>
+              </indexterm>The <varname>src</varname> descriptor produces an
+            archive of your project source and <filename>pom.xml</filename>
+            files, along with any <filename>LICENSE</filename>,
             <filename>README</filename>, and <filename>NOTICE</filename> files
             that are in the project’s root directory. This precursor to the
             project descriptor produces an archive that can be built by Maven
@@ -175,12 +214,16 @@
     <section id="assemblies-sect-building">
       <title>Building an Assembly</title>
 
-      <para>The Assembly plugin can be executed in two ways: you can invoke it
-      directly from the command line, or you can configure it as part of your
-      standard build process by binding it to a phase of your project’s build
-      lifecycle. Direct invocation has its uses, particularly for one-off
-      assemblies that are not considered part of your project’s core
-      deliverables. In most cases, you’ll probably want to generate the
+      <para><indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>building</secondary>
+        </indexterm>The Assembly plugin can be executed in two ways: you can
+      invoke it directly from the command line, or you can configure it as
+      part of your standard build process by binding it to a phase of your
+      project’s build lifecycle. Direct invocation has its uses, particularly
+      for one-off assemblies that are not considered part of your project’s
+      core deliverables. In most cases, you’ll probably want to generate the
       assemblies for your project as part of its standard build process. Doing
       this has the effect of including your custom assemblies whenever the
       project is installed or deployed into Maven’s repositories, so they are
@@ -192,7 +235,11 @@
       the build, you wanted to include the source as well. You won’t need to
       do this often, so it doesn’t make sense to add the configuration to your
       <sgmltag>POM</sgmltag>. Instead, you can use the following
-      command:</para>
+      command:<indexterm>
+          <primary>Assembly plugin</primary>
+
+          <secondary>single goal</secondary>
+        </indexterm></para>
 
       <screen>$ <command>mvn -DdescriptorId=project assembly:single</command> 
 ...
@@ -218,7 +265,19 @@
       <para>Assuming the main class for the project is
       <classname>org.sonatype.mavenbook.App</classname>, the following
       <acronym>POM</acronym> configuration will create an executable
-      <acronym>JAR</acronym>:</para>
+      <acronym>JAR</acronym>:<indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>descriptor</secondary>
+        </indexterm><indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>configuring POM</secondary>
+        </indexterm><indexterm>
+          <primary>Assembly plugin</primary>
+
+          <secondary>attaching execution</secondary>
+        </indexterm></para>
 
       <example>
         <title>Assembly Descriptor for Executable JAR</title>
@@ -325,8 +384,12 @@ Hello, World!</screen>
     <section id="assemblies-sect-as-depend">
       <title>Assemblies as Dependencies</title>
 
-      <para>When you generate assemblies as part of your normal build process,
-      those assembly archives will be attached to your main project’s
+      <para><indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>as dependencies</secondary>
+        </indexterm>When you generate assemblies as part of your normal build
+      process, those assembly archives will be attached to your main project’s
       artifact. This means they will be installed and deployed alongside the
       main artifact, and are then resolvable in much the same way. Each
       assembly artifact is given the same basic coordinates
@@ -370,9 +433,13 @@ Hello, World!</screen>
     <section id="assemblies-sect-assembling-via-depend">
       <title>Assembling Assemblies via Assembly Dependencies</title>
 
-      <para>How's that for a confusing section title? Let's try to set up a
-      scenario which would explain the idea of assembling assemblies. Imagine
-      you want to create an archive which itself contains some project
+      <para><indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>assembling via dependencies</secondary>
+        </indexterm>How's that for a confusing section title? Let's try to set
+      up a scenario which would explain the idea of assembling assemblies.
+      Imagine you want to create an archive which itself contains some project
       assemblies. Assume that you have a multi-module build and you want to
       deploy an assembly which contains a set of related project assemblies.
       In this section's example, we create a bundle of "buildable" project
@@ -388,7 +455,15 @@ Hello, World!</screen>
       <sgmltag>descriptorRef</sgmltag>. Every project in a multi-module will
       inherit the configuration from a top-level <filename>pom.xml</filename>
       whose <sgmltag>pluginManagement</sgmltag> element is shown in <xref
-      linkend="ex-top-pom-assembly" />.</para>
+      linkend="ex-top-pom-assembly" />.<indexterm>
+          <primary>Project Object Model (POM)</primary>
+
+          <secondary>assemblies</secondary>
+        </indexterm><indexterm>
+          <primary>Assembly plugin</primary>
+
+          <secondary>configuring single goal</secondary>
+        </indexterm></para>
 
       <example id="ex-top-pom-assembly">
         <title>Configuring the project assembly in top-level POM</title>
@@ -426,7 +501,11 @@ Hello, World!</screen>
       <para>Each project <acronym>POM</acronym> references the managed plugin
       configuration from <xref linkend="ex-top-pom-assembly" /> using a
       minimal plugin declaration in its build section shown in <xref
-      linkend="ex-activating-assembly" />.</para>
+      linkend="ex-activating-assembly" />.<indexterm>
+          <primary>assemblies</primary>
+
+          <secondary>activating in child projects</secondary>
+        </indexterm></para>
 
       <example id="ex-activating-assembly">
         <title>Activating the Assembly Plugin Configuration in Child
@@ -596,7 +675,17 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
   <section id="assemblies-sect-overview-descriptor">
     <title>Overview of the Assembly Descriptor</title>
 
-    <para>When the standard assembly descriptors introduced in <xref
+    <para><indexterm>
+        <primary>assemblies</primary>
+
+        <secondary>descriptor</secondary>
+      </indexterm><indexterm>
+        <primary>assembly descriptor</primary>
+      </indexterm><indexterm>
+        <primary>Assembly plugin</primary>
+
+        <secondary>descriptor</secondary>
+      </indexterm>When the standard assembly descriptors introduced in <xref
     linkend="assemblies-sect-basics" /> are not adequate, you will need to
     define your own assembly descriptor. The assembly descriptor is an XML
     document which defines the structure and contents of an assembly. The
@@ -687,15 +776,29 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
   <section id="assemblies-sect-descriptor">
     <title>The Assembly Descriptor</title>
 
-    <para>This section is a tour of the assembly descriptor which contains
-    some guidelines for developing a custom assembly descriptor. The Assembly
-    plugin is one of the largest plugins in the Maven ensemble, and one of the
-    most flexible.</para>
+    <para><indexterm>
+        <primary>assemblies</primary>
+
+        <secondary>descriptor</secondary>
+      </indexterm><indexterm>
+        <primary>assembly descriptor</primary>
+      </indexterm><indexterm>
+        <primary>Assembly plugin</primary>
+
+        <secondary>descriptor</secondary>
+      </indexterm>This section is a tour of the assembly descriptor which
+    contains some guidelines for developing a custom assembly descriptor. The
+    Assembly plugin is one of the largest plugins in the Maven ensemble, and
+    one of the most flexible.</para>
 
     <section id="assemblies-sect-prop-refs">
       <title>Property References in Assembly Descriptors</title>
 
-      <para>Any property discussed in <xref
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>property references</secondary>
+        </indexterm>Any property discussed in <xref
       linkend="resource-filtering-sect-properties" /> can be referenced in an
       assembly descriptor. Before any assembly descriptor is used by Maven, it
       is interpolated using information from the <acronym>POM</acronym> and
@@ -720,13 +823,17 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
     <section id="assemblies-sect-required">
       <title>Required Assembly Information</title>
 
-      <para>There are two essential pieces of information that are required
-      for every assembly: the <sgmltag>id</sgmltag>, and the list of archive
-      formats to produce. In practice, at least one other section of the
-      descriptor is required - since most archive format components will choke
-      if they don’t have at least one file to include - but without at least
-      one <sgmltag>format</sgmltag> and an <sgmltag>id</sgmltag>, there is no
-      archive to create. The <sgmltag>id</sgmltag> is used both in the
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>required information</secondary>
+        </indexterm>There are two essential pieces of information that are
+      required for every assembly: the <sgmltag>id</sgmltag>, and the list of
+      archive formats to produce. In practice, at least one other section of
+      the descriptor is required - since most archive format components will
+      choke if they don’t have at least one file to include - but without at
+      least one <sgmltag>format</sgmltag> and an <sgmltag>id</sgmltag>, there
+      is no archive to create. The <sgmltag>id</sgmltag> is used both in the
       archive’s file name, and as part of the archive’s artifact classifier in
       the Maven repository. The format string also controls the
       archiver-component instance that will create the final assembly archive.
@@ -821,12 +928,16 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
   <section id="assemblies-sect-controlling-contents">
     <title>Controlling the Contents of an Assembly</title>
 
-    <para>In theory, <varname>id</varname> and <varname>format</varname> are
-    the only absolute requirements for a valid assembly descriptor; however,
-    many assembly archivers will fail if they do not have at least one file to
-    include in the output archive. The task of defining the files to be
-    included in the assembly is handled by the five main sections of the
-    assembly descriptor: <sgmltag>files</sgmltag>,
+    <para><indexterm>
+        <primary>assembly descriptor</primary>
+
+        <secondary>assembly contents</secondary>
+      </indexterm>In theory, <varname>id</varname> and
+    <varname>format</varname> are the only absolute requirements for a valid
+    assembly descriptor; however, many assembly archivers will fail if they do
+    not have at least one file to include in the output archive. The task of
+    defining the files to be included in the assembly is handled by the five
+    main sections of the assembly descriptor: <sgmltag>files</sgmltag>,
     <sgmltag>fileSets</sgmltag>, <sgmltag>dependencySets</sgmltag>,
     <sgmltag>repositories</sgmltag>, and <sgmltag>moduleSets</sgmltag>. To
     explore these sections most effectively, we’ll start by discussing the
@@ -840,12 +951,16 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
     <section id="assemblies-sect-files">
       <title><sgmltag>Files</sgmltag> Section</title>
 
-      <para>The <sgmltag>files</sgmltag> section is the simplest part of the
-      assembly descriptor, it is designed for files that have a definite
-      location relative to your project’s directory. Using this section, you
-      have absolute control over the exact set of files that are included in
-      your assembly, exactly what they are named, and where they will reside
-      in the archive.</para>
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>files</secondary>
+        </indexterm>The <sgmltag>files</sgmltag> section is the simplest part
+      of the assembly descriptor, it is designed for files that have a
+      definite location relative to your project’s directory. Using this
+      section, you have absolute control over the exact set of files that are
+      included in your assembly, exactly what they are named, and where they
+      will reside in the archive.</para>
 
       <example id="ex-assembly-files">
         <title>Including a <acronym>JAR</acronym> file in an Assembly using
@@ -896,7 +1011,11 @@ second-project-1.0-SNAPSHOT/src/test/java/org/sonatype/mavenbook/AppTest.java</s
     <section id="assemblies-sect-filesets">
       <title><sgmltag>FileSets</sgmltag> Section</title>
 
-      <para>Similar to the <sgmltag>files</sgmltag> section,
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>file sets</secondary>
+        </indexterm>Similar to the <sgmltag>files</sgmltag> section,
       <sgmltag>fileSets</sgmltag> are intended for files that have a definite
       location relative to your project’s directory structure. However, unlike
       the <sgmltag>files</sgmltag> section, <sgmltag>fileSets</sgmltag>
@@ -1059,10 +1178,14 @@ I can add this back in later.  I didn't want to talk about it without an example
       <title>Default Exclusion Patterns for
       <sgmltag>fileSets</sgmltag></title>
 
-      <para>When you use the default exclusion patterns, the Maven Assembly
-      plugin is going to be ignoring more than just <acronym>SVN</acronym> and
-      <acronym>CVS</acronym> information. By default the exclusion patterns
-      are defined by the <ulink
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>default exclusion patterns</secondary>
+        </indexterm>When you use the default exclusion patterns, the Maven
+      Assembly plugin is going to be ignoring more than just
+      <acronym>SVN</acronym> and <acronym>CVS</acronym> information. By
+      default the exclusion patterns are defined by the <ulink
       url="http://svn.codehaus.org/plexus/plexus-utils/trunk/src/main/java/org/codehaus/plexus/util/DirectoryScanner.java">DirectoryScanner</ulink>
       class in the <ulink
       url="http://plexus.codehaus.org/plexus-utils/">plexus-utils</ulink>
@@ -1129,7 +1252,11 @@ I can add this back in later.  I didn't want to talk about it without an example
     <section id="assemblies-sect-output-algorithm">
       <title><sgmltag>dependencySets</sgmltag> Section</title>
 
-      <para>One of the most common requirements for assemblies is the
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>dependency sets</secondary>
+        </indexterm>One of the most common requirements for assemblies is the
       inclusion of a project’s dependencies in an assembly archive. Where
       <sgmltag>files</sgmltag> and <sgmltag>fileSets</sgmltag> deal with files
       in your project, dependency files don't have a location in your project.
@@ -1195,9 +1322,13 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-output-location">
         <title>Customizing Dependency Output Location</title>
 
-        <para>There are two configuration options that are used in concert to
-        define the location for a dependency file within the assembly archive:
-        <sgmltag>outputDirectory</sgmltag> and
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>customizing output locations</secondary>
+          </indexterm>There are two configuration options that are used in
+        concert to define the location for a dependency file within the
+        assembly archive: <sgmltag>outputDirectory</sgmltag> and
         <sgmltag>outputFileNameMapping</sgmltag>. You may want to customize
         the location of dependencies in your assembly using properties of the
         dependency artifacts themselves. Let's say you want to put all the
@@ -1248,8 +1379,12 @@ I can add this back in later.  I didn't want to talk about it without an example
         <title>Interpolation of Properties in Dependency Output
         Location</title>
 
-        <para>As mentioned in the Assembly Interpolation section above,
-        neither of these elements are interpolated with the rest of the
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>properties and output location</secondary>
+          </indexterm>As mentioned in the Assembly Interpolation section
+        above, neither of these elements are interpolated with the rest of the
         assembly descriptor, because their raw values have to be interpreted
         using additional, artifact-specific expression resolvers.</para>
 
@@ -1359,7 +1494,11 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-include-by-scope">
         <title>Including and Excluding Dependencies by Scope</title>
 
-        <para>In <xref
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>exclude/include dependencies by scope</secondary>
+          </indexterm>In <xref
         linkend="pom-relationships-sect-project-dependencies" />, it was noted
         that all project dependencies have one scope or another. Scope
         determines when in the build process that dependency normally would be
@@ -1471,22 +1610,26 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-fine-tune">
         <title>Fine Tuning: Dependency Includes and Excludes</title>
 
-        <para>A resource dependency might be as simple as a set of resources
-        (CSS, Javascript, and Images) in a project that has an assembly which
-        creates a <acronym>ZIP</acronym> archive. Depending on the particulars
-        of our web application, we might be able to distinguish resource
-        dependencies from binary dependencies solely according to type. Most
-        web applications are going to depend on other dependencies of type
-        <varname>jar</varname>, and it is possible that we can state with
-        certainty that all dependencies of type <varname>zip</varname> are
-        resource dependencies. Or, we might have a situation where resources
-        are stored in <varname>jar</varname> format, but have a classifier of
-        something like <varname>resources</varname>. In either case, we can
-        specify an inclusion pattern to target these resource dependencies and
-        apply different logic than that used for binary dependencies. We’ll
-        specify these tuning patterns using the <sgmltag>includes</sgmltag>
-        and <sgmltag>excludes</sgmltag> sections of the
-        <sgmltag>dependencySet</sgmltag>.</para>
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>fine tuning includes/excludes</secondary>
+          </indexterm>A resource dependency might be as simple as a set of
+        resources (CSS, Javascript, and Images) in a project that has an
+        assembly which creates a <acronym>ZIP</acronym> archive. Depending on
+        the particulars of our web application, we might be able to
+        distinguish resource dependencies from binary dependencies solely
+        according to type. Most web applications are going to depend on other
+        dependencies of type <varname>jar</varname>, and it is possible that
+        we can state with certainty that all dependencies of type
+        <varname>zip</varname> are resource dependencies. Or, we might have a
+        situation where resources are stored in <varname>jar</varname> format,
+        but have a classifier of something like <varname>resources</varname>.
+        In either case, we can specify an inclusion pattern to target these
+        resource dependencies and apply different logic than that used for
+        binary dependencies. We’ll specify these tuning patterns using the
+        <sgmltag>includes</sgmltag> and <sgmltag>excludes</sgmltag> sections
+        of the <sgmltag>dependencySet</sgmltag>.</para>
 
         <para>Both includes and excludes are list sections, meaning they
         accept the sub-elements <sgmltag>include</sgmltag> and
@@ -1632,13 +1775,25 @@ I can add this back in later.  I didn't want to talk about it without an example
         <title>Transitive Dependencies, Project Attachments, and Project
         Artifacts</title>
 
-        <para>The <sgmltag>dependencySet</sgmltag> section supports two more
-        general mechanisms for tuning the subset of matching artifacts:
-        transitive selection options, and options for working with project
-        artifacts. Both of these features are a product of the need to support
-        legacy configurations that applied a somewhat more liberal definition
-        of the word “dependency”. As a prime example, consider the project’s
-        own main artifact. Typically, this would not be considered a
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>transitive dependencies</secondary>
+          </indexterm><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>project attachments</secondary>
+          </indexterm><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>project artifacts</secondary>
+          </indexterm>The <sgmltag>dependencySet</sgmltag> section supports
+        two more general mechanisms for tuning the subset of matching
+        artifacts: transitive selection options, and options for working with
+        project artifacts. Both of these features are a product of the need to
+        support legacy configurations that applied a somewhat more liberal
+        definition of the word “dependency”. As a prime example, consider the
+        project’s own main artifact. Typically, this would not be considered a
         dependency; yet older versions of the Assembly plugin included the
         project artifact in calculations of dependency sets. To provide
         backward compatibility with this “feature”, the 2.2 releases
@@ -1727,12 +1882,16 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-unpack">
         <title>Advanced Unpacking Options</title>
 
-        <para>As we discussed previously, some project dependencies may need
-        to be unpacked in order to create a working assembly archive. In the
-        examples above, the decision to unpack or not was simple. It didn’t
-        take into account what needed to be unpacked, or more importantly,
-        what should not be unpacked. To gain more control over the dependency
-        unpacking process, we can configure the
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>advanced options</secondary>
+          </indexterm>As we discussed previously, some project dependencies
+        may need to be unpacked in order to create a working assembly archive.
+        In the examples above, the decision to unpack or not was simple. It
+        didn’t take into account what needed to be unpacked, or more
+        importantly, what should not be unpacked. To gain more control over
+        the dependency unpacking process, we can configure the
         <sgmltag>unpackOptions</sgmltag> element of the
         <sgmltag>dependencySet</sgmltag>. Using this section, we have the
         ability to choose which file patterns to include or exclude from the
@@ -1821,8 +1980,12 @@ I can add this back in later.  I didn't want to talk about it without an example
     <section id="assemblies-sect-modulesets">
       <title><sgmltag>moduleSets</sgmltag> Sections</title>
 
-      <para>Multi-module builds are generally stitched together using the
-      parent and modules sections of interrelated <acronym>POM</acronym>s.
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>module sets</secondary>
+        </indexterm>Multi-module builds are generally stitched together using
+      the parent and modules sections of interrelated <acronym>POM</acronym>s.
       Typically, parent <acronym>POM</acronym>s specify their children in a
       <sgmltag>modules</sgmltag> section, which under normal circumstances
       causes the child <acronym>POM</acronym>s to be included in the build
@@ -1864,7 +2027,11 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-module-selection">
         <title>Module Selection</title>
 
-        <para>By now, you should be familiar with
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>module selection</secondary>
+          </indexterm>By now, you should be familiar with
         <sgmltag>includes</sgmltag>/<sgmltag>excludes</sgmltag> patterns as
         they are used throughout the assembly descriptor to filter files and
         dependencies. When you are referring to modules in an assembly
@@ -1917,14 +2084,19 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-sources-section">
         <title>Sources Section</title>
 
-        <para>Suppose you want to include the source of all modules in your
-        project's assembly, but you would like to exclude a particular module.
-        Maybe you have a project named <varname>secret-sauce</varname> which
-        contains secret and sensitive code that you don't want to distribute
-        with your project. The simplest way to accomplish this is to use a
-        <sgmltag>moduleSet</sgmltag> which includes each project's directory
-        in <varname>\${module.basedir.name}</varname> and which excludes the
-        <varname>secret-sauce</varname> module from the assembly.</para>
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>sources</secondary>
+          </indexterm>Suppose you want to include the source of all modules in
+        your project's assembly, but you would like to exclude a particular
+        module. Maybe you have a project named <varname>secret-sauce</varname>
+        which contains secret and sensitive code that you don't want to
+        distribute with your project. The simplest way to accomplish this is
+        to use a <sgmltag>moduleSet</sgmltag> which includes each project's
+        directory in <varname>\${module.basedir.name}</varname> and which
+        excludes the <varname>secret-sauce</varname> module from the
+        assembly.</para>
 
         <example id="ex-include-exclude-moduleSet">
           <title>Includes and Excluding Modules with a
@@ -2048,8 +2220,12 @@ I can add this back in later.  I didn't want to talk about it without an example
       <section id="assemblies-sect-binaries">
         <title>Binaries section</title>
 
-        <para>Just as the <sgmltag>sources</sgmltag> section is primarily
-        concerned with including a module in its source form, the
+        <para><indexterm>
+            <primary>assembly descriptor</primary>
+
+            <secondary>binaries</secondary>
+          </indexterm>Just as the <sgmltag>sources</sgmltag> section is
+        primarily concerned with including a module in its source form, the
         <sgmltag>binaries</sgmltag> section is primarily concerned with
         including the module’s build output, or its artifacts. Though this
         section functions primarily as a way of specifying
@@ -2214,18 +2390,23 @@ I can add this back in later.  I didn't want to talk about it without an example
     <section id="assemblies-sect-repositories">
       <title>Repositories Section</title>
 
-      <para>The repositories section represents a slightly more exotic feature
-      in the assembly descriptor, since few applications other than Maven can
-      take full advantage of a Maven-repository directory structure. For this
-      reason, and because many of its features closely resemble those in the
-      <sgmltag>dependencySets</sgmltag> section, we won’t spend too much time
-      on the repositories section of the assembly descriptor. In most cases,
-      users who understand dependency sets should have no trouble constructing
-      repositories via the Assembly plugin. We're not going to motivate the
-      <sgmltag>repositories</sgmltag> section; we're not going to go through a
-      the business of setting up a use case and walking you through the
-      process. We're just going to bring up a few caveats for those of you who
-      find the need to use the <sgmltag>repositories</sgmltag> section.</para>
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>repositories</secondary>
+        </indexterm>The repositories section represents a slightly more exotic
+      feature in the assembly descriptor, since few applications other than
+      Maven can take full advantage of a Maven-repository directory structure.
+      For this reason, and because many of its features closely resemble those
+      in the <sgmltag>dependencySets</sgmltag> section, we won’t spend too
+      much time on the repositories section of the assembly descriptor. In
+      most cases, users who understand dependency sets should have no trouble
+      constructing repositories via the Assembly plugin. We're not going to
+      motivate the <sgmltag>repositories</sgmltag> section; we're not going to
+      go through a the business of setting up a use case and walking you
+      through the process. We're just going to bring up a few caveats for
+      those of you who find the need to use the
+      <sgmltag>repositories</sgmltag> section.</para>
 
       <!--TODO: We probably need to motivate why you would ever want to do this.  Right now, this section
 doesn't make sense to new users.-->
@@ -2265,9 +2446,13 @@ doesn't make sense to new users.-->
     <section id="assemblies-sect-managing-root">
       <title>Managing the Assembly’s Root Directory</title>
 
-      <para>Now that we’ve made it through the main body of the assembly
-      descriptor, we can close the discussion of content-related descriptor
-      sections with something lighter: root-directory naming and
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>root directory</secondary>
+        </indexterm>Now that we’ve made it through the main body of the
+      assembly descriptor, we can close the discussion of content-related
+      descriptor sections with something lighter: root-directory naming and
       site-directory handling.</para>
 
       <para>Some may consider it a stylistic concern, but it’s often important
@@ -2323,8 +2508,16 @@ doesn't make sense to new users.-->
       <title><sgmltag>componentDescriptors</sgmltag> and
       <sgmltag>containerDescriptorHandlers</sgmltag></title>
 
-      <para>To round out our exploration of the assembly descriptor, we should
-      touch briefly on two other sections:
+      <para><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>component descriptors</secondary>
+        </indexterm><indexterm>
+          <primary>assembly descriptor</primary>
+
+          <secondary>container descriptor handlers</secondary>
+        </indexterm>To round out our exploration of the assembly descriptor,
+      we should touch briefly on two other sections:
       <sgmltag>containerDescriptorHandlers</sgmltag> and
       <sgmltag>componentDescriptors</sgmltag>. The
       <sgmltag>containerDescriptorHandlers</sgmltag> section refers to custom
@@ -2387,13 +2580,17 @@ doesn't make sense to new users.-->
   <section id="assemblies-sect-best-practices">
     <title>Best Practices</title>
 
-    <para>The Assembly plugin provides enough flexibility to solve many
-    problems in a number of different ways. If you have a unique requirement
-    for your project, there's a good chance that you can use the methods
-    documented in this chapter to achieve almost any assembly structure. This
-    section of the chapter details some common best practices which, if
-    adhered to, will make your experiences with the assembly plugin more
-    productive and less painful.</para>
+    <para><indexterm>
+        <primary>assemblies</primary>
+
+        <secondary>best practices</secondary>
+      </indexterm>The Assembly plugin provides enough flexibility to solve
+    many problems in a number of different ways. If you have a unique
+    requirement for your project, there's a good chance that you can use the
+    methods documented in this chapter to achieve almost any assembly
+    structure. This section of the chapter details some common best practices
+    which, if adhered to, will make your experiences with the assembly plugin
+    more productive and less painful.</para>
 
     <section id="assemblies-sect-standard-reusable">
       <title>Standard, Reusable Assembly Descriptors</title>

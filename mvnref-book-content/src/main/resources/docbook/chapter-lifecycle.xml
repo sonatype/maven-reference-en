@@ -7,7 +7,9 @@
   <section id="lifecycle-sect-structure">
     <title>Introduction</title>
 
-    <para>Maven models projects as nouns which are described by a
+    <para><indexterm>
+        <primary>build lifecycle</primary>
+      </indexterm>Maven models projects as nouns which are described by a
     <acronym>POM</acronym>. The <acronym>POM</acronym> captures the identity
     of a project: What does a project contain? What type of packaging a
     project needs? Does the project have a parent? What are the dependencies?
@@ -24,20 +26,33 @@
     of phases and execute any goals which may have been registered with each
     phase.</para>
 
-    <para>A build lifecycle is an organized sequence of phases that exist to
-    give order to a set of goals. Those goals are chosen and bound by the
-    packaging type of the project being acted upon. There are three standard
-    lifecycles in Maven: clean, default (sometimes called build) and site. In
-    this chapter, you are going to learn how Maven ties goals to lifecycle
-    phases and how the lifecycle can be customized. You will also learn about
-    the default lifecycle phases.</para>
+    <para><indexterm>
+        <primary>build lifecycle</primary>
+
+        <secondary>phases</secondary>
+      </indexterm><indexterm>
+        <primary>build phases</primary>
+      </indexterm>A build lifecycle is an organized sequence of phases that
+    exist to give order to a set of goals. Those goals are chosen and bound by
+    the packaging type of the project being acted upon. There are three
+    standard lifecycles in Maven: clean, default (sometimes called build) and
+    site. In this chapter, you are going to learn how Maven ties goals to
+    lifecycle phases and how the lifecycle can be customized. You will also
+    learn about the default lifecycle phases.</para>
 
     <section id="lifecycle-sect-clean">
       <title>Clean Lifecycle (clean)</title>
 
-      <para>The first lifecycle you'll be interested in is the simplest
-      lifecycle in Maven. Running <command>mvn clean</command> invokes the
-      clean lifecycle which consists of three lifecycle phases:</para>
+      <para><indexterm>
+          <primary>build lifecycle</primary>
+
+          <secondary>clean lifecycle</secondary>
+        </indexterm><indexterm>
+          <primary>clean lifecycle</primary>
+        </indexterm>The first lifecycle you'll be interested in is the
+      simplest lifecycle in Maven. Running <command>mvn clean</command>
+      invokes the clean lifecycle which consists of three lifecycle
+      phases:</para>
 
       <itemizedlist>
         <listitem>
@@ -174,7 +189,11 @@
       <sgmltag>fileSet</sgmltag>. The example below configures clean to remove
       all <filename>.class</filename> files in a directory named
       <filename>target-other/</filename> using standard Ant file wildcards:
-      <varname>*</varname> and <varname>**</varname>.</para>
+      <varname>*</varname> and <varname>**</varname>.<indexterm>
+          <primary>Clean plugin</primary>
+
+          <secondary>customizing behavior of</secondary>
+        </indexterm></para>
 
       <para><example>
           <title>Customizing Behavior of the Clean Plugin</title>
@@ -206,11 +225,17 @@
     <section id="lifecycle-sect-default">
       <title>Default Lifecycle (default)</title>
 
-      <para>Most Maven users will be familiar with the default lifecycle. It
-      is a general model of a build process for a software application. The
-      first phase is <varname>validate</varname> and the last phase is
-      <varname>deploy</varname>. The phases in the default Maven lifecycle are
-      shown in <xref linkend="tbl-default-lifecycle" />.</para>
+      <para><indexterm>
+          <primary>build lifecycle</primary>
+
+          <secondary>default lifecycle</secondary>
+        </indexterm><indexterm>
+          <primary>default lifecycle</primary>
+        </indexterm>Most Maven users will be familiar with the default
+      lifecycle. It is a general model of a build process for a software
+      application. The first phase is <varname>validate</varname> and the last
+      phase is <varname>deploy</varname>. The phases in the default Maven
+      lifecycle are shown in <xref linkend="tbl-default-lifecycle" />.</para>
 
       <table id="tbl-default-lifecycle">
         <title>Maven Lifecycle Phases</title>
@@ -382,10 +407,16 @@
     <section id="lifecycle-sect-site">
       <title>Site Lifecycle (site)</title>
 
-      <para>Maven does more than build software artifacts from project, it can
-      also generate project documentation and reports about the project, or a
-      collection of projects. Project documentation and site generation have a
-      dedicated lifecycle which contains four phases:</para>
+      <para><indexterm>
+          <primary>build lifecycle</primary>
+
+          <secondary>site lifecycle</secondary>
+        </indexterm><indexterm>
+          <primary>site lifecycle</primary>
+        </indexterm>Maven does more than build software artifacts from
+      project, it can also generate project documentation and reports about
+      the project, or a collection of projects. Project documentation and site
+      generation have a dedicated lifecycle which contains four phases:</para>
 
       <orderedlist>
         <listitem>
@@ -435,8 +466,14 @@
   <section id="lifecycle-sect-package-specific">
     <title>Package-specific Lifecycles</title>
 
-    <para>The specific goals bound to each phase default to a set of goals
-    specific to a project's packaging. A project with packaging
+    <para><indexterm>
+        <primary>build lifecycle</primary>
+
+        <secondary>package-specific lifecycles</secondary>
+      </indexterm><indexterm>
+        <primary>package-specific lifecycles</primary>
+      </indexterm>The specific goals bound to each phase default to a set of
+    goals specific to a project's packaging. A project with packaging
     <varname>jar</varname> has a different set of default goals from a project
     with a packaging of <varname>war</varname>. The
     <sgmltag>packaging</sgmltag> element affects the steps required to build a
@@ -455,10 +492,16 @@
     <section id="lifecycle-sect-jar">
       <title>JAR</title>
 
-      <para><acronym>JAR</acronym> is the default packaging type, the most
-      common, and thus the most commonly encountered lifecycle configuration.
-      The default goals for the <acronym>JAR</acronym> lifecycle are shown in
-      <xref linkend="tbl-jar-lifecycle" />.</para>
+      <para><acronym>JAR</acronym> <indexterm>
+          <primary>packaging</primary>
+
+          <secondary>JAR</secondary>
+        </indexterm><indexterm>
+          <primary>JAR packaging</primary>
+        </indexterm>is the default packaging type, the most common, and thus
+      the most commonly encountered lifecycle configuration. The default goals
+      for the <acronym>JAR</acronym> lifecycle are shown in <xref
+      linkend="tbl-jar-lifecycle" />.</para>
 
       <table id="tbl-jar-lifecycle">
         <title>Default Goals for JAR Packaging</title>
@@ -528,12 +571,18 @@
     <section id="lifecycle-sect-pom">
       <title>POM</title>
 
-      <para><acronym>POM</acronym> is the simplest packaging type. The
-      artifact that it generates is itself only, rather than a
-      <acronym>JAR</acronym>, <acronym>SAR</acronym>, or
-      <acronym>EAR</acronym>. There is no code to test or compile, and there
-      are no resources the process. The default goals for projects with POM
-      packaging are shown in <xref linkend="tbl-pom-lifecycle" />.</para>
+      <para><acronym>POM</acronym> <indexterm>
+          <primary>packaging</primary>
+
+          <secondary>POM</secondary>
+        </indexterm><indexterm>
+          <primary>POM packaging</primary>
+        </indexterm>is the simplest packaging type. The artifact that it
+      generates is itself only, rather than a <acronym>JAR</acronym>,
+      <acronym>SAR</acronym>, or <acronym>EAR</acronym>. There is no code to
+      test or compile, and there are no resources the process. The default
+      goals for projects with POM packaging are shown in <xref
+      linkend="tbl-pom-lifecycle" />.</para>
 
       <table id="tbl-pom-lifecycle">
         <title>Default Goals for POM Packaging</title>
@@ -573,8 +622,15 @@
     <section id="lifecycle-sect-plugin-lifecycle">
       <title>Maven Plugin</title>
 
-      <para>This packaging type is similar to <acronym>JAR</acronym> packaging
-      type with three additions: <varname>plugin:descriptor</varname>,
+      <para><indexterm>
+          <primary>packaging</primary>
+
+          <secondary>Maven Plugin</secondary>
+        </indexterm><indexterm>
+          <primary>Maven Plugin packaging</primary>
+        </indexterm>This packaging type is similar to <acronym>JAR</acronym>
+      packaging type with three additions:
+      <varname>plugin:descriptor</varname>,
       <varname>plugin:addPluginArtifactMetadata</varname>, and
       <varname>plugin:updateRegistry</varname>. These goals generate a
       descriptor file and perform some modifications to the repository data.
@@ -655,13 +711,19 @@
     <section id="lifecycle-sect-ejb">
       <title>EJB</title>
 
-      <para><acronym>EJB</acronym>s, or Enterprise Java Beans, are a common
-      data access mechanism for model-driven development in Enterprise Java.
-      Maven provides support for <acronym>EJB</acronym> 2 and 3. Though you
-      must configure the <acronym>EJB</acronym> plugin to specifically package
-      for <acronym>EJB3</acronym>, else the plugin defaults to 2.1 and looks
-      for the presence of certain <acronym>EJB</acronym> configuration files.
-      The default goals for projects with <acronym>EJB</acronym> packaging are
+      <para><acronym>EJB</acronym>s, <indexterm>
+          <primary>packaging</primary>
+
+          <secondary>EJB</secondary>
+        </indexterm><indexterm>
+          <primary>EJB packaging</primary>
+        </indexterm>or Enterprise Java Beans, are a common data access
+      mechanism for model-driven development in Enterprise Java. Maven
+      provides support for <acronym>EJB</acronym> 2 and 3. Though you must
+      configure the <acronym>EJB</acronym> plugin to specifically package for
+      <acronym>EJB3</acronym>, else the plugin defaults to 2.1 and looks for
+      the presence of certain <acronym>EJB</acronym> configuration files. The
+      default goals for projects with <acronym>EJB</acronym> packaging are
       shown in <xref linkend="tbl-ejb-lifecycle" />.</para>
 
       <table id="tbl-ejb-lifecycle">
@@ -732,11 +794,17 @@
     <section id="lifecycle-sect-war">
       <title>WAR</title>
 
-      <para>The <acronym>WAR</acronym> packaging type is similar to
-      the<acronym> JAR</acronym> and <acronym>EJB</acronym> types. The
-      exception being the <varname>package</varname> goal of
-      <varname>war:war</varname>. Note that the <varname>war:war</varname>
-      plugin requires a <filename>web.xml</filename> configuration in your
+      <para>The <acronym>WAR</acronym> <indexterm>
+          <primary>packaging</primary>
+
+          <secondary>WAR</secondary>
+        </indexterm><indexterm>
+          <primary>WAR packaging</primary>
+        </indexterm>packaging type is similar to the<acronym> JAR</acronym>
+      and <acronym>EJB</acronym> types. The exception being the
+      <varname>package</varname> goal of <varname>war:war</varname>. Note that
+      the <varname>war:war</varname> plugin requires a
+      <filename>web.xml</filename> configuration in your
       <filename>src/main/webapp/WEB-INF</filename> directory. The default
       goals for projects with <acronym>WAR</acronym> packaging are shown in
       <xref linkend="tbl-war-lifecycle" />.</para>
@@ -809,10 +877,16 @@
     <section id="lifecycle-sect-ear">
       <title>EAR</title>
 
-      <para><acronym>EAR</acronym>s are probably the simplest Java
-      <acronym>EE</acronym> constructs, consisting primarily of the deployment
-      descriptor <filename>application.xml</filename> file, some resources and
-      some modules. The <acronym>EAR</acronym> plugin has a goal named
+      <para><acronym>EAR</acronym>s <indexterm>
+          <primary>packaging</primary>
+
+          <secondary>EAR</secondary>
+        </indexterm><indexterm>
+          <primary>EAR packaging</primary>
+        </indexterm>are probably the simplest Java <acronym>EE</acronym>
+      constructs, consisting primarily of the deployment descriptor
+      <filename>application.xml</filename> file, some resources and some
+      modules. The <acronym>EAR</acronym> plugin has a goal named
       <varname>generate-application-xml</varname> which generates the
       <filename>application.xml</filename> based upon the configuration in the
       <acronym>EAR</acronym> project's <acronym>POM</acronym>. The default
@@ -869,10 +943,14 @@
     <section id="lifecycle-sect-other-packaging">
       <title>Other Packaging Types</title>
 
-      <para>This is not an exhaustive list of every packaging type available
-      for Maven. There are a number of packaging formats available through
-      external projects and plugins: the <acronym>NAR</acronym> (native
-      archive) packaging type, the <acronym>SWF</acronym> and
+      <para><indexterm>
+          <primary>packaging</primary>
+
+          <secondary>miscellaneous types</secondary>
+        </indexterm>This is not an exhaustive list of every packaging type
+      available for Maven. There are a number of packaging formats available
+      through external projects and plugins: the <acronym>NAR</acronym>
+      (native archive) packaging type, the <acronym>SWF</acronym> and
       <acronym>SWC</acronym> packaging types for projects that produce Adobe
       Flash and Flex content, and many others. You can also define a custom
       packaging type and customize the default lifecycle goals to suit your
@@ -884,7 +962,13 @@
       defined in plugins available from the central Maven repository. Here is
       an example of a project which references the Israfil Flex plugin and
       uses a custom packaging type of <acronym>SWF</acronym> to produce output
-      from Adobe Flex source.</para>
+      from Adobe Flex source.<indexterm>
+          <primary>packaging</primary>
+
+          <secondary>SWF</secondary>
+        </indexterm><indexterm>
+          <primary>SWF packaging</primary>
+        </indexterm></para>
 
       <para><example>
           <title>Custom Packaging Type for Adobe Flex (SWF)</title>
@@ -965,9 +1049,11 @@
   <section id="lifecycle-sect-common-goals">
     <title>Common Lifecycle Goals</title>
 
-    <para>Many of the packaging lifecycles have similar goals. If you look at
-    the goals bound to the <acronym>WAR</acronym> and <acronym>JAR</acronym>
-    lifecycles, you'll see that they differ only in the
+    <para><indexterm>
+        <primary>build lifecycle</primary>
+      </indexterm>Many of the packaging lifecycles have similar goals. If you
+    look at the goals bound to the <acronym>WAR</acronym> and
+    <acronym>JAR</acronym> lifecycles, you'll see that they differ only in the
     <varname>package</varname> phase. The <varname>package</varname> phase of
     the <acronym>WAR</acronym> lifecycle calls <varname>war:war</varname> and
     the <varname>package</varname> phase of the <acronym>JAR</acronym>
@@ -979,12 +1065,20 @@
     <section id="lifecycle-sect-process-resources-phase">
       <title>Process Resources</title>
 
-      <para>Most lifecycles bind the <varname>resources:resources</varname>
-      goal to the <varname>process-resources</varname> phase. The
-      <varname>process-resources</varname> phase "processes" resources and
-      copies them to the output directory. If you haven't customized the
-      default directory locations defined in the Super <acronym>POM</acronym>,
-      this means that Maven will copy the files from
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>process-resources phase</secondary>
+        </indexterm>Most lifecycles bind the
+      <varname>resources:resources</varname> goal to the
+      <varname>process-resources</varname> phase.<indexterm>
+          <primary>Resources plugin</primary>
+
+          <secondary>resources goal</secondary>
+        </indexterm> The <varname>process-resources</varname> phase
+      "processes" resources and copies them to the output directory. If you
+      haven't customized the default directory locations defined in the Super
+      <acronym>POM</acronym>, this means that Maven will copy the files from
       <filename>\${basedir}/src/main/resources</filename> to
       <filename>\${basedir}/target/classes</filename> or the directory defined
       in <filename>\${project.build.outputDirectory}</filename>. In addition
@@ -1089,7 +1183,9 @@ jdbc.password=
       <filename>src/main/images</filename> to hold this content. To add
       directories to the list of resource directories, you would add the
       following <sgmltag>resource</sgmltag> elements to your build
-      configuration.</para>
+      configuration.<indexterm>
+          <primary>overriding project directories</primary>
+        </indexterm></para>
 
       <example>
         <title>Configuring Additional Resource Directories</title>
@@ -1122,7 +1218,9 @@ jdbc.password=
       resource filtering and a reference to the project variable to capture
       the final output name of the <acronym>JAR</acronym>. For more
       information about the Maven Assembly plugin, see <xref
-      linkend="assemblies" />.</para>
+      linkend="assemblies" />.<indexterm>
+          <primary>resource filtering</primary>
+        </indexterm></para>
 
       <para><example id="ex-filter-script">
           <title>Filtering Script Resources</title>
@@ -1189,7 +1287,13 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-compile-phase">
       <title>Compile</title>
 
-      <para>Most lifecycles bind the Compiler plugin's
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>compile phase</secondary>
+        </indexterm><indexterm>
+          <primary>compiling code</primary>
+        </indexterm>Most lifecycles bind the Compiler plugin's
       <varname>compile</varname> goal to the <varname>compile</varname> phase.
       This phase calls out to <varname>compile:compile</varname> which is
       configured to compile all of the source code and copy the bytecode to
@@ -1250,7 +1354,9 @@ java -jar simple-cmd-2.3.1.jar %*
       to <filename>classes</filename> instead of
       <filename>target/classes</filename>, you could always override the
       default <sgmltag>sourceDirectory</sgmltag> defined by the Super
-      <acronym>POM</acronym>.</para>
+      <acronym>POM</acronym>.<indexterm>
+          <primary>overriding project directories</primary>
+        </indexterm></para>
 
       <example>
         <title>Overriding the Default Source Directory</title>
@@ -1277,10 +1383,14 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-process-test-resources-phase">
       <title>Process Test Resources</title>
 
-      <para>The <varname>process-test-resources</varname> phase is almost
-      indistinguishable from the <varname>process-resources</varname> phase.
-      There are some trivial differences in the <acronym>POM</acronym>, but
-      most everything the same. You can filter test resources just as you
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>process-test-resources phase</secondary>
+        </indexterm>The <varname>process-test-resources</varname> phase is
+      almost indistinguishable from the <varname>process-resources</varname>
+      phase. There are some trivial differences in the <acronym>POM</acronym>,
+      but most everything the same. You can filter test resources just as you
       filter regular resources. The default location for test resources is
       defined in the Super <acronym>POM</acronym> as
       <filename>src/test/resources</filename>, and the default output
@@ -1292,9 +1402,13 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-test-compile-phase">
       <title>Test Compile</title>
 
-      <para>The <varname>test-compile</varname> phase is almost identical to
-      the <varname>compile</varname> phase. The only difference is that
-      <varname>test-compile</varname> is going to invoke
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>test-compile phase</secondary>
+        </indexterm>The <varname>test-compile</varname> phase is almost
+      identical to the <varname>compile</varname> phase. The only difference
+      is that <varname>test-compile</varname> is going to invoke
       <varname>compile:testCompile</varname> to compile source from the test
       source directory to the test build output directory. If you haven't
       customized the default directories from the Super
@@ -1310,7 +1424,9 @@ java -jar simple-cmd-2.3.1.jar %*
       <filename>src/test/java</filename> and you wanted to save test bytecode
       to <filename>classes-test/</filename> instead of
       <filename>target/test-classes</filename>, you would use the following
-      configuration.</para>
+      configuration.<indexterm>
+          <primary>overriding project directories</primary>
+        </indexterm></para>
 
       <example>
         <title>Overriding the Location of Test Source and Output</title>
@@ -1327,10 +1443,20 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-test-phase">
       <title>Test</title>
 
-      <para>Most lifecycles bind the test goal of the Surefire plugin to the
-      test phase. The Surefire plugin is Maven's unit testing plugin, the
-      default behavior of Surefire is to look for all classes ending in *Test
-      in the test source directory and to run them as <ulink
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>test phase</secondary>
+        </indexterm><indexterm>
+          <primary>JUnit</primary>
+        </indexterm><indexterm>
+          <primary>TestNG</primary>
+        </indexterm><indexterm>
+          <primary>unit testing</primary>
+        </indexterm>Most lifecycles bind the test goal of the Surefire plugin
+      to the test phase. The Surefire plugin is Maven's unit testing plugin,
+      the default behavior of Surefire is to look for all classes ending in
+      *Test in the test source directory and to run them as <ulink
       url="http://www.junit.org">JUnit</ulink> tests. The Surefire plugin can
       also be configured to run <ulink
       url="http://www.testng.org">TestNG</ulink> unit tests.</para>
@@ -1353,7 +1479,11 @@ java -jar simple-cmd-2.3.1.jar %*
       default behavior is to stop a build whenever a unit test failure is
       encountered. To override this behavior, you'll need to set the
       <varname>testFailureIgnore</varname> configuration property on the
-      Surefire plugin to true.</para>
+      Surefire plugin to true.<indexterm>
+          <primary>Surefire plugin</primary>
+
+          <secondary>ignoring test failure</secondary>
+        </indexterm></para>
 
       <example>
         <title>Configuring Surefire to Ignore Test Failures</title>
@@ -1372,8 +1502,14 @@ java -jar simple-cmd-2.3.1.jar %*
 &lt;/build&gt;</programlisting>
       </example>
 
-      <para>If you would like to skip tests altogether, you can do so by
-      executing the following command:</para>
+      <para><indexterm>
+          <primary>skipping unit tests</primary>
+        </indexterm><indexterm>
+          <primary>Surefire plugin</primary>
+
+          <secondary>skipping unit tests</secondary>
+        </indexterm>If you would like to skip tests altogether, you can do so
+      by executing the following command:</para>
 
       <screen>$ mvn install -Dmaven.test.skip=true</screen>
 
@@ -1386,13 +1522,22 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-install-phase">
       <title>Install</title>
 
-      <para>The <varname>install</varname> goal of the Install plugin is
-      almost always bound to the <varname>install</varname> lifecycle phase.
-      This <varname>install:install</varname> goal simply installs a project's
-      main artifact to the local repository. If you have a project with a
-      <sgmltag>groupId</sgmltag> of <package>org.sonatype.mavenbook</package>,
-      an <sgmltag>artifactId</sgmltag> of <varname>simple-test</varname>, and
-      a <sgmltag>version</sgmltag> of 1.0.2, the
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>install phase</secondary>
+        </indexterm><indexterm>
+          <primary>local repository</primary>
+
+          <secondary>installing artifacts to</secondary>
+        </indexterm>The <varname>install</varname> goal of the Install plugin
+      is almost always bound to the <varname>install</varname> lifecycle
+      phase. This <varname>install:install</varname> goal simply installs a
+      project's main artifact to the local repository. If you have a project
+      with a <sgmltag>groupId</sgmltag> of
+      <package>org.sonatype.mavenbook</package>, an
+      <sgmltag>artifactId</sgmltag> of <varname>simple-test</varname>, and a
+      <sgmltag>version</sgmltag> of 1.0.2, the
       <varname>install:install</varname> goal is going to copy the
       <acronym>JAR</acronym> file from
       <filename>target/simple-test-1.0.2.jar</filename> to
@@ -1404,18 +1549,27 @@ java -jar simple-cmd-2.3.1.jar %*
     <section id="lifecycle-sect-deploy-phase">
       <title>Deploy</title>
 
-      <para>The <varname>deploy</varname> goal of the Deploy plugin is usually
-      bound to the <varname>deploy</varname> lifecycle phase. This phase is
-      used to deploy an artifact to a remote Maven repository, this is usually
-      required to update a remote repository when you are performing a
-      release. The deployment procedure can be as simple as copying a file to
-      another directory or as complex as transferring a file over
-      <acronym>SCP</acronym> using a public key. Deployment settings usually
-      involve credentials to a remote repository, and, as such, deployment
-      settings are usually not stored in a <filename>pom.xml</filename>.
-      Instead, deployment settings are more frequently found in an individual
-      user's <filename>~/.m2/settings.xml</filename>. For now, all you need to
-      know is that the <varname>deploy:deploy</varname> goal is bound to the
+      <para><indexterm>
+          <primary>default lifecycle</primary>
+
+          <secondary>deploy phase</secondary>
+        </indexterm><indexterm>
+          <primary>remote repositories</primary>
+
+          <secondary>deploying artifacts to</secondary>
+        </indexterm>The <varname>deploy</varname> goal of the Deploy plugin is
+      usually bound to the <varname>deploy</varname> lifecycle phase. This
+      phase is used to deploy an artifact to a remote Maven repository, this
+      is usually required to update a remote repository when you are
+      performing a release. The deployment procedure can be as simple as
+      copying a file to another directory or as complex as transferring a file
+      over <acronym>SCP</acronym> using a public key. Deployment settings
+      usually involve credentials to a remote repository, and, as such,
+      deployment settings are usually not stored in a
+      <filename>pom.xml</filename>. Instead, deployment settings are more
+      frequently found in an individual user's
+      <filename>~/.m2/settings.xml</filename>. For now, all you need to know
+      is that the <varname>deploy:deploy</varname> goal is bound to the
       <varname>deploy</varname> phase and it takes care of transporting an
       artifact to a published repository and updating any repository
       information which might be affected by such a deployment.</para>

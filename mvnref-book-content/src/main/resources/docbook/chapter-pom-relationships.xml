@@ -7,7 +7,11 @@
   <section id="pom-relationships-sect-intro">
     <title>Introduction</title>
 
-    <para>This chapter covers the central concept of Maven—the Project
+    <para><indexterm>
+        <primary>Project Object Model (POM)</primary>
+      </indexterm><indexterm>
+        <primary>pom.xml</primary>
+      </indexterm>This chapter covers the central concept of Maven—the Project
     Object<indexterm class="startofrange" id="pom1">
         <primary>POM (Project Object Model)</primary>
       </indexterm> Model. The <acronym>POM</acronym> is where a project’s
@@ -19,9 +23,13 @@
   <section id="pom-relationships-sect-pom">
     <title>The POM</title>
 
-    <para>Maven projects, dependencies, builds, artifacts: all of these are
-    objects to be modeled and described. These objects are described by an
-    <acronym>XML</acronym> file called a Project Object Model. The
+    <para><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>definition of</secondary>
+      </indexterm>Maven projects, dependencies, builds, artifacts: all of
+    these are objects to be modeled and described. These objects are described
+    by an <acronym>XML</acronym> file called a Project Object Model. The
     <acronym>POM</acronym> tells Maven what sort of project it is dealing with
     and how to modify default behavior to generate output from source. In the
     same way a Java web application has a <filename
@@ -38,7 +46,15 @@
     that Maven needs to understand what it is looking at when it builds your
     project.</para>
 
-    <para>You could also think of the <filename
+    <para><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>comparison to build.xml</secondary>
+      </indexterm><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>comparison to Makefile</secondary>
+      </indexterm>You could also think of the <filename
     moreinfo="none">pom.xml</filename> as analogous to a <filename
     moreinfo="none">Makefile</filename> or an Ant <filename
     moreinfo="none">build.xml</filename>. When you are using
@@ -105,8 +121,12 @@
         </mediaobject>
       </figure></para>
 
-    <para>The <acronym>POM</acronym> contains four categories of description
-    and configuration:</para>
+    <para><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>contents of</secondary>
+      </indexterm>The <acronym>POM</acronym> contains four categories of
+    description and configuration:</para>
 
     <variablelist>
       <varlistentry>
@@ -190,13 +210,20 @@
     <section id="pom-relationships-sect-super-pom" label="">
       <title>The Super POM</title>
 
-      <para>Before we dive into some examples of <acronym>POM</acronym>s,
-      let's take a quick look at the Super <acronym>POM</acronym>. All Maven
-      project <acronym>POM</acronym>s extend the Super <acronym>POM</acronym>,
-      which defines a set of defaults shared by all projects. This Super
-      <acronym>POM</acronym> is a part of the Maven installation and can be
-      found in the <filename>maven-${maven.version}-uber.jar</filename> file
-      in <filename>\${M2_HOME}/lib</filename>. If you look in this
+      <para><indexterm>
+          <primary>Super POM</primary>
+        </indexterm><indexterm>
+          <primary>Project Object Model (POM)</primary>
+
+          <secondary>Super POM</secondary>
+        </indexterm>Before we dive into some examples of
+      <acronym>POM</acronym>s, let's take a quick look at the Super
+      <acronym>POM</acronym>. All Maven project <acronym>POM</acronym>s extend
+      the Super <acronym>POM</acronym>, which defines a set of defaults shared
+      by all projects. This Super <acronym>POM</acronym> is a part of the
+      Maven installation and can be found in the
+      <filename>maven-${maven.version}-uber.jar</filename> file in
+      <filename>\${M2_HOME}/lib</filename>. If you look in this
       <acronym>JAR</acronym> file, you will find a file named
       <filename>pom-4.0.0.xml</filename> under the
       <package>org.apache.maven.project</package> package. The Super
@@ -454,8 +481,14 @@
     <section id="pom-relationships-sect-effective-pom">
       <title>The Effective POM</title>
 
-      <para>This simplest <acronym>POM</acronym> brings us to the concept of
-      <indexterm>
+      <para><indexterm>
+          <primary>effective POM</primary>
+        </indexterm><indexterm>
+          <primary>Project Object Model (POM)</primary>
+
+          <secondary>effective POM</secondary>
+        </indexterm>This simplest <acronym>POM</acronym> brings us to the
+      concept of <indexterm>
           <primary>effective POMs</primary>
         </indexterm>the “effective <acronym>POM</acronym>.” Since
       <acronym>POM</acronym>s can inherit configuration from other
@@ -475,7 +508,11 @@
       linkend="installation-sect-help-plugin-install" />. To run the
       <varname>effective-pom</varname> goal, execute the following in a
       directory with a <filename moreinfo="none">pom.xml</filename>
-      file:</para>
+      file:<indexterm>
+          <primary>Help plugin</primary>
+
+          <secondary>effective-pom goal</secondary>
+        </indexterm></para>
 
       <screen>$ <command>mvn help:effective-pom</command></screen>
 
@@ -522,7 +559,11 @@
     <section id="pom-reationships-sect-versions">
       <title>Project Versions</title>
 
-      <para>A Maven project’s <sgmltag>version</sgmltag> encodes a
+      <para><indexterm>
+          <primary>version identifier</primary>
+
+          <secondary>format of</secondary>
+        </indexterm>A Maven project’s <sgmltag>version</sgmltag> encodes a
       release<indexterm>
           <primary>major versions (projects)</primary>
         </indexterm><indexterm>
@@ -575,8 +616,16 @@
       <section id="pom-relationships-sect-version-build-numbers">
         <title>Version Build Numbers</title>
 
-        <para>One gotcha for release version numbers is the ordering of the
-        <indexterm>
+        <para><indexterm>
+            <primary>version identifier</primary>
+
+            <secondary>build numbers</secondary>
+          </indexterm><indexterm>
+            <primary>Project Object Model (POM)</primary>
+
+            <secondary>version identifier</secondary>
+          </indexterm>One gotcha for release version numbers is the ordering
+        of the <indexterm>
             <primary>ordering of version qualifiers</primary>
           </indexterm><indexterm>
             <primary>qualifiers for project versions</primary>
@@ -605,8 +654,14 @@
       <section id="pom-relationships-sect-snapshot-versions">
         <title>SNAPSHOT Versions</title>
 
-        <para>Maven versions can contain a string literal to signify that a
-        <indexterm>
+        <para><indexterm>
+            <primary>version identifier</primary>
+
+            <secondary>SNAPSHOT versions</secondary>
+          </indexterm><indexterm>
+            <primary>SNAPSHOT versions</primary>
+          </indexterm>Maven versions can contain a string literal to signify
+        that a <indexterm>
             <primary>snapshot versions</primary>
           </indexterm>project is currently under active development. If a
         version contains the string “SNAPSHOT,” then Maven will expand this
@@ -650,8 +705,14 @@
     <section id="pom-relationships-sect-property-refs">
       <title>Property References</title>
 
-      <para>A <acronym>POM</acronym> can include references to properties
-      <indexterm>
+      <para><indexterm>
+          <primary>Project Object Model (POM)</primary>
+
+          <secondary>property references</secondary>
+        </indexterm><indexterm>
+          <primary>properties</primary>
+        </indexterm>A <acronym>POM</acronym> can include references to
+      properties <indexterm>
           <primary>properties</primary>
 
           <secondary>referencing in pom.xml</secondary>
@@ -695,8 +756,12 @@
           <term>env</term>
 
           <listitem>
-            <para>The <varname>env</varname> variable exposes environment
-            <indexterm>
+            <para><indexterm>
+                <primary>properties</primary>
+
+                <secondary>environment variables</secondary>
+              </indexterm>The <varname>env</varname> variable exposes
+            environment <indexterm>
                 <primary>env variable</primary>
               </indexterm><indexterm>
                 <primary>implicit variables, list of</primary>
@@ -712,7 +777,11 @@
           <term>project</term>
 
           <listitem>
-            <para>The <varname>project</varname> variable exposes
+            <para><indexterm>
+                <primary>properties</primary>
+
+                <secondary>project variables</secondary>
+              </indexterm>The <varname>project</varname> variable exposes
             the<indexterm>
                 <primary>project variable</primary>
               </indexterm> <acronym>POM</acronym>. You can use a dot-notated
@@ -729,8 +798,12 @@
           <term>settings</term>
 
           <listitem>
-            <para>The <varname>settings</varname> variable exposes Maven
-            <indexterm>
+            <para><indexterm>
+                <primary>properties</primary>
+
+                <secondary>settings variables</secondary>
+              </indexterm>The <varname>settings</varname> variable exposes
+            Maven <indexterm>
                 <primary>settings variable</primary>
               </indexterm>settings information. You can use a dot-notated (.)
             path to reference the value of an element in a <filename
@@ -760,7 +833,11 @@
           <term>Java System Properties</term>
 
           <listitem>
-            <para>All properties accessible via<indexterm>
+            <para><indexterm>
+                <primary>properties</primary>
+
+                <secondary>Java system properties</secondary>
+              </indexterm>All properties accessible via<indexterm>
                 <primary>Java system properties, referencing</primary>
               </indexterm> <methodname>getProperties()</methodname> on
             <classname>java.lang.System</classname> are exposed as
@@ -778,7 +855,11 @@
           <term>x</term>
 
           <listitem>
-            <para>Arbitrary properties can be set with a<indexterm>
+            <para><indexterm>
+                <primary>properties</primary>
+
+                <secondary>arbitrary properties</secondary>
+              </indexterm>Arbitrary properties can be set with a<indexterm>
                 <primary>arbitrary properties, referencing</primary>
               </indexterm> <varname>properties</varname> element in a
             <filename moreinfo="none">pom.xml</filename> or <filename
@@ -811,7 +892,7 @@
     An<indexterm class="startofrange" id="pom3a">
         <primary>dependencies</primary>
       </indexterm><indexterm>
-        <primary>POM (Project Object Model)</primary>
+        <primary>Project Object Model (POM)</primary>
 
         <secondary>project dependencies</secondary>
 
@@ -893,14 +974,20 @@
       <literal>test</literal>, and <literal>provided</literal>. Scope controls
       which dependencies are available in which classpath, and which
       dependencies are included with an application. Let’s explore each scope
-      in detail:</para>
+      in detail:<indexterm>
+          <primary>dependency management</primary>
+        </indexterm></para>
 
       <variablelist>
         <varlistentry>
           <term>compile</term>
 
           <listitem>
-            <para><literal>compile</literal> is the default scope; all
+            <para><literal><indexterm>
+                <primary>dependency management</primary>
+
+                <secondary>compile scope</secondary>
+              </indexterm>compile</literal> is the default scope; all
             dependencies are <indexterm>
                 <primary>compile dependencies</primary>
               </indexterm><literal>compile</literal>-scoped if a scope is not
@@ -913,7 +1000,11 @@
           <term>provided</term>
 
           <listitem>
-            <para><literal>provided</literal> dependencies are used when you
+            <para><literal><indexterm>
+                <primary>dependency management</primary>
+
+                <secondary>provided scope</secondary>
+              </indexterm>provided</literal> dependencies are used when you
             expect the <acronym>JDK</acronym> or a container to provide them.
             For <indexterm>
                 <primary>provided dependencies</primary>
@@ -933,7 +1024,11 @@
           <term>runtime</term>
 
           <listitem>
-            <para><literal>runtime</literal> dependencies are required to
+            <para><literal><indexterm>
+                <primary>dependency management</primary>
+
+                <secondary>runtime scope</secondary>
+              </indexterm>runtime</literal> dependencies are required to
             execute and test the <indexterm>
                 <primary>runtime dependencies</primary>
               </indexterm>system, but they are not required for compilation.
@@ -948,7 +1043,11 @@
           <term>test</term>
 
           <listitem>
-            <para><literal>test</literal>-scoped dependencies are not required
+            <para><literal><indexterm>
+                <primary>dependency management</primary>
+
+                <secondary>test scope</secondary>
+              </indexterm>test</literal>-scoped dependencies are not required
             during the normal<indexterm>
                 <primary>dependencies</primary>
 
@@ -972,7 +1071,11 @@
           <term>system</term>
 
           <listitem>
-            <para>The <literal>system</literal> scope is similar to
+            <para><indexterm>
+                <primary>dependency management</primary>
+
+                <secondary>system scope</secondary>
+              </indexterm>The <literal>system</literal> scope is similar to
             <literal>provided</literal> except that you have to <indexterm>
                 <primary>system-scope dependencies</primary>
               </indexterm>provide an explicit path to the
@@ -992,8 +1095,12 @@
     <section id="pom-relationships-sect-optional">
       <title>Optional Dependencies</title>
 
-      <para>Assume that you are working on a library that provides caching
-      <indexterm>
+      <para><indexterm>
+          <primary>dependency management</primary>
+
+          <secondary>optional dependencies</secondary>
+        </indexterm>Assume that you are working on a library that provides
+      caching <indexterm>
           <primary>optional dependencies</primary>
         </indexterm><indexterm>
           <primary>dependencies</primary>
@@ -1092,7 +1199,14 @@
     <section id="pom-relationships-sect-version-ranges">
       <title>Dependency Version Ranges</title>
 
-      <para>You don’t just have to depend on a specific version of a<indexterm>
+      <para><indexterm>
+          <primary>version ranges</primary>
+        </indexterm><indexterm>
+          <primary>dependency management</primary>
+
+          <secondary>version ranges</secondary>
+        </indexterm>You don’t just have to depend on a specific version of
+      a<indexterm>
           <primary>version attribute (pom.xml)</primary>
 
           <secondary>dependency version ranges</secondary>
@@ -1190,7 +1304,11 @@
     <section id="pom-relationships-sect-transitive">
       <title>Transitive Dependencies</title>
 
-      <para>A transitive dependency is a dependency of a dependency.
+      <para><indexterm>
+          <primary>dependency management</primary>
+
+          <secondary>transitive dependencies</secondary>
+        </indexterm>A transitive dependency is a dependency of a dependency.
       If<indexterm>
           <primary>transitive dependencies</primary>
         </indexterm><indexterm>
@@ -1368,7 +1486,9 @@
       another dependency that provides the same functionality. <xref
       linkend="ex-exclude" /> shows an example of a dependency element that
       adds a dependency on <varname>project-a</varname>, but excludes the
-      transitive dependency <varname>project-b</varname>.</para>
+      transitive dependency <varname>project-b</varname>.<indexterm>
+          <primary>excluding transitive dependencies</primary>
+        </indexterm></para>
 
       <para><example id="ex-exclude">
           <title>Excluding a Transitive Dependency</title>
@@ -1475,9 +1595,11 @@
     <section id="pom-relationships-sect-dep-manage">
       <title>Dependency Management</title>
 
-      <para>Once you've adopted Maven at your super complex enterprise and you
-      have two hundred and twenty inter-related Maven projects, you are going
-      to start wondering if there is a better way to get a handle on
+      <para><indexterm>
+          <primary>dependency management</primary>
+        </indexterm>Once you've adopted Maven at your super complex enterprise
+      and you have two hundred and twenty inter-related Maven projects, you
+      are going to start wondering if there is a better way to get a handle on
       dependency versions. If every single project that uses a dependency like
       the MySQL Java connector needs to independently list the version number
       of the dependency, you are going to run into problems when you need to
@@ -1581,14 +1703,16 @@
   <section id="pom-relationships-sect-project-relationships">
     <title>Project Relationships</title>
 
-    <para>One of the compelling reasons to use Maven is that it makes the
-    process of tracking down dependencies (and dependencies of dependencies)
-    very easy. When a project depends on an artifact produced by another
-    project we say that this artifact is a dependency. In the case of a Java
-    project, this can be as simple as a project depending on an external
-    dependency like Log4J or JUnit. While dependencies can model external
-    dependencies, they can also manage the dependencies between a set of
-    related projects. If <varname>project-a</varname> depends on
+    <para><indexterm>
+        <primary>project relationships</primary>
+      </indexterm>One of the compelling reasons to use Maven is that it makes
+    the process of tracking down dependencies (and dependencies of
+    dependencies) very easy. When a project depends on an artifact produced by
+    another project we say that this artifact is a dependency. In the case of
+    a Java project, this can be as simple as a project depending on an
+    external dependency like Log4J or JUnit. While dependencies can model
+    external dependencies, they can also manage the dependencies between a set
+    of related projects. If <varname>project-a</varname> depends on
     <varname>project-b</varname>, Maven is smart enough to know that
     <varname>project-b</varname> must be built before
     <varname>project-a</varname>.</para>
@@ -1602,8 +1726,10 @@
     <section id="pom-relationships-sect-more-coordinates">
       <title>More on Coordinates</title>
 
-      <para>Coordinates define a unique location for a project. Projects are
-      related to one another using Maven Coordinates.
+      <para><indexterm>
+          <primary>maven coordinates</primary>
+        </indexterm>Coordinates define a unique location for a project.
+      Projects are related to one another using Maven Coordinates.
       <varname>project-a</varname> doesn't just depend on
       <varname>project-b</varname>; a project with a
       <varname>groupId</varname>, <varname>artifactId</varname>, and
@@ -1617,7 +1743,13 @@
           <term>groupId</term>
 
           <listitem>
-            <para>A <varname>groupId</varname> groups a set of related
+            <para><indexterm>
+                <primary>group identifier</primary>
+              </indexterm><indexterm>
+                <primary>maven coordinates</primary>
+
+                <secondary>groupId</secondary>
+              </indexterm>A <varname>groupId</varname> groups a set of related
             artifacts. Group identifiers generally resemble a Java package
             name. For example, the <varname>groupId</varname>
             <varname>org.apache.maven</varname> is the base groupId for all
@@ -1633,10 +1765,16 @@
           <term>artifactId</term>
 
           <listitem>
-            <para>The <varname>artifactId</varname> is the project's main
-            identifier. When you generate an artifact, this artifact is going
-            to be named with the <varname>artifactId</varname>. When you refer
-            to a project, you are going to refer to it using the
+            <para><indexterm>
+                <primary>artifact identifier</primary>
+              </indexterm><indexterm>
+                <primary>maven coordinates</primary>
+
+                <secondary>artifactId</secondary>
+              </indexterm>The <varname>artifactId</varname> is the project's
+            main identifier. When you generate an artifact, this artifact is
+            going to be named with the <varname>artifactId</varname>. When you
+            refer to a project, you are going to refer to it using the
             <varname>artifactId</varname>. The <varname>artifactId</varname>,
             <varname>groupId</varname> combination must be unique. In other
             words, you can't have two separate projects with the same
@@ -1658,13 +1796,19 @@
           <term>version</term>
 
           <listitem>
-            <para>When an artifact is released, it is released with a version
-            number. This version number is a numeric identifier such as "1.0",
-            "1.1.1", or "1.1.2-alpha-01". You can also use what is known as a
-            snapshot version. A snapshot version is a version for a component
-            which is under development, snapshot version numbers always end in
-            SNAPSHOT; for example, "1.0-SNAPSHOT", "1.1.1-SNAPSHOT", and
-            "1-SNAPSHOT". <xref
+            <para><indexterm>
+                <primary>version identifier</primary>
+              </indexterm><indexterm>
+                <primary>maven coordinates</primary>
+
+                <secondary>version</secondary>
+              </indexterm>When an artifact is released, it is released with a
+            version number. This version number is a numeric identifier such
+            as "1.0", "1.1.1", or "1.1.2-alpha-01". You can also use what is
+            known as a snapshot version. A snapshot version is a version for a
+            component which is under development, snapshot version numbers
+            always end in SNAPSHOT; for example, "1.0-SNAPSHOT",
+            "1.1.1-SNAPSHOT", and "1-SNAPSHOT". <xref
             linkend="pom-relationships-sect-version-build-numbers" />
             introduces versions and version ranges.</para>
           </listitem>
@@ -1678,12 +1822,18 @@
           <term>classifier</term>
 
           <listitem>
-            <para>You would use a classifier if you were releasing the same
-            code but needed to produce two separate artifacts for technical
-            reasons. For example, if you wanted to build two separate
-            artifacts of a <acronym>JAR</acronym>, one compiled with the Java
-            1.4 compiler and another compiled with the Java 6 compiler, you
-            might use the classifier to produce two separate
+            <para><indexterm>
+                <primary>classifier</primary>
+              </indexterm><indexterm>
+                <primary>maven coordinates</primary>
+
+                <secondary>classifier</secondary>
+              </indexterm>You would use a classifier if you were releasing the
+            same code but needed to produce two separate artifacts for
+            technical reasons. For example, if you wanted to build two
+            separate artifacts of a <acronym>JAR</acronym>, one compiled with
+            the Java 1.4 compiler and another compiled with the Java 6
+            compiler, you might use the classifier to produce two separate
             <acronym>JAR</acronym> artifacts under the same
             groupId:artifactId:version combination. If your project uses
             native extensions, you might use the classifier to produce an
@@ -1707,13 +1857,21 @@
     <section id="pom-relationships-sect-project-inheritance">
       <title>Project Inheritance</title>
 
-      <para>There are going to be times when you want a project to inherit
-      values from a parent POM. You might be building a large system, and you
-      don't want to have to repeat the same dependency elements over and over
-      again. You can avoid repeating yourself if your projects make use of
-      inheritance via the parent element. When a project specifies a parent,
-      it inherits the information in the parent project's POM. It can then
-      override and add to the values specified in this parent POM.</para>
+      <para><indexterm>
+          <primary>project inheritiance</primary>
+        </indexterm><indexterm>
+          <primary>project relationships</primary>
+
+          <secondary>inheritance</secondary>
+        </indexterm><indexterm>
+          <primary>parent project</primary>
+        </indexterm>There are going to be times when you want a project to
+      inherit values from a parent POM. You might be building a large system,
+      and you don't want to have to repeat the same dependency elements over
+      and over again. You can avoid repeating yourself if your projects make
+      use of inheritance via the parent element. When a project specifies a
+      parent, it inherits the information in the parent project's POM. It can
+      then override and add to the values specified in this parent POM.</para>
 
       <para>All Maven <acronym>POM</acronym>s inherit values from a parent
       <acronym>POM</acronym>. If a <acronym>POM</acronym> does not specify a
@@ -1858,30 +2016,43 @@
   <section id="pom-relationships-sect-pom-best-practice">
     <title>POM Best Practices</title>
 
-    <para>Maven can be used to manage everything from simple, single-project
-    systems to builds that involve hundreds of inter-related submodules. Part
-    of the learning process with Maven isn't just figuring out the syntax for
-    configuring Maven, it is learning the "Maven Way"—the current set of best
-    practices for organizing and building projects using Maven. This section
-    attempts to distill some of this knowledge to help you adopt best
-    practices from the start without having to wade through years of
-    discussions on the Maven mailing lists.</para>
+    <para><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>best practices</secondary>
+      </indexterm><indexterm>
+        <primary>best practices</primary>
+      </indexterm>Maven can be used to manage everything from simple,
+    single-project systems to builds that involve hundreds of inter-related
+    submodules. Part of the learning process with Maven isn't just figuring
+    out the syntax for configuring Maven, it is learning the "Maven Way"—the
+    current set of best practices for organizing and building projects using
+    Maven. This section attempts to distill some of this knowledge to help you
+    adopt best practices from the start without having to wade through years
+    of discussions on the Maven mailing lists.</para>
 
     <section id="pom-relationships-sect-grouping-deps">
       <title>Grouping Dependencies</title>
 
-      <para>If you have a set of dependencies which are logically grouped
-      together. You can create a project with pom packaging that groups
-      dependencies together. For example, let's assume that your application
-      uses Hibernate, a popular Object-Relational mapping framework. Every
-      project which uses Hibernate might also have a dependency on the Spring
-      Framework and a MySQL <acronym>JDBC</acronym> driver. Instead of having
-      to include these dependencies in every project that uses Hibernate,
-      Spring, and MySQL you could create a special <acronym>POM</acronym> that
-      does nothing more than declare a set of common dependencies. You could
-      create a project called <varname>persistence-deps</varname> (short for
-      Persistence Dependencies), and have every project that needs to do
-      persistence depend on this convenience project:</para>
+      <para><indexterm>
+          <primary>grouping dependencies</primary>
+        </indexterm><indexterm>
+          <primary>best practices</primary>
+
+          <secondary>grouping dependencies</secondary>
+        </indexterm>If you have a set of dependencies which are logically
+      grouped together. You can create a project with pom packaging that
+      groups dependencies together. For example, let's assume that your
+      application uses Hibernate, a popular Object-Relational mapping
+      framework. Every project which uses Hibernate might also have a
+      dependency on the Spring Framework and a MySQL <acronym>JDBC</acronym>
+      driver. Instead of having to include these dependencies in every project
+      that uses Hibernate, Spring, and MySQL you could create a special
+      <acronym>POM</acronym> that does nothing more than declare a set of
+      common dependencies. You could create a project called
+      <varname>persistence-deps</varname> (short for Persistence
+      Dependencies), and have every project that needs to do persistence
+      depend on this convenience project:</para>
 
       <para><example>
           <title>Consolidating Dependencies in a Single POM Project</title>
@@ -1984,8 +2155,10 @@
     <section id="pom-relationships-sect-multi-vs-inherit">
       <title>Multi-module vs. Inheritance</title>
 
-      <para>There is a difference between inheriting from a parent project
-      and<indexterm>
+      <para><indexterm>
+          <primary>multi-module projects</primary>
+        </indexterm>There is a difference between inheriting from a parent
+      project and<indexterm>
           <primary>multimodule projects, in general</primary>
 
           <secondary>inheritance versus</secondary>
@@ -2085,12 +2258,14 @@
       <section id="pom-relationships-sect-multi-module-enterprise">
         <title>Multi-module Enterprise Project</title>
 
-        <para>Let's take a look at an example that provides a more accurate
-        picture of a real-world project where inheritance and multi-module
-        relationships exist side by side. <xref linkend="fig-multi-module" />
-        shows a collection of projects that resemble a typical set of projects
-        in an enterprise application. There is a top-level
-        <acronym>POM</acronym> for the corporation with an
+        <para><indexterm>
+            <primary>multi-module project</primary>
+          </indexterm>Let's take a look at an example that provides a more
+        accurate picture of a real-world project where inheritance and
+        multi-module relationships exist side by side. <xref
+        linkend="fig-multi-module" /> shows a collection of projects that
+        resemble a typical set of projects in an enterprise application. There
+        is a top-level <acronym>POM</acronym> for the corporation with an
         <varname>artifactId</varname> of <varname>sonatype</varname>. There is
         a multi-module project named <varname>big-system</varname> which
         references sub-modules <varname>server-side</varname> and

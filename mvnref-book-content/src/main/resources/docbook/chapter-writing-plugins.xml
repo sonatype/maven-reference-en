@@ -7,19 +7,31 @@
   <section id="writing-plugins-sect-intro">
     <title>Introduction</title>
 
-    <para>While this chapter covers an advanced topic, don't let the idea of
-    writing a Maven plugin intimidate. For all of the theory and complexity of
-    this tool, the fundamental concepts are easy to understand and the
-    mechanics of writing a plugin are straightforward. After you read this
-    chapter, you will have a better grasp of what is involved in creating a
-    Maven plugin.</para>
+    <para><indexterm>
+        <primary>writing plugins</primary>
+      </indexterm><indexterm>
+        <primary>custom plugins</primary>
+      </indexterm><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>developing plugins</secondary>
+      </indexterm>While this chapter covers an advanced topic, don't let the
+    idea of writing a Maven plugin intimidate. For all of the theory and
+    complexity of this tool, the fundamental concepts are easy to understand
+    and the mechanics of writing a plugin are straightforward. After you read
+    this chapter, you will have a better grasp of what is involved in creating
+    a Maven plugin.</para>
   </section>
 
   <section id="writing-plugins-sect-programming-maven">
     <title>Programming Maven</title>
 
-    <para>Most of this book has dealt with using Maven, and for a book on
-    Maven, you haven't seen too many code examples dealing with Maven
+    <para><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>developing Maven</secondary>
+      </indexterm>Most of this book has dealt with using Maven, and for a book
+    on Maven, you haven't seen too many code examples dealing with Maven
     customization. In fact, you haven't yet seen any. This is by design, 99
     out of 100 Maven users will never need to write a custom plugin to
     customize Maven; there is an abundance of configurable plugins, and unless
@@ -44,14 +56,19 @@
     <section id="writing-plugins-ioc">
       <title>What is Inversion of Control?</title>
 
-      <para>At the heart of Maven is an Inversion of Control (IoC) container
-      named Plexus. What does it do? It is a system for managing and relating
-      components. While there is a canonical essay about IoC written by Martin
-      Fowler, the concept and term have been so heavily overloaded in the past
-      few years it is tough to find a good definition of the concept that
-      isn't a self-reference (or just a lazy reference to the aforementioned
-      essay). Instead of resorting to a Wikipedia quote, we'll summarize
-      Inversion of Control and Dependency Injection with an analogy.</para>
+      <para><indexterm>
+          <primary>Inversion of Control (IoC)</primary>
+        </indexterm>At the heart of Maven is an Inversion of Control (IoC)
+      container named <indexterm>
+          <primary>Plexus</primary>
+        </indexterm>Plexus. What does it do? It is a system for managing and
+      relating components. While there is a canonical essay about IoC written
+      by Martin Fowler, the concept and term have been so heavily overloaded
+      in the past few years it is tough to find a good definition of the
+      concept that isn't a self-reference (or just a lazy reference to the
+      aforementioned essay). Instead of resorting to a Wikipedia quote, we'll
+      summarize Inversion of Control and Dependency Injection with an
+      analogy.</para>
 
       <para>Assume that you have a series of components which need to be wired
       together. When you think about components, think stereo components not
@@ -105,21 +122,27 @@
     <section id="writing-plugins-intro-plexus">
       <title>Introduction to Plexus</title>
 
-      <para>The most important feature of an <acronym>IoC</acronym> container
-      implemented in Java is a mechanism called dependency injection. The
-      basic idea of <acronym>IoC</acronym> is that the control of creating and
-      managing objects is removed from the code itself and placed into the
-      hands of an <acronym>IoC</acronym> framework. Using dependency injection
-      in an application that has been programmed to interfaces, you can create
-      components which are not bound to specific implementations of these
-      interfaces. Instead, you program to interfaces and then configure Plexus
-      to connect the appropriate implementation to the appropriate component.
-      While your code deals with interfaces, you can capture the dependencies
-      between classes and components in an <acronym>XML</acronym> file that
-      defines components, implementation classes, and the relationships
-      between your components. In other words, you can write isolated
-      components, then you can wire them together using an
-      <acronym>XML</acronym> file that defines how the components are wired
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>Plexus</secondary>
+        </indexterm><indexterm>
+          <primary>Plexus</primary>
+        </indexterm>The most important feature of an <acronym>IoC</acronym>
+      container implemented in Java is a mechanism called dependency
+      injection. The basic idea of <acronym>IoC</acronym> is that the control
+      of creating and managing objects is removed from the code itself and
+      placed into the hands of an <acronym>IoC</acronym> framework. Using
+      dependency injection in an application that has been programmed to
+      interfaces, you can create components which are not bound to specific
+      implementations of these interfaces. Instead, you program to interfaces
+      and then configure Plexus to connect the appropriate implementation to
+      the appropriate component. While your code deals with interfaces, you
+      can capture the dependencies between classes and components in an
+      <acronym>XML</acronym> file that defines components, implementation
+      classes, and the relationships between your components. In other words,
+      you can write isolated components, then you can wire them together using
+      an <acronym>XML</acronym> file that defines how the components are wired
       together. In the case of Plexus, system components are defined with an
       <acronym>XML</acronym> document that is found in
       <filename>META-INF/plexus/components.xml</filename>.</para>
@@ -183,13 +206,21 @@
     <section id="writing-plugins-why-plexus">
       <title>Why Plexus?</title>
 
-      <para>Spring does happen to be the most popular IoC container at the
-      moment, and there's a good argument to be made that it has affected the
-      Java "ecosystem" for the better forcing companies like Sun Microsystems
-      to yield more control to the open source community and helping to open
-      up standards by providing a pluggable, component-oriented "bus". But,
-      Spring isn't the only IoC container in open source. There are many IoC
-      containers (like <ulink
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>Plexus</secondary>
+        </indexterm><indexterm>
+          <primary>Plexus</primary>
+
+          <secondary>compared to Spring</secondary>
+        </indexterm>Spring does happen to be the most popular IoC container at
+      the moment, and there's a good argument to be made that it has affected
+      the Java "ecosystem" for the better forcing companies like Sun
+      Microsystems to yield more control to the open source community and
+      helping to open up standards by providing a pluggable,
+      component-oriented "bus". But, Spring isn't the only IoC container in
+      open source. There are many IoC containers (like <ulink
       url="http://www.picocontainer.org/">PicoContainer</ulink>).</para>
 
       <para>Years and years ago, when Maven was created, Spring wasn't a
@@ -217,7 +248,15 @@
     <section id="writing-plugins-what-is-plugin">
       <title>What is a Plugin?</title>
 
-      <para>A Maven Plugin is a Maven artifact which contains a plugin
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>definition of a plugin</secondary>
+        </indexterm><indexterm>
+          <primary>plugins</primary>
+
+          <secondary>definition of</secondary>
+        </indexterm>A Maven Plugin is a Maven artifact which contains a plugin
       descriptor and one or more Mojos. A Mojo can be thought of as a goal in
       Maven, and every goal corresponds to a Mojo. The
       <varname>compiler:compile</varname> goal corresponds to the
@@ -241,8 +280,14 @@
         because it is a play on the word Pojo (Plain-old Java Object).</para>
       </note>
 
-      <para>A Mojo is much more than just a goal in Maven, it is a component
-      managed by Plexus that can include references to other Plexus
+      <para><indexterm>
+          <primary>mojo</primary>
+        </indexterm><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo</secondary>
+        </indexterm>A Mojo is much more than just a goal in Maven, it is a
+      component managed by Plexus that can include references to other Plexus
       components.</para>
     </section>
   </section>
@@ -250,9 +295,13 @@
   <section id="writing-plugins-sect-plugin-descriptor">
     <title>Plugin Descriptor</title>
 
-    <para>A Maven plugin contains a road-map for Maven that tells Maven about
-    the various Mojos and plugin configuration. This plugin descriptor is
-    present in the plugin <acronym>JAR</acronym> file in
+    <para><indexterm>
+        <primary>developing plugins</primary>
+
+        <secondary>plugin descriptor</secondary>
+      </indexterm>A Maven plugin contains a road-map for Maven that tells
+    Maven about the various Mojos and plugin configuration. This plugin
+    descriptor is present in the plugin <acronym>JAR</acronym> file in
     <filename>META-INF/maven/plugin.xml</filename>. When Maven loads a plugin,
     it reads this <acronym>XML</acronym> file, instantiates and configures
     plugin objects to make the Mojos contained in a plugin available to
@@ -354,7 +403,11 @@
     <section id="writing-plugins-top-level-elements">
       <title>Top-level Plugin Descriptor Elements</title>
 
-      <para>The top-level configuration values in the
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>plugin descriptor</secondary>
+        </indexterm>The top-level configuration values in the
       <sgmltag>plugin</sgmltag> element are:</para>
 
       <variablelist>
@@ -432,10 +485,14 @@
     <section id="writing-plugins-sect-mojo-config">
       <title>Mojo Configuration</title>
 
-      <para>Next is the declaration of the each Mojo. The plugin element
-      contains an element named mojos which contains a mojo element for each
-      mojo present in the Plugin. Each mojo element contains the following
-      configuration elements:</para>
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo configuration</secondary>
+        </indexterm>Next is the declaration of the each Mojo. The plugin
+      element contains an element named mojos which contains a mojo element
+      for each mojo present in the Plugin. Each mojo element contains the
+      following configuration elements:</para>
 
       <variablelist>
         <varlistentry>
@@ -714,29 +771,41 @@
     <section id="writing-plugins-sect-plugin-depend">
       <title>Plugin Dependencies</title>
 
-      <para>Lastly, the plugin descriptor declares a set of dependencies just
-      like a Maven project. When Maven uses a plugin, it will download any
-      required dependencies before it attempts to execute a goal from this
-      plugin. In this example, the plugin depends on Jakarta Commons IO
-      version 1.3.2.</para>
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>plugin dependencies</secondary>
+        </indexterm>Lastly, the plugin descriptor declares a set of
+      dependencies just like a Maven project. When Maven uses a plugin, it
+      will download any required dependencies before it attempts to execute a
+      goal from this plugin. In this example, the plugin depends on Jakarta
+      Commons IO version 1.3.2.</para>
     </section>
   </section>
 
   <section id="writing-plugins-sect-custom-plugin">
     <title>Writing a Custom Plugin</title>
 
-    <para>When you write a custom plugin, you are going to be writing a series
-    of Mojos (goals). Every Mojo is a single Java class which contains a
-    series of annotations that tell Maven how to generate the Plugin
-    descriptor described in the previous section. Before you can start writing
-    Mojo classes, you will need to create Maven project with the appropriate
-    packaging and POM.</para>
+    <para><indexterm>
+        <primary>developing plugins</primary>
+
+        <secondary>custom plugins</secondary>
+      </indexterm>When you write a custom plugin, you are going to be writing
+    a series of Mojos (goals). Every Mojo is a single Java class which
+    contains a series of annotations that tell Maven how to generate the
+    Plugin descriptor described in the previous section. Before you can start
+    writing Mojo classes, you will need to create Maven project with the
+    appropriate packaging and POM.</para>
 
     <section id="writing-plugins-sect-creating-plugin-project">
       <title>Creating a Plugin Project</title>
 
-      <para>To create a plugin project, you should use the Maven Archetype
-      plugin. The following command-line will create a plugin with a
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>creating a plugin</secondary>
+        </indexterm>To create a plugin project, you should use the Maven
+      Archetype plugin. The following command-line will create a plugin with a
       <varname>groupId</varname> of
       <varname>org.sonatype.mavenbook.plugins</varname> and the
       <varname>artifactId</varname> of
@@ -801,8 +870,12 @@
     <section id="writing-plugins-simple-java-mojo">
       <title>A Simple Java Mojo</title>
 
-      <para>In this chapter, we're going to introduce a Maven Mojo written in
-      Java. Each Mojo in your project is going to implement the
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>example mojo</secondary>
+        </indexterm>In this chapter, we're going to introduce a Maven Mojo
+      written in Java. Each Mojo in your project is going to implement the
       <classname>org.apache.maven.plugin.Mojo</classname> interface, the
       <classname>Mojo</classname> implementation shown in the following
       example implements the Mojo interface by extending the
@@ -923,7 +996,13 @@ public class EchoMojo extends AbstractMojo
     <section id="writing-plugins-sect-plugin-prefix">
       <title>Configuring a Plugin Prefix</title>
 
-      <para>Specifying the <varname>groupId</varname>,
+      <para><indexterm>
+          <primary>plugin prefix</primary>
+        </indexterm><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>plugin prefix</secondary>
+        </indexterm>Specifying the <varname>groupId</varname>,
       <varname>artifactId</varname>, <varname>version</varname>, and
       <varname>goal</varname> on the command-line is cumbersome. To address
       this, Maven assigns a plugin a prefix. Instead of typing:</para>
@@ -1107,9 +1186,13 @@ public class EchoMojo extends AbstractMojo
     <section id="writing-plugins-sect-logging">
       <title>Logging from a Plugin</title>
 
-      <para>Maven takes care of connecting your Mojo to a logging provider by
-      calling <methodname>setLog()</methodname> prior to the execution of your
-      Mojo. It supplies an implementation of
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>logging from a mojo</secondary>
+        </indexterm>Maven takes care of connecting your Mojo to a logging
+      provider by calling <methodname>setLog()</methodname> prior to the
+      execution of your Mojo. It supplies an implementation of
       <classname>org.apache.maven.monitor.logging.Log</classname>. This class
       exposes methods that you can use to communicate information back to the
       user. This <classname>Log</classname> class provides multiple levels of
@@ -1182,11 +1265,15 @@ public class EchoMojo extends AbstractMojo
     <section id="writing-plugins-sect-class-annotations">
       <title>Mojo Class Annotations</title>
 
-      <para>In <varname>first-maven-plugin</varname>, you didn't write the
-      plugin descriptor yourself, you relied on Maven to generate the plugin
-      descriptor from your source code. The descriptor was generated using
-      your plugin project's <acronym>POM</acronym> information and a set of
-      annotations on your <classname>EchoMojo</classname> class.
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo annotations</secondary>
+        </indexterm>In <varname>first-maven-plugin</varname>, you didn't write
+      the plugin descriptor yourself, you relied on Maven to generate the
+      plugin descriptor from your source code. The descriptor was generated
+      using your plugin project's <acronym>POM</acronym> information and a set
+      of annotations on your <classname>EchoMojo</classname> class.
       <classname>EchoMojo</classname> only specifies the
       <classname>@goal</classname> annotation, here is a list of other
       annotations you can place on your <classname>Mojo</classname>
@@ -1332,8 +1419,12 @@ public class EchoMojo extends AbstractMojo
     <section id="writing-plugins-sect-failure">
       <title>When a Mojo Fails</title>
 
-      <para>The <methodname>execute()</methodname> method in Mojo throws two
-      exceptions <classname>MojoExecutionException</classname> and
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo failure</secondary>
+        </indexterm>The <methodname>execute()</methodname> method in Mojo
+      throws two exceptions <classname>MojoExecutionException</classname> and
       <classname>MojoFailureException</classname>. The difference between
       these two exception is both subtle and important, and it relates to what
       happens when a goal execution "fails". A
@@ -1404,16 +1495,24 @@ public class EchoMojo extends AbstractMojo
   <section id="writing-plugins-sect-mojo-params">
     <title>Mojo Parameters</title>
 
-    <para>Just as important as the <methodname>execute()</methodname> method
-    and the Mojo annotations, a Mojo is configured via parameters. This
+    <para><indexterm>
+        <primary>developing plugins</primary>
+
+        <secondary>mojo parameters</secondary>
+      </indexterm>Just as important as the <methodname>execute()</methodname>
+    method and the Mojo annotations, a Mojo is configured via parameters. This
     section deals with some configuration and topics surrounding Mojo
     parameters.</para>
 
     <section id="writing-plugins-sect-param-values">
       <title>Supplying Values for Mojo Parameters</title>
 
-      <para>In EchoMojo we declared the message parameter with the following
-      annotations:</para>
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo parameters</secondary>
+        </indexterm>In EchoMojo we declared the message parameter with the
+      following annotations:</para>
 
       <programlisting language="java">/**
  * Any Object to print out.
@@ -1534,8 +1633,12 @@ private Object message;
     <section id="writing-plugins-sect-multival-params">
       <title>Multi-valued Mojo Parameters</title>
 
-      <para>Plugins can have parameters which accept more than one value. Take
-      a look at the <classname>ZipMojo</classname> shown in <xref
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>multi-valued mojo parameters</secondary>
+        </indexterm>Plugins can have parameters which accept more than one
+      value. Take a look at the <classname>ZipMojo</classname> shown in <xref
       linkend="ex-plugin-multivalue" />. Both the <varname>includes</varname>
       and <varname>excludes</varname> parameters are multivalued
       <classname>String</classname> arrays which specify the inclusion and
@@ -1639,7 +1742,11 @@ public class ZipMojo extends AbstractMojo
     <section id="writing-plugins-sect-depend-plexus">
       <title>Depending on Plexus Components</title>
 
-      <para>A Mojo is a component managed by an <acronym>IoC</acronym>
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>plexus components</secondary>
+        </indexterm>A Mojo is a component managed by an <acronym>IoC</acronym>
       container called Plexus. A Mojo can depend on other components managed
       by Plexus by declaring a Mojo parameter and using the
       <classname>@parameter</classname> or the
@@ -1671,9 +1778,13 @@ private ZipArchiver zipArchiver;</programlisting>
     <section id="writing-plugins-sect-param-annot">
       <title>Mojo Parameter Annotations</title>
 
-      <para>Unless you insist on writing your Plugin descriptors by hand,
-      you'll never have to write that <acronym>XML</acronym>. Instead, the
-      Maven Plugin Plugin has a <varname>plugin:descriptor</varname> goal
+      <para><indexterm>
+          <primary>developing plugins</primary>
+
+          <secondary>mojo parameter annotations</secondary>
+        </indexterm>Unless you insist on writing your Plugin descriptors by
+      hand, you'll never have to write that <acronym>XML</acronym>. Instead,
+      the Maven Plugin Plugin has a <varname>plugin:descriptor</varname> goal
       bound to the generate-resources phase. This goal generates the plugin
       descriptor from annotations on your Mojo. To configure a Mojo parameter,
       you should use the following annotations on either the private member
@@ -1773,8 +1884,12 @@ private ZipArchiver zipArchiver;</programlisting>
   <section id="writing-plugins-sect-plugins-lifecycle">
     <title>Plugins and the Maven Lifecycle</title>
 
-    <para>In the <xref linkend="lifecycle" /> chapter, you learned that
-    lifecycles can be customized by packaging types. A plugin can both
+    <para><indexterm>
+        <primary>developing plugins</primary>
+
+        <secondary>lifecycle</secondary>
+      </indexterm>In the <xref linkend="lifecycle" /> chapter, you learned
+    that lifecycles can be customized by packaging types. A plugin can both
     introduce a new packaging type and customize the lifecycle. In this
     section, you are going to learn how you can customize the lifecycle from a
     custom Maven plugin. You are also some to see how you can tell a Mojo to
@@ -1856,9 +1971,11 @@ private ZipArchiver zipArchiver;</programlisting>
     <section id="writing-plugins-sect-custom-lifecycle">
       <title>Creating a Custom Lifecycle</title>
 
-      <para>A custom lifecycle must be packaged in the plugin under the
-      <filename>META-INF/maven/lifecycle.xml</filename> file. You can include
-      a lifecycle under <filename>src/main/resources</filename> in
+      <para><indexterm>
+          <primary>custom lifecycle</primary>
+        </indexterm>A custom lifecycle must be packaged in the plugin under
+      the <filename>META-INF/maven/lifecycle.xml</filename> file. You can
+      include a lifecycle under <filename>src/main/resources</filename> in
       <filename>META-INF/maven/lifecycle.xml</filename>. The following
       <filename>lifecycle.xml</filename> declares a lifecycle named
       <varname>zipcycle</varname> that contains only the

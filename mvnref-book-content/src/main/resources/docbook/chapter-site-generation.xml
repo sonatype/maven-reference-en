@@ -7,18 +7,24 @@
   <section id="site-generation-sect-intro">
     <title>Introduction</title>
 
-    <para>Successful software applications are rarely produced by a team of
-    one. When we're talking about any software worth writing, we're usually
-    dealing teams of collaborating developers ranging anywhere in size from a
-    handful of programmers working in a small team to hundreds or thousands of
-    programmers working in large distributed environment. Most open source
-    projects (such as Maven) succeed or fail based on the presence or absence
-    of well written documentation for a widely-distributed, ad-hoc collection
-    of users and developers. In all environments it is important for projects
-    to have an easy way to publish and maintain online documentation. Software
-    development is primarily an exercise in collaboration and communication,
-    and publishing a Maven site is one way to make sure that your project is
-    communicating with your end-users.</para>
+    <para><indexterm>
+        <primary>site generation</primary>
+      </indexterm><indexterm>
+        <primary>Apache Maven</primary>
+
+        <secondary>site generation</secondary>
+      </indexterm>Successful software applications are rarely produced by a
+    team of one. When we're talking about any software worth writing, we're
+    usually dealing teams of collaborating developers ranging anywhere in size
+    from a handful of programmers working in a small team to hundreds or
+    thousands of programmers working in large distributed environment. Most
+    open source projects (such as Maven) succeed or fail based on the presence
+    or absence of well written documentation for a widely-distributed, ad-hoc
+    collection of users and developers. In all environments it is important
+    for projects to have an easy way to publish and maintain online
+    documentation. Software development is primarily an exercise in
+    collaboration and communication, and publishing a Maven site is one way to
+    make sure that your project is communicating with your end-users.</para>
 
     <para>A web site for an open source project is often the foundation for
     both the end-user and developer communities alike. End-users look to a
@@ -52,8 +58,12 @@
   <section id="site-generation-sect-building">
     <title>Building a Project Site with Maven</title>
 
-    <para>To illustrate the process of building a project website, create a
-    sample Maven project with the archetype plugin:</para>
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>building a project site</secondary>
+      </indexterm>To illustrate the process of building a project website,
+    create a sample Maven project with the archetype plugin:</para>
 
     <screen>$ mvn archetype:create -DgroupId=org.sonatype.mavenbook -DartifactId=sample-project
 </screen>
@@ -133,8 +143,16 @@ $ <command>mvn site:run</command>
   <section id="site-generation-sect-custom-descript">
     <title>Customizing the Site Descriptor</title>
 
-    <para>When you add content to the site, you are going to want to modify
-    the left-hand navigation menu that is generated with your site. The
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>customizing look and feel</secondary>
+      </indexterm><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>customizing menu</secondary>
+      </indexterm>When you add content to the site, you are going to want to
+    modify the left-hand navigation menu that is generated with your site. The
     following site descriptor customizes the logo in the upper left-hand
     corner of the site. In addition to customizing the header of the site,
     this descriptor adds a menu section to the left-hand navigation menu under
@@ -217,8 +235,12 @@ $ mvn site:run</screen>
     <section id="site-generation-sect-custom-header">
       <title>Customizing the Header Graphics</title>
 
-      <para>To customize the graphics which appear in the upper left-hand and
-      right-hand corners of the page, you can use the
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>customizing header</secondary>
+        </indexterm>To customize the graphics which appear in the upper
+      left-hand and right-hand corners of the page, you can use the
       <sgmltag>bannerLeft</sgmltag> and <sgmltag>bannerRight</sgmltag>
       elements in a site descriptor.</para>
 
@@ -258,7 +280,11 @@ $ mvn site:run</screen>
     <section id="site-generation-sect-custom-nav">
       <title>Customizing the Navigation Menu</title>
 
-      <para>To customize the contents of the navigation menu, use the
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>customizing navigation</secondary>
+        </indexterm>To customize the contents of the navigation menu, use the
       <sgmltag>menu</sgmltag> element with <sgmltag>item</sgmltag> child
       elements. The <sgmltag>menu</sgmltag> element adds a section to the
       left-hand navigation menu. Each item is rendered as a link in that
@@ -327,16 +353,21 @@ $ mvn site:run</screen>
   <section id="site-generation-sect-dir-struct">
     <title>Site Directory Structure</title>
 
-    <para>Maven places all site document under <filename>src/site</filename>.
-    Documents of similar format are placed in subdirectories of
-    <filename>src/site</filename>. All <acronym>APT</acronym> documents should
-    be in <filename>src/site/apt</filename>, all <acronym>FML</acronym>
-    documents should be in <filename>src/site/fml</filename>, and XDoc
-    documents should be in <filename>src/site/xdoc</filename>. The site
-    descriptor should be in <filename>src/site/site.xml</filename>, and all
-    resources should be stored under <filename>src/site/resources</filename>.
-    When the Maven Site plugin builds a web site, it will copy everything in
-    the resources directory to the root of the site. If you store an image in
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>directory structure</secondary>
+      </indexterm>Maven places all site document under
+    <filename>src/site</filename>. Documents of similar format are placed in
+    subdirectories of <filename>src/site</filename>. All
+    <acronym>APT</acronym> documents should be in
+    <filename>src/site/apt</filename>, all <acronym>FML</acronym> documents
+    should be in <filename>src/site/fml</filename>, and XDoc documents should
+    be in <filename>src/site/xdoc</filename>. The site descriptor should be in
+    <filename>src/site/site.xml</filename>, and all resources should be stored
+    under <filename>src/site/resources</filename>. When the Maven Site plugin
+    builds a web site, it will copy everything in the resources directory to
+    the root of the site. If you store an image in
     <filename>src/site/resources/images/test.png</filename>, they you would
     refer to the image from your site documentation using the relative path
     <filename>images/test.png</filename>.</para>
@@ -394,15 +425,22 @@ $ mvn site:run</screen>
   <section id="site-generation-sect-proj-doc">
     <title>Writing Project Documentation</title>
 
-    <para>Maven uses a documentation-processing engine called Doxia which
-    reads multiple source formats into a common document model. Doxia can then
-    manipulate documents and render the result into several output formats,
-    such as <acronym>PDF</acronym> or <acronym>XHTML</acronym>. To write
-    document for your project, you will need to write your content in a format
-    which can be parsed by Doxia. Doxia currently has support for Almost Plain
-    Text (<acronym>APT</acronym>), XDoc (a Maven 1.x documentation format),
-    <acronym>XHTML</acronym>, and <acronym>FML</acronym> (useful for
-    <acronym>FAQ</acronym> documents) formats.</para>
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>project documentation</secondary>
+      </indexterm><indexterm>
+        <primary>writing documentation</primary>
+      </indexterm>Maven uses a documentation-processing engine called Doxia
+    which reads multiple source formats into a common document model. Doxia
+    can then manipulate documents and render the result into several output
+    formats, such as <acronym>PDF</acronym> or <acronym>XHTML</acronym>. To
+    write document for your project, you will need to write your content in a
+    format which can be parsed by Doxia. Doxia currently has support for
+    Almost Plain Text (<acronym>APT</acronym>), XDoc (a Maven 1.x
+    documentation format), <acronym>XHTML</acronym>, and
+    <acronym>FML</acronym> (useful for <acronym>FAQ</acronym> documents)
+    formats.</para>
 
     <para>This chapter has a cursory introduction to the
     <acronym>APT</acronym> format. For a deeper understand of the
@@ -429,9 +467,13 @@ $ mvn site:run</screen>
     <section id="site-generation-apt-example">
       <title>APT Example</title>
 
-      <para><xref linkend="ex-apt" /> shows a simple <acronym>APT</acronym>
-      document with an introductory paragraph and a simple list. Note that the
-      list is terminated by the psuedo-element "[]".</para>
+      <para><xref linkend="ex-apt" /> <indexterm>
+          <primary>site generation</primary>
+
+          <secondary>APT format</secondary>
+        </indexterm>shows a simple <acronym>APT</acronym> document with an
+      introductory paragraph and a simple list. Note that the list is
+      terminated by the psuedo-element "[]".</para>
 
       <example id="ex-apt">
         <title>APT Document</title>
@@ -473,7 +515,11 @@ Welcome to Sample Project
     <section id="site-generation-sect-fml-example">
       <title>FML Example</title>
 
-      <para>Many projects maintain a Frequently Asked Questions
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>FML format</secondary>
+        </indexterm>Many projects maintain a Frequently Asked Questions
       (<acronym>FAQ</acronym>) page. <xref linkend="ex-fml" /> shows an
       example of an <acronym>FML</acronym> document.</para>
 
@@ -521,14 +567,25 @@ Welcome to Sample Project
   <section id="site-generation-sect-deploy-site">
     <title>Deploying Your Project Website</title>
 
-    <para>Once your project's documentation has been written and you've
-    creates a site to be proud of, you will want to deploy it to a server. To
-    deploy your site you'll use the Maven Site plugin which can take care of
-    deploying your project's site to a remote server using a number of methods
-    including <acronym>FTP</acronym>, <acronym>SCP</acronym>, and
-    <acronym>DAV</acronym>. To deploy the site using <acronym>DAV</acronym>,
-    configure the site entry of the <sgmltag>distributionManagement</sgmltag>
-    section in the <acronym>POM</acronym>, like this:</para>
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>deploying a site</secondary>
+      </indexterm><indexterm>
+        <primary>site deployment</primary>
+      </indexterm><indexterm>
+        <primary>Project Object Model (POM)</primary>
+
+        <secondary>distribution management</secondary>
+      </indexterm>Once your project's documentation has been written and
+    you've creates a site to be proud of, you will want to deploy it to a
+    server. To deploy your site you'll use the Maven Site plugin which can
+    take care of deploying your project's site to a remote server using a
+    number of methods including <acronym>FTP</acronym>,
+    <acronym>SCP</acronym>, and <acronym>DAV</acronym>. To deploy the site
+    using <acronym>DAV</acronym>, configure the site entry of the
+    <sgmltag>distributionManagement</sgmltag> section in the
+    <acronym>POM</acronym>, like this:</para>
 
     <para><example>
         <title>Configuring Site Deployment</title>
@@ -568,8 +625,16 @@ Welcome to Sample Project
     <section id="site-generation-sect-server-auth">
       <title>Configuring Server Authentication</title>
 
-      <para>To configure a username/password combination for use during the
-      site deployment, we'll include the following in
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>configuring server authentication</secondary>
+        </indexterm><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>server authentication</secondary>
+        </indexterm>To configure a username/password combination for use
+      during the site deployment, we'll include the following in
       <filename>$HOME/.m2/settings.xml</filename>:</para>
 
       <para><example>
@@ -603,9 +668,17 @@ Welcome to Sample Project
     <section id="site-generation-sect-modes">
       <title>Configuring File and Directory Modes</title>
 
-      <para>If you are working in a large group of developers, you'll want to
-      make sure that your web site's files end up with the proper user and
-      group permissions after they are published to the remote server. To
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>file and directory permissions</secondary>
+        </indexterm><indexterm>
+          <primary>Maven settings</primary>
+
+          <secondary>server file permissions</secondary>
+        </indexterm>If you are working in a large group of developers, you'll
+      want to make sure that your web site's files end up with the proper user
+      and group permissions after they are published to the remote server. To
       configure specific file and directory modes for use during the site
       deployment, include the following in
       <filename>$HOME/.m2/settings.xml</filename>:</para>
@@ -642,8 +715,12 @@ Welcome to Sample Project
   <section id="site-generation-sect-site-appearance">
     <title>Customizing Site Appearance</title>
 
-    <para>The default Maven template leaves much to be desired. If you wish to
-    customize your project's website beyond simply adding content,
+    <para><indexterm>
+        <primary>site generation</primary>
+
+        <secondary>customizing site appearance</secondary>
+      </indexterm>The default Maven template leaves much to be desired. If you
+    wish to customize your project's website beyond simply adding content,
     navigational elements, and custom logos. Maven offers several mechanisms
     for customizing your website that offer successively deeper access to
     content decoration and website structure. For small, per-project tweaks,
@@ -656,10 +733,15 @@ Welcome to Sample Project
     <section id="site-generation-sect-site-css">
       <title>Customizing the Site CSS</title>
 
-      <para>The easiest way to affect the look and feel of your project's web
-      site is through the project's <filename>site.css</filename>. Just like
-      any images or <acronym>XHTML</acronym> content you provide for the
-      website, the <filename>site.css</filename> file goes in the
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>custom CSS</secondary>
+        </indexterm>The easiest way to affect the look and feel of your
+      project's web site is through the project's
+      <filename>site.css</filename>. Just like any images or
+      <acronym>XHTML</acronym> content you provide for the website, the
+      <filename>site.css</filename> file goes in the
       <filename>src/site/resources</filename> directory. Maven expects this
       file to be in the <filename>src/site/resources/css</filename>
       subdirectory. With <acronym>CSS</acronym> it is possible to change text
@@ -702,10 +784,14 @@ Welcome to Sample Project
     <section id="site-generation-sect-custom-template">
       <title>Create a Custom Site Template</title>
 
-      <para>If the default Maven Site structure just doesn't do it for you,
-      you can always customize the Maven site template. Customizing the Maven
-      Site template gives you complete control over the ultimate output of the
-      Maven plugin, and it is possible to customize your project's site
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>custom site template</secondary>
+        </indexterm>If the default Maven Site structure just doesn't do it for
+      you, you can always customize the Maven site template. Customizing the
+      Maven Site template gives you complete control over the ultimate output
+      of the Maven plugin, and it is possible to customize your project's site
       template to the point where it hardly resembles the structure of a
       default Maven site template.</para>
 
@@ -986,8 +1072,12 @@ $ <command>cp -rf \
     <section id="site-generation-sect-reusable-skin">
       <title>Reusable Website Skins</title>
 
-      <para>If your organization is creating many Maven project sites, you
-      will likely want to reuse site template and <acronym>CSS</acronym>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>custom skins</secondary>
+        </indexterm>If your organization is creating many Maven project sites,
+      you will likely want to reuse site template and <acronym>CSS</acronym>
       customizations throughout an organization. If you want thirty projects
       to share the same <acronym>CSS</acronym> and site template, you can use
       Maven's support for skinning. Maven Site skins allow you to package up
@@ -1059,8 +1149,12 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-custom-theme-css">
       <title>Creating a Custom Theme CSS</title>
 
-      <para>Next, write a custom <acronym>CSS</acronym> for the custom skin. A
-      custom CSS stylesheet in a Maven site skin should be placed in
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>custom theme CSS</secondary>
+        </indexterm>Next, write a custom <acronym>CSS</acronym> for the custom
+      skin. A custom CSS stylesheet in a Maven site skin should be placed in
       <filename>src/main/resources/css/maven-theme.css</filename>. Unlike the
       <filename>site.css</filename> file, which goes in the site-specific
       source directory for a project, the <filename>maven-theme.css</filename>
@@ -1181,8 +1275,12 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-add-links">
       <title>Add Links under Your Site Logo</title>
 
-      <para>If you are working on a project which is being developed by an
-      organization, you may want to add links under your project's logo.
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>header links</secondary>
+        </indexterm>If you are working on a project which is being developed
+      by an organization, you may want to add links under your project's logo.
       Assume that your project is a part of the Apache Software Foundation,
       you might want to add a link to the Apache Software Foundation web site
       right below your logo, and you might want to add a link to a parent
@@ -1214,16 +1312,21 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-add-breadcumbs">
       <title>Add Breadcrumbs to Your Site</title>
 
-      <para>If your hierarchy exists within a logical hierarchy, you may want
-      to place a series of breadcrumbs to give the user a sense of context and
-      give them a way to navigate up the tree to projects which might contain
-      the current project as a subproject. To configure breadcrumbs, add a
-      <sgmltag>breadcrumbs</sgmltag> element to the <sgmltag>body</sgmltag>
-      element in the site descriptor. Each <sgmltag>item</sgmltag> element
-      will render a link, and the items in the <sgmltag>breadcrumbs</sgmltag>
-      element will be rendered in order. The breadcrumb items should be listed
-      from highest level to lowest level. In the following site descriptor,
-      the Codehaus item would be seen to contain the Mojo item.</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>breadcrumbs</secondary>
+        </indexterm>If your hierarchy exists within a logical hierarchy, you
+      may want to place a series of breadcrumbs to give the user a sense of
+      context and give them a way to navigate up the tree to projects which
+      might contain the current project as a subproject. To configure
+      breadcrumbs, add a <sgmltag>breadcrumbs</sgmltag> element to the
+      <sgmltag>body</sgmltag> element in the site descriptor. Each
+      <sgmltag>item</sgmltag> element will render a link, and the items in the
+      <sgmltag>breadcrumbs</sgmltag> element will be rendered in order. The
+      breadcrumb items should be listed from highest level to lowest level. In
+      the following site descriptor, the Codehaus item would be seen to
+      contain the Mojo item.</para>
 
       <para><example>
           <title>Configuring the Site's Breadcrumbs</title>
@@ -1246,10 +1349,15 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-add-project-version">
       <title>Add the Project Version</title>
 
-      <para>When you are documenting a project that has multiple versions, it
-      is often very helpful to list the project's version number on every
-      page. To display your project's version on the website, simply add the
-      <sgmltag>version</sgmltag> element to your site descriptor:</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>listing version in header</secondary>
+        </indexterm>When you are documenting a project that has multiple
+      versions, it is often very helpful to list the project's version number
+      on every page. To display your project's version on the website, simply
+      add the <sgmltag>version</sgmltag> element to your site
+      descriptor:</para>
 
       <para><example>
           <title>Positioning the Version Information</title>
@@ -1313,10 +1421,14 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-mod-pubdate">
       <title>Modify the Publication Date Format and Location</title>
 
-      <para>In some cases, you may wish to reformat or reposition the "Last
-      Published" date for your project website. Just like the project version
-      tip above, you can specify the position of the publication date by using
-      one of the following:</para>
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>publication date</secondary>
+        </indexterm>In some cases, you may wish to reformat or reposition the
+      "Last Published" date for your project website. Just like the project
+      version tip above, you can specify the position of the publication date
+      by using one of the following:</para>
 
       <variablelist>
         <varlistentry>
@@ -1396,11 +1508,15 @@ $ <command>mkdir src/main/resources</command>
     <section id="site-generation-sect-doxia-macros">
       <title>Using Doxia Macros</title>
 
-      <para>In addition to its advanced document rendering features, Doxia
-      also provides a macro engine that allows each input format to trigger
-      injection of dynamic content. An excellent example of this is the
-      snippet macro, which allows a document to pull a code snippet out of a
-      source file that's available via <acronym>HTTP</acronym>. Using this
+      <para><indexterm>
+          <primary>site generation</primary>
+
+          <secondary>doxia macros</secondary>
+        </indexterm>In addition to its advanced document rendering features,
+      Doxia also provides a macro engine that allows each input format to
+      trigger injection of dynamic content. An excellent example of this is
+      the snippet macro, which allows a document to pull a code snippet out of
+      a source file that's available via <acronym>HTTP</acronym>. Using this
       macro, a small fragment of <acronym>APT</acronym> can be rendered into
       <acronym>XHTML</acronym>. The following <acronym>APT</acronym> code
       calls out to the snippet macro. Please note that this code should be on
