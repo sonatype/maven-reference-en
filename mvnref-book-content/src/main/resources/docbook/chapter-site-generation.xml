@@ -202,8 +202,8 @@ What is Sample Project
   help maintain this sample site, and so on and so forth.
 </programlisting>
 
-    <para>To preview the the site, run <command>mvn clean site</command>
-    followed by <command>mvn site:run</command>:</para>
+    <para>To preview the site, run <command>mvn clean site</command> followed
+    by <command>mvn site:run</command>:</para>
 
     <screen>$ mvn clean site
 $ mvn site:run</screen>

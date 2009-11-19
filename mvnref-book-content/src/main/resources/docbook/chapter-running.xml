@@ -471,7 +471,7 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
 
           <secondary>updating snapshots</secondary>
         </indexterm>The following command line options affect the way that
-      Maven will interact with remote reopsitories and how it verifies
+      Maven will interact with remote repositories and how it verifies
       downloaded artifacts:</para>
 
       <variablelist>
@@ -822,12 +822,14 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
 
       <para><indexterm>
           <primary>command-line options</primary>
-        </indexterm>making subsetsIf you wanted to run a portion of the larger
-      build, you would use the <command>-pl</command> or
-      <command>--projects</command> option with the <command>-am</command> or
-      <command>--also-make option</command>. When you specify a project with
-      the <command>-am</command> option, Maven will build all of the projects
-      that the specified project depends upon (either directly or indirectly).
+
+          <secondary>making subsets</secondary>
+        </indexterm>If you wanted to run a portion of the larger build, you
+      would use the <command>-pl</command> or <command>--projects</command>
+      option with the <command>-am</command> or <command>--also-make
+      option</command>. When you specify a project with the
+      <command>-am</command> option, Maven will build all of the projects that
+      the specified project depends upon (either directly or indirectly).
       Maven will examine the list of projects and walk down the dependency
       tree, finding all of the projects that it needs to build.</para>
 

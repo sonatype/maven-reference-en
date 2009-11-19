@@ -515,7 +515,7 @@
       <title>Activation Configuration</title>
 
       <para><indexterm>
-          <primary>profile activiation</primary>
+          <primary>profile activation</primary>
 
           <secondary>configuration</secondary>
         </indexterm>Activations can contain one of more selectors including
@@ -623,7 +623,7 @@
       <title>Activation by the Absence of a Property</title>
 
       <para><indexterm>
-          <primary>profile activiation</primary>
+          <primary>profile activation</primary>
 
           <secondary>property trigger</secondary>
         </indexterm>You can activate a profile based on the value of a
@@ -667,7 +667,7 @@
     <title>Listing Active Profiles</title>
 
     <para><indexterm>
-        <primary>profile activiation</primary>
+        <primary>profile activation</primary>
 
         <secondary>listing active profiles</secondary>
       </indexterm><indexterm>
