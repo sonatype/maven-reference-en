@@ -426,7 +426,7 @@ $ <command>export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}</c
 
       <para>Instead of adding the path for the Flash Player to your PATH on
       the command-line, you should configure your environment's profile. On
-      OSX, tyou would add the last export command to you
+      OSX, you would add the last export command to you
       <filename>~/.bash_profile</filename>.</para>
     </section>
 
@@ -1468,7 +1468,7 @@ package: org.sonatype.test
 
         <listitem>
           <para>Compiles Flex source (Actionscript and MXML) into a SWF for
-          use in the Adob Flash Player or Adobe AIR Runtime</para>
+          use in the Adobe Flash Player or Adobe AIR Runtime</para>
         </listitem>
       </varlistentry>
 

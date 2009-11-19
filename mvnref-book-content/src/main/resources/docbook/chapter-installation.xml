@@ -321,7 +321,7 @@ OS name: "mac os x" version: "10.5.7" arch: "i386" Family: "unix"
         stands for Mebibyte which is defined as 2<superscript>20</superscript>
         or 1024<superscript>2</superscript>. These binary prefix standards are
         endorsed by the <acronym>IEEE</acronym>, <acronym>CIPM</acronym>, and
-        and <acronym>IEC</acronym>. For more information about Kibibytes,
+        <acronym>IEC</acronym>. For more information about Kibibytes,
         Mebibytes, Gibibytes, and Tebibytes see <ulink
         url="http://en.wikipedia.org/wiki/Mebibyte">http://en.wikipedia.org/wiki/Mebibyte</ulink>,</para>
       </footnote></para>

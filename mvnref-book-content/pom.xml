@@ -246,9 +246,10 @@
 		<pdf>${basedir}/src/main/resources/pdf/maven-reference-cover.pdf</pdf>
 		<pdf>${basedir}/src/main/resources/pdf/title-page.pdf</pdf>
 		<pdf>${basedir}/src/main/resources/pdf/copyright-page.pdf</pdf>
+		<pdf>${basedir}/src/main/resources/pdf/promo-page.pdf</pdf>
 		<pdf>${basedir}/src/main/resources/pdf/blank-page.pdf</pdf>
 		<pdf>${project.build.directory}/docbkx/pdf/public-book.pdf</pdf>
-	      </pdfs>	
+		<pdf>${basedir}/src/main/resources/pdf/promo-page.pdf</pdf>	      </pdfs>	
 	    </configuration>
 	  </execution>
 	</executions>

@@ -7,7 +7,7 @@
   <para><indexterm>
       <primary>dependency management</primary>
 
-      <secondary>Sun speicification alternatives</secondary>
+      <secondary>Sun specification alternatives</secondary>
     </indexterm>The Apache Geronimo project maintains implementations of
   various enterprise Java specifications. <xref
   linkend="table-spec-alternatives" /> lists the artifactId and artifact

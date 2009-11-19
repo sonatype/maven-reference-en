@@ -8,7 +8,7 @@
     <title>Introduction</title>
 
     <para><indexterm>
-        <primary>properites</primary>
+        <primary>properties</primary>
       </indexterm><indexterm>
         <primary>resource filtering</primary>
       </indexterm><indexterm>
@@ -49,7 +49,7 @@
     <title>Maven Properties</title>
 
     <para><indexterm>
-        <primary>properites</primary>
+        <primary>properties</primary>
       </indexterm>You can use Maven properties in a
     <filename>pom.xml</filename> file or in any resource that is being
     processed by the Maven Resource plugin's filtering features. A property is
@@ -68,7 +68,7 @@
 
         <listitem>
           <para><indexterm>
-              <primary>properites</primary>
+              <primary>properties</primary>
 
               <secondary>project properties</secondary>
             </indexterm>Maven Project Object Model (<acronym>POM</acronym>).
@@ -82,7 +82,7 @@
 
         <listitem>
           <para><indexterm>
-              <primary>properites</primary>
+              <primary>properties</primary>
 
               <secondary>Maven settings</secondary>
             </indexterm>Maven Settings. You use the
@@ -96,7 +96,7 @@
 
         <listitem>
           <para><indexterm>
-              <primary>properites</primary>
+              <primary>properties</primary>
 
               <secondary>environment variables</secondary>
             </indexterm>Environment variables like <varname>PATH</varname> and
@@ -110,7 +110,7 @@
 
         <listitem>
           <para><indexterm>
-              <primary>properites</primary>
+              <primary>properties</primary>
 
               <secondary>System properties</secondary>
             </indexterm>Any property which can be retrieved from the
@@ -129,7 +129,7 @@
       <title>Maven Project Properties</title>
 
       <para><indexterm>
-          <primary>properites</primary>
+          <primary>properties</primary>
 
           <secondary>project properties</secondary>
         </indexterm>When a Maven Project Property is referenced, the property
@@ -182,9 +182,9 @@
           <listitem>
             <para>A project's artifactId is often used as the name of a
             deliverable. For example, in a project with <acronym>WAR</acronym>
-            packaging, you will want to generate a a <acronym>WAR</acronym>
-            file without the version identifiers. To do this, you would
-            reference the <varname>project.artifactId</varname> in your
+            packaging, you will want to generate a <acronym>WAR</acronym> file
+            without the version identifiers. To do this, you would reference
+            the <varname>project.artifactId</varname> in your
             <acronym>POM</acronym> file like this:</para>
 
             <programlisting language="xml">&lt;build&gt;
@@ -302,7 +302,7 @@
       <title>Maven Settings Properties</title>
 
       <para><indexterm>
-          <primary>properites</primary>
+          <primary>properties</primary>
 
           <secondary>Maven settings</secondary>
         </indexterm>You can also reference any properties in the Maven Local
@@ -321,7 +321,7 @@
       <title>Environment Variable Properties</title>
 
       <para><indexterm>
-          <primary>properites</primary>
+          <primary>properties</primary>
 
           <secondary>environment variables</secondary>
         </indexterm>Environment variables can be referenced with the env.*
@@ -383,7 +383,7 @@
       <title>Java System Properties</title>
 
       <para><indexterm>
-          <primary>properites</primary>
+          <primary>properties</primary>
 
           <secondary>System properties</secondary>
         </indexterm>Maven exposes all properties from
@@ -562,7 +562,7 @@
       <title>User-defined Properties</title>
 
       <para><indexterm>
-          <primary>properites</primary>
+          <primary>properties</primary>
 
           <secondary>User-defined properties</secondary>
         </indexterm>In addition to the implicit properties provided by the
@@ -637,7 +637,7 @@
     <title>Resource Filtering</title>
 
     <para><indexterm>
-        <primary>properites</primary>
+        <primary>properties</primary>
 
         <secondary>resource filtering</secondary>
       </indexterm><indexterm>

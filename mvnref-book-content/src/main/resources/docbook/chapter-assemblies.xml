@@ -1353,8 +1353,8 @@ I can add this back in later.  I didn't want to talk about it without an example
         <sgmltag>groupId</sgmltag>.</para>
 
         <para>If you wanted to perform a further customization and remove the
-        version numbers from all dependencies. You could customize the the
-        output file name for each dependency using the
+        version numbers from all dependencies. You could customize the output
+        file name for each dependency using the
         <sgmltag>outputFileNameMapping</sgmltag> element as follows:</para>
 
         <programlisting language="xml">&lt;assembly&gt;
@@ -2160,10 +2160,10 @@ I can add this back in later.  I didn't want to talk about it without an example
         a particularly strange directory structure, you may need to resort to
         special <sgmltag>moduleSet</sgmltag> declarations that include
         specific project and account for your own project's
-        idiosyncracies.</para>
+        idiosyncrasies.</para>
 
         <warning>
-          <para>Try to minimize your own project's idiosyncracies, while Maven
+          <para>Try to minimize your own project's idiosyncrasies, while Maven
           is flexible, if you find yourself doing too much configuration there
           is likely an easier way.</para>
         </warning>
