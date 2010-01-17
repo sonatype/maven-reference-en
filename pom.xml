@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.sonatype.mvnrefbook</groupId>
   <artifactId>mvnref-book-parent</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.1</version>
   <packaging>pom</packaging>
   <name>Maven: The Complete Reference (Parent Project)</name>
   <description>A book about Apache Maven 2.x</description>
@@ -137,6 +137,11 @@
   </pluginRepositories>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.0-alpha-4</version>
+      </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-compiler-plugin</artifactId>
