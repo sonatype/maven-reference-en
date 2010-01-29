@@ -6,14 +6,13 @@
 
   <section id="android-dev-sect-intro">
     <title>Introduction</title>
-
-      <para>
-       a bit about android as an open source mobile phone platform from the ohsa
+      <para>Android is a mobile phone and embedded device operating system developed by the Open Handset Alliance. It
+        is based on a Linux kernel with a virtual machine environment for managed code application.
       </para>
-
       <para>
-        talk about how java source code is compiled to java bytecode
-        and then everything is compiled into a dalvik artifact
+        The main application development environment is based on Java bytecode, that is transformed into dalvik
+        executable code optimized for the constrained devices. Java is the default programming language and the API's
+        are all Java based.
       </para>
 
   </section>
@@ -26,63 +25,133 @@
 
         <secondary>configuring build environment</secondary>
       </indexterm>Before you attempt to build your Android  libraries and
-    applications with Maven, you will need to complete two configuration
-    tasks:</para>
+      applications with Maven, you will need to complete two configuration
+      tasks:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Install the Android SDK including $ANDROID_HOME</para>
+        <para>Install the Android SDK </para>
       </listitem>
-
       <listitem>
-        <para>get jars from SDK into local repo or repo server</para>
+        <para>Installing the Android API jar files into local or remote Maven repository</para>
       </listitem>
-
       <listitem>
-        <para>Configure the usage of the maven-android-plugin</para>
+        <para>Optionally configure Maven for simplified usage of the Maven Android Plugin</para>
       </listitem>
     </itemizedlist>
 
     <section id="android-dev-sect-sdk-install">
       <title>Installing the Android SDK</title>
-      <para>
-
-      http://developer.android.com/sdk/index.html
-
-      and all componentes following
-
-      http://developer.android.com/sdk/adding-components.html
-
-      and adding $ANDROID_HOME as well as ANDROID_HOME/tools to $PATH
+      <para>The Maven Android Plugin relies on the presence of the Android SDK on the development environment and the
+        ANDROID_HOME environment variable to point to the installation location. The SDK should be installed following
+        the directions on the Android Developer web site at<uri>http://developer.android.com/sdk/index.html</uri>.
       </para>
+      <para>In addition to the SDK itself the various platform versions or API levels should be installed as part of the
+        install. Instruction for this process are located at
+        <uri>http://developer.android.com/sdk/adding-components.html</uri>. Depending on the target platform version
+        of the application you can install a subset of platforms or just go ahead and install all available versions.
+      </para>
+      <para>For the usage of the Maven Android Plugin the ANDROID_HOME environment variable needs to point to the folder
+        where the SDK is installed. For example if the SDK is installed in /opt/android-sdk-linux this can be achieved with
+
+        <command>export ANDROID_HOME=/opt/android-sdk-linux</command>
+        in Unix/bash based systems or
+        <command>set ANDROID_HOME=/opt/android-sdk-linux</command>
+        in Windows systems.
+      </para>
+      <para>Optionally the path ANDROID_HOME/tools can be added to the PATH variable to allow easy command line execution
+        of the various tools provided with the SDK.
+      </para>
+      <!-- TODO: do we need to explain that more and the environment variable stuff more
+        (i hope we can assume the readers know how to do that, but maybe not) -->
     </section>
 
     <section id="android-dev-sect-repository-install">
       <title>Android artifact install into Maven repository</title>
       <para>
-      Either for only one machine into local .m2 using the install command or for a bunch of machines including the
-      build servers and multiple developers using deploy
-
-        use "download source" at http://github.com/mosabua/maven-android-sdk-deployer
-
-        add content from readme in here
+        Once the SDK is installed you will need to provide the API jar files to Maven in a repository. The
+        Maven Android SDK Deployer tool allows you to do that for a single machine in a local repository as well as for
+        any number of machines in a remote repository server. <!-- TODO link to nexus... in general how much do we have
+        to explain here about this stuff, i would prefer to add links to the nexus book chapters somehow.. -->
+      </para>
+      <para>The Maven Android SDK deployer tool is available for download at
+        <uri>http://github.com/mosabua/maven-android-sdk-deployer</uri>. Simply click on the
+        <varname>Download Source</varname> button and extracted the downloaded zip or tar archive in a folder of your
+        choice. A folder with a naming pattern of mosabua-maven-android-sdk-deployer-XXX with XXX some revision number
+        like df824df will be created. Entering the sdk deployer folder with e.g.
+          <command>cd mosabua-maven-android-sdk-deployer-df824df</command> readies you to install the desired artifacts.
       </para>
 
       <section id="android-dev-sect-repository-install-local">
         <title>Installation to local repository</title>
-        <para>using mvn install, potentially with profile for platforms desired.. </para>
+        <para>In order to install the android API jar files from the different platform revisions into your local
+          repository you run the command
+          <command>mvn clean install</command> in the deployer tool folder. By default this will upload all android.jar
+        and maps.jar files into repository, which is by defaulted located in ~/.m2/repository. You should find all
+        newly installed files in the <varname>android</varname> and <varname>com/google/android/maps</varname> folders.</para>
       </section>
 
       <section id="android-dev-sect-repository-install-remote">
-        <title>Installation to remot repository</title>
-        <para>using mvn deploy, potentially with profile for platforms desired, need server setup in settings,xml. </para>
+        <title>Installation to remote repository</title>
+        <para>The above deployment works fine for one machine, but if you need to supply a whole team of developers 
+          and a cluster of build machines with the artifacts, you will want to deploy the artifacts once to a remote
+          repository server that is available to all users. <!-- TODO reference nexus somehow and not do more explaining here -->
+          </para>
+        
+        <para>As a first step you will need to edit the <varname>repo.url</varname> property in the pom.xml in the top 
+          folder of the Maven Android SDK Deployer tool to point to the repository you want to publish to.</para>
+        <para>Then you need to add a server with the correct access credentials for the server to your settings.xml.
+
+        <example>
+        <title>Snippet for settings.xml for the repository server access credentials</title>
+        <programlisting>
+&lt;settings&gt;
+    &lt;servers&gt;
+        &lt;server&gt;
+            &lt;id&gt;android.repo&lt;/id&gt;
+            &lt;username&gt;your username&lt;/username&gt;
+            &lt;password&gt;your password&lt;/password&gt;
+        &lt;/server&gt;
+    &lt;/servers&gt;
+&lt;/settings&gt;
+        </programlisting>
+        </example>
+
+        Once that configuration is completed you can deploy the artifacts with the command
+          <command>mvn deploy</command>. As a result you should find the artifact in the repository of your remote server.
+      <!-- TODO ??
+          For more information about this stuff look at the documentation for the maven-deploy-plugin.
+          or better chapter bla in this book.. -->
+        </para>
+      </section>
+
+      <section id="android-dev-sect-repository-install-parts">
+        <title>Installation of a subset of all platforms</title>
+        <para>By default the Maven Android SDK Deployer tool will attempt to install or deploy all versions of the
+          platforms artifacts into a repository. If you however decided to only install a subset of the components in
+        the section above <!-- TODO make it a link -->, the tool can be used with profile options to only install
+        or deploy some artifacts. This can be done by specifying the platform API versions as a profile name:
+        <command>mvn install -P 2.1</command>. Available profile names are <varname>1.1</varname>,
+        <varname>1.5</varname>, <varname>1.6</varname>, <varname>2.0</varname> and <varname>2.1</varname>.
+        </para>
       </section>
 
     </section>
 
     <section id="android-dev-sect-plugin-config">
       <title>Configuring Maven for usage of the Maven-Android-Plugin</title>
-      <para>add shortcut to settings.xml that will allow usage of mvn android:goal</para>
+      <para>In order to use the Maven Android Plugin goals on the command line with the short plugin name
+        <varname>android</varname>, you have to add the following <varname>pluginGroups</varname> snippet to your
+        <varname>settings.xml</varname> file.
+      </para>
+      <example>
+        <title>Snippet for settings.xml to enable short plugin name usage</title>
+        <programlisting>
+&lt;pluginGroups&gt;
+   &lt;pluginGroup&gt;com.jayway.maven.plugins.android.generation2&lt;/pluginGroup&gt;
+&lt;/pluginGroups&gt;
+        </programlisting>
+      </example>
     </section>
 
   </section>
