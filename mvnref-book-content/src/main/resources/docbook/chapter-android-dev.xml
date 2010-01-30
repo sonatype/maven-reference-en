@@ -52,8 +52,8 @@
         of the application you can install a subset of platforms or just go ahead and install all available versions.
       </para>
       <para>For the usage of the Maven Android Plugin the ANDROID_HOME environment variable needs to point to the folder
-        where the SDK is installed. For example if the SDK is installed in /opt/android-sdk-linux this can be achieved with
-
+        where the SDK is installed. For example if the SDK is installed in /opt/android-sdk-linux this can be achieved
+        with
         <command>export ANDROID_HOME=/opt/android-sdk-linux</command>
         in Unix/bash based systems or
         <command>set ANDROID_HOME=/opt/android-sdk-linux</command>
@@ -88,14 +88,16 @@
           repository you run the command
           <command>mvn clean install</command> in the deployer tool folder. By default this will upload all android.jar
         and maps.jar files into repository, which is by defaulted located in ~/.m2/repository. You should find all
-        newly installed files in the <varname>android</varname> and <varname>com/google/android/maps</varname> folders.</para>
+        newly installed files in the <varname>android</varname> and <varname>com/google/android/maps</varname> folders.
+        </para>
       </section>
 
       <section id="android-dev-sect-repository-install-remote">
         <title>Installation to remote repository</title>
         <para>The above deployment works fine for one machine, but if you need to supply a whole team of developers 
           and a cluster of build machines with the artifacts, you will want to deploy the artifacts once to a remote
-          repository server that is available to all users. <!-- TODO reference nexus somehow and not do more explaining here -->
+          repository server that is available to all users.
+          <!-- TODO reference nexus somehow and not do more explaining here -->
           </para>
         
         <para>As a first step you will need to edit the <varname>repo.url</varname> property in the pom.xml in the top 
@@ -157,12 +159,81 @@
   </section>
 
   <section id="android-dev-sect-helloandroidexample">
-    <title>HelloAndroid Example</title>
-    <para>super simple one project setup, only display one screen in terms of code (or do a flashlight with
-      color buttons or something.., show pom file for it, and commands to get it to run on the emulator and then refer
-      to next chapters to see what actually happened, potentially add commandline output for build here
+    <title>HelloFlashlight Example</title>
+    <para>The HelloFlashlight example application serves as a starting point to introduce you to the usage of the
+      Maven Android Plugin. You can follow the same steps to introduce a Maven Android Plugin based build to your
+      Android application. After the initial environment setup documented above the Android Development Tools from
+      <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> where installed and used to create a new Android
+      project.</para>
 
-    code will be available at maven-android-plugin-samples project</para>
+    <para>To enable a Maven based build of the project the following pom.xml file was added in the root folder of the
+      project:</para>
+
+    <example>
+      <title>The HelloFlashlight pom.xml file</title>
+      <programlisting>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.simpligility.android&lt;/groupId&gt;
+    &lt;artifactId&gt;helloflashlight&lt;/artifactId&gt;
+    &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;apk&lt;/packaging&gt;
+    &lt;name&gt;HelloFlashlight&lt;/name&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;android&lt;/groupId&gt;
+            &lt;artifactId&gt;android&lt;/artifactId&gt;
+            &lt;version&gt;2.1_r1&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt; 
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.2.3-SNAPSHOT&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;sdk&gt;
+                        &lt;platform&gt;2.1&lt;/platform&gt;
+                    &lt;/sdk&gt;
+                    &lt;deleteConflictingFiles&gt;true&lt;/deleteConflictingFiles&gt;
+                &lt;/configuration&gt;
+                &lt;extensions&gt;true&lt;/extensions&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;1.5&lt;/source&gt;
+                    &lt;target&gt;1.5&lt;/target&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;        
+      </programlisting>
+    </example>
+    <para>The main characteristics of the project file are the <varname>packaging</varname> type of <varname>apk</varname>
+
+      dependency to android
+
+      plugin config
+      compiler config
+    </para>
+
+    <para>
+    commands to get it to run on the emulator and then refer
+      to next chapters to see what actually happened, potentially add commandline output for build here
+    </para>
+
+    <para>The code for the example application is available as part of the maven-android-plugin-samples available at
+    <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>. </para>
 
 
   </section>
