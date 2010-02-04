@@ -193,7 +193,7 @@
     &lt;/dependencies&gt;
 
     &lt;build&gt;
-        &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt; 
+        &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
         &lt;plugins&gt;
             &lt;plugin&gt;
                 &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
@@ -216,26 +216,39 @@
             &lt;/plugin&gt;
         &lt;/plugins&gt;
     &lt;/build&gt;
-&lt;/project&gt;        
+&lt;/project&gt;
       </programlisting>
     </example>
-    <para>The main characteristics of the project file are the <varname>packaging</varname> type of <varname>apk</varname>
-
-      dependency to android
-
-      plugin config
-      compiler config
+    <para>The main characteristics of the project file are:
+      <itemizedlist>
+        <listitem><para>the <varname>packaging</varname> type of <varname>apk</varname>
+      </para></listitem>
+        <listitem><para>the dependency to the Android platform jar</para></listitem>
+        <listitem><para>and the build configuration with the Maven Android Plugin and the Compiler Plugin</para></listitem>
+      </itemizedlist>
     </para>
 
-    <para>
-    commands to get it to run on the emulator and then refer
-      to next chapters to see what actually happened, potentially add commandline output for build here
+    <para>The Android Package packaging type <varname>apk</varname> is the main hook and kicks off the life cycle
+      modifications of the Maven Android Plugin. It takes care of all the custom calls to the various tools of the SDK that will
+      be explained later.
     </para>
 
-    <para>The code for the example application is available as part of the maven-android-plugin-samples available at
+    <para>The declared dependency to the android platform jar has to use the version of the target platform as published
+      into the Maven repository by the Maven Android SDK Deployer. It in turn takes the library version from the <varname>
+      Platform.Version</varname> and the <varname>Pkg.Revision</varname> values in the <varname>source.properties</varname>
+      file in the respective platforms folder of the Android SDK. The current valid values are 1.1_r1,, 1.5_r3, 1.6_r2, 2.0_r1,
+      2.0.1_r1 and 2.1_r1. Simply browse the android folder of your maven repository/repository server to see what the versions are.
+    </para>
+
+    <para>The configuration of the Maven Compiler Plugin in the build is necessary since Android uses Java 5 code with
+      annotations and such and the Java compiler needs to know that. The main configuration of the Maven Android Plugin
+      is done in the build section, but out of the box only limited configuration is necessary. </para>
+
+    <para>To build the application and run it on an already started emulator you could use
+      <command>mvn clean install android:deploy</command>.
+      <!--TODO potentially add commandline output for build here-->
+      The code for the example application is available as part of the maven-android-plugin-samples available at
     <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>. </para>
-
-
   </section>
 
 
