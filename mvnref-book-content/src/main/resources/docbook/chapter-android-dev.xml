@@ -7,12 +7,13 @@
   <section id="android-dev-sect-intro">
     <title>Introduction</title>
       <para>Android is a mobile phone and embedded device operating system developed by the Open Handset Alliance. It
-        is based on a Linux kernel with a virtual machine environment for managed code application.
+        is based on a Linux kernel with a virtual machine environment for managed code application using Java bytecode
+        for the runtime code generation.
       </para>
       <para>
-        The main application development environment is based on Java bytecode, that is transformed into dalvik
-        executable code optimized for the constrained devices. Java is the default programming language and the API's
-        are all Java based.
+        The development environment is based on the Java lanuage and JVM/JDK based tooling. The generated Java bytecode is
+        transformed into dalvik executable code optimized for the constrained devices. Java is the default programming
+        language and the API's are all Java based.
       </para>
 
   </section>
@@ -158,280 +159,401 @@
 
   </section>
 
-  <section id="android-dev-sect-helloandroidexample">
-    <title>HelloFlashlight Example</title>
-    <para>The HelloFlashlight example application serves as a starting point to introduce you to the usage of the
-      Maven Android Plugin. You can follow the same steps to introduce a Maven Android Plugin based build to your
-      Android application. After the initial environment setup documented above the Android Development Tools from
-      <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> where installed and used to create a new Android
-      project.</para>
 
-    <para>To enable a Maven based build of the project the following pom.xml file was added in the root folder of the
-      project:</para>
+  <section id="android-dev-sect-using">
+  <title>Android Application Development with the Maven Android Plugin</title>
 
-    <example>
-      <title>The HelloFlashlight pom.xml file</title>
-      <programlisting>
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;com.simpligility.android&lt;/groupId&gt;
-    &lt;artifactId&gt;helloflashlight&lt;/artifactId&gt;
-    &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;apk&lt;/packaging&gt;
-    &lt;name&gt;HelloFlashlight&lt;/name&gt;
+    <section id="android-dev-sect-helloandroidexample">
+      <title>HelloFlashlight Example</title>
+      <para>The HelloFlashlight example application serves as a starting point to introduce you to the usage of the
+        Maven Android Plugin. You can follow the same steps to introduce a Maven Android Plugin based build to your
+        Android application. After the initial environment setup documented above the Android Development Tools from
+        <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> where installed and used to create a new Android
+        project.</para>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;android&lt;/groupId&gt;
-            &lt;artifactId&gt;android&lt;/artifactId&gt;
-            &lt;version&gt;2.1_r1&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+      <para>To enable a Maven based build of the project the following pom.xml file was added in the root folder of the
+        project:</para>
 
-    &lt;build&gt;
-        &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
-                &lt;version&gt;2.2.3-SNAPSHOT&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;sdk&gt;
-                        &lt;platform&gt;2.1&lt;/platform&gt;
-                    &lt;/sdk&gt;
-                    &lt;deleteConflictingFiles&gt;true&lt;/deleteConflictingFiles&gt;
-                &lt;/configuration&gt;
-                &lt;extensions&gt;true&lt;/extensions&gt;
-            &lt;/plugin&gt;
-            &lt;plugin&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;configuration&gt;
-                    &lt;source&gt;1.5&lt;/source&gt;
-                    &lt;target&gt;1.5&lt;/target&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;
+      <example>
+        <title>The HelloFlashlight pom.xml file</title>
+        <programlisting>
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+      &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+      &lt;groupId&gt;com.simpligility.android&lt;/groupId&gt;
+      &lt;artifactId&gt;helloflashlight&lt;/artifactId&gt;
+      &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+      &lt;packaging&gt;apk&lt;/packaging&gt;
+      &lt;name&gt;HelloFlashlight&lt;/name&gt;
+
+      &lt;dependencies&gt;
+          &lt;dependency&gt;
+              &lt;groupId&gt;android&lt;/groupId&gt;
+              &lt;artifactId&gt;android&lt;/artifactId&gt;
+              &lt;version&gt;2.1_r1&lt;/version&gt;
+              &lt;scope&gt;provided&lt;/scope&gt;
+          &lt;/dependency&gt;
+      &lt;/dependencies&gt;
+
+      &lt;build&gt;
+          &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
+          &lt;plugins&gt;
+              &lt;plugin&gt;
+                  &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
+                  &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
+                  &lt;version&gt;2.2.3-SNAPSHOT&lt;/version&gt;
+                  &lt;configuration&gt;
+                      &lt;sdk&gt;
+                          &lt;platform&gt;2.1&lt;/platform&gt;
+                      &lt;/sdk&gt;
+                      &lt;deleteConflictingFiles&gt;true&lt;/deleteConflictingFiles&gt;
+                  &lt;/configuration&gt;
+                  &lt;extensions&gt;true&lt;/extensions&gt;
+              &lt;/plugin&gt;
+              &lt;plugin&gt;
+                  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                  &lt;configuration&gt;
+                      &lt;source&gt;1.5&lt;/source&gt;
+                      &lt;target&gt;1.5&lt;/target&gt;
+                  &lt;/configuration&gt;
+              &lt;/plugin&gt;
+          &lt;/plugins&gt;
+      &lt;/build&gt;
+  &lt;/project&gt;
+        </programlisting>
+      </example>
+      <para>The main characteristics of the project file are:
+        <itemizedlist>
+          <listitem><para>the <varname>packaging</varname> type of <varname>apk</varname>
+        </para></listitem>
+          <listitem><para>the dependency to the Android platform jar</para></listitem>
+          <listitem><para>and the build configuration with the Maven Android Plugin and the Compiler Plugin</para></listitem>
+        </itemizedlist>
+      </para>
+
+      <para>The Android Package packaging type <varname>apk</varname> is the main hook and kicks off the life cycle
+        modifications of the Maven Android Plugin. It takes care of all the custom calls to the various tools of the SDK that will
+        be explained later.
+      </para>
+
+      <para>The declared dependency to the android platform jar has to use the version of the target platform as published
+        into the Maven repository by the Maven Android SDK Deployer. It in turn takes the library version from the <varname>
+        Platform.Version</varname> and the <varname>Pkg.Revision</varname> values in the <varname>source.properties</varname>
+        file in the respective platforms folder of the Android SDK. The current valid values are 1.1_r1,, 1.5_r3, 1.6_r2, 2.0_r1,
+        2.0.1_r1 and 2.1_r1. Simply browse the android folder of your maven repository/repository server to see what the versions are.
+      </para>
+
+      <para>The configuration of the Maven Compiler Plugin in the build is necessary since Android uses Java 5 code with
+        annotations and such and the Java compiler needs to know that. The main configuration of the Maven Android Plugin
+        is done in the build section, but out of the box only limited configuration is necessary. </para>
+
+      <para>To build the application and run it on an already started emulator you could use
+        <command>mvn clean install android:deploy</command>.
+        <!--TODO potentially add commandline output for build here-->
+        The code for the example application is available as part of the maven-android-plugin-samples available at
+      <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>. </para>
+    </section>
+
+    <section id="android-dev-sect-dependencies">
+      <title>Using external dependencies</title>
+      <para>When using the Maven Android plugin there are two types of dependencies that are treated differently. </para>
+      <variablelist>
+        <varlistentry>
+          <term>Regular dependencies to other Java libraries</term>
+          <listitem><para>The Java byte code files (.class) of library dependencies as denoted in the normal Maven way are
+            transformed to dalvik executable format like any source code of the current project and included in the Android
+            package. All other files are included as contained in the source library.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Dependencies to other Android projects</term>
+          <listitem><para>Other Maven Android projects with packaging type apk declared as dependencies are deployed to the
+            emulator prior to running the instrumentation tests in the integration test phase.</para></listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section id="android-dev-sect-test">
+      <title>Testing Android Application Code</title>
+      <para>
+        as on above example visible, if library is normal jar any testing with sure fire can be done just like normal,
+        also possible to run integration tests with apk deployed on emulator, instrumentation test examples that are
+        already there, set up as separate additional module
+      </para>
+
+      <section id="android-dev-sect-test-unit">
+        <title>Unit tests</title>
+        <para>The Maven Android plugin includes the execution of the Surefire plugin and as such unit tests can be
+          included in the project like in any other project. The default path for test classes in the
+          Eclipse and therefore Android Development Toolkit is <varname>test</varname> and therefore Maven has to be 
+          configured to access code from there with the configuration
+          <example>
+            <title>Adding the test folder to the build configuration</title>
+            <programlisting>
+            &lt;build&gt;
+              &lt;testSourceDirectory&gt;test&lt;/testSourceDirectory&gt;
+              ...
+            </programlisting>
+          </example>
+        </para>
+      </section>
+
+      <section id="android-dev-sect-test-instrumentation">
+        <title>Instrumentation tests</title>
+        <para>Instrumentation tests are integration tests bundled into an application that runs on the emulator or device
+        and interacts with another deployed application to test the behaviour. The common setup to run instrumentation tests
+        would be two parallel projects, one for the application and one for the instrumentation tests, that are tied
+          together as modules of a parent pom. The Maven Android Plugin Samples codebase contains two examples for a
+          project setup like that. The setup of the instrumentation test application with the Maven Android Plugin is
+          the same as for a normal application with the added dependency to the application that needs to be tested. It
+          is important to add the <varname>type</varname> of <varname>apk</varname> to the dependency to allow the
+          Maven Android Plugin to find the Android package of the application.
+        </para>
+      </section>
+    </section>
+
+    <section id="android-dev-sect-maps">
+      <title>Using Add Ons like the Google Maps Extension</title>
+      <para>For many applications the normal Android SDK artifact (android.jar) will be sufficient, however some
+        application require usage of add-ons. The standard usage of an add-on is to use the Google Maps add-on to gain
+        access to the Goole Maps API. The Maps add-ons are deployed to your Maven repository by the Maven Android SDK
+        Deployer tool. In order access the API's in your application development you need to add a dependency to the
+        add-on to your pom.xml like this:</para>
+
+      <example>
+        <title>The dependency to the Google Maps API</title>
+        <programlisting>
+      &lt;dependency&gt;
+          &lt;groupId&gt;com.google.android.maps&lt;/groupId&gt;
+          &lt;artifactId&gt;maps&lt;/artifactId&gt;
+          &lt;version&gt;7_r1&lt;/version&gt;
+          &lt;scope&gt;provided&lt;/scope&gt;
+      &lt;/dependency&gt;
       </programlisting>
-    </example>
-    <para>The main characteristics of the project file are:
-      <itemizedlist>
-        <listitem><para>the <varname>packaging</varname> type of <varname>apk</varname>
-      </para></listitem>
-        <listitem><para>the dependency to the Android platform jar</para></listitem>
-        <listitem><para>and the build configuration with the Maven Android Plugin and the Compiler Plugin</para></listitem>
-      </itemizedlist>
-    </para>
+      </example>
 
-    <para>The Android Package packaging type <varname>apk</varname> is the main hook and kicks off the life cycle
-      modifications of the Maven Android Plugin. It takes care of all the custom calls to the various tools of the SDK that will
-      be explained later.
-    </para>
+      <para>The valid versions currently are <varname>3_r3</varname>, <varname>4_r2</varname>, <varname>5_r1</varname>,
+        <varname>6_r1</varname> and <varname>7_r1</varname>. Simply browse the android folder of your
+        maven repository/repository server to see what the versions are.</para>
+    </section>
 
-    <para>The declared dependency to the android platform jar has to use the version of the target platform as published
-      into the Maven repository by the Maven Android SDK Deployer. It in turn takes the library version from the <varname>
-      Platform.Version</varname> and the <varname>Pkg.Revision</varname> values in the <varname>source.properties</varname>
-      file in the respective platforms folder of the Android SDK. The current valid values are 1.1_r1,, 1.5_r3, 1.6_r2, 2.0_r1,
-      2.0.1_r1 and 2.1_r1. Simply browse the android folder of your maven repository/repository server to see what the versions are.
-    </para>
-
-    <para>The configuration of the Maven Compiler Plugin in the build is necessary since Android uses Java 5 code with
-      annotations and such and the Java compiler needs to know that. The main configuration of the Maven Android Plugin
-      is done in the build section, but out of the box only limited configuration is necessary. </para>
-
-    <para>To build the application and run it on an already started emulator you could use
-      <command>mvn clean install android:deploy</command>.
-      <!--TODO potentially add commandline output for build here-->
-      The code for the example application is available as part of the maven-android-plugin-samples available at
-    <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>. </para>
-  </section>
-
-
-  <section id="android-dev-sect-custom-lifecycle">
-    <title>The Maven-Android-Plugin Lifecycle</title>
-
-    <para><indexterm>
-        <primary>Maven-Android-Plugin</primary>
-
-        <secondary>lifecycle</secondary>
-      </indexterm>The Android Maven plugin customizes the lifecycle based on
-    the packaging. If your project has a <varname>packaging</varname> of type
-    <varname>apk</varname> the Android plugin
-    with execute a customized lifecycle.</para>
-
-    
+    <section id="android-dev-sect-multimodule">
+      <title>Multi Module Maven Android Projects</title>
+      <para>The Maven Android Plugin can be used in a multi-module project setup. An example setup would be 3 different
+        modules linked via a parent pom.</para>
+        <variablelist>
+          <varlistentry>
+            <term>Java Library Code</term>
+            <listitem><para>This first module could contain any business logic implemented in Java, or any other JVM
+              based language actually, in a jar package. </para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Android Application Code</term>
+            <listitem><para>This second module would depend on the first module and consist of all the interface code
+            for the Android platform. It would need to use apk packaging and the Maven Android Plugin.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Instrumentation Test</term>
+            <listitem><para>This third module would depend on the second module and implement the integration test of
+            the application.</para></listitem>
+          </varlistentry>
+        </variablelist>
+      <para>Together with the usage of other dependencies to separate items it is possible to set up a multi module build
+      for an Android application as well as a server side web application sharing e.g. the code for the core objects and
+      business logic.</para>
 
     </section>
 
-  <section id="android-dev-sect-goals">
-    <title>Android Plugin Goals</title>
+    <!--TODO To we want these sections? -->
+    <!--<section id="android-dev-sect-eclipse">-->
+      <!--<title>Using the plugin with Eclipse</title>-->
+      <!--<para>document what needs to be done, maybe install m2eclipse, more details on the wiki and need to play around with it-->
+      <!--same applies for motodev studio, http://code.google.com/p/maven-android-plugin/wiki/EclipseIntegration</para>-->
+    <!--</section>-->
 
-    <para>
-      <indexterm>
-        <primary>Android</primary>
-
-        <secondary>plugin goals</secondary>
-      </indexterm>
-      The Android Maven Plugin contains the following
-      goals:
-    </para>
-
-    <variablelist>
-      <varlistentry>
-        <term>android:apk</term>
-        <listitem>
-          <para>The apk goal creates the android package (apk) file. By default the plugin signs the file with the debug
-            keystore.  The configuration parameter sign debug false debug sign can be used to disable the signing process.
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:deploy</term>
-        <listitem>
-          <para>The deploy goal deploys the built apk file, or another specified apk, to a connected device or emulator.
-          This goal is automatically performed when running through the integration-test life cycle phase on a project
-          with instrumentation tests (e.g. <command>mvn install</command> or <command>mvn integration-test</command>).
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:deploy-dependencies</term>
-        <listitem>
-          <para>The deploy-dependencies goal deploys all directly declared dependencies of
-            <type>apk</type> in this project. This goal is usually used in a project with instrumentation tests, to
-            deploy the apk to test onto the device before running the deploying and running the instrumentation tests
-            apk. The goal is automatically performed when running through the integration-test life cycle phase on a project
-          with instrumentation tests (e.g. <command>mvn install</command> or <command>mvn integration-test</command>).
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:dex</term>
-        <listitem>
-          <para>The dex goal converts compiled Java classes to the Android Dalivk Executable (dex) format.</para>
-        </listitem>
-      </varlistentry>
-
-
-      <varlistentry>
-        <term>android:generate-sources</term>
-        <listitem>
-          <para>The generate-sources goal generates R.java based on the resources specified by the resources
-            configuration parameter. It generates java files based on aidl files.</para>
-
-          <para>If the configuration parameter <varname>deleteConflictingFiles</varname> is true (which it is by default),
-            this goal has also deletes any R.java files found in the source directory, deletes any .java files with the
-            same name as an .aidl file found in the source directory and deletes any Thumbs.db files found in the
-            resource directory.
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:instrument</term>
-        <listitem>
-          <para>The instrument goal runs the instrumentation android package on the device/emulator.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:internal-integration-test</term>
-
-        <listitem>
-          <para>The internal-integration-test goal is called automatically when the lifecycle reaches the
-            integration-test phase. It determines whether to call the goal instrument in this phase based on the
-            existance of instrumentation test classes in the current project. The goal is internal to the plugin
-            lifecycle and should not be used as separate invocation on the command line.
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:internal-pre-integration-test</term>
-
-        <listitem>
-          <para>The internal-pre-integration-test goal is called automatically when the lifecycle reaches
-            pre-integration-test phase. It determines whether to call the goals android:deploy-dependencies and android:deploy
-            in this face and if necessary invokes them. The goal is internal to the plugin lifecycle and should not be
-            used as separate invocation on the command line.
-          </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:pull</term>
-        <listitem>
-          <para>The pull goal can be used to copy files or directories from the device.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:push</term>
-        <listitem>
-          <para>The pull goal can be used to copy files or directories to the device.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>android:undeploy</term>
-
-        <listitem>
-          <para>The undeploy goal removes the apk of the current project, or another specified apk, from the connected
-            device.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <!--<section id="android-dev-sect-intellij">-->
+      <!--<title>Using the plugin with IntelliJ IDEA</title>-->
+      <!--<para>need to play around with it</para>-->
+    <!--</section>-->
 
   </section>
 
-  <section id="android-dev-sect-depdenencies">
-    <title>Using external dependencies</title>
-    <para> show how to declare dependencies just like normal with maven but explain the difference in what
-    happens, all class files get compiled to dalvik bytecode and everything gets bundled all together into the one apk</para>
+  <section id="android-dev-sect-custom-details">
+    <title>Maven Android Plugin Details</title>
+
+    <section id="android-dev-sect-custom-lifecycle">
+      <title>Maven Android Plugin Lifecycle</title>
+
+      <para><indexterm>
+          <primary>Maven-Android-Plugin</primary>
+
+          <secondary>lifecycle</secondary>
+        </indexterm>The Android Maven plugin customizes the lifecycle based on the packaging. If your project has a
+        <varname>packaging</varname> of type<varname>apk</varname> the Android plugin will execute a customized lifecycle.</para>
+
+      <para>
+
+      The customised life cycle has the following additional executions in the default lifecycle.</para>
+      <variablelist>
+        <varlistentry>
+          <term>generate-sources Phase</term>
+          <listitem>
+            <para>Use the Android Asset Packaging Tool (aapt) of the platform version specified in the pom to package
+              the Android specific resources like AndroidManifest.xml and the assets.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>process-classes Phase</term>
+          <listitem>
+            <para>Run the dx tool of the platform version specified in the pom to convert all classes
+              (libraries, resources and project code) into davlik executable format.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>package Phase</term>
+          <listitem>
+            <para>Run the Android Package tool (apk) of the Android SDK to create and sign the Android package file (apk)
+              for installation on the emulator or device.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>pre-integration-test Phase</term>
+          <listitem>
+            <para>Deploy the currently build Android Application (apk) as well as any other dependencies with packaging type
+              apk to the emulator/device.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>integration-test Phase</term>
+          <listitem>
+            <para>Run the instrumentation test classes against the deployed application.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      </section>
+
+    <section id="android-dev-sect-goals">
+      <title>Maven Android Plugin Goals</title>
+
+      <para>
+        <indexterm>
+          <primary>Android</primary>
+
+          <secondary>plugin goals</secondary>
+        </indexterm>
+        The Android Maven Plugin contains the following goals:
+      </para>
+
+      <variablelist>
+        <varlistentry>
+          <term>android:apk</term>
+          <listitem>
+            <para>The apk goal creates the android package (apk) file. By default the plugin signs the file with the debug
+              keystore.  The configuration parameter sign debug false debug sign can be used to disable the signing process.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:deploy</term>
+          <listitem>
+            <para>The deploy goal deploys the built apk file, or another specified apk, to a connected device or emulator.
+            This goal is automatically performed when running through the integration-test life cycle phase on a project
+            with instrumentation tests (e.g. <command>mvn install</command> or <command>mvn integration-test</command>).
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:deploy-dependencies</term>
+          <listitem>
+            <para>The deploy-dependencies goal deploys all directly declared dependencies of
+              <type>apk</type> in this project. This goal is usually used in a project with instrumentation tests, to
+              deploy the apk to test onto the device before running the deploying and running the instrumentation tests
+              apk. The goal is automatically performed when running through the integration-test life cycle phase on a project
+            with instrumentation tests (e.g. <command>mvn install</command> or <command>mvn integration-test</command>).
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:dex</term>
+          <listitem>
+            <para>The dex goal converts compiled Java classes to the Android Dalivk Executable (dex) format.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:generate-sources</term>
+          <listitem>
+            <para>The generate-sources goal generates R.java based on the resources specified by the resources
+              configuration parameter. It generates java files based on aidl files.</para>
+            <para>If the configuration parameter <varname>deleteConflictingFiles</varname> is true (which it is by default),
+              this goal has also deletes any R.java files found in the source directory, deletes any .java files with the
+              same name as an .aidl file found in the source directory and deletes any Thumbs.db files found in the
+              resource directory.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:instrument</term>
+          <listitem>
+            <para>The instrument goal runs the instrumentation android package on the device/emulator.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:internal-integration-test</term>
+          <listitem>
+            <para>The internal-integration-test goal is called automatically when the lifecycle reaches the
+              integration-test phase. It determines whether to call the goal instrument in this phase based on the
+              existance of instrumentation test classes in the current project. The goal is internal to the plugin
+              lifecycle and should not be used as separate invocation on the command line.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:internal-pre-integration-test</term>
+          <listitem>
+            <para>The internal-pre-integration-test goal is called automatically when the lifecycle reaches
+              pre-integration-test phase. It determines whether to call the goals android:deploy-dependencies and android:deploy
+              in this face and if necessary invokes them. The goal is internal to the plugin lifecycle and should not be
+              used as separate invocation on the command line.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:pull</term>
+          <listitem>
+            <para>The pull goal can be used to copy files or directories from the device.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:push</term>
+          <listitem>
+            <para>The pull goal can be used to copy files or directories to the device.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>android:undeploy</term>
+          <listitem>
+            <para>The undeploy goal removes the apk of the current project, or another specified apk, from the connected
+              device.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+    </section>
+
   </section>
-
-  <section id="android-dev-sect-multimodule">
-    <title>Multi Module Android Project Example</title>
-    <para>
-      Have a parent pom and two modules, one jar with library code, one apk with application, see how classes from
-      library code end up being compiled to dalvik code in the apk project and included in the file,
-    </para>
-
-  </section>
-
-  <section id="android-dev-sect-testing">
-    <title>Using Tests</title>
-    <para>
-      as on above example visible, if library is normal jar any testing with sure fire can be done just like normal,
-      also possible to run integration tests with apk deployed on emulator, instrumentation test examples that are
-      already there, set up as separate additional module
-    </para>
-
-  </section>
-
-  <section id="android-dev-sect-maps">
-    <title>Using the Google Maps Extension</title>
-    <para>just add the dependency..</para>
-  </section>
-
-  <section id="android-dev-sect-eclipse">
-    <title>Using the plugin with Eclipse</title>
-    <para>document what needs to be done, maybe install m2eclipse, more details on the wiki and need to play around with it
-    same applies for motodev studio, http://code.google.com/p/maven-android-plugin/wiki/EclipseIntegration</para>
-  </section>
-
-  <section id="android-dev-sect-intellij">
-    <title>Using the plugin with IntelliJ IDEA</title>
-    <para>need to play around with it</para>
-  </section>
-
-
 </chapter>
