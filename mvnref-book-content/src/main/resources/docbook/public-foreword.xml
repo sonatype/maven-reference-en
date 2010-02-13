@@ -18,20 +18,62 @@
 
   <para>Tim O'Brien (tobrien@sonatype.com)</para>
 
-  <para>Evanston, IL</para>
+  <para>February XX, 2010</para>
 
-  <para>November 19, 2009</para>
+  <section>
+    <title>Changes in Edition 0.4</title>
 
-    <section>
-      <title>Changes in Edition 0.2.1</title>
+    <para>The following changes were made:</para>
 
-      <para>The following changes were made:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Updated the Flexmojos version to 3.5.0 in <xref
+        linkend="flex-dev" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-127">MVNREF-127</ulink>)<itemizedlist>
+            <listitem>
+              <para>Added some clarification to <xref
+              linkend="flex-dev-sect-referencing-repo-with-flex" /> that
+              suggests adding the flexmojos repository to an existing Nexus
+              installation.</para>
+            </listitem>
 
-      <itemizedlist>
-        <listitem>
-          <para>Various small typos were address throughout the book.</para>
-        </listitem>
-      </itemizedlist>
-    </section>
+            <listitem>
+              <para>Reorganized <xref linkend="flex-dev-sect-proxy-nexus" />.
+              Added level four headings to group content into more easily
+              understood chunks with respect to Nexus configuration.</para>
+            </listitem>
 
+            <listitem>
+              <para>Fixed minor typos throughout <xref
+              linkend="flex-dev" />.</para>
+            </listitem>
+
+            <listitem>
+              <para>Updated all of the Flexmojos Maven Archetypes with most
+              recent pom.xml content. Changes affected <xref
+              linkend="flex-dev-sect-library-archetype" />, <xref
+              linkend="flex-dev-sect-application-archetype" />, and <xref
+              linkend="flex-dev-sect-multimodule-archetype" />.</para>
+            </listitem>
+
+            <listitem>
+              <para>Removed the warnings in the multi-module project exampe in
+              <xref linkend="flex-dev-sect-multimodule-archetype" />. There
+              used to be a problem with the archetype module dependencies,
+              this has been fixed in the recent Flexmojos releases.</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The following contributors provided invaluable feedback and
+    contributions:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Emmanuel Hugonnet provided the issue report that prompted the
+        update of the Flexmojos chapter to version 3.5.0.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
 </preface>
