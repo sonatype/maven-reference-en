@@ -585,10 +585,10 @@ $ <command>export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}</c
       command at the command-line:</para>
 
       <screen>$ <command>mvn archetype:generate \
-    -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
-    -DarchetypeGroupId=org.sonatype.flexmojos \
-    -DarchetypeArtifactId=flexmojos-archetypes-library \
-    -DarchetypeVersion=${flexmojos.version}</command>
+-DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
+-DarchetypeGroupId=org.sonatype.flexmojos \
+-DarchetypeArtifactId=flexmojos-archetypes-library \
+-DarchetypeVersion=${flexmojos.version}</command>
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
@@ -881,10 +881,10 @@ See COPYRIGHT file
       execute the following command:</para>
 
       <screen>$ <command>mvn archetype:generate \
-    -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
-    -DarchetypeGroupId=org.sonatype.flexmojos \
-    -DarchetypeArtifactId=flexmojos-archetypes-application \
-    -DarchetypeVersion=${flexmojos.version}</command>
+-DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
+-DarchetypeGroupId=org.sonatype.flexmojos \
+-DarchetypeArtifactId=flexmojos-archetypes-application \
+-DarchetypeVersion=${flexmojos.version}</command>
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
@@ -1084,10 +1084,10 @@ package: org.sonatype.test
       Application.</para>
 
       <screen>$ <command>mvn archetype:generate \
-    -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
-    -DarchetypeGroupId=org.sonatype.flexmojos \
-    -DarchetypeArtifactId=flexmojos-archetypes-modular-webapp \
-    -DarchetypeVersion=${flexmojos.version}</command>
+-DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
+-DarchetypeGroupId=org.sonatype.flexmojos \
+-DarchetypeArtifactId=flexmojos-archetypes-modular-webapp \
+-DarchetypeVersion=${flexmojos.version}</command>
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
