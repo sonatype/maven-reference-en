@@ -267,29 +267,29 @@
   &lt;/pluginRepositories&gt;
 
   &lt;build&gt; <co id="coDef-super-3" linkends="coRef-super-3" />
-    &lt;directory&gt;${project.basedir}/target&lt;/directory&gt;
+    &lt;directory&gt;\${project.basedir}/target&lt;/directory&gt;
     &lt;outputDirectory&gt;
-      ${project.build.directory}/classes
+      \${project.build.directory}/classes
     &lt;/outputDirectory&gt;
-    &lt;finalName&gt;${project.artifactId}-${project.version}&lt;/finalName&gt;
+    &lt;finalName&gt;\${project.artifactId}-\${project.version}&lt;/finalName&gt;
     &lt;testOutputDirectory&gt;
-      ${project.build.directory}/test-classes
+      \${project.build.directory}/test-classes
     &lt;/testOutputDirectory&gt;
     &lt;sourceDirectory&gt;
-      ${project.basedir}/src/main/java
+      \${project.basedir}/src/main/java
     &lt;/sourceDirectory&gt;
     &lt;scriptSourceDirectory&gt;src/main/scripts&lt;/scriptSourceDirectory&gt;
     &lt;testSourceDirectory&gt;
-      ${project.basedir}/src/test/java
+      \${project.basedir}/src/test/java
     &lt;/testSourceDirectory&gt;
     &lt;resources&gt;
       &lt;resource&gt;
-        &lt;directory&gt;${project.basedir}/src/main/resources&lt;/directory&gt;
+        &lt;directory&gt;\${project.basedir}/src/main/resources&lt;/directory&gt;
       &lt;/resource&gt;
     &lt;/resources&gt;
     &lt;testResources&gt;
       &lt;testResource&gt;
-        &lt;directory&gt;${project.basedir}/src/test/resources&lt;/directory&gt;
+        &lt;directory&gt;\${project.basedir}/src/test/resources&lt;/directory&gt;
       &lt;/testResource&gt;
     &lt;/testResources&gt;
 

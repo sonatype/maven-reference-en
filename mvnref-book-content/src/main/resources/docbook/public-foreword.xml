@@ -64,6 +64,25 @@
             </listitem>
           </itemizedlist></para>
       </listitem>
+
+      <listitem>
+        <para><xref linkend="profiles-sect-common-envs" /> was incorrect. The
+        property defined in ~/.m2/settings.xml was not activating the profile
+        defined in a project's POM. This seciton has been corrected. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-124">MVNREF-124</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed a code overflow in <xref
+        linkend="configuring-sect-exec-param" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-118">MVNREF-118</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed unescaped property references and a code overflow in <xref
+        linkend="ex-super-pom" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-117">MVNREF-117</ulink>)</para>
+      </listitem>
     </itemizedlist>
 
     <para>The following contributors provided invaluable feedback and
@@ -73,6 +92,11 @@
       <listitem>
         <para>Emmanuel Hugonnet provided the issue report that prompted the
         update of the Flexmojos chapter to version 3.5.0.</para>
+      </listitem>
+
+      <listitem>
+        <para>Benjamin Bentmann reported an inconsistenct in <xref
+        linkend="profiles-sect-common-envs" />.</para>
       </listitem>
     </itemizedlist>
   </section>
