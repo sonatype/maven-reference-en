@@ -50,12 +50,11 @@
       <para>The Maven Android Plugin relies on the presence of the Android SDK on the development environment and
         is simplified by the presence of the
         <varname>ANDROID_HOME</varname> environment variable pointing to the installation location. The SDK should be installed following
-        the directions on the Android Developer web site at<uri>http://developer.android.com/sdk/index.html</uri>.
+        the directions on the Android Developer web site at <uri>http://developer.android.com/sdk/index.html</uri>.
       </para>
       <para>In addition to the SDK itself the various platform versions or API levels should be installed as part of the
         install. Instruction for this process are located at <uri>http://developer.android.com/sdk/adding-components.html</uri>.
-        Depending on the target platform version of the application you can install a subset of platforms or go
-        ahead and install all available versions.
+        You can install a subset of available platforms or simply install all available versions.
       </para>
       <para>The <varname>ANDROID_HOME</varname> environment variable simplifies the usage of the Maven Android Plugin and the
         Maven Android SDK Deployer and should point to the folder where the SDK is installed. For example
@@ -87,15 +86,17 @@
         <varname>Download Source</varname> button and extracted the downloaded zip or tar archive in a folder of your
         choice. A folder with a naming pattern of mosabua-maven-android-sdk-deployer-XXX with XXX some revision number
         like df824df will be created. Entering the sdk deployer folder with e.g.
-          <command>cd mosabua-maven-android-sdk-deployer-df824df</command> readies you to install the desired artifacts.
+          <programlisting>cd mosabua-maven-android-sdk-deployer-df824df</programlisting>
+        readies you to install the desired artifacts.
       </para>
 
       <section id="android-dev-sect-repository-install-local">
         <title>Installation to local repository</title>
         <para>In order to install the android API jar files from the different platform revisions into your local
           repository you run the command
-          <programlisting>mvn clean install</programlisting> in the deployer tool folder. By default this will upload all android.jar
-        and maps.jar files into repository, which is by defaulted located in ~/.m2/repository. You should find all
+          <programlisting>mvn clean install</programlisting>
+          in the deployer tool folder. By default this will upload all android.jar
+        and maps.jar files into the local repository, which is by defaulted located in ~/.m2/repository. You should find all
         newly installed files in the <varname>android</varname> and <varname>com/google/android/maps</varname> folders.
         </para>
       </section>
@@ -141,7 +142,8 @@
           platforms artifacts into a repository. If you however decided to only install a subset of the components in
         the section above <!-- TODO make it a link -->, the tool can be used with profile options to only install
         or deploy some artifacts. This can be done by specifying the platform API versions as a profile name:
-        <programlisting>mvn install -P 2.1</programlisting>. Available profile names are <varname>1.1</varname>,
+        <programlisting>mvn install -P 2.1</programlisting>
+        Available profile names are <varname>1.1</varname>,
         <varname>1.5</varname>, <varname>1.6</varname>, <varname>2.0</varname> and <varname>2.1</varname>.
         </para>
       </section>
@@ -174,8 +176,8 @@
       <title>HelloFlashlight Example</title>
       <para>The HelloFlashlight example application serves as a starting point to introduce you to the usage of the
         Maven Android Plugin. You can follow the same steps to introduce a Maven Android Plugin based build to your
-        Android application. After the initial environment setup documented above the Android Development Tools from
-        <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> where installed and used to create a new Android
+        Android application. After the initial environment setup documented above, the Android Development Tools from
+        <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> were installed and used to create a new Android
         project.</para>
 
       <para>To enable a Maven based build of the project the following pom.xml file was added in the root folder of the
@@ -242,8 +244,8 @@
       </para>
 
       <para>The Android Package <varname>packaging</varname> type <varname>apk</varname> is the main hook and kicks off the life cycle
-        modifications of the Maven Android Plugin. It takes care of all the custom calls to the various tools of the SDK that will
-        be explained later.
+        modifications of the Maven Android Plugin. It takes care of all the specific calls to the Android SDK tools,
+        that process resources, convert Java bytecode and so on.
       </para>
 
       <para>The declared dependency to the android platform jar has to use the version of the target platform as published
@@ -255,8 +257,9 @@
         see what the exact versions are.
       </para>
 
-      <para>The configuration of the Maven Compiler Plugin in the build is necessary since Android uses Java 5 code with
-        annotations and such and the Java compiler needs to know that. The main configuration of the Maven Android Plugin
+      <para>The configuration of the Maven Compiler Plugin in the build is necessary since Android uses Java 5 language
+        specification code with annotations, for each loop and so on and the Java compiler needs to know that.
+        The main configuration of the Maven Android Plugin
         is done in the build section, but out of the box only limited configuration is necessary. </para>
 
       <para>To build the application and run it on an already started emulator you could use
@@ -286,6 +289,9 @@
               ...
             </programlisting>
           </example>
+          Alternatively the Maven conventions can be implemented by moving the source code for the application and the
+          test source code into <varname>src/main/java</varname> and <varname>src/test/java</varname> and reconfiguring
+          the Eclipse project files.
         </para>
       </section>
 
@@ -296,7 +302,7 @@
         would be two parallel projects, one for the application and one for the instrumentation tests, that are tied
           together as modules of a parent pom.</para>
         <para>The Maven Android Plugin Samples codebase contains two examples for a
-          project setup like that. The setup of the instrumentation test application with the Maven Android Plugin is
+          project set up in this manner. The setup of the instrumentation test application with the Maven Android Plugin is
           the same as for a normal application with the added dependency to the application that needs to be tested. It
           is important to add the <varname>type</varname> of <varname>apk</varname> to the dependency to allow the
           Maven Android Plugin to find the Android package of the application.
@@ -366,7 +372,7 @@
 
     <section id="android-dev-sect-dependencies">
       <title>Using external dependencies</title>
-      <para>When using the Maven Android plugin there are two types of dependencies that are treated differently. </para>
+      <para>When using the Maven Android plugin there are three types of dependencies that are treated differently. </para>
       <variablelist>
         <varlistentry>
           <term>Regular dependencies to other Java libraries</term>
@@ -546,20 +552,37 @@
           </listitem>
         </varlistentry>
 
-        <!-- TODO activate and amend once this feature is actually released.. -->
-        <!--<varlistentry>-->
-          <!--<term>android:emulator-start</term>-->
-          <!--<listitem>-->
-            <!--<para>The <varname>emulator-start</varname> starts the Android device emulator.</para>-->
-          <!--</listitem>-->
-        <!--</varlistentry>-->
+        <varlistentry>
+          <term>android:emulator-start</term>
+          <listitem>
+            <para>The <varname>emulator-start</varname> goal starts the Android device emulator. The start up parameters
+              can be configured in the Maven Android Plugin configuration in the pom.xml file
+               <programlisting>
+               &lt;configuration&gt;
+                    ...
+                    &lt;emulator&gt;
+                      &lt;avd&gt;21&lt;/avd&gt;
+                      &lt;wait&gt;6000&lt;/wait&gt;
+                      &lt;options&gt;-no-skin&lt;/options&gt;
+                    &lt;/emulator&gt;
+                    ...
+                &lt;/configuration&gt;
+               </programlisting>
+              or via command line parameters outside an actual project.
+              <programlisting>
+              mvn android:emulator-start -Dandroid.emulator.avd=Default -Dandroid.emulator.options=-no-skin -Dandroid.emulator.wait=10000
+              </programlisting>
+            </para>
+          </listitem>
+        </varlistentry>
 
-        <!--<varlistentry>-->
-          <!--<term>android:emulator-stop</term>-->
-          <!--<listitem>-->
-            <!--<para>The <varname>emulator-stops</varname> stops the Android device emulator.</para>-->
-          <!--</listitem>-->
-        <!--</varlistentry>-->
+        <varlistentry>
+          <term>android:emulator-stop</term>
+          <listitem>
+            <para>The <varname>emulator-stops</varname> stops the Android device emulator and can be used inside or
+              outside a Maven project folder.</para>
+          </listitem>
+        </varlistentry>
 
         <varlistentry>
           <term>android:generate-sources</term>
