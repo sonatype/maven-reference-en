@@ -59,6 +59,12 @@
           <orgname>${project.organization.name}</orgname>
         </affiliation>
       </author>
+
+      <author>
+        <firstname>Manfred</firstname>
+
+        <surname>Moser</surname>
+      </author>
     </authorgroup>
 
     <authorgroup role="Contributing Authors">
@@ -72,12 +78,6 @@
         <firstname>Larry</firstname>
 
         <surname>Shatzer</surname>
-      </author>
-
-      <author>
-        <firstname>Manfred</firstname>
-
-        <surname>Moser</surname>
       </author>
     </authorgroup>
 
@@ -138,7 +138,7 @@
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 
   <xi:include href="chapter-android-dev.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
 
   <xi:include href="appendix-settings-details.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />

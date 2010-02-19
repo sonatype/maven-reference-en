@@ -18,7 +18,7 @@
 
   <para>Tim O'Brien (tobrien@sonatype.com)</para>
 
-  <para>February XX, 2010</para>
+  <para>February, 2010</para>
 
   <section>
     <title>Changes in Edition 0.4</title>
@@ -83,6 +83,11 @@
         linkend="ex-super-pom" />. (<ulink
         url="https://issues.sonatype.org/browse/MVNREF-117">MVNREF-117</ulink>)</para>
       </listitem>
+
+      <listitem>
+        <para>Added a new chapter: <xref linkend="android-dev" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-135">MVNREF-135</ulink>)</para>
+      </listitem>
     </itemizedlist>
 
     <para>The following contributors provided invaluable feedback and
@@ -95,8 +100,13 @@
       </listitem>
 
       <listitem>
-        <para>Benjamin Bentmann reported an inconsistenct in <xref
+        <para>Benjamin Bentmann reported an inconsistency in <xref
         linkend="profiles-sect-common-envs" />.</para>
+      </listitem>
+
+      <listitem>
+        <para>Manfred Moser was added as a primary author for contributing
+        <xref linkend="android-dev" />.</para>
       </listitem>
     </itemizedlist>
   </section>
