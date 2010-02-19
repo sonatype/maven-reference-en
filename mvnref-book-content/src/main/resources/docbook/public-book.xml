@@ -59,6 +59,12 @@
           <orgname>${project.organization.name}</orgname>
         </affiliation>
       </author>
+
+      <author>
+        <firstname>Manfred</firstname>
+
+        <surname>Moser</surname>
+      </author>
     </authorgroup>
 
     <authorgroup role="Contributing Authors">
@@ -129,6 +135,9 @@
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 
   <xi:include href="chapter-flex-dev.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <xi:include href="chapter-android-dev.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 
   <xi:include href="appendix-settings-details.xml"

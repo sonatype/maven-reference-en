@@ -729,50 +729,21 @@ The following profiles are active:
       environments with identifiers like <literal>dev</literal> and
       <literal>prod</literal>. A simpler way to do this would be to define
       profiles that are activated by environment properties and to use these
-      common environment properties across all of your projects. For example,
-      if every project had a <literal>development</literal> profile activated
-      by a property named <varname>environment.type</varname> having a value
-      of <literal>dev</literal>, and if those same projects had a
+      common environment properties across all of your projects. </para>
+
+      <para>For example, if every project had a <literal>development</literal>
+      profile activated by a property named
+      <varname>environment.type</varname> having a value of
+      <literal>dev</literal>, and if those same projects had a
       <literal>production</literal> profile activated by a property named
       <varname>environment.type</varname> having a value of
-      <literal>prod</literal>, you could create a default profile in your
-      <filename>settings.xml</filename> that always set
-      <varname>environment.type</varname> to <literal>dev</literal> on your
-      development machine. This way, each project defines a
-      <literal>dev</literal> profile activated by the same environment
-      variable. Let's see how this is done, the following
-      <filename>settings.xml</filename> defines a profile in
-      <filename>~/.m2/settings.xml</filename> which sets the
-      <varname>environment.type</varname> property to
-      <literal>dev</literal>.</para>
-
-      <para><example>
-          <title>~/.m2/settings.xml defines a default profile setting
-          environment.type</title>
-
-          <programlisting language="xml">&lt;settings&gt;
-  &lt;profiles&gt;
-    &lt;profile&gt;
-      &lt;activation&gt;
-        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-      &lt;/activation&gt;
-      &lt;properties&gt;
-        &lt;environment.type&gt;dev&lt;/environment.type&gt;
-      &lt;/properties&gt;
-    &lt;/profile&gt;
-  &lt;/profiles&gt;
-&lt;/settings&gt;
-</programlisting>
-        </example></para>
-
-      <para>This means that every time you run Maven on your machine, this
-      profile will be activated and the property
-      <varname>environment.type</varname> will have the value
-      <literal>dev</literal>. You can then use this property to activate
-      profiles defined in a project's <filename>pom.xml</filename> as follows.
-      Let's take a look at how a project's <filename>pom.xml</filename> would
-      define a profile activated by <varname>environment.type</varname> having
-      the value <literal>dev</literal>.</para>
+      <literal>prod</literal>, you could simply pass in the appropriate
+      property value on the command-line to ensure that your builds target the
+      correct environment. You can then use this property to activate profiles
+      defined in a project's <filename>pom.xml</filename> as follows. Let's
+      take a look at how a project's <filename>pom.xml</filename> would define
+      a profile activated by <varname>environment.type</varname> having the
+      value <literal>dev</literal>.</para>
 
       <para><example id="ex-profile-envtype-pom">
           <title>Project Profile Activated by setting environment.type to
@@ -784,6 +755,7 @@ The following profiles are active:
     &lt;profile&gt;
       &lt;id&gt;development&lt;/id&gt;
       &lt;activation&gt;
+        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
         &lt;property&gt;
           &lt;name&gt;environment.type&lt;/name&gt;
           &lt;value&gt;dev&lt;/value&gt;
@@ -825,28 +797,28 @@ The following profiles are active:
       plugin which can generate annotated model objects for use in persistence
       frameworks. A few of these plugins, can be configured in a
       <filename>pom.xml</filename> using these properties. These properties
-      could also be used to filter resources. In this example, because we've
-      defined a profile in <filename>~/.m2/settings.xml</filename> which sets
-      <varname>environment.type</varname> to <literal>dev</literal>, the
-      development profile will always be activated when we run Maven on our
-      development machine. Alternatively, if we wanted to override this
-      default, we could set a property on the command-line. If we need to
-      activate the production profile, we could always run Maven with:</para>
+      could also be used to filter resources. If we needed to target the
+      development environment, we would just run the following command:</para>
+
+      <para><screen>~/examples/profiles $ <command>mvn install</command></screen></para>
+
+      <para>Because the development profile is active by default, and because
+      there are no other profiles activated, running <command>mvn
+      help:active-profiles</command> will show that the development profile is
+      active. Now, the activeByDefault option will only work if no other
+      profiles are active. If you wanted to be sure that the development
+      profile would be active for a given build, you could explicitly pass in
+      the environment.type variable as follows:</para>
+
+      <screen>~/examples/profiles $ <command>mvn install -Denvironment.type=dev</command></screen>
+
+      <para>Alternatively, if we need to activate the production profile, we
+      could always run Maven with:</para>
 
       <screen>~/examples/profiles $ <command>mvn install -Denvironment.type=prod</command></screen>
 
-      <para>Setting a property on the command-line would override the default
-      property set in <filename>~/.m2/settings.xml</filename>. We could have
-      just defined a profile with an <sgmltag>id</sgmltag> of "dev" and
-      invoked it directly with the <command>-P</command> command-line
-      argument, but using this <varname>environment.type</varname> property
-      allows us to code other project <filename>pom.xml</filename> files to
-      this standard. Every project in your codebase could have a profile which
-      is activated by the same <varname>environment.type</varname> property
-      set in every user's <filename>~/.m2/settings.xml</filename>. In this
-      way, developers can share common configuration for development without
-      defining this configuration in non-portable
-      <filename>settings.xml</filename> files.</para>
+      <para>To test which profiles are active for a given build, use
+      <command>mvn help:active-profiles</command>.</para>
     </section>
 
     <section id="profiles-sect-protecting-secrets">

@@ -297,7 +297,7 @@ compiler:testCompile
       </example>
     </section>
 
-    <section>
+    <section id="configuring-sect-exec-param">
       <title>Setting Execution Specific Parameters</title>
 
       <para><indexterm>
@@ -328,9 +328,9 @@ compiler:testCompile
       &lt;/goals&gt;
       &lt;configuration&gt;
         &lt;tasks&gt;
-          &lt;echo&gt;${PATH}=${env.PATH}&lt;/echo&gt;
-          &lt;echo&gt;User's Home Directory: ${user.home}&lt;/echo&gt;
-          &lt;echo&gt;Project's Base Director: ${basedir}&lt;/echo&gt;
+          &lt;echo&gt;\${PATH}=\${env.PATH}&lt;/echo&gt;
+          &lt;echo&gt;User's Home Directory: \${user.home}&lt;/echo&gt;
+          &lt;echo&gt;Project's Base Director: \${basedir}&lt;/echo&gt;
         &lt;/tasks&gt;
       &lt;/configuration&gt;
     &lt;/execution&gt;

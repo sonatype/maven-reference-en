@@ -3,7 +3,7 @@
   <parent>
 	<groupId>org.sonatype.mvnrefbook</groupId>
 	<artifactId>mvnref-book-parent</artifactId>
-	<version>0.3.1</version>
+	<version>0.4</version>
   </parent>
   <artifactId>mvnref-book-content</artifactId>
   <packaging>jar</packaging>
@@ -27,7 +27,7 @@
     <nexus.book.title>Repository Management with Nexus</nexus.book.title>
     <m2eclipse.book.baseurl>http://books.sonatype.com/m2eclipse-book-stage/</m2eclipse.book.baseurl>
     <m2eclipse.book.title>Developing with Eclipse and Maven</m2eclipse.book.title>
-    <flexmojos.version>3.3.0</flexmojos.version>
+    <flexmojos.version>3.5.0</flexmojos.version>
     <flexmojos.repository>http://repository.sonatype.org/content/groups/flexgroup/</flexmojos.repository>
     <examples.download.url>http://www.sonatype.com/books/maven-book/mvnref-book-examples-${project.version}-project.zip</examples.download.url>
   </properties>
