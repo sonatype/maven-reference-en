@@ -159,8 +159,8 @@
         the tool can be used with profile options to only install or deploy
         some artifacts. This can be done by specifying the platform API
         versions as a profile name: <programlisting>mvn install -P 2.1</programlisting>Available
-        profile names are <varname>1.1</varname>, <varname>1.5</varname>,
-        <varname>1.6</varname>, <varname>2.0</varname> and
+        profile names are <varname>1.5</varname>,
+        <varname>1.6</varname>, <varname>2.0.1</varname> and
         <varname>2.1</varname>.</para>
       </section>
     </section>
@@ -236,7 +236,7 @@
                     com.jayway.maven.plugins.android.generation2
                   &lt;/groupId&gt;
                   &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
-                  &lt;version&gt;2.2.3-SNAPSHOT&lt;/version&gt;
+                  &lt;version&gt;2.3.2&lt;/version&gt;
                   &lt;configuration&gt;
                       &lt;sdk&gt;
                           &lt;platform&gt;2.1&lt;/platform&gt;
@@ -289,8 +289,8 @@
       <varname>Pkg.Revision</varname> values in the
       <varname>source.properties</varname> file in the respective platforms
       folder of the Android SDK. The current valid values are
-      <varname>1.1_r1</varname>, <varname>1.5_r3</varname>,
-      <varname>1.6_r2</varname>, <varname>2.0_r1</varname>,
+      <varname>1.5_r3</varname>,
+      <varname>1.6_r2</varname>,
       <varname>2.0.1_r1</varname> and <varname>2.1_r1</varname>. Simply browse
       the android folder of your maven repository/repository server to see
       what the exact versions are.</para>
@@ -387,7 +387,7 @@
       </example>
 
       <para>The valid versions currently are <varname>3_r3</varname>,
-      <varname>4_r2</varname>, <varname>5_r1</varname>,
+      <varname>4_r2</varname>,
       <varname>6_r1</varname> and <varname>7_r1</varname>. Simply browse the
       android folder of your maven repository/repository server to see what
       the versions are.</para>
