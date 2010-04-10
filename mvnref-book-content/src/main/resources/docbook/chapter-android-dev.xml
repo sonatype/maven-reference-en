@@ -236,7 +236,7 @@
                     com.jayway.maven.plugins.android.generation2
                   &lt;/groupId&gt;
                   &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
-                  &lt;version&gt;2.3.2&lt;/version&gt;
+                  &lt;version&gt;2.3.3&lt;/version&gt;
                   &lt;configuration&gt;
                       &lt;sdk&gt;
                           &lt;platform&gt;2.1&lt;/platform&gt;
@@ -293,7 +293,12 @@
       <varname>1.6_r2</varname>,
       <varname>2.0.1_r1</varname> and <varname>2.1_r1</varname>. Simply browse
       the android folder of your maven repository/repository server to see
-      what the exact versions are.</para>
+      what the exact versions are. It is important to note that the <varname>scope</varname>
+      of the dependeny is declared as provided. This is necessary since we do not want this dependency to be
+      included into our application package. We just need the classes to be available at compile time.
+      The android jar as well as the Google maps jar files actually contain only empty stubs of all classes
+      with all methods throwing exceptions. As such only execution on the emulator and the device where the actual
+      implementations are available is possible.</para>
 
       <para>The configuration of the Maven Compiler Plugin in the build is
       necessary since Android uses Java 5 language specification code with
@@ -334,7 +339,41 @@
         moving the source code for the application and the test source code
         into <varname>src/main/java</varname> and
         <varname>src/test/java</varname> and reconfiguring the Eclipse project
-        files.</para>
+        files. As supported by the Maven Surefire Plugin TestNG as well as JUnit
+        can be used as the testing framework by adding the respective dependency to the
+        pom.xml like this:
+
+            <example>
+                <title>Adding JUnit or TestNG as testing framework</title>
+                <programlisting>
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.8.1&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    or
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.testng&lt;/groupId&gt;
+        &lt;artifactId&gt;testng&lt;/artifactId&gt;
+        &lt;version&gt;5.11&lt;/version&gt;
+        &lt;classifier&gt;jdk15&lt;/classifier&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;android&lt;/groupId&gt;
+        &lt;artifactId&gt;android&lt;/artifactId&gt;
+        &lt;version&gt;2.0_r1&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+                </programlisting>
+            </example>
+        It is important to use the scope test, since the testing framework will otherwise be included in your Android'
+            application package. A second important characterisitic of this setup is that the dependency to Android is
+            after the Junit dependency. This is due to the fact that a stubbed junit is included in the Android jar itself
+            for instrumentation testing. The classes in the actual jar are exception throwing shells that will not allow
+            your JUnit tests to run if they are picked up first in the classpath by the surefire plugin.
+        </para>
       </section>
 
       <section id="android-dev-sect-test-instrumentation">
