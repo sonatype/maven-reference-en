@@ -789,7 +789,10 @@
 
           <listitem>
             <para>The pull goal can be used to copy files or directories from
-            the device.</para>
+            the device. Source and destination file have to be specified with <varname>-Dandroid.source</varname> and
+                <varname>-Dandroid.destination</varname> or equivalent configuration in the pom.xml file. The optional 
+                parameter <varname>-Dandroid.device</varname> with a explicit value of for a device or emulator name
+                or simply <varname>usb</varname> or <varname>emulator</varname> can be used to copy to a specific device.</para>
           </listitem>
         </varlistentry>
 
@@ -798,7 +801,7 @@
 
           <listitem>
             <para>The pull goal can be used to copy files or directories to
-            the device.</para>
+            the device. The same configuration parameters as for the <varname>pull</varname> goal can be used.</para>
           </listitem>
         </varlistentry>
 
