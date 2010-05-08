@@ -239,7 +239,7 @@
                   &lt;version&gt;2.3.3&lt;/version&gt;
                   &lt;configuration&gt;
                       &lt;sdk&gt;
-                          &lt;platform&gt;2.1&lt;/platform&gt;
+                          &lt;platform&gt;4&lt;/platform&gt;
                       &lt;/sdk&gt;
                       &lt;deleteConflictingFiles&gt;
                         true
@@ -249,10 +249,7 @@
               &lt;/plugin&gt;
               &lt;plugin&gt;
                   &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                  &lt;configuration&gt;
-                      &lt;source&gt;1.5&lt;/source&gt;
-                      &lt;target&gt;1.5&lt;/target&gt;
-                  &lt;/configuration&gt;
+                  &lt;version&gt;2.3&lt;/version&gt;
               &lt;/plugin&gt;
           &lt;/plugins&gt;
       &lt;/build&gt;
@@ -303,7 +300,8 @@
       <para>The configuration of the Maven Compiler Plugin in the build is
       necessary since Android uses Java 5 language specification code with
       annotations, foreach loop and so on and the Java compiler needs to know
-      that. The main configuration of the Maven Android Plugin is done in the
+      that. The default of the Maven Compiler Plugin version 2.3 and higher is set to use Java 1.5, whereas earlier
+      versions are not. The main configuration of the Maven Android Plugin is done in the
       build section, but out of the box only limited configuration is
       necessary.</para>
 
