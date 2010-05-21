@@ -15,9 +15,9 @@
         <secondary>site generation</secondary>
       </indexterm>Successful software applications are rarely produced by a
     team of one. When we're talking about any software worth writing, we're
-    usually dealing teams of collaborating developers ranging anywhere in size
-    from a handful of programmers working in a small team to hundreds or
-    thousands of programmers working in large distributed environment. Most
+    usually dealing with teams of collaborating developers ranging anywhere in
+    size from a handful of programmers working in a small team to hundreds or
+    thousands of programmers working in a large distributed environment. Most
     open source projects (such as Maven) succeed or fail based on the presence
     or absence of well written documentation for a widely-distributed, ad-hoc
     collection of users and developers. In all environments it is important
@@ -31,12 +31,12 @@
     project's web site for tutorials, user guides, <acronym>API</acronym>
     documentation, and mailing list archives, and developers look to a
     project's web site for design documents, code reports, issue tracking, and
-    release plans. Large open-sources projects may be integrated with wikis,
+    release plans. Large open-source projects may be integrated with wikis,
     issue trackers, and continuous integration systems which help to augment a
     project's online documentation with material that reflects the current
     status of ongoing development. If a new open source project has an
     inadequate web site which fails to convey basic information to prospective
-    users, if often is a sign that the project in question will fail to be
+    users, it often is a sign that the project in question will fail to be
     adopted. In other words, for an open source project, the site and the
     documentation are as important to the formation of a community as the code
     itself.</para>
@@ -48,11 +48,11 @@
     provides you with the ability to write simple web pages and render those
     pages against a consistent project template. Maven can publish site
     content in multiple formats including <acronym>XHTML</acronym> and
-    <acronym>PDF</acronym>. Maven can be used to generate API document and can
-    also be used to embedded Javadoc and source code in your project's binary
-    release archive. Once you've used Maven to generate all of your project's
-    end-user and developer documentation, you can then use Maven to publish
-    your web site to a remote server.</para>
+    <acronym>PDF</acronym>. Maven can be used to generate API documentation
+    and can also be used to embed Javadoc and source code in your project's
+    binary release archive. Once you've used Maven to generate all of your
+    project's end-user and developer documentation, you can then use Maven to
+    publish your web site to a remote server.</para>
   </section>
 
   <section id="site-generation-sect-building">
@@ -68,12 +68,12 @@
     <screen>$ mvn archetype:create -DgroupId=org.sonatype.mavenbook -DartifactId=sample-project
 </screen>
 
-    <para>This creates the simplest possible Maven project with a one Java
-    class in <filename>src/main/java</filename> and a simple
-    <acronym>POM</acronym>. You can then build a Maven site by simply running
-    mvn site. To build the site and preview the result in a browser, you can
-    run <command>mvn site:run</command>, this will build the site and start an
-    embedded instance of Jetty.</para>
+    <para>This creates the simplest possible Maven project with one Java class
+    in <filename>src/main/java</filename> and a simple <acronym>POM</acronym>.
+    You can then build a Maven site by simply running <command>mvn
+    site</command>. To build the site and preview the result in a browser, you
+    can run <command>mvn site:run</command>, this will build the site and
+    start an embedded instance of Jetty.</para>
 
     <screen>$ <command>cd sample-project</command>
 $ <command>mvn site:run</command>
@@ -127,8 +127,8 @@ $ <command>mvn site:run</command>
     or source code repositories, all of these pages on the project site will
     have no information. Even the index page of the site states, "There is
     currently no description associated with this project". To customize the
-    site, you'll have to start add content to the project and to the project's
-    <acronym>POM</acronym>.</para>
+    site, you'll have to start to add content to the project and to the
+    project's <acronym>POM</acronym>.</para>
 
     <para>If you are going to use the Maven Site plugin to build your
     project's site, you'll want to customize it. You will want to populate
@@ -357,7 +357,7 @@ $ mvn site:run</screen>
         <primary>site generation</primary>
 
         <secondary>directory structure</secondary>
-      </indexterm>Maven places all site document under
+      </indexterm>Maven places all site documents under
     <filename>src/site</filename>. Documents of similar format are placed in
     subdirectories of <filename>src/site</filename>. All
     <acronym>APT</acronym> documents should be in
@@ -368,11 +368,11 @@ $ mvn site:run</screen>
     under <filename>src/site/resources</filename>. When the Maven Site plugin
     builds a web site, it will copy everything in the resources directory to
     the root of the site. If you store an image in
-    <filename>src/site/resources/images/test.png</filename>, they you would
-    refer to the image from your site documentation using the relative path
+    <filename>src/site/resources/images/test.png</filename>, you would refer
+    to the image from your site documentation using the relative path
     <filename>images/test.png</filename>.</para>
 
-    <para>The following examples shows the location of all files in a project
+    <para>The following example shows the location of all files in a project
     which contains <acronym>APT</acronym>, <acronym>FML</acronym>,
     <acronym>HTML</acronym>, <acronym>XHTML</acronym>, and some XDoc. Note
     that the <acronym>XHTML</acronym> content is simply stored in the

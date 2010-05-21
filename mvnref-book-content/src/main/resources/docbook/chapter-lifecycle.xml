@@ -803,7 +803,7 @@
         </indexterm>packaging type is similar to the<acronym> JAR</acronym>
       and <acronym>EJB</acronym> types. The exception being the
       <varname>package</varname> goal of <varname>war:war</varname>. Note that
-      the <varname>war:war</varname> plugin requires a
+      the <varname>war:war</varname> goal requires a
       <filename>web.xml</filename> configuration in your
       <filename>src/main/webapp/WEB-INF</filename> directory. The default
       goals for projects with <acronym>WAR</acronym> packaging are shown in
@@ -1058,7 +1058,7 @@
     the <acronym>WAR</acronym> lifecycle calls <varname>war:war</varname> and
     the <varname>package</varname> phase of the <acronym>JAR</acronym>
     lifecycle calls <varname>jar:jar</varname>. Most of the lifecycles you
-    will come into contact share some common lifecycle goals for managing
+    will come into contact with share some common lifecycle goals for managing
     resources, running tests, and compiling source code. In this section,
     we'll explore some of these common lifecycle goals in detail.</para>
 
@@ -1175,7 +1175,7 @@ jdbc.password=
       default value defined in the Super <acronym>POM</acronym>. You should
       also note that you don't need to consolidate all of your resources into
       a single directory. You can always separate resources into separate
-      directories under <filename>src/main</filename>. Assume that you have
+      directories under <filename>src/main</filename>. Assume that you have a
       project which contains hundreds of <acronym>XML</acronym> documents and
       hundreds of images. Instead of mixing the resources in the
       <filename>src/main/resources</filename> directory, you might want to
@@ -1212,7 +1212,7 @@ jdbc.password=
       simple shell scripts that need to reference the <acronym>JAR</acronym>
       produced by a build. When you are using the assembly plugin to produce a
       distribution for an application as a <acronym>ZIP</acronym> or
-      <acronym>TAR</acronym>, you might place all of you scripts in a
+      <acronym>TAR</acronym>, you might place all of your scripts in a
       directory like <filename>src/main/command</filename>. In the following
       <acronym>POM</acronym> resource configuration, you'll see how we can use
       resource filtering and a reference to the project variable to capture

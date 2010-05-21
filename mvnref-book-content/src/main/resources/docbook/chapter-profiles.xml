@@ -43,7 +43,7 @@
       build which works without any custom configuration or customization of
       properties files is more portable than a build which requires a great
       deal of work to build from scratch. The most portable projects tend to
-      be widely used open source projects like Apache Commons of Apache
+      be widely used open source projects like Apache Commons or Apache
       Velocity which ship with Maven builds which require little or no
       customization. Put simply, the most portable project builds tend to just
       work, out of the box, and the least portable builds require you to jump
@@ -729,7 +729,7 @@ The following profiles are active:
       environments with identifiers like <literal>dev</literal> and
       <literal>prod</literal>. A simpler way to do this would be to define
       profiles that are activated by environment properties and to use these
-      common environment properties across all of your projects. </para>
+      common environment properties across all of your projects.</para>
 
       <para>For example, if every project had a <literal>development</literal>
       profile activated by a property named

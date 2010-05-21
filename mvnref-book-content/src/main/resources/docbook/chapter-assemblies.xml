@@ -420,7 +420,7 @@ Hello, World!</screen>
       <varname>artifactId</varname>, <varname>version</varname>, and
       <varname>packaging</varname>. In <xref
       linkend="profiles-sect-platform-classifier" />, multiple
-      platform-specific variants of a project’s artifact and available, and
+      platform-specific variants of a project’s artifact are available, and
       the project specifies a <varname>classifier</varname> element with a
       value of either <varname>win</varname> or <varname>linux</varname> to
       select the appropriate dependency artifact for the target platform.
@@ -543,16 +543,16 @@ Installing ~/mvn-examples-1.0/assemblies/as-dependencies/project-parent/\
            second-project-1.0-SNAPSHOT-project.zip
 ...</screen>
 
-      <para>When you run install, Maven will copy the each project's main
-      artifact and each assembly to your local Maven repository. All of these
-      artifacts are now available for reference as dependencies in other
-      projects locally. If your ultimate goal is to create a bundle which
-      includes assemblies from multiple project, you can do so by creating
-      another project which will include other project's assemblies as
-      dependencies. This bundling project (aptly named project-bundle) is
-      responsible for creating the bundled assembly. The
-      <acronym>POM</acronym> for the bundling project would resemble the XML
-      document listed in <xref linkend="ex-bundling-pom" />.</para>
+      <para>When you run install, Maven will copy each project's main artifact
+      and each assembly to your local Maven repository. All of these artifacts
+      are now available for reference as dependencies in other projects
+      locally. If your ultimate goal is to create a bundle which includes
+      assemblies from multiple projects, you can do so by creating another
+      project which will include other project's assemblies as dependencies.
+      This bundling project (aptly named project-bundle) is responsible for
+      creating the bundled assembly. The <acronym>POM</acronym> for the
+      bundling project would resemble the XML document listed in <xref
+      linkend="ex-bundling-pom" />.</para>
 
       <example id="ex-bundling-pom">
         <title>POM for the Assembly Bundling Project</title>
