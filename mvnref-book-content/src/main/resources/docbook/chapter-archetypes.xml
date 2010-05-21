@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
 <chapter id="archetypes">
   <title>Using Maven Archetypes</title>
 
@@ -22,7 +22,7 @@
     series of similar and related projects. If you work in an organization
     with a large team of developers who all need to create projects which
     follow a similar structure, you can publish an archetype that can be used
-    by all other members of the development team. You can create a new product
+    by all other members of the development team. You can create a new project
     from an archetype using the Maven Archetype plugin from the command line
     or by using the project creation wizard in the m2eclipse plugin introduced
     in <ulink
@@ -314,8 +314,9 @@ package: org.sonatype.mavenbook
       </indexterm>As more and more projects adopt Maven, more and more
     artifacts are being published by projects as a way to provide users with a
     quick way of creating projects from existing templates. This section
-    discusses some of the simple core archetypes from the Apache Maven as well
-    as providing a survey of some interesting third-party archetypes.</para>
+    discusses some of the simple core archetypes from the Apache Maven project
+    as well as providing a survey of some interesting third-party
+    archetypes.</para>
 
     <section id="archetype-sect-common-maven">
       <title>Common Maven Archetypes</title>
@@ -330,7 +331,7 @@ package: org.sonatype.mavenbook
       <filename>\${basedir}/src/main/webapp/WEB-INF</filename>, and it doesn't
       even go as far as providing a Servlet for you to customize. In <xref
       linkend="archetype-sect-third-party" /> you'll see a quick survey of
-      some of the more notable third-party archetype such as the AppFuse and
+      some of the more notable third-party archetypes such as the AppFuse and
       Cocoon artifacts.</para>
 
       <para>The following archetypes can be found in the groupId
@@ -644,7 +645,7 @@ $ <command>mvn jetty:run</command>
         <primary>archetypes</primary>
 
         <secondary>publishing</secondary>
-      </indexterm>Once you've generated a good set of artifacts, you will
+      </indexterm>Once you've generated a good set of archetypes, you will
     probably want to share them with the world. To do this, you'll need to
     create something called an Archetype catalog. An Archetype catalog is an
     XML file which the Maven Archetype plugin can consult to locate archetypes
@@ -684,7 +685,7 @@ $ <command>mvn jetty:run</command>
   &lt;/archetypes&gt;
 
 &lt;/archetype-catalog&gt;</programlisting>To generate such a catalog, you'll
-      need crawl a Maven repository and generate this catalog XML file. The
+      need to crawl a Maven repository and generate this catalog XML file. The
       Archetype plugin has a goal named crawl which does just this, and it
       assumes that it has access to the file system that hosts a repository.
       If you run archetype:crawl from the command line with no arguments, the

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
 <chapter id="running">
   <title>Running Maven</title>
 
@@ -796,8 +796,8 @@ OS name: "mac os x" version: "10.6.1" arch: "x86_64" Family: "mac"
         </indexterm>The <command>-pl</command> or
       <command>--projects</command> option allows you to select a list of
       projects from a multimodule project. This option can be useful if you
-      are working on a specific set of projects, and you'd rather not wait
-      through a full build of a multi-module project during a development
+      are working on a specific set of projects, and you'd rather not wait for
+      a full build of a multi-module project during a development
       cycle.</para>
 
       <para>Assume that you are working on the multi-module project with the
