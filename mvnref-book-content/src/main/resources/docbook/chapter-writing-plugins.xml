@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
 <chapter id="writing-plugins">
   <title>Writing Plugins</title>
 
@@ -16,7 +16,7 @@
 
         <secondary>developing plugins</secondary>
       </indexterm>While this chapter covers an advanced topic, don't let the
-    idea of writing a Maven plugin intimidate. For all of the theory and
+    idea of writing a Maven plugin intimidate you. For all of the theory and
     complexity of this tool, the fundamental concepts are easy to understand
     and the mechanics of writing a plugin are straightforward. After you read
     this chapter, you will have a better grasp of what is involved in creating
@@ -489,10 +489,10 @@
           <primary>developing plugins</primary>
 
           <secondary>mojo configuration</secondary>
-        </indexterm>Next is the declaration of the each Mojo. The plugin
-      element contains an element named mojos which contains a mojo element
-      for each mojo present in the Plugin. Each mojo element contains the
-      following configuration elements:</para>
+        </indexterm>Next is the declaration of each Mojo. The plugin element
+      contains an element named mojos which contains a mojo element for each
+      mojo present in the Plugin. Each mojo element contains the following
+      configuration elements:</para>
 
       <variablelist>
         <varlistentry>
@@ -512,7 +512,7 @@
 
           <listitem>
             <para>This contains a short description of the goal to display to
-            the use when they use the Help plugin to generate plugin
+            the user when they use the Help plugin to generate plugin
             documentation.</para>
           </listitem>
         </varlistentry>
@@ -538,7 +538,7 @@
           <listitem>
             <para>Specifies that a given goal cannot be executed outside of a
             project. The goal requires a project with a
-            <acronym>POM</acronym>. The default value for this
+            <acronym>POM</acronym>. The default value for
             <varname>requiresProject</varname> is
             <varname>true</varname>.</para>
           </listitem>
@@ -571,8 +571,7 @@
             <varname>aggregator</varname> set to <varname>true</varname>
             should only be run against the top-level project in a Maven build.
             The default value of <varname>aggregator</varname> is
-            <varname>false</varname>. Aggregator is slated for deprecation in
-            a future release of Maven.</para>
+            <varname>false</varname>.</para>
           </listitem>
         </varlistentry>
 
@@ -1067,7 +1066,7 @@ public class EchoMojo extends AbstractMojo
 
       <para>As you can see in <xref linkend="ex-maven-metadata" />, this
       <filename>maven-metadata-central.xml</filename> file in your local
-      repository is what makes it possible for your to execute <command>mvn
+      repository is what makes it possible for you to execute <command>mvn
       surefire:test</command>. Maven scans
       <varname>org.apache.maven.plugins</varname> and
       <varname>org.codehaus.mojo</varname>: plugins from
@@ -1180,7 +1179,7 @@ public class EchoMojo extends AbstractMojo
       <sgmltag>pluginGroups</sgmltag> in your
       <filename>~/.m2/settings.xml</filename>, you should be able to execute
       the <classname>EchoMojo</classname> by running <command>mvn
-      echo:blah</command> from any directory.</para>
+      blah:echo</command> from any directory.</para>
     </section>
 
     <section id="writing-plugins-sect-logging">
@@ -1788,9 +1787,9 @@ private ZipArchiver zipArchiver;</programlisting>
       bound to the generate-resources phase. This goal generates the plugin
       descriptor from annotations on your Mojo. To configure a Mojo parameter,
       you should use the following annotations on either the private member
-      variables for each of your Mojo's parameters. You can also use these
-      annotations on public setter methods, but the most common convention for
-      Maven plugins is to annotate private member variables directly.</para>
+      variables for each of your Mojo's parameters on public setter methods
+      for each property. The most common convention for Maven plugins is to
+      annotate private member variables directly.</para>
 
       <variablelist>
         <varlistentry>
@@ -1819,7 +1818,7 @@ private ZipArchiver zipArchiver;</programlisting>
             <para>If this annotation is present, a valid value for this
             parameter is required prior to Mojo execution. If Maven tries to
             execute this Mojo and the parameter has a null value, Maven will
-            throw and error when it tries to execute this goal.</para>
+            throw an error when it tries to execute this goal.</para>
           </listitem>
         </varlistentry>
 
@@ -1892,8 +1891,8 @@ private ZipArchiver zipArchiver;</programlisting>
     that lifecycles can be customized by packaging types. A plugin can both
     introduce a new packaging type and customize the lifecycle. In this
     section, you are going to learn how you can customize the lifecycle from a
-    custom Maven plugin. You are also some to see how you can tell a Mojo to
-    execute a parallel lifecycle.</para>
+    custom Maven plugin. You are going to learn how to execute a parallel
+    lifecycle.</para>
 
     <section id="writing-plugins-sect-execute-parallel-lifecycle">
       <title>Executing a Parallel Lifecycle</title>
@@ -1905,33 +1904,7 @@ private ZipArchiver zipArchiver;</programlisting>
       <classname>@execute</classname> annotation on a Mojo class. This
       annotation will cause Maven to spawn a parallel build and execute a goal
       or a lifecycle in a parallel instance of Maven that isn't going to
-      affect the current build. Maybe you wrote some Mojo that you can to run
-      once a day that runs <command>mvn install</command> and then packages up
-      all of the output in some sort of customized distribution format. Your
-      Mojo descriptor could tell Maven that before you execute your
-      <classname>CustomMojo</classname>, you'd like it to execute the default
-      lifecycle up to the install phase and then expose the results of that
-      project to your Mojo as the property
-      <varname>\${executedProject}</varname>. You could then reference
-      properties in that project to before some sort of post
-      processing.</para>
-
-      <para>Another possibility is that you have a goal that does something
-      completely unrelated to the default lifecycle. Let's consider something
-      completely unexpected, maybe you have a goal that turns a
-      <acronym>WAV</acronym> file into an <acronym>MP3</acronym> using
-      something like <acronym>LAME</acronym>, but before you do that, you want
-      to step through a lifecycle that turns a <acronym>MIDI</acronym> file to
-      a <acronym>WAV</acronym>. (You can use Maven for anything; this isn't
-      that "far out".) You've created a "midi-sound" lifecycle, and you want
-      to include the output of the <varname>midi-sound</varname> lifecycle's
-      <varname>install</varname> phase in your web application project which
-      has a <varname>war</varname> packaging type. Since your project is
-      running in the <varname>war</varname> packaging lifecycle, you'll need
-      to have a goal that effectively forks off an isolated build and runs
-      through the <varname>midi-source</varname> lifecycle. You would do this
-      by annotating your mojo with <varname>@execute lifecycle="midi-source"
-      phase="install"</varname>.</para>
+      affect the current build. </para>
 
       <variablelist>
         <varlistentry>
@@ -1962,7 +1935,7 @@ private ZipArchiver zipArchiver;</programlisting>
           <listitem>
             <para>This will execute the given alternate lifecycle. A custom
             lifecycle can be defined in
-            <filename>META-INF/maven/lifecycle.xml</filename>.</para>
+            <filename>META-INF/maven/lifecycles.xml</filename>.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -1974,16 +1947,16 @@ private ZipArchiver zipArchiver;</programlisting>
       <para><indexterm>
           <primary>custom lifecycle</primary>
         </indexterm>A custom lifecycle must be packaged in the plugin under
-      the <filename>META-INF/maven/lifecycle.xml</filename> file. You can
+      the <filename>META-INF/maven/lifecycles.xml</filename> file. You can
       include a lifecycle under <filename>src/main/resources</filename> in
-      <filename>META-INF/maven/lifecycle.xml</filename>. The following
+      <filename>META-INF/maven/lifecycles.xml</filename>. The following
       <filename>lifecycle.xml</filename> declares a lifecycle named
       <varname>zipcycle</varname> that contains only the
       <varname>zip</varname> goal in a <varname>package</varname>
       phase.</para>
 
       <para><example>
-          <title>Define a Custom Lifecycle in lifecycle.xml</title>
+          <title>Define a Custom Lifecycle in lifecycles.xml</title>
 
           <programlisting language="xml">&lt;lifecycles&gt;
   &lt;lifecycle&gt;
@@ -2005,15 +1978,15 @@ private ZipArchiver zipArchiver;</programlisting>
 </programlisting>
         </example></para>
 
-      <para>If you wanted to execute the <varname>zipcycle</varname> phase
+      <para>If you wanted to execute the <varname>zipcycle</varname> lifecycle
       within another build, you could then create a
       <classname>ZipForkMojo</classname> which uses the
       <classname>@execute</classname> annotation to tell Maven to step through
-      the <varname>zipcycle</varname> phase to package when the
+      the <varname>zipcycle</varname> lifecycle when the
       <classname>ZipForkMojo</classname> is executed.</para>
 
       <para><example>
-          <title>Forking a Customer Lifecycle from a Mojo</title>
+          <title>Forking a Custom Lifecycle from a Mojo</title>
 
           <programlisting language="java">/**
  * Forks a zip lifecycle.
@@ -2070,15 +2043,13 @@ public class ZipForkMojo extends AbstractMojo
 
       <para>Once you've created your own lifecycle and spawned it from a Mojo.
       The next question you might have is how do you override the default
-      lifecycle. How do you create custom lifecycles and attach them to
+      lifecycle? How do you create custom lifecycles and attach them to
       projects? In <xref linkend="lifecycle" />, we saw that the packaging of
       a project defines the lifecycle of a project. There's something
-      different about almost every packaging type; <varname>war</varname>
-      attached different goals to package, custom lifecycles like
-      <varname>swf</varname> from the Israfil Flex 3 plugin attach different
-      goals to the compile phase. When you create a custom lifecycle, you can
-      attach that lifecycle to a packaging type by supplying some Plexus
-      configuration in your plugin's archive.</para>
+      different about almost every packaging type; each packaging type
+      attaches different goals to the default lifecycle. When you create a
+      custom lifecycle, you can attach that lifecycle to a packaging type by
+      supplying some Plexus configuration in your plugin's archive.</para>
 
       <para>To define a new lifecycle for a new packaging type, you'll need to
       configure a <classname>LifecycleMapping</classname> component in Plexus.

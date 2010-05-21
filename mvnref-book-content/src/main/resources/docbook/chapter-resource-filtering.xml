@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
 <chapter id="resource-filtering">
   <title>Properties and Resource Filtering</title>
 
@@ -59,8 +59,8 @@
 
     <programlisting language="java">\${project.version}</programlisting>
 
-    <para>There some implicit properties available in any Maven project, these
-    implicit properties are:</para>
+    <para>There are some implicit properties available in any Maven project,
+    these implicit properties are:</para>
 
     <variablelist>
       <varlistentry>
@@ -123,7 +123,7 @@
     <para>In addition to the implicit properties listed above, a Maven
     <acronym>POM</acronym>, Maven Settings, or a Maven Profile can define a
     set of arbitrary, user-defined properties. The following sections provide
-    so detail on the various properties available in a Maven project.</para>
+    some detail on the various properties available in a Maven project.</para>
 
     <section id="resource-filtering-sect-project-properties">
       <title>Maven Project Properties</title>
@@ -136,13 +136,14 @@
       name is referencing a property of the Maven Project Object Model
       (<acronym>POM</acronym>). Specifically, you are referencing a property
       of the <classname>org.apache.maven.model.Model</classname> class which
-      is being exposed as the implicit variable project. When you reference a
-      property using this implicit variable, you are using simple dot notation
-      to reference a bean property of the <classname>Model</classname> object.
-      For example, when you reference <varname>\${project.version}</varname>,
-      you are really invoking the <methodname>getVersion()</methodname> method
-      on the instance of <classname>Model</classname> that is being exposed as
-      project.</para>
+      is being exposed as the implicit variable <varname>project</varname>.
+      When you reference a property using this implicit variable, you are
+      using simple dot notation to reference a bean property of the
+      <classname>Model</classname> object. For example, when you reference
+      <varname>\${project.version}</varname>, you are really invoking the
+      <methodname>getVersion()</methodname> method on the instance of
+      <classname>Model</classname> that is being exposed as
+      <varname>project</varname>.</para>
 
       <para>The <acronym>POM</acronym> is also represented in the
       <filename>pom.xml</filename> document present in all Maven projects.
@@ -375,7 +376,7 @@
       use <varname>\${user.home}</varname> instead of
       <varname>\${env.HOME}</varname>. If you do this, you'll end up with a
       more portable build that is more likely to adhere to the
-      Write-One-Run-Anywhere (<acronym>WORA</acronym>) promise of the Java
+      Write-Once-Run-Anywhere (<acronym>WORA</acronym>) promise of the Java
       platform.</para>
     </section>
 
@@ -417,7 +418,7 @@
             </row>
 
             <row>
-              <entry>java.vendor.url</entry>
+              <entry><varname>java.vendor.url</varname></entry>
 
               <entry>Java vendor URL</entry>
             </row>
@@ -604,10 +605,8 @@
       <varname>hibernate.version</varname> is referenced in a dependency
       declaration. Using the period character as a separator in property names
       is a standard practice throughout Maven <acronym>POM</acronym>s and
-      Profiles. There is nothing special about using a period as a separator;
-      to Maven "hibernate.version" is just a key used to retrieve the property
-      value "3.3.0.ga". The next example shows you how to define a property in
-      a profile from a Maven <acronym>POM</acronym>.</para>
+      Profiles. The next example shows you how to define a property in a
+      profile from a Maven <acronym>POM</acronym>.</para>
 
       <example>
         <title>User-defined Properties in a Profile in a POM</title>
@@ -644,13 +643,13 @@
         <primary>resource filtering</primary>
       </indexterm>You can use Maven to perform variable replacement on project
     resources. When resource filtering is activated, Maven will scan resources
-    for references to Maven property references surrounded by
-    <varname>\${</varname> and <varname>}</varname>. When it finds these
-    references it will replace them with the appropriate value in much the
-    same way the properties defined in the previous section can be referenced
-    from a <acronym>POM</acronym>. This feature is especially helpful when you
-    need to parameterize a build with different configuration values depending
-    on the target deployment platform.</para>
+    for property references surrounded by <varname>\${</varname> and
+    <varname>}</varname>. When it finds these references it will replace them
+    with the appropriate value in much the same way the properties defined in
+    the previous section can be referenced from a <acronym>POM</acronym>. This
+    feature is especially helpful when you need to parameterize a build with
+    different configuration values depending on the target deployment
+    platform.</para>
 
     <para>Often a <filename>.properties</filename> file or an
     <acronym>XML</acronym> document in <filename>src/main/resources</filename>
@@ -668,11 +667,11 @@
     <para>Using Maven resource filtering you can reference Maven properties
     and then use Maven profiles to define different configuration values for
     different target deployment environments. To illustrate this feature,
-    assume that you have a project which uses a the Spring Framework to
+    assume that you have a project which uses the Spring Framework to
     configure a <classname>BasicDataSource</classname> from the <ulink
     url="http://commons.apache.org/dbcp">Commons DBCP</ulink> project. Your
     project may contain a file in <filename>src/main/resources</filename>
-    named <filename>applicationContact.xml</filename> which contains the
+    named <filename>applicationContext.xml</filename> which contains the
     <acronym>XML</acronym> listed in <xref
     linkend="ex-filter-spring" />.</para>
 
@@ -703,11 +702,12 @@
     <varname>jdbc.url</varname> and <varname>jdbc.username</varname> with the
     values you defined in your pom.xml. Resource filtering is disabled by
     default to prevent any unintentional resource filtering. To turn on
-    resource filter, you need to use the resources child element of the build
-    element in a <acronym>POM</acronym>. <xref linkend="ex-filter-pom" />
-    shows a <acronym>POM</acronym> which defines the variables referenced in
-    <xref linkend="ex-filter-spring" /> and which activates resource filtering
-    for every resource under <filename>src/main/resources</filename>.</para>
+    resource filtering, you need to use the <sgmltag>resources</sgmltag> child
+    element of the build element in a <acronym>POM</acronym>. <xref
+    linkend="ex-filter-pom" /> shows a <acronym>POM</acronym> which defines
+    the variables referenced in <xref linkend="ex-filter-spring" /> and which
+    activates resource filtering for every resource under
+    <filename>src/main/resources</filename>.</para>
 
     <example id="ex-filter-pom">
       <title>Defining Variables and Activating Resource Filtering</title>
@@ -724,8 +724,10 @@
   ...
   &lt;build&gt;
     &lt;resources&gt;
-      &lt;resource&gt;src/main/resources&lt;/resource&gt;
-      &lt;filtering&gt;true&lt;/filtering&gt;
+      &lt;resource&gt;
+        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+        &lt;filtering&gt;true&lt;/filtering&gt;
+      &lt;/resource&gt;
     &lt;/resources&gt;
   &lt;/build&gt;
   ...
