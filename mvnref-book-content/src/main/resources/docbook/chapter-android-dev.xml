@@ -158,10 +158,10 @@
         repository. If you decide to only install a subset of the components
         the tool can be used with profile options to only install or deploy
         some artifacts. This can be done by specifying the platform API
-        versions as a profile name: <programlisting>mvn install -P 2.1</programlisting>Available
+        versions as a profile name: <programlisting>mvn install -P 2.2</programlisting>Available
         profile names are <varname>1.5</varname>,
-        <varname>1.6</varname>, <varname>2.0.1</varname> and
-        <varname>2.1</varname>.</para>
+        <varname>1.6</varname>, <varname>2.1</varname> and
+        <varname>2.2</varname>.</para>
       </section>
     </section>
 
@@ -288,7 +288,7 @@
       folder of the Android SDK. The current valid values are
       <varname>1.5_r3</varname>,
       <varname>1.6_r2</varname>,
-      <varname>2.0.1_r1</varname> and <varname>2.1_r1</varname>. Simply browse
+      <varname>2.1_r2</varname> and <varname>2.2_r1</varname>. Simply browse
       the android folder of your maven repository/repository server to see
       what the exact versions are. It is important to note that the <varname>scope</varname>
       of the dependeny is declared as provided. This is necessary since we do not want this dependency to be
@@ -361,7 +361,7 @@
     &lt;dependency&gt;
         &lt;groupId&gt;android&lt;/groupId&gt;
         &lt;artifactId&gt;android&lt;/artifactId&gt;
-        &lt;version&gt;2.0_r1&lt;/version&gt;
+        &lt;version&gt;2.2_r1&lt;/version&gt;
         &lt;scope&gt;provided&lt;/scope&gt;
     &lt;/dependency&gt;
                 </programlisting>
@@ -418,14 +418,14 @@
         <programlisting>&lt;dependency&gt;
   &lt;groupId&gt;com.google.android.maps&lt;/groupId&gt;
   &lt;artifactId&gt;maps&lt;/artifactId&gt;
-  &lt;version&gt;7_r1&lt;/version&gt;
+  &lt;version&gt;8_r1&lt;/version&gt;
   &lt;scope&gt;provided&lt;/scope&gt;
 &lt;/dependency&gt;      </programlisting>
       </example>
 
       <para>The valid versions currently are <varname>3_r3</varname>,
       <varname>4_r2</varname>,
-      <varname>6_r1</varname> and <varname>7_r1</varname>. Simply browse the
+      <varname>7_r1</varname> and <varname>8_r1</varname>. Simply browse the
       android folder of your maven repository/repository server to see what
       the versions are.</para>
     </section>
