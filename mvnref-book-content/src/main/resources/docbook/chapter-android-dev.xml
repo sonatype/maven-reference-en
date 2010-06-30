@@ -386,7 +386,7 @@
 
         <para>The Maven Android Plugin Samples codebase contains two examples
         for a project set up in this manner. The setup of the instrumentation
-        test application with the Maven Android Plugin is like an additional separate module with <varname>apk<varname>
+        test application with the Maven Android Plugin is like an additional separate module with <varname>apk</varname>
             packaging.
         <programlisting>
     &lt;dependencies&gt;
