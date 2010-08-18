@@ -9,6 +9,52 @@
   reverse chronological order starting with ${project.version}.</para>
 
   <section>
+    <title>Changes in Edition 0.5</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fixed an error plugin prefix name "blah" in <xref
+        linkend="writing-plugins-sect-plugin-prefix" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-145">MVNREF-145</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Corrected XML for resource definition in <xref
+        linkend="ex-filter-pom" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-143">MVNREF-143</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Changed lifecycle.xml to lifecycles.xml in <xref
+        linkend="writing-plugins-sect-plugins-lifecycle" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-142">MVNREF-142</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed the examples download link. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-140">MVNREF-140</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Various typos fixed throughout the book. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-139">MVNREF-139</ulink>,
+        <ulink
+        url="https://issues.sonatype.org/browse/MVNREF-138">MVNREF-138</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Thanks to Pascal Thivent for reporting errors in the plugin chapter.
+    Thanks to Emmanuel Hugonnet for reporting an error in the filtering
+    chapter and the writing plugins chapter. Thanks to Steffan Westcott for
+    reporting an error with the examples download link.</para>
+
+    <para>Special thanks to David M. Karr for reporting various typos and
+    errors throughout the book.</para>
+  </section>
+
+  <section>
     <title>Changes in Edition 0.4</title>
 
     <para>The following changes were made:</para>
