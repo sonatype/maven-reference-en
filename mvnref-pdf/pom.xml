@@ -210,13 +210,13 @@
 	                  <outputDir>${basedir}/target</outputDir>
 	      <outputFilename>mvnref-complete.pdf</outputFilename>
 	      <pdfs>
-		      <pdf>${basedir}/src/main/resources/pdf/maven-reference-cover.pdf</pdf>
-		      <pdf>${basedir}/src/main/resources/pdf/title-page.pdf</pdf>
-		      <pdf>${basedir}/src/main/resources/pdf/copyright-page.pdf</pdf>
-		      <pdf>${basedir}/src/main/resources/pdf/promo-page.pdf</pdf>
-		      <pdf>${basedir}/src/main/resources/pdf/blank-page.pdf</pdf>
-		      <pdf>${project.build.directory}/docbkx/pdf/public-book.pdf</pdf>
-		      <pdf>${basedir}/src/main/resources/pdf/promo-page.pdf</pdf>	      </pdfs>	
+		      <pdf>${basedir}/src/main/resources/maven-reference-cover.pdf</pdf>
+		      <pdf>${basedir}/src/main/resources/title-page.pdf</pdf>
+		      <pdf>${basedir}/src/main/resources/copyright-page.pdf</pdf>
+		      <pdf>${basedir}/src/main/resources/promo-page.pdf</pdf>
+		      <pdf>${basedir}/src/main/resources/blank-page.pdf</pdf>
+		      <pdf>${project.build.directory}/public-book.pdf</pdf>
+		      <pdf>${basedir}/src/main/resources/promo-page.pdf</pdf>	      </pdfs>	
 	              </configuration>
 	          </execution>
 	      </executions>
