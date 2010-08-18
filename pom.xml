@@ -3,16 +3,23 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.sonatype.mvnrefbook</groupId>
   <artifactId>mvnref-book-parent</artifactId>
-  <version>0.5</version>
+  <version>0.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Maven: The Complete Reference (Parent Project)</name>
   <description>A book about Apache Maven 2.x</description>
   
   <url>http://sonatype.com/book</url>
+  <properties>
+    <docbkx-tools.version>2.0.11-SNAPSHOT</docbkx-tools.version>
+  </properties>
   
   <modules>
-    <module>mvnref-book-examples</module>
-    <module>mvnref-book-content</module>
+    <module>mvnref-examples</module>
+    <module>mvnref-content</module>
+    <module>mvnref-pdf</module>
+    <module>mvnref-html</module>
+    <module>mvnref-epub</module>
+    <module>mvnref-site</module>
   </modules>
   
   <profiles>
