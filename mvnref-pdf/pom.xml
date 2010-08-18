@@ -7,7 +7,7 @@
   </parent>
   <artifactId>mvnref-book-content</artifactId>
   <packaging>jar</packaging>
-  <name>Maven: The Complete Reference (XML, HTML, PDF, and Site)</name>
+  <name>Maven: The Complete Reference (PDF)</name>
   <description>A book about Apache Maven 2.x</description>
 
 

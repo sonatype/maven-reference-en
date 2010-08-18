@@ -116,6 +116,7 @@
 				<center><img src="http://www.sonatype.com/system/files/images/maven-reference-cover.png" width="150"/></center>
 <ul>
   <li><a href="http://www.sonatype.com/maven/documentation/download-reference?file=books/maven-complete-reference.pdf">Download the Maven Reference PDF</a></li>
+  <li><a href="http://www.sonatype.com/maven/documentation/download-reference?file=books/maven-complete-reference.epub">Download the Maven Reference ePub</a></li>
   <li><a href="http://www.lulu.com/product/paperback/maven-the-complete-reference/6014509">Purchase a Printed Copy</a></li>
   <li><a href="https://issues.sonatype.org/browse/MVNREF">Report a Typo or an Error</a></li>
 </ul>

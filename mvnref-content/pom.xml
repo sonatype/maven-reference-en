@@ -7,7 +7,7 @@
   </parent>
   <artifactId>mvnref-content</artifactId>
   <packaging>jar</packaging>
-  <name>Maven: The Complete Reference (XML, HTML, PDF, and Site)</name>
+  <name>Maven: The Complete Reference (Docbook XML)</name>
   <description>A book about Apache Maven 2.x</description>
   <organization>
     <name>Sonatype, Inc.</name>
@@ -29,7 +29,7 @@
     <m2eclipse.book.title>Developing with Eclipse and Maven</m2eclipse.book.title>
     <flexmojos.version>3.5.0</flexmojos.version>
     <flexmojos.repository>http://repository.sonatype.org/content/groups/flexgroup/</flexmojos.repository>
-    <examples.download.url>http://www.sonatype.com/books/mvnref-book/mvnref-book-examples-${project.version}-project.zip</examples.download.url>
+    <examples.download.url>http://www.sonatype.com/books/mvnref-book/mvnref-examples-${project.version}-project.zip</examples.download.url>
   </properties>
 
   <build>
