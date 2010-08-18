@@ -5,7 +5,7 @@
 	<artifactId>mvnref-book-parent</artifactId>
 	<version>0.6-SNAPSHOT</version>
   </parent>
-  <artifactId>mvnref-book-content</artifactId>
+  <artifactId>mvnref-pdf</artifactId>
   <packaging>jar</packaging>
   <name>Maven: The Complete Reference (PDF)</name>
   <description>A book about Apache Maven 2.x</description>
