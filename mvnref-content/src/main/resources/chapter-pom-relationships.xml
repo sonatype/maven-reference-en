@@ -503,11 +503,10 @@
       <acronym>POM</acronym> that is a mixture of various
       <acronym>POM</acronym>s. If you want to see a project’s effective
       <acronym>POM</acronym>, you’ll need to run the
-      <varname>effective-pom</varname> goal in the Maven Help plugin, which
-      was introduced earlier in the section <xref
-      linkend="installation-sect-help-plugin-install" />. To run the
-      <varname>effective-pom</varname> goal, execute the following in a
-      directory with a <filename moreinfo="none">pom.xml</filename>
+      <varname>effective-pom</varname> goal in the Maven Help plugin, which is
+      introduced in <xref linkend="installation-sect-help-plugin-install" />.
+      To run the <varname>effective-pom</varname> goal, execute the following
+      in a directory with a <filename moreinfo="none">pom.xml</filename>
       file:<indexterm>
           <primary>Help plugin</primary>
 
@@ -1158,8 +1157,10 @@
 &lt;/project&gt;</programlisting>
       </example>
 
-      <para>Once you've declared these dependencies as optional, you are
-      required to include them explicitly in the project that depends on
+      <para>Since you've declared these dependencies as optional in
+      <varname>my-project</varname>, if you've defined a project that depends
+      on <varname>my-project</varname> which needs those dependencies, you'll
+      have to include them explicitly in the project that depends on
       <varname>my-project</varname>. For example, if you were writing an
       application which depended on <varname>my-project</varname> and wanted
       to use the EHCache implementation, you would need to add the following
@@ -2099,9 +2100,10 @@
       <filename>pom.xml</filename> and run <command>mvn install</command>.
       Since the packaging type is <varname>pom</varname>, this POM is
       installed in your local repository. You can now add this project as a
-      dependency and all of its dependencies will be added to your project.
-      When you declare a dependency on this persistence-deps project, don't
-      forget to specify the dependency type as pom.</para>
+      dependency and all of its dependencies will be added as transitive
+      dependencies to your project. When you declare a dependency on this
+      persistence-deps project, don't forget to specify the dependency type as
+      pom.</para>
 
       <para><example>
           <title>Declaring a Dependency on a POM</title>
@@ -2250,7 +2252,7 @@
         different build configuration, and use drastically different plugins
         to create the content you are now reading. The
         <varname>sonatype</varname> <acronym>POM</acronym> gives the
-        organization a change to customize the default behavior of Maven and
+        organization a chance to customize the default behavior of Maven and
         supply some organization-specific information to configure deployment
         settings and build profiles.</para>
       </section>

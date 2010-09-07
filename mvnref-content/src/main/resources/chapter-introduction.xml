@@ -346,7 +346,7 @@
     "enterprise-scale builds".</para>
   </section>
 
-  <section id="installation-sect-compare-ant-maven" label="">
+  <section id="installation-sect-compare-ant-maven">
     <title>Comparing Maven with Ant</title>
 
     <para><indexterm>

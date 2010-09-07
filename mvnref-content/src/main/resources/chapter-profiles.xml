@@ -553,10 +553,10 @@
           &lt;version&gt;5.1.2600&lt;/version&gt;
         &lt;/os&gt;
         &lt;property&gt;
-          &lt;name&gt;mavenVersion&lt;/name&gt;<co
+          &lt;name&gt;customProperty&lt;/name&gt;<co
               id="coDef-profiles-active2-4"
               linkends="coRef-profiles-active2-4" />
-          &lt;value&gt;2.0.5&lt;/value&gt;
+          &lt;value&gt;BLUE&lt;/value&gt;
         &lt;/property&gt;
         &lt;file&gt;
           &lt;exists&gt;file2.properties&lt;/exists&gt;<co
@@ -600,9 +600,8 @@
                  id="coRef-profiles-active2-4">
           <para>The <sgmltag>property</sgmltag> element tells Maven to
           activate this profile if the property
-          <varname>mavenVersion</varname> is set to the value
-          <literal>2.0.5</literal>. <varname>mavenVersion</varname> is an
-          implicit property that is available to all Maven builds.</para>
+          <varname>customProperty</varname> is set to the value
+          <literal>BLUE</literal>. </para>
         </callout>
 
         <callout arearefs="coDef-profiles-active2-5"
