@@ -283,7 +283,7 @@ compiler:testCompile
       use the values defined directly under the <sgmltag>plugin</sgmltag>
       element for all goals which are executed in this plugin.</para>
 
-      <example id="ex-config-global-plugin-param" label="">
+      <example id="ex-config-global-plugin-param">
         <title>Configuring a Maven Plugin</title>
 
         <programlisting>&lt;plugin&gt;
@@ -360,7 +360,7 @@ compiler:testCompile
       be used when you execute <command>mvn assembly:assembly</command> from
       the command line.</para>
 
-      <example id="ex-configure-plugin-default-cli" label="" lang="">
+      <example id="ex-configure-plugin-default-cli">
         <title>Configuring Plugin Parameters for Command Line
         Execution</title>
 
@@ -411,7 +411,7 @@ compiler:testCompile
       parameters of a separate goal execution if you follow the example shown
       in <xref linkend="ex-configure-default-param" />.</para>
 
-      <example id="ex-configure-default-param" label="">
+      <example id="ex-configure-default-param">
         <title>Setting a Parameter for a Default Goal Execution</title>
 
         <programlisting>&lt;plugin&gt;

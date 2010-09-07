@@ -3,7 +3,7 @@
   <parent>
 	<groupId>org.sonatype.mvnrefbook</groupId>
 	<artifactId>mvnref-book-parent</artifactId>
-	<version>0.6</version>
+    <version>0.7</version>
   </parent>
   <artifactId>mvnref-content</artifactId>
   <packaging>jar</packaging>
@@ -23,6 +23,7 @@
     <organization.logo>http://cms.sonatype.com/sites/all/themes/sonatype/images/sonatype_logo.gif</organization.logo>
     <copyright.year>2010</copyright.year>
     <maven.version>2.2.1</maven.version>
+    <maven3.version>3.0-beta-3</maven3.version>
     <nexus.book.baseurl>http://books.sonatype.com/nexus-book-stage/</nexus.book.baseurl>
     <nexus.book.title>Repository Management with Nexus</nexus.book.title>
     <m2eclipse.book.baseurl>http://books.sonatype.com/m2eclipse-book-stage/</m2eclipse.book.baseurl>

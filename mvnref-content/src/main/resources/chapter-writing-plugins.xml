@@ -1326,15 +1326,15 @@ public class EchoMojo extends AbstractMojo
             <term>@aggregator (true|false)</term>
 
             <listitem>
-              <para>A Mojo with <varname>aggregator</varname> set to
-              <varname>true</varname> is supposed to only run once during the
-              execution of Maven, it was created to give plugin developers the
-              ability to summarize the output of a series of builds; for
-              example, to create a plugin that summarizes a report across all
-              projects included in a build. A goal with
-              <varname>aggregator</varname> set to <varname>true</varname>
-              should only be run against the top-level project in a Maven
-              build. The default value of <varname>aggregator</varname> is
+              <para>A Mojo with aggregator set to true is supposed to only run
+              once during the execution of Maven. It was created to give
+              plugin developers the ability to summarize the output of a
+              series of builds; for example, to create a plugin that
+              summarizes a report across all projects included in a build. A
+              goal with <varname>aggregator</varname> set to
+              <varname>true</varname> should only be run against the top-level
+              project in a Maven build. The default value of
+              <varname>aggregator</varname> is
               <varname>false</varname>.</para>
             </listitem>
           </varlistentry>
@@ -1904,7 +1904,7 @@ private ZipArchiver zipArchiver;</programlisting>
       <classname>@execute</classname> annotation on a Mojo class. This
       annotation will cause Maven to spawn a parallel build and execute a goal
       or a lifecycle in a parallel instance of Maven that isn't going to
-      affect the current build. </para>
+      affect the current build.</para>
 
       <variablelist>
         <varlistentry>

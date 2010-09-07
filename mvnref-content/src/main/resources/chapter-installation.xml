@@ -69,13 +69,66 @@ Java HotSpot(TM) Client VM (build 1.5.0_16-133, mixed mode, sharing)
     at <ulink
     url="http://maven.apache.org/download.html">http://maven.apache.org/download.html</ulink>.</para>
 
-    <para>When downloading Maven, make sure you choose the latest version of
-    Apache Maven from the Maven website. The latest version of Maven when this
-    book was written was Maven ${maven.version}. If you are not familiar with
-    the Apache Software License, you should familiarize yourself with the
-    terms of the license before you start using the product. More information
-    on the Apache Software License can be found in <xref
+    <para>When downloading Maven, you can download the latest available
+    version of Maven 2 or the latest available version of Maven 3. The latest
+    version of Maven 2 when this book was written was Maven ${maven.version},
+    and the latest version of Maven 3 was ${maven3.version}. If you are not
+    familiar with the Apache Software License, you should familiarize yourself
+    with the terms of the license before you start using the product. More
+    information on the Apache Software License can be found in <xref
     linkend="installation-sect-license" />.</para>
+
+    <section>
+      <title>Downloading Maven 2</title>
+
+      <para>To download Maven 2, go to <ulink
+      url="http://maven.apache.org/download.html">http://maven.apache.org/download.html</ulink>
+      and select the appropriate archive format for your platform. shows the
+      section of the download page that contains links to the Apache Maven
+      ${maven.version} archives.</para>
+
+      <figure id="fig-installation-maven2-download">
+        <title>Downloading Maven 2 from the Apache Maven web site</title>
+
+        <mediaobject>
+          <imageobject role="web">
+            <imagedata fileref="figs/web/installing-download-maven2.png" />
+          </imageobject>
+
+          <imageobject role="print">
+            <imagedata align="center"
+                       fileref="figs/print/installing-download-maven2.pdf"
+                       scalefit="0" width="100%" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section>
+      <title>Downloading Maven 3</title>
+
+      <para>To download Maven 3, go to <ulink
+      url="http://maven.apache.org/download.html">http://maven.apache.org/download.html</ulink>
+      and select the appropriate archive format for your platform. shows the
+      section of the download page that contains links to the Apache Maven
+      ${maven3.version} archives.</para>
+
+      <figure id="fig-installation-maven3-download">
+        <title>Downloading Maven 3 from the Apache Maven web site</title>
+
+        <mediaobject>
+          <imageobject role="web">
+            <imagedata fileref="figs/web/installing-download-maven3.png" />
+          </imageobject>
+
+          <imageobject role="print">
+            <imagedata align="center"
+                       fileref="figs/print/installing-download-maven3.pdf"
+                       scalefit="0" width="100%" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
   </section>
 
   <section id="installation-sect-maven-install">
