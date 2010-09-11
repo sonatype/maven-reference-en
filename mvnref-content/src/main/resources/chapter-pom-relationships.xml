@@ -2236,7 +2236,7 @@
         is the top-most <varname>sonatype</varname> <acronym>POM</acronym> and
         that it creates an archive of examples. In this case, the
         <varname>maven-book</varname> project exists only as a convenience and
-        as a aggregator of modules.</para>
+        as an aggregator of modules.</para>
 
         <para>Each of the three projects: <varname>maven-book</varname>,
         <varname>book-examples</varname>, and <varname>book-chapters</varname>
