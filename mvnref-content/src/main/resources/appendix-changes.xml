@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
+<appendix id="appendix-changes">
+  <title>Book Revision History</title>
+
+  <para>Many readers have been asking us to keep track of specific changes to
+  the book content, the following sections list changes made to the book in
+  reverse chronological order starting with ${project.version}.</para>
+
+  <section>
+    <title>Changes in Edition 0.6</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Maven: The Complete Reference is now available as an epub.
+        (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-88">MVNREF-88</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Changes in Edition 0.5</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fixed an error plugin prefix name "blah" in <xref
+        linkend="writing-plugins-sect-plugin-prefix" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-145">MVNREF-145</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Corrected XML for resource definition in <xref
+        linkend="ex-filter-pom" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-143">MVNREF-143</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Changed lifecycle.xml to lifecycles.xml in <xref
+        linkend="writing-plugins-sect-plugins-lifecycle" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-142">MVNREF-142</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed the examples download link. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-140">MVNREF-140</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Various typos fixed throughout the book. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-139">MVNREF-139</ulink>,
+        <ulink
+        url="https://issues.sonatype.org/browse/MVNREF-138">MVNREF-138</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Thanks to Pascal Thivent for reporting errors in the plugin chapter.
+    Thanks to Emmanuel Hugonnet for reporting an error in the filtering
+    chapter and the writing plugins chapter. Thanks to Steffan Westcott for
+    reporting an error with the examples download link.</para>
+
+    <para>Special thanks to David M. Karr for reporting various typos and
+    errors throughout the book.</para>
+  </section>
+
+  <section>
+    <title>Changes in Edition 0.4</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Updated the Flexmojos version to 3.5.0 in <xref
+        linkend="flex-dev" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-127">MVNREF-127</ulink>)<itemizedlist>
+            <listitem>
+              <para>Added some clarification to <xref
+              linkend="flex-dev-sect-referencing-repo-with-flex" /> that
+              suggests adding the flexmojos repository to an existing Nexus
+              installation.</para>
+            </listitem>
+
+            <listitem>
+              <para>Reorganized <xref linkend="flex-dev-sect-proxy-nexus" />.
+              Added level four headings to group content into more easily
+              understood chunks with respect to Nexus configuration.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed minor typos throughout <xref
+              linkend="flex-dev" />.</para>
+            </listitem>
+
+            <listitem>
+              <para>Updated all of the Flexmojos Maven Archetypes with most
+              recent pom.xml content. Changes affected <xref
+              linkend="flex-dev-sect-library-archetype" />, <xref
+              linkend="flex-dev-sect-application-archetype" />, and <xref
+              linkend="flex-dev-sect-multimodule-archetype" />.</para>
+            </listitem>
+
+            <listitem>
+              <para>Removed the warnings in the multi-module project exampe in
+              <xref linkend="flex-dev-sect-multimodule-archetype" />. There
+              used to be a problem with the archetype module dependencies,
+              this has been fixed in the recent Flexmojos releases.</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+
+      <listitem>
+        <para><xref linkend="profiles-sect-common-envs" /> was incorrect. The
+        property defined in ~/.m2/settings.xml was not activating the profile
+        defined in a project's POM. This seciton has been corrected. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-124">MVNREF-124</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed a code overflow in <xref
+        linkend="configuring-sect-exec-param" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-118">MVNREF-118</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed unescaped property references and a code overflow in <xref
+        linkend="ex-super-pom" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-117">MVNREF-117</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Added a new chapter: <xref linkend="android-dev" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-135">MVNREF-135</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The following contributors provided invaluable feedback and
+    contributions:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Emmanuel Hugonnet provided the issue report that prompted the
+        update of the Flexmojos chapter to version 3.5.0.</para>
+      </listitem>
+
+      <listitem>
+        <para>Benjamin Bentmann reported an inconsistency in <xref
+        linkend="profiles-sect-common-envs" />.</para>
+      </listitem>
+
+      <listitem>
+        <para>Manfred Moser was added as a primary author for contributing
+        <xref linkend="android-dev" />.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Changes in Edition 0.2.1</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Various small typos were address throughout the book.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Changes in Edition 0.2</title>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Added a Table of Figures. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-95"
+        userlevel="">MVNREF-95</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Added a Table of Examples. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-96">MVNREF-96</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Expanded and improved the book index. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-79">MVNREF-79</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The following errors and typos were addressed:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fixed caption and labelling problem with <xref
+        linkend="fig-running-aro-depends" />. (<ulink
+        url="???">MVNREF-25</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed missing label on <xref linkend="ex-running-aro-order" />.
+        (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-30">MVNREF-30</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed section title in <xref
+        linkend="running-sect-downloading-aro" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-22">MVNREF-22</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Fixed improper section label in <xref
+        linkend="installation-sect-common-interface" />, <xref
+        linkend="installation-sect-compare-ant-maven" />, and throughout <xref
+        linkend="running" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-89">MVNREF-89</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Added a mention of the short <command>-rf</command> version of
+        <command>--resume-from</command> to <xref
+        linkend="running-sect-resuming" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-52"
+        userlevel="">MVNREF-52</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Changes in Edition 0.1</title>
+
+    <para>This is the initial version of Maven: The Complete Reference.</para>
+
+    <para>The following changes were made:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Removed all cross-references that referenced content in the
+        former Part I of Maven: The Definitive Guide. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-1">MVNREF-1</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Uploaded new book to Scribd as both a private staging version
+        and a public production version. Updated the book project's pom.xml
+        accordingly. (<ulink type=""
+        url="https://issues.sonatype.org/browse/MVNREF-2">MVNREF-2</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Cloned Maven: The Definitive Guide's Github repository and
+        created a new Github repository for Maven: The Complete Reference.
+        (<ulink type="" url="https://issues.sonatype.org/browse/MVNREF-3"
+        userlevel="">MVNREF-3</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Modified the book project build to publish book to new URL and
+        to use new identifiers for all generated artifacts. (<ulink
+        url="https://issues.sonatype.org/browse/MVNEX-4">MVNREF-4</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Created a new book cover for the downloadable PDF version of
+        Maven: The Complete Reference. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-5">MVNREF-5</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Modified the title page for Maven: The Complete Reference.
+        (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-6">MVNREF-6</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Assigned new ISBN to Maven: The Complete Reference
+        (978-0-9842433-4-1, 0-9842433-4-8). (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-8">MVNREF-8</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Created a GetSatisfaction page for Maven: The Complete
+        Reference, here: <ulink
+        url="http://www.getsatisfaction.com/sonatype/products/sonatype_maven_the_complete_reference">http://www.getsatisfaction.com/sonatype/products/sonatype_maven_the_complete_reference</ulink>
+        . (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-9">MVNREF-9</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Created automated Hudson jobs for publishing to staging and
+        production. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-20">MVNREF-20</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Updated front matter and copyright to match other Sonatype
+        books. (<ulink type=""
+        url="https://issues.sonatype.org/browse/MVNREF-19"
+        userlevel="">MVNREF-19</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Modified the web site template for the book pages. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-7">MVNREF-7</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Add Maven: The Complete Reference to the Sonatype Books page.
+        (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-14">MVNREF-14</ulink>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Created a download form for Maven: The Complete Reference PDF.
+        (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-16">MVNREF-16</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>
