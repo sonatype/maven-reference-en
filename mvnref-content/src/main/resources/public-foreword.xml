@@ -25,84 +25,22 @@
 
   <para>Tim O'Brien (tobrien@sonatype.com)</para>
 
-  <para>September, 2010</para>
+  <para>November, 2010</para>
 
   <section>
-    <title>Changes in Edition 0.7</title>
+    <title>Changes in Edition 0.8</title>
 
-    <para>The following changes were made in September, 2010:</para>
+    <para>The following changes were made in November, 2010:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Added Maven 3.0 to the cover of the ePub and PDF. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-163">MVNREF-163</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Added Maven 3.0 download instructions to <xref
-        linkend="installation-sect-maven-download" />.(<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-164">MVNREF-164</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Fixed a typo in <xref
-        linkend="pom-relationships-sect-simple-project" />, "change" -&gt;
-        "chance" (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-150">MVNREF-150</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Fixed some wording issues with optional dependencies in <xref
-        linkend="pom-relationships-sect-optional" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-137">MVNREF-137</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Adding a missing label to <xref
-        linkend="ex-config-global-plugin-param" />, <xref
-        linkend="ex-configure-plugin-default-cli" />, and <xref
-        linkend="ex-configure-default-param" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-165">MVNREF-165</ulink>,
-        <ulink
-        url="https://issues.sonatype.org/browse/MVNREF-149">MVNREF-149</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Removed blank label attribute from <xref
-        linkend="installation-sect-compare-ant-maven" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-166">MVNREF-166</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Fixed a run-on sentence in <xref
-        linkend="writing-plugins-sect-class-annotations" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-151">MVNREF-151</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Changed the tense of a cross-reference in <xref
-        linkend="pom-relationships-sect-effective-pom" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-147">MVNREF-147</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Changed the name of the property in <xref
-        linkend="profiles-sect-activation-config" /> for clarity. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-129">MVNREF-129</ulink>)</para>
-      </listitem>
-
-      <listitem>
-        <para>Clarified language about grouping dependencies in <xref
-        linkend="pom-relationships-sect-grouping-deps" />. (<ulink
-        url="https://issues.sonatype.org/browse/MVNREF-134">MVNREF-134</ulink>)</para>
+        <para>The XML Namespace information for Maven Settings files was
+        incorrect throughout <xref linkend="appendix-settings" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-168">MVNREF-168</ulink>)</para>
       </listitem>
     </itemizedlist>
 
-    <para>Thanks to Florian Brunner for reporting a typo in the book. Thanks
-    to David M. Karr for suggesting improvements to the description of
-    optional dependencies. Thanks to Mark Vedder for finding run-on sentences
-    in the book. Thanks to Cedric Girard for finding examples with missing
-    labels. Thanks to Benjamin Bentmann for identifying an issue in the
-    profiles chapter.</para>
+    <para>Thanks to Stanley Brubaker for uncovering the Settings Namespace
+    error.</para>
   </section>
 </preface>
