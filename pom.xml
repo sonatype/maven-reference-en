@@ -11,6 +11,7 @@
   <url>http://sonatype.com/book</url>
   <properties>
     <docbkx-tools.version>2.0.11</docbkx-tools.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
   <modules>
