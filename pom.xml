@@ -12,7 +12,6 @@
   <properties>
     <docbkx-tools.version>2.0.11</docbkx-tools.version>
   </properties>
-  
   <modules>
     <module>mvnref-examples</module>
     <module>mvnref-content</module>
@@ -21,50 +20,6 @@
     <module>mvnref-epub</module>
     <module>mvnref-site</module>
   </modules>
-  
-  <profiles>
-    <profile>
-      <id>publish</id>
-      <distributionManagement>
-        <site>
-          <id>sonatype-site</id>
-          <name>Sonatype Book Examples</name>
-          <url>scp://site@172.16.0.1/home/site/books/mvnref-book/parent</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>publish-external</id>
-      <distributionManagement>
-        <site>
-          <id>sonatype-site</id>
-          <name>Sonatype Book Examples</name>
-          <url>scp://site@svn.sonatype.com/home/site/books/mvnref-book/parent</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>stage</id>
-      <distributionManagement>
-        <site>
-          <id>sonatype-site</id>
-          <name>Sonatype Book Examples</name>
-          <url>scp://site@172.16.0.1/home/site/books/mvnref-book-stage/parent</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>stage-external</id>
-      <distributionManagement>
-        <site>
-          <id>sonatype-site</id>
-          <name>Sonatype Book Examples</name>
-          <url>scp://site@svn.sonatype.com/home/site/books/mvnref-book-stage/parent</url>
-        </site>
-      </distributionManagement>
-    </profile>
-  </profiles>
-
   <repositories>
     <repository>
       <id>sonatype-public</id>
