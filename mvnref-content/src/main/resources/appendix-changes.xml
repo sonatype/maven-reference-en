@@ -9,6 +9,23 @@
   reverse chronological order starting with ${project.version}.</para>
 
   <section>
+    <title>Changes in Edition 0.8</title>
+
+    <para>The following changes were made in November, 2010:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>The XML Namespace information for Maven Settings files was
+        incorrect throughout <xref linkend="appendix-settings" />. (<ulink
+        url="https://issues.sonatype.org/browse/MVNREF-168">MVNREF-168</ulink>)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Thanks to Stanley Brubaker for uncovering the Settings Namespace
+    error.</para>
+  </section>
+
+  <section>
     <title>Changes in Edition 0.7</title>
 
     <para>The following changes were made in September, 2010:</para>
