@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.sonatype.mvnrefbook</groupId>
   <artifactId>mvnref-book-parent</artifactId>
-  <version>0.9-SNAPSHOT</version>
+  <version>0.9</version>
   <packaging>pom</packaging>
   <name>Maven: The Complete Reference (Parent Project)</name>
   <description>A book about Apache Maven 2.x</description>
