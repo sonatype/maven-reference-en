@@ -119,6 +119,7 @@
                           <goal>mesh-velocity</goal>
                       </goals>
                       <configuration>
+                          <bookId>mvnref</bookId>
 							<bookTitle>Maven: The Complete Reference</bookTitle>
 							<velocityTemplate>${basedir}/target/book-site/vm/book-template.html</velocityTemplate>
                       </configuration>
