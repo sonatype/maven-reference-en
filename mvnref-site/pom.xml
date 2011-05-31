@@ -14,6 +14,23 @@
           <plugin>
               <artifactId>maven-dependency-plugin</artifactId>
               <executions>
+          <execution>
+            <id>unpack-template</id>
+            <phase>site</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.sonatype.book</groupId>
+                  <artifactId>book-site</artifactId>
+                  <version>0.1-SNAPSHOT</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${basedir}/target/book-site</outputDirectory>
+            </configuration>
+          </execution>
 	              <execution>
 	                  <id>unpack-html</id>
 	                  <phase>site</phase>
@@ -102,7 +119,8 @@
                           <goal>mesh-velocity</goal>
                       </goals>
                       <configuration>
-                          <velocityTemplate>src/main/resources/vm/book-template.html</velocityTemplate>
+							<bookTitle>Maven: The Complete Reference</bookTitle>
+							<velocityTemplate>${basedir}/target/book-site/vm/book-template.html</velocityTemplate>
                       </configuration>
                   </execution>
               </executions>
