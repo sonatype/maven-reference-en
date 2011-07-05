@@ -30,7 +30,6 @@
 
     <para><indexterm>
         <primary>Android</primary>
-
         <secondary>configuring build environment</secondary>
       </indexterm>Before you attempt to build your Android libraries and
     applications with Maven, you will need to complete the following
@@ -42,14 +41,14 @@
       </listitem>
 
       <listitem>
-        <para>Install the Android API jar files into a local or remote Maven
-        repository</para>
+        <para>Configure Maven for simplified usage of the Maven Android Plugin</para>
       </listitem>
 
       <listitem>
-        <para>Configure Maven for simplified usage of the Maven Android
-        Plugin</para>
+        <para>Optionally install the Android Maps API jar files into a local or remote Maven
+        repository</para>
       </listitem>
+
     </itemizedlist>
 
     <section id="android-dev-sect-sdk-install">
@@ -77,94 +76,6 @@
       the SDK.</para>
     </section>
 
-    <section id="android-dev-sect-repository-install">
-      <title>Android artifact install into Maven repository</title>
-
-      <para>Once the SDK is installed you will need to provide the API JAR
-      files to Maven in a repository. The Maven Android SDK Deployer tool
-      allows you to do that for a single machine in a local repository as well
-      as for any number of machines in a remote repository server. <!-- TODO link to nexus... in general how much do we have
-        to explain here about this stuff, i would prefer to add links to the nexus book chapters somehow.. --></para>
-
-      <para>The Maven Android SDK deployer tool is available for download
-      at:</para>
-
-      <para><uri>http://github.com/mosabua/maven-android-sdk-deployer</uri></para>
-
-      <para>Simply click on the <varname>Download Source</varname> button and
-      extract the downloaded zip or tar archive in a folder of your choice. A
-      folder with a naming pattern of mosabua-maven-android-sdk-deployer-XXX
-      with XXX being a revision number like df824df will be created. Change
-      directories to this new maven-android-sdk directory: <programlisting>cd mosabua-maven-android-sdk-deployer-df824df</programlisting></para>
-
-      <section id="android-dev-sect-repository-install-local">
-        <title>Installation to local repository</title>
-
-        <para>In order to install the android API jar files from the different
-        platform revisions into your local repository you run the command in
-        the deployer folder.<programlisting>mvn clean install</programlisting>By
-        default this will install all android.jar and maps.jar files into your
-        local Maven repository. You should find all newly installed files in
-        the <varname>android</varname> and
-        <varname>com.google.android.maps</varname> group identifiers under
-        <filename>~/.m2/repository</filename>.</para>
-      </section>
-
-      <section id="android-dev-sect-repository-install-remote">
-        <title>Installation to remote repository</title>
-
-        <para>The above deployment works fine for one machine, but if you need
-        to supply a whole team of developers and a cluster of build machines
-        with the artifacts, you will want to deploy the artifacts once to a
-        remote repository server that is available to all users. If you are
-        not currently using a repository manager, you should download Nexus
-        and configure a user with permission to deploy artifacts to a
-        repository. To get started with Nexus, read the <ulink
-        url="http://www.sonatype.com/books/nexus-book/reference/install.html">Nexus
-        Installation chapter</ulink> in the free, online Nexus book.</para>
-
-        <para>As a first step you will need to edit the
-        <varname>repo.url</varname> property in the pom.xml in the top folder
-        of the Maven Android SDK Deployer tool to point to the repository you
-        want to publish to. Then you need to add a server with the correct
-        access credentials for the server to your Maven Settings file
-        (<filename>~/.m2/settings.xml</filename>). <example>
-            <title>Snippet for settings.xml for the repository server access
-            credentials</title>
-
-            <programlisting>&lt;settings&gt;
-    &lt;servers&gt;
-        &lt;server&gt;
-            &lt;id&gt;android.repo&lt;/id&gt;
-            &lt;username&gt;your username&lt;/username&gt;
-            &lt;password&gt;your password&lt;/password&gt;
-        &lt;/server&gt;
-    &lt;/servers&gt;
-&lt;/settings&gt;
-</programlisting>
-          </example>Once that configuration is completed you can deploy the
-        artifacts with the command <command>mvn deploy</command>. As a result
-        you should find the artifact in the repository of your remote server.
-        <!-- TODO ??
-          For more information about this stuff look at the documentation for the maven-deploy-plugin.
-          or better chapter bla in this book.. --></para>
-      </section>
-
-      <section id="android-dev-sect-repository-install-parts">
-        <title>Installation of a subset of all platforms</title>
-
-        <para>By default the Maven Android SDK Deployer tool will attempt to
-        install or deploy all versions of the platforms artifacts into a
-        repository. If you decide to only install a subset of the components
-        the tool can be used with profile options to only install or deploy
-        some artifacts. This can be done by specifying the platform API
-        versions as a profile name: <programlisting>mvn install -P 2.1</programlisting>Available
-        profile names are <varname>1.1</varname>, <varname>1.5</varname>,
-        <varname>1.6</varname>, <varname>2.0</varname> and
-        <varname>2.1</varname>.</para>
-      </section>
-    </section>
-
     <section id="android-dev-sect-plugin-config">
       <title>Configuring Maven for usage of the Maven Android Plugin</title>
 
@@ -184,6 +95,97 @@
 &lt;/pluginGroups&gt;        </programlisting>
       </example>
     </section>
+
+    <section id="android-dev-sect-repository-install">
+        <title>Android Maps artifact install into Maven repository</title>
+
+        <para>The Android artifacts necessary for building standard Android applications are available in the
+            Maven central repository. These artifacts were built from the Android open source code base.
+        </para>
+        <para>
+            If you are planning to use the Google Maps API or if you decide to use the android jar artifacts as shipped
+            with the SDK, you will need to provide these jar files to Maven in a repository. The Maven Android SDK
+            Deployer tool allows you to do that for a single machine in a local repository as well as for any number of
+            machines in a remote repository server.
+        </para>
+
+        <para>The Maven Android SDK Deployer tool is available for download
+        at:</para>
+
+        <para><uri>http://github.com/mosabua/maven-android-sdk-deployer</uri></para>
+
+        <para>Simply click on the <varname>Download Source</varname> button and
+        extract the downloaded zip or tar archive in a folder of your choice. A
+        folder with a naming pattern of mosabua-maven-android-sdk-deployer-XXX
+        with XXX being a revision number like df824df will be created. Change
+        directories to this new maven-android-sdk directory: <programlisting>cd mosabua-maven-android-sdk-deployer-df824df</programlisting></para>
+
+        <section id="android-dev-sect-repository-install-local">
+          <title>Installation to local repository</title>
+
+          <para>In order to install the jar files from the different
+          platform revisions into your local repository you run the command in
+          the deployer folder.<programlisting>mvn clean install</programlisting>By
+          default this will install all android.jar and maps.jar files into your
+          local Maven repository. You should find all newly installed files in
+          the <varname>android</varname> and
+          <varname>com.google.android.maps</varname> group identifiers under
+          <filename>~/.m2/repository</filename>.</para>
+        </section>
+
+        <section id="android-dev-sect-repository-install-remote">
+          <title>Installation to remote repository</title>
+
+          <para>The above deployment works fine for one machine, but if you need
+          to supply a whole team of developers and a cluster of build machines
+          with the artifacts, you will want to deploy the artifacts once to a
+          remote repository server that is available to all users. If you are
+          not currently using a repository manager, you should download Nexus
+          and configure a user with permission to deploy artifacts to a
+          repository. To get started with Nexus, read the <ulink
+          url="http://www.sonatype.com/books/nexus-book/reference/install.html">Nexus
+          Installation chapter</ulink> in the free, online Nexus book.</para>
+
+          <para>As a first step you will need to edit the
+          <varname>repo.url</varname> property in the pom.xml in the top folder
+          of the Maven Android SDK Deployer tool to point to the repository you
+          want to publish to. Then you need to add a server with the correct
+          access credentials for the server to your Maven Settings file
+          (<filename>~/.m2/settings.xml</filename>). <example>
+              <title>Snippet for settings.xml for the repository server access
+              credentials</title>
+
+              <programlisting>&lt;settings&gt;
+      &lt;servers&gt;
+          &lt;server&gt;
+              &lt;id&gt;android.repo&lt;/id&gt;
+              &lt;username&gt;your username&lt;/username&gt;
+              &lt;password&gt;your password&lt;/password&gt;
+          &lt;/server&gt;
+      &lt;/servers&gt;
+  &lt;/settings&gt;
+  </programlisting>
+            </example>Once that configuration is completed you can deploy the
+          artifacts with the command <command>mvn deploy</command>. As a result
+          you should find the artifact in the repository of your remote server.
+          </para>
+        </section>
+
+        <section id="android-dev-sect-repository-install-parts">
+          <title>Installation of a subset of all platforms</title>
+
+          <para>By default the Maven Android SDK Deployer tool will attempt to
+          install or deploy all versions of the platforms artifacts into a
+          repository. If you decide to only install a subset of the components
+          the tool can be used with profile options to only install or deploy
+          some artifacts. This can be done by specifying the platform API
+          versions as a profile name: <programlisting>mvn install -P 2.2</programlisting>Available
+          profile names are <varname>1.5</varname>,
+          <varname>1.6</varname>, <varname>2.1</varname> and
+          <varname>2.2</varname>.</para>
+        </section>
+      </section>
+
   </section>
 
   <section id="android-dev-sect-using">
@@ -221,7 +223,7 @@
 
       &lt;dependencies&gt;
           &lt;dependency&gt;
-              &lt;groupId&gt;android&lt;/groupId&gt;
+              &lt;groupId&gt;com.google.android&lt;/groupId&gt;
               &lt;artifactId&gt;android&lt;/artifactId&gt;
               &lt;version&gt;2.1_r1&lt;/version&gt;
               &lt;scope&gt;provided&lt;/scope&gt;
@@ -236,10 +238,10 @@
                     com.jayway.maven.plugins.android.generation2
                   &lt;/groupId&gt;
                   &lt;artifactId&gt;maven-android-plugin&lt;/artifactId&gt;
-                  &lt;version&gt;2.2.3-SNAPSHOT&lt;/version&gt;
+                  &lt;version&gt;2.5.0&lt;/version&gt;
                   &lt;configuration&gt;
                       &lt;sdk&gt;
-                          &lt;platform&gt;2.1&lt;/platform&gt;
+                          &lt;platform&gt;4&lt;/platform&gt;
                       &lt;/sdk&gt;
                       &lt;deleteConflictingFiles&gt;
                         true
@@ -249,10 +251,7 @@
               &lt;/plugin&gt;
               &lt;plugin&gt;
                   &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                  &lt;configuration&gt;
-                      &lt;source&gt;1.5&lt;/source&gt;
-                      &lt;target&gt;1.5&lt;/target&gt;
-                  &lt;/configuration&gt;
+                  &lt;version&gt;2.3&lt;/version&gt;
               &lt;/plugin&gt;
           &lt;/plugins&gt;
       &lt;/build&gt;
@@ -282,31 +281,33 @@
       specific calls to the Android SDK tools, that process resources, convert
       Java bytecode and so on.</para>
 
-      <para>The declared dependency to the android platform jar has to use the
-      version of the target platform as published into the Maven repository by
-      the Maven Android SDK Deployer. It, in turn, takes the library version
-      from the <varname> Platform.Version</varname> and the
-      <varname>Pkg.Revision</varname> values in the
-      <varname>source.properties</varname> file in the respective platforms
-      folder of the Android SDK. The current valid values are
-      <varname>1.1_r1</varname>, <varname>1.5_r3</varname>,
-      <varname>1.6_r2</varname>, <varname>2.0_r1</varname>,
-      <varname>2.0.1_r1</varname> and <varname>2.1_r1</varname>. Simply browse
-      the android folder of your maven repository/repository server to see
-      what the exact versions are.</para>
+        <para>The declared dependency to the android platform jar uses the version of the target platform as published
+            into the Maven central repository. Browse the central repository to see which versions are available. When
+            using the artifacts as deployed by the Maven Android SDK Deployer, simply browse the android folder of your
+            maven repository/repository server to see what the exact versions are. It is important to note that the
+            <varname>scope</varname>
+            of the dependency is declared as provided. This is necessary since we do not want this dependency to be
+            included into our application package. We just need the classes to be available at compile time. The android
+            jar as well as the Google maps jar files actually contain only empty stubs of all classes with all methods
+            throwing exceptions. As such only execution on the emulator and the device where the actual implementations
+            are available is possible.
+        </para>
 
       <para>The configuration of the Maven Compiler Plugin in the build is
       necessary since Android uses Java 5 language specification code with
       annotations, foreach loop and so on and the Java compiler needs to know
-      that. The main configuration of the Maven Android Plugin is done in the
-      build section, but out of the box only limited configuration is
-      necessary.</para>
+      that. The default of the Maven Compiler Plugin version 2.3 and higher is set to use Java 1.5, whereas earlier
+      versions are not.</para>
 
-      <para>To build the application and run it on an already started emulator
-      you could use <programlisting>mvn clean install android:deploy</programlisting><!--TODO potentially add commandline output for build here-->The
-      code for the example application is available as part of the
-      maven-android-plugin-samples available at
-      <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>.</para>
+        <para>The main configuration of the Maven Android Plugin is done in the build section, but out of the box only
+            limited configuration is necessary.
+        </para>
+
+        <para>To build the application and run it on an already started emulator you could use
+            <programlisting>mvn clean install android:deploy</programlisting>. The code for the example application is
+            available as part of the maven-android-plugin-samples available at
+            <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>.
+        </para>
     </section>
 
     <section id="android-dev-sect-test">
@@ -334,33 +335,95 @@
         moving the source code for the application and the test source code
         into <varname>src/main/java</varname> and
         <varname>src/test/java</varname> and reconfiguring the Eclipse project
-        files.</para>
+        files. As supported by the Maven Surefire Plugin TestNG as well as JUnit
+        can be used as the testing framework by adding the respective dependency to the
+        pom.xml like this:
+
+            <example>
+                <title>Adding JUnit or TestNG as testing framework</title>
+                <programlisting>
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.8.1&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    or
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.testng&lt;/groupId&gt;
+        &lt;artifactId&gt;testng&lt;/artifactId&gt;
+        &lt;version&gt;5.11&lt;/version&gt;
+        &lt;classifier&gt;jdk15&lt;/classifier&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;android&lt;/groupId&gt;
+        &lt;artifactId&gt;android&lt;/artifactId&gt;
+        &lt;version&gt;2.2_r1&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+                </programlisting>
+            </example>
+        It is important to use the scope test, since the testing framework will otherwise be included in your Android'
+            application package. A second important characteristic of this setup is that the dependency to Android is
+            after the Junit dependency. This is due to the fact that a stubbed junit is included in the Android jar itself
+            for instrumentation testing, when using the artifacts from the SDK. The classes in the actual jar are
+            exception throwing shells that will not allow your JUnit tests to run if they are picked up first in the
+            classpath by the surefire plugin. This ordering does not apply to TestNG or the artifacts from Maven central,
+            but it can be considered a good practice.
+        </para>
       </section>
 
       <section id="android-dev-sect-test-instrumentation">
         <title>Instrumentation tests</title>
 
-        <para>Instrumentation tests are integration tests bundled into an
-        application that run on the emulator or device and interact with
-        another deployed application to test the behaviour. The common setup
-        to run instrumentation tests would be two parallel projects, one for
-        the application and one for the instrumentation tests. These modules
-        are tied together as modules of a parent pom.</para>
+          <para>Instrumentation tests are integration tests bundled into an application that run on the emulator or
+              device and interact with another deployed application to test the behaviour. A Maven build run therefore
+              needs a running emulator or attached device to succeed.The common setup to run instrumentation tests would
+              be two parallel projects, one for the application and one for the instrumentation tests. These modules are
+              tied together as modules of a parent pom.
+          </para>
 
         <para>The Maven Android Plugin Samples codebase contains two examples
         for a project set up in this manner. The setup of the instrumentation
-        test application with the Maven Android Plugin is the same as for a
-        normal application with the added dependency to the application that
-        needs to be tested. It is important to add the <varname>type</varname>
-        of <varname>apk</varname> to the dependency to allow the Maven Android
-        Plugin to find the Android package of the application.
-        <programlisting>&lt;dependency&gt;
-  &lt;groupId&gt;com.simpligility.android&lt;/groupId&gt;
-  &lt;artifactId&gt;intents&lt;/artifactId&gt;
-  &lt;version&gt;0.1&lt;/version&gt;
-  &lt;type&gt;apk&lt;/type&gt;
-&lt;/dependency&gt;
-</programlisting></para>
+        test application with the Maven Android Plugin is like an additional separate module with <varname>apk</varname>
+            packaging.
+        <programlisting>
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.google.android&lt;/groupId&gt;
+            &lt;artifactId&gt;android&lt;/artifactId&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.google.android&lt;/groupId&gt;
+            &lt;artifactId&gt;android-test&lt;/artifactId&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.simpligility.android.morse&lt;/groupId&gt;
+            &lt;artifactId&gt;morseflash-app&lt;/artifactId&gt;
+            &lt;version&gt;${project.version}&lt;/version&gt;
+            &lt;type&gt;apk&lt;/type&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.simpligility.android.morse&lt;/groupId&gt;
+            &lt;artifactId&gt;morseflash-app&lt;/artifactId&gt;
+            &lt;version&gt;${project.version}&lt;/version&gt;
+            &lt;scope&gt;compile&lt;/scope&gt;
+            &lt;type&gt;jar&lt;/type&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;            
+    </programlisting></para>
+
+          <para>Looking at the example from the morseflash application the main difference are the dependencies as shown
+              above. As usual a dependency to Android has to be added. In addition a dependency to the android-test
+              artifact that contains the JUnit extensions, mock implementations and other helpers provided by the Android
+              SDK.</para>
+          <para>Furthermore a dependency to the application under test with the <varname>type</varname>
+        of <varname>apk</varname> is necessary. Optionally a <varname>compile</varname> scoped
+              dependency to the jar artifact helps with code completion and more during the development of the
+              instrumentation test clases.</para>
       </section>
     </section>
 
@@ -381,14 +444,14 @@
         <programlisting>&lt;dependency&gt;
   &lt;groupId&gt;com.google.android.maps&lt;/groupId&gt;
   &lt;artifactId&gt;maps&lt;/artifactId&gt;
-  &lt;version&gt;7_r1&lt;/version&gt;
+  &lt;version&gt;8_r1&lt;/version&gt;
   &lt;scope&gt;provided&lt;/scope&gt;
 &lt;/dependency&gt;      </programlisting>
       </example>
 
       <para>The valid versions currently are <varname>3_r3</varname>,
-      <varname>4_r2</varname>, <varname>5_r1</varname>,
-      <varname>6_r1</varname> and <varname>7_r1</varname>. Simply browse the
+      <varname>4_r2</varname>,
+      <varname>7_r1</varname> and <varname>8_r1</varname>. Simply browse the
       android folder of your maven repository/repository server to see what
       the versions are.</para>
     </section>
@@ -750,7 +813,10 @@
 
           <listitem>
             <para>The pull goal can be used to copy files or directories from
-            the device.</para>
+            the device. Source and destination file have to be specified with <varname>-Dandroid.source</varname> and
+                <varname>-Dandroid.destination</varname> or equivalent configuration in the pom.xml file. The optional 
+                parameter <varname>-Dandroid.device</varname> with a explicit value of for a device or emulator name
+                or simply <varname>usb</varname> or <varname>emulator</varname> can be used to copy to a specific device.</para>
           </listitem>
         </varlistentry>
 
@@ -759,7 +825,7 @@
 
           <listitem>
             <para>The pull goal can be used to copy files or directories to
-            the device.</para>
+            the device. The same configuration parameters as for the <varname>pull</varname> goal can be used.</para>
           </listitem>
         </varlistentry>
 
