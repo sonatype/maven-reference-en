@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
+"http://www.discursive.com/docbook/xml/4.5/docbookx.dtd">
 <appendix id="appendix-settings">
   <title>Appendix: Settings Details</title>
 
@@ -37,10 +37,11 @@
     <para><example>
         <title>Overview of top-level elements in settings.xml</title>
 
-        <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+        <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+
   &lt;localRepository/&gt;
   &lt;interactiveMode/&gt;
   &lt;usePluginRegistry/&gt;
@@ -73,10 +74,10 @@
       <para><example>
           <title>Simple top-level elements in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   &lt;localRepository&gt;\${user.dir}/.m2/repository&lt;/localRepository&gt;
   &lt;interactiveMode&gt;true&lt;/interactiveMode&gt;
   &lt;usePluginRegistry&gt;false&lt;/usePluginRegistry&gt;
@@ -167,10 +168,10 @@
       <para><example>
           <title>Server configuration in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;servers&gt;
     &lt;server&gt;
@@ -250,10 +251,10 @@
       <para><example>
           <title>Mirror configuration in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;mirrors&gt;
     &lt;mirror&gt;
@@ -314,10 +315,10 @@
       <para><example>
           <title>Proxy configuration in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;proxies&gt;
     &lt;proxy&gt;
@@ -428,10 +429,10 @@
       <para><example>
           <title>Defining Activation Parameters in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;profiles&gt;
     &lt;profile&gt;
@@ -615,10 +616,10 @@
       <para><example>
           <title>Setting the \${user.install} property in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;profiles&gt;
     &lt;profile&gt;
@@ -655,10 +656,10 @@
       <para><example>
           <title>Repository Configuration in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;profiles&gt;
     &lt;profile&gt;
@@ -773,10 +774,10 @@
       <example>
         <title>Plugin Repositories in settings.xml</title>
 
-        <programlisting>&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+        <programlisting>&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;profiles&gt;
     &lt;profile&gt;
@@ -817,10 +818,10 @@
       <para><example>
           <title>Setting active profiles in settings.xml</title>
 
-          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+          <programlisting language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+          http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
   ...
   &lt;activeProfiles&gt;
     &lt;activeProfile&gt;env-test&lt;/activeProfile&gt;

@@ -3,7 +3,7 @@
   <parent>
 	<groupId>org.sonatype.mvnrefbook</groupId>
 	<artifactId>mvnref-book-parent</artifactId>
-	<version>0.7-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>mvnref-site</artifactId>
   <packaging>jar</packaging>
@@ -14,6 +14,23 @@
           <plugin>
               <artifactId>maven-dependency-plugin</artifactId>
               <executions>
+          <execution>
+            <id>unpack-template</id>
+            <phase>site</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.sonatype.book</groupId>
+                  <artifactId>book-site</artifactId>
+                  <version>0.1-SNAPSHOT</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${basedir}/target/book-site</outputDirectory>
+            </configuration>
+          </execution>
 	              <execution>
 	                  <id>unpack-html</id>
 	                  <phase>site</phase>
@@ -93,7 +110,7 @@
           <plugin>
               <groupId>org.sonatype.book</groupId>
               <artifactId>book-sitemesh-plugin</artifactId>
-              <version>1.0</version>
+              <version>1.1-SNAPSHOT</version>
               <executions>
                   <execution>
                       <id>mesh-velocity</id>
@@ -102,7 +119,9 @@
                           <goal>mesh-velocity</goal>
                       </goals>
                       <configuration>
-                          <velocityTemplate>src/main/resources/vm/book-template.html</velocityTemplate>
+                          <bookId>mvnref</bookId>
+							<bookTitle>Maven: The Complete Reference</bookTitle>
+							<velocityTemplate>${basedir}/target/book-site/vm/book-template.html</velocityTemplate>
                       </configuration>
                   </execution>
               </executions>
@@ -124,34 +143,29 @@
           </plugin>
       </plugins>
   </reporting>
-  <profiles>
-      <profile>
-          <id>publish-external</id>
-          <distributionManagement>
-              <site>
-                  <id>sonatype-site</id>
-                  <name>Sonatype Book Examples</name>
-                  <url>scp://site@svn.sonatype.com/home/site/books/htdocs/mvnref-book/</url>
-              </site>
-          </distributionManagement>
-          <properties>
-              <sonatype.site>scp://site@svn.sonatype.com/home/site/books/htdocs/</sonatype.site>
-              <nexus.book.baseurl>http://books.sonatype.com/nexus-book/</nexus.book.baseurl>
-              <m2eclipse.book.baseurl>http://books.sonatype.com/m2eclipse-book/</m2eclipse.book.baseurl>
-          </properties>
-      </profile>
-      <profile>
-          <id>stage-external</id>
-          <distributionManagement>
-              <site>
-                  <id>sonatype-site</id>
-                  <name>Sonatype Book Examples</name>
-                  <url>scp://site@svn.sonatype.com/home/site/books/htdocs/mvnref-book-stage/</url>
-              </site>
-          </distributionManagement>
-          <properties>
-              <sonatype.site>scp://site@svn.sonatype.com/home/site/books/htdocs/</sonatype.site>
-          </properties>
-      </profile>
-  </profiles>
+<profiles>
+  <profile>
+    <id>publish-external</id>
+    <distributionManagement>
+      <site>
+          <id>sonatype-site</id>
+          <name>Sonatype Book Examples</name>
+          <url>scp://deployer@sonatype-marketing01.managed.contegix.com/var/www/domains/sonatype.com/www/shared/books/mvnref-book/</url>
+        </site>
+    </distributionManagement>
+    <properties>
+      <maven.book.baseurl>http://books.sonatype.com/maven-book</maven.book.baseurl>
+    </properties>
+  </profile>
+  <profile>
+    <id>stage-external</id>
+    <distributionManagement>
+      <site>
+          <id>sonatype-site</id>
+          <name>Sonatype Book Examples</name>
+          <url>scp://deployer@sonatype-marketing01.managed.contegix.com/var/www/domains/sonatype.com/www/shared/books/mvnref-book-stage/</url>
+        </site>
+    </distributionManagement>
+  </profile>
+</profiles>
 </project>

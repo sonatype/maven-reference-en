@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.sonatype.com/tmp/docbook/xml/4.5/docbookx.dtd">
+"http://www.discursive.com/docbook/xml/4.5/docbookx.dtd">
 <book id="book-hibernate3devNotebook">
   <title>${book.title}</title>
 
@@ -9,99 +9,46 @@
 
     <edition>${project.version}</edition>
 
-    <editor>
-      <firstname>Tim</firstname>
-
-      <surname>O'Brien</surname>
-
-      <affiliation>
-        <orgname>Sonatype</orgname>
-      </affiliation>
-    </editor>
-
     <authorgroup role="Primary Authors">
       <author>
         <firstname>Tim</firstname>
-
         <surname>O'Brien</surname>
-
-        <affiliation>
-          <orgname>${project.organization.name}</orgname>
-        </affiliation>
       </author>
 
       <author>
         <firstname>John</firstname>
-
         <surname>Casey</surname>
-
-        <affiliation>
-          <orgname>${project.organization.name}</orgname>
-        </affiliation>
       </author>
 
       <author>
         <firstname>Brian</firstname>
-
         <surname>Fox</surname>
-
-        <affiliation>
-          <orgname>${project.organization.name}</orgname>
-        </affiliation>
       </author>
 
       <author>
         <firstname>Jason</firstname>
-
         <surname>Van Zyl</surname>
-
-        <affiliation>
-          <orgname>${project.organization.name}</orgname>
-        </affiliation>
       </author>
 
       <author>
         <firstname>Manfred</firstname>
-
         <surname>Moser</surname>
       </author>
-    </authorgroup>
 
-    <authorgroup role="Contributing Authors">
       <author>
         <firstname>Eric</firstname>
-
         <surname>Redmond</surname>
       </author>
 
       <author>
         <firstname>Larry</firstname>
-
         <surname>Shatzer</surname>
       </author>
     </authorgroup>
 
-    <abstract role="description-short">
-      <para>Maven: The Complete Reference is a book about Apache Maven.</para>
-    </abstract>
-
-    <copyright>
-      <year>2010</year>
-
-      <holder>Sonatype. All Rights Reserved.</holder>
-    </copyright>
-
-    <date>2010-08-16</date>
-
     <publisher>
       <publishername>Sonatype, Inc.</publishername>
     </publisher>
-
-    <subjectset>
-      <subject>
-        <subjectterm>COM018000</subjectterm>
-      </subject>
-    </subjectset>
 
     <mediaobject role="cover">
       <imageobject remap="lrg" role="front-large">
