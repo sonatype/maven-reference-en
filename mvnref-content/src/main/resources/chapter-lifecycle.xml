@@ -1032,13 +1032,13 @@
             <row>
               <entry>install</entry>
 
-              <entry>install</entry>
+              <entry>install:install</entry>
             </row>
 
             <row>
               <entry>deploy</entry>
 
-              <entry>deploy</entry>
+              <entry>deploy:deploy</entry>
             </row>
           </tbody>
         </tgroup>
