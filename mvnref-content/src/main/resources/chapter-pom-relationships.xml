@@ -1277,7 +1277,7 @@
         <programlisting language="xml">&lt;dependency&gt;
   &lt;groupId&gt;junit&lt;/groupId&gt;
   &lt;artifactId&gt;junit&lt;/artifactId&gt;
-  &lt;version&gt;[,3.8.1]&lt;/version&gt;ex-de
+  &lt;version&gt;[,3.8.1]&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;
 </programlisting>
@@ -1644,6 +1644,7 @@
         &lt;groupId&gt;mysql&lt;/groupId&gt;
         &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
         &lt;version&gt;5.1.2&lt;/version&gt;
+        &lt;scope&gt;runtime&lt;/scope&gt;
       &lt;/dependency&gt;
       ...
     &lt;dependencies&gt;
@@ -2235,7 +2236,7 @@
         is the top-most <varname>sonatype</varname> <acronym>POM</acronym> and
         that it creates an archive of examples. In this case, the
         <varname>maven-book</varname> project exists only as a convenience and
-        as a aggregator of modules.</para>
+        as an aggregator of modules.</para>
 
         <para>Each of the three projects: <varname>maven-book</varname>,
         <varname>book-examples</varname>, and <varname>book-chapters</varname>
