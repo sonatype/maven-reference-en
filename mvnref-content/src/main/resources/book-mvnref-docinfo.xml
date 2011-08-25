@@ -1,0 +1,62 @@
+        <isbn>9780984243341</isbn>
+y
+        <edition>${project.version}</edition>
+
+        <authorgroup role="Primary Authors">
+            <author>
+                <firstname>Tim</firstname>
+                <surname>O'Brien</surname>
+            </author>
+
+            <author>
+                <firstname>John</firstname>
+                <surname>Casey</surname>
+            </author>
+
+            <author>
+                <firstname>Brian</firstname>
+                <surname>Fox</surname>
+            </author>
+
+            <author>
+                <firstname>Jason</firstname>
+                <surname>Van Zyl</surname>
+            </author>
+
+            <author>
+                <firstname>Manfred</firstname>
+                <surname>Moser</surname>
+            </author>
+
+            <author>
+                <firstname>Eric</firstname>
+                <surname>Redmond</surname>
+            </author>
+
+            <author>
+                <firstname>Larry</firstname>
+                <surname>Shatzer</surname>
+            </author>
+        </authorgroup>
+
+        <publisher>
+            <publishername>Sonatype, Inc.</publishername>
+        </publisher>
+
+        <mediaobject role="cover">
+            <imageobject remap="lrg" role="front-large">
+                <imagedata fileref="covers/cvr_lrg.jpg" format="JPEG" width="600px" />
+            </imageobject>
+
+            <imageobject remap="s" role="front">
+                <imagedata fileref="covers/cvr_s.gif" format="GIF" />
+            </imageobject>
+
+            <imageobject remap="xs" role="front-small">
+                <imagedata fileref="covers/cvr_xs.gif" format="GIF" />
+            </imageobject>
+
+            <imageobject remap="cs" role="thumbnail">
+                <imagedata fileref="covers/cvr_cs.gif" format="GIF" />
+            </imageobject>
+        </mediaobject>
