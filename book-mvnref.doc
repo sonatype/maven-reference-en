@@ -3,6 +3,7 @@
 :data-uri:
 :icons:
 :docinfo:
+:quotes.~:
 
 [[preface-copyright]]
 [preface]
@@ -1124,8 +1125,7 @@ Maven accomplishes this by building a graph of dependencies and dealing with any
 
 Each of the scopes outlined earlier in the section <<pom-relationships-sect-dependency-scope>> affects not just the scope of the dependency in the declaring project, but also how it acts as a transitive dependency. The easiest way to convey this information is through a table, as in <<table-transitive-dep-and-scope>>. Scopes in the top row represent the scope of a transitive dependency. Scopes in the leftmost column represent the scope of a direct dependency. The intersection of the row and column is the scope that is assigned to a transitive dependency. A blank cell in this table means that the transitive dependency will be omitted.
 
-
-
+[[table-transitive-dep-and-scope]]
 .How Scope Affects Transitive Dependencies
 [options="header"]
 |==========================
@@ -1570,7 +1570,7 @@ Running +mvn clean+ on a project with this build configuration will produce outp
                 
 ----
 
-In addition to configuring Maven to run a goal during the+ pre-clean+ phase, you can also customize the Clean plugin to delete files in addition to the build output directory. You can configure the plugin to remove specific files in a +fileSet+. The example below configures clean to remove all '.class' files in a directory named 'target-other/' using standard Ant file wildcards: +*+ and +**+.
+In addition to configuring Maven to run a goal during the+ pre-clean+ phase, you can also customize the Clean plugin to delete files in addition to the build output directory. You can configure the plugin to remove specific files in a +fileSet+. The example below configures clean to remove all '.class' files in a directory named 'target-other/' using standard Ant file wildcards: \* and \**.
 
 .Customizing Behavior of the Clean Plugin
 ----
@@ -4124,13 +4124,13 @@ In the previous example, a dependency on +commons:commons-codec+ version 1.3, wo
 
 As mentioned in the Assembly Interpolation section above, neither of these elements are interpolated with the rest of the assembly descriptor, because their raw values have to be interpreted using additional, artifact-specific expression resolvers.
 
-The artifact expressions available for these two elements vary only slightly. In both cases, all of the +\${project.*}+, +\${pom.*}+, and +\${*}+ expressions that are available in the POM and the rest of the assembly descriptor are also available here. For the +outputFileNameMapping+ element, the following process is applied to resolve expressions:
+The artifact expressions available for these two elements vary only slightly. In both cases, all of the +\${project.\*}+, +\${pom.\*}+, and +\${*}+ expressions that are available in the POM and the rest of the assembly descriptor are also available here. For the +outputFileNameMapping+ element, the following process is applied to resolve expressions:
 
  . If the expression matches the pattern +\${artifact.*}+:
  .. Match against the dependency’s +Artifact+ instance (resolves: +groupId+, +artifactId+, +version+, +baseVersion+, +scope+, +classifier+, and +file.*+) 
  .. Match against the dependency’s +ArtifactHandler+ instance (resolves: +expression+) 
  .. Match against the project instance associated with the dependency’s Artifact (resolves: mainly POM properties)   
-. If the expression matches the patterns +\${pom.*}+ or +\${project.*}+:
+. If the expression matches the patterns +\${pom.\*}+ or +\${project.*}+:
 .. Match against the project instance (+MavenProject+) of the current build. 
 . If the expression matches the pattern +\${dashClassifier?}+ and the Artifact instance contains a non-null classifier, resolve to the classifier preceded by a dash (-classifier). Otherwise, resolve to an empty string. 
 .. Attempt to resolve the expression against the project instance of the current build. 
@@ -4138,7 +4138,7 @@ The artifact expressions available for these two elements vary only slightly. In
 .. Attempt to resolve the expression against the available system properties. 
 .. Attempt to resolve the expression against the available operating-system environment variables.  
 
-The +outputDirectory+ value is interpolated in much the same way, with the difference being that there is no available +\${artifact.*}+ information, only the +\${project.*}+ instance for the particular artifact. Therefore, the expressions listed above associated with those classes (1a, 1b, and 3 in the process listing above) are unavailable.
+The +outputDirectory+ value is interpolated in much the same way, with the difference being that there is no available +\${artifact.\*}+ information, only the +\${project.*}+ instance for the particular artifact. Therefore, the expressions listed above associated with those classes (1a, 1b, and 3 in the process listing above) are unavailable.
 
 How do you know when to use +outputDirectory+ and +outputFileNameMapping+? When dependencies are unpacked only the +outputDirectory+ is used to calculate the output location. When dependencies are managed as whole files (not unpacked), both +outputDirectory+ and +outputFileNameMapping+ can be used together. When used together, the result is the equivalent of:
 
@@ -4424,7 +4424,7 @@ Suppose we want to include the javadoc jars for each of our modules inside our a
 
 In <<ex-include-javadoc-moduleset>>, we don’t explicitly set the +includeSubModules+ flag, since it’s +true+ by default. However, we definitely want to process all modules - even sub-modules - using this module set, since we’re not using any sort of file pattern that could match on sub-module directory structures within. The +attachmentClassifier+ grabs the attached artifact with the javadoc classifier for each module processed. The +includeDependencies+ element tells the Assembly plugin that we're not interested in any of the module's dependencies, just the javadoc attachment. Finally, the +outputDirectory+ element tells the Assembly plugin to put all of the javadoc jars into a directory named 'apidoc-jars/' off of the assembly root directory.
 
-Although we’re not doing anything too complicated in this example, it’s important to understand that the same changes to the expression-resolution algorithm discussed for the +outputDirectoryMapping+ element of the sources section also applies here. That is, whatever was available as +\${artifact.*}+ inside a +dependencySet+’s +outputFileNameMapping+ configuration is also available here as +\${module.*}+. The same applies for +outputFileNameMapping+ when used directly within a +binaries+ section.
+Although we’re not doing anything too complicated in this example, it’s important to understand that the same changes to the expression-resolution algorithm discussed for the +outputDirectoryMapping+ element of the sources section also applies here. That is, whatever was available as +\${artifact.\*}+ inside a +dependencySet+’s +outputFileNameMapping+ configuration is also available here as +\${module.*}+. The same applies for +outputFileNameMapping+ when used directly within a +binaries+ section.
 
 Finally, let’s examine an example where we simply want to process the module’s artifact and its runtime dependencies. In this case, we want to separate the artifact set for each module into separate directory structures, according to the module’s +artifactId+ and +version+. The resulting module set is surprisingly simply, and it looks like the listing in <<ex-the-big-include>>:
 
@@ -7333,7 +7333,7 @@ AppFuse is an application framework developed by Matt Raible. You can think of A
 
    Persistence and object model without the presentation layer   
 
-Archetypes following the +appfuse-basic-*+ pattern are entire end-to-end applications in a single Maven project, and archetypes following the +appfuse-modular-*+ pattern are end-to-end applications in a multimodule Maven project which separates the core model objects and persistence logic from the web front-end. Here's an example from generating a project to running a web application for the modular Spring MVC application:
+Archetypes following the +appfuse-basic-\*+ pattern are entire end-to-end applications in a single Maven project, and archetypes following the +appfuse-modular-*+ pattern are end-to-end applications in a multimodule Maven project which separates the core model objects and persistence logic from the web front-end. Here's an example from generating a project to running a web application for the modular Spring MVC application:
 
 ----
 $ mvn archetype:generate \
