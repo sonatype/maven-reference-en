@@ -429,20 +429,19 @@ NOTE: These installation instructions assume that you are running bash.
 If you are using MacPorts, you can install the maven2 port by executing the following command-line:
 
 ----
-$ +sudo port install maven2+
-    Password: ******
-    --->  Fetching maven2
-    --->  Attempting to fetch apache-maven-3.0.3-bin.tar.bz2 
-    from http://www.apache.org/dist/maven/binaries
-    --->  Verifying checksum(s) for maven2
-    --->  Extracting maven2
-    --->  Configuring maven2
-    --->  Building maven2 with target all
-    --->  Staging maven2 into destroot
-    --->  Installing maven2 3.0.3_0
-    --->  Activating maven2 3.0.3_0
-    --->  Cleaning maven2
-
+$ sudo port install maven2
+Password: ******
+--->  Fetching maven2
+--->  Attempting to fetch apache-maven-3.0.3-bin.tar.bz2 
+from http://www.apache.org/dist/maven/binaries
+--->  Verifying checksum(s) for maven2
+--->  Extracting maven2
+--->  Configuring maven2
+--->  Building maven2 with target all
+--->  Staging maven2 into destroot
+--->  Installing maven2 3.0.3_0
+--->  Activating maven2 3.0.3_0
+--->  Cleaning maven2
 ----
 
 For more information about the maven2 port, see the maven2 http://trac.macports.org/browser/trunk/dports/java/maven2/Portfile[Portfile]. For more information about MacPorts and how to install it, see the http://www.macports.org/index.php[MacPorts project page].
@@ -475,13 +474,12 @@ To install Maven on a FreeBSD or OpenBSD machine, follow the exact procedure out
 Once Maven is installed, you can check the version by running +mvn -v+ from the command-line. If Maven has been installed, you should see something resembling the following output.
 
 ----
-$ +mvn -v+
-                Apache Maven 2.2.0 (r788681; 2009-06-26 08:04:01-0500)
-                Java version: 1.5.0_19
-                Java home: /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
-                Default locale: en_US, platform encoding: MacRoman
-                OS name: "mac os x" version: "10.5.7" arch: "i386" Family: "unix"
-            
+$ mvn -v
+Apache Maven 2.2.0 (r788681; 2009-06-26 08:04:01-0500)
+Java version: 1.5.0_19
+Java home: /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
+Default locale: en_US, platform encoding: MacRoman
+OS name: "mac os x" version: "10.5.7" arch: "i386" Family: "unix"
 ----
 
 If you see this output, you know that Maven is available and ready to be used. If you do not see this output, and your operating system cannot find the +mvn+ command, make sure that your +PATH+ environment variable and +M2_HOME+ environment variable have been properly set.
@@ -492,14 +490,14 @@ If you see this output, you know that Maven is available and ready to be used. I
 Maven's download measures in at roughly 1.5 MiB, it has attained such a slim download size because the core of Maven has been designed to retrieve plugins and dependencies from a remote repository on-demand. When you start using Maven, it will start to download plugins to a local repository described in <<installation-sect-user>>. In case you are curious, let's take a quick look at what is in Maven's installation directory. 
 
 ----
-/usr/local/maven $ +ls -p1+
-                LICENSE.txt
-                NOTICE.txt
-                README.txt
-                bin/
-                boot/
-                conf/
-                lib/
+/usr/local/maven $ ls -p1
+LICENSE.txt
+NOTICE.txt
+README.txt
+bin/
+boot/
+conf/
+lib/
 ----
 
 'LICENSE.txt' contains the software license for Apache Maven. This license is described in some detail later in the section <<installation-sect-license>>. 'NOTICE.txt' contains some notices and attributions required by libraries that Maven depends on. 'README.txt' contains some installation instructions. 'bin/' contains the 'mvn' script that executes Maven. 'boot/' contains a JAR file ('classwords-1.1.jar') that is responsible for creating the Class Loader in which Maven executes. 'conf/' contains a global 'settings.xml' that can be used to customize the behavior of your Maven installation. If you need to customize Maven, it is customary to override any settings in a 'settings.xml' file stored in '~/.m2'. 'lib/' contains a single JAR file ('maven-core-3.0.3-uber.jar') that contains the core of Maven.
@@ -834,7 +832,7 @@ Such a simple POM would be more than adequate for a simple project—e.g., a Jav
 
 
 ----
-$ +mvn help:effective-pom+
+$ mvn help:effective-pom
 ----
 
 Executing the +effective-pom+ goal should print out an XML document capturing the merge between the Super POM and the POM from <<ex-simplest-pom>>.
@@ -1540,7 +1538,7 @@ Running +mvn clean+ on a project with this build configuration will produce outp
 [INFO] Building Your Project
 [INFO]task-segment: [clean]
 [INFO] ----------------------------------------------------------------------
-[INFO] [antrun:run {execution: file-exists}]
+[INFO] [antrun:run \{execution: file-exists}]
 [INFO] Executing tasks
 [echo] Deleting your-project-1.0-SNAPSHOT.jar
 [INFO] Executed tasks
@@ -1635,7 +1633,7 @@ The default goals bound to the site lifecycle is:
 The packaging type does not usually alter this lifecycle since packaging types are concerned primarily with artifact creation, not with the type of site generated. The Site plugin kicks off the execution of http://maven.apache.org/doxia/[Doxia] document generation and other report generation plugins. You can generate a site from a Maven project by running the following command:
 
 ----
-$ +mvn site+
+$ mvn site
 ----
 
 For more information about Maven Site generation, see <<site-generation>>.   
@@ -2133,7 +2131,7 @@ In this example, we've added a profile named +production+ that overrides the def
 To execute +mvn install+ under the +production+ profile, you need to pass the +-Pproduction+ argument on the command-line. To verify that the +production+ profile overrides the default Compiler plugin configuration, execute Maven with debug output enabled (+-X+) as follows:
 
 ----
-~/examples/profile $ +mvn clean install -Pproduction -X+
+~/examples/profile $ mvn clean install -Pproduction -X
 ... (omitting debugging output) ...
 [DEBUG] Configuring mojo 'o.a.m.plugins:maven-compiler-plugin:2.0.2:testCompile'
 [DEBUG]   (f) basedir = ~\examples\profile
@@ -2320,7 +2318,7 @@ Note the exclamation point prefixing the property name. The exclamation point is
 Maven profiles can be defined in either 'pom.xml', 'profiles.xml', '~/.m2/settings.xml', or '\${M2_HOME}/conf/settings.xml'. With these four levels, there's no good way of keeping track of profiles available to a particular project without remembering which profiles are defined in these four files. To make it easier to keep track of which profiles are available, and where they have been defined, the Maven Help plugin defines a goal, +active-profiles+, which lists all the active profiles and where they have been defined. You can run the +active-profiles+ goal, as follows:
 
 ----
-$ +mvn help:active-profiles+
+$ mvn help:active-profiles
 Active Profiles for Project 'My Project':
 
 The following profiles are active:
@@ -2387,19 +2385,19 @@ For example, if every project had a +development+ profile activated by a propert
 This project defines some properties like +database.url+ and +database.user+ which might be used to configure another Maven plugin configured in the 'pom.xml'. There are plugins available that can manipulate the database, run SQL, and plugins like the Maven Hibernate3 plugin which can generate annotated model objects for use in persistence frameworks. A few of these plugins, can be configured in a 'pom.xml' using these properties. These properties could also be used to filter resources. If we needed to target the development environment, we would just run the following command:
 
 ----
-~/examples/profiles $ +mvn install+
+~/examples/profiles $ mvn install
 ----
 
 Because the development profile is active by default, and because there are no other profiles activated, running +mvn help:active-profiles+ will show that the development profile is active. Now, the activeByDefault option will only work if no other profiles are active. If you wanted to be sure that the development profile would be active for a given build, you could explicitly pass in the environment.type variable as follows:
 
 ----
-~/examples/profiles $ +mvn install -Denvironment.type=dev+
+~/examples/profiles $ mvn install -Denvironment.type=dev
 ----
 
 Alternatively, if we need to activate the production profile, we could always run Maven with:
 
 ----
-~/examples/profiles $ +mvn install -Denvironment.type=prod+
+~/examples/profiles $ mvn install -Denvironment.type=prod
 ----
 
 To test which profiles are active for a given build, use +mvn help:active-profiles+. 
@@ -2561,8 +2559,8 @@ To define a property use the following option on the command line:
 This is the option most frequently used to customized the behavior of Maven plugins. Some examples of using the +-D+ command line argument:
 
 ----
-$ +mvn help:describe -Dcmd=compiler:compile+
-$ +mvn install -Dmaven.test.skip=true+
+$ mvn help:describe -Dcmd=compiler:compile
+$ mvn install -Dmaven.test.skip=true
 ----
 
 Properties defined on the command line are also available as properties to be used in a Maven POM or Maven Plugin. Form more information about referencing Maven properties, see <<resource-filtering>>.
@@ -2581,7 +2579,7 @@ To list the available command line parameters, use the following command line op
 Executing Maven with this option produces the following output:
 
 ----
-$ +mvn --help+
+$ mvn --help
 
 usage: mvn [options] [<goal(s)>] [<phase(s)>]
 
@@ -2673,7 +2671,7 @@ Both of these options produce the same version information output, but the -v op
 
 .Maven Version Information
 ----
-$ +mvn -v+
+$ mvn -v
 Apache Maven 2.2.1 (r801777; 2009-08-06 14:16:01-0500)
 Java version: 1.6.0_15
 Java home: /System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home
@@ -2912,7 +2910,7 @@ The +-rf+ or +--resume-from+ option can come in handy if you want to tell the Ma
 Assume that you are working on the multi-module project with the build order shown in <<ex-running-aro-order>> and that your build ran successfully up until Maven encountered a failing unit test in +sample-client-connector+. With the +-rf+ option, you can fix the unit test in +simple-client-connector+ and then run +mvn -rf sample-client-connect+ from the 'sample-parent/' directory to resume the build with the final three projects.
 
 ----
-$ +mvn --resume-from sample-client-connector install+
+$ mvn --resume-from sample-client-connector install
 [INFO] Scanning for projects...
 [INFO] Reactor build order: 
 [INFO]   sample-client-connector
@@ -2928,12 +2926,11 @@ The +-pl+ or +--projects+ option allows you to select a list of projects from a 
 Assume that you are working on the multi-module project with the build order shown in <<ex-running-aro-order>> and that you are a developer focused on the +sample-rest+ and +sample-client-connector+ projects. If you only wanted Maven to build the +sample-rest+ and +sample-client-connector+ project, you would use the following syntax from the 'sample-parent/' directory:
 
 ----
-$ +mvn --projects sample-client-connector,sample-rest install+
+$ mvn --projects sample-client-connector,sample-rest install
 [INFO] Scanning for projects...
 [INFO] Reactor build order: 
 [INFO]   sample-rest
 [INFO]   sample-client-connector
-++
 ----
 
 
@@ -2946,7 +2943,7 @@ If you wanted to run a portion of the larger build, you would use the +-pl+ or +
 If you are working on the multi-module project with the build order shown in <<ex-running-aro-order>> and you were only interested in working on the +sample-services+ project, you would run +mvn -pl simple-services -am+ to build only those projects
 
 ----
-$ +mvn --projects sample-services --also-make install+
+$ mvn --projects sample-services --also-make install
 [INFO] Scanning for projects...
 [INFO] Reactor build order: 
 [INFO]   sample-parent
@@ -2964,14 +2961,13 @@ While the +-am+ command makes all of the projects required by a particular proje
 If you are working on the multi-module project with the build order shown in <<ex-running-aro-order>> and you wanted to make sure that your changes to +sample-services+ did not introduce any errors into the projects that directly or indirectly depend on +sample-services+, you would run the following command:
 
 ----
-$ +mvn --projects sample-services --also-make-dependents install+
+$ mvn --projects sample-services --also-make-dependents install
 [INFO] Scanning for projects...
 [INFO] Reactor build order: 
 [INFO]   sample-services
 [INFO]   sample-admin-webapp
 [INFO]   sample-webapp
 [INFO]   sample-rest
-
 ----
 
 [[running-sect-resuming]]
@@ -2980,8 +2976,8 @@ $ +mvn --projects sample-services --also-make-dependents install+
 When using +--also-make+, Maven will execute a subset of the larger build as shown in <<running-sect-make-subset>>. Combining +--project+, +--also-make+, and +--resume-from+ provides you with the ability to refine your build even further. The +-rf+ or +--resume-from+ resumes the build from a specific point in the Reactor build order.
 
 ----
-$ +mvn --projects sample-webapp --also-make \
---resume-from sample-services install+
+$ mvn --projects sample-webapp --also-make \
+      --resume-from sample-services install
 [INFO] Scanning for projects...
 [INFO] Reactor build order: 
 [INFO]   sample-services
@@ -3022,7 +3018,7 @@ help:describe::
 Once you start using Maven, you'll spend most of your time trying to get more information about Maven Plugins: How do plugins work? What are the configuration parameters? What are the goals? The +help:describe+ goal is something you'll be using very frequently to retrieve this information. With the +plugin+ parameter you can specify a plugin you wish to investigate, passing in either the plugin prefix (e.g. +maven-help-plugin+ as +help+) or the +groupId:artifact[:version]+, where version is optional. For example, the following command uses the Help plugin's +describe+ goal to print out information about the Maven Help plugin.
 
 ----
-$ +mvn help:describe -Dplugin=help+
+$ mvn help:describe -Dplugin=help
 ...
 Group Id:  org.apache.maven.plugins
 Artifact Id: maven-help-plugin
@@ -3042,7 +3038,7 @@ usage information.
 Executing the +describe+ goal with the +plugin+ parameter printed out the Maven coordinates for the plugin, the goal prefix, and a brief description of the plugin. While this information is helpful, you'll usually be looking for more detail than this. If you want the Help plugin to print a full list of goals with parameters, execute the +help:describe+ goal with the parameter +full+ as follows:
 
 ----
-$ +mvn help:describe -Dplugin=help -Dfull+
+$ mvn help:describe -Dplugin=help -Dfull
 ...
 Group Id:  org.apache.maven.plugins
 Artifact Id: maven-help-plugin
@@ -3058,9 +3054,7 @@ give usage information.
 
 Mojos:
 
-===============================================
 Goal: 'active-profiles'
-===============================================
 Description:
 
 Lists the profiles which are currently active for this build.
@@ -3069,7 +3063,6 @@ Implementation: org.apache.maven.plugins.help.ActiveProfilesMojo
 Language: java
 
 Parameters:
------------------------------------------------
 
 [0] Name: output
 Type: java.io.File
@@ -3080,7 +3073,6 @@ Description:
 This is an optional parameter for a file destination for the output of 
 this mojo...the listing of active profiles per project.
 
------------------------------------------------
 
 [1] Name: projects
 Type: java.util.List
@@ -3090,10 +3082,8 @@ Description:
 
 This is the list of projects currently slated to be built by Maven.
 
------------------------------------------------
 
 This mojo doesn't have any component requirements.
-===============================================
 
 ... removed the other goals ...
 
@@ -3102,7 +3092,7 @@ This mojo doesn't have any component requirements.
 This option is great for discovering all of a plugin's goals as well as their parameters. But sometimes this is far more information than necessary. To get information about a single goal, set the +mojo+ parameter as well as the +plugin+ parameter. The following command lists all of the information about the Compiler plugin's +compile+ goal.
 
 ----
-$ +mvn help:describe -Dplugin=compiler -Dmojo=compile -Dfull+
+$ mvn help:describe -Dplugin=compiler -Dmojo=compile -Dfull
 ----
 
 [[configuring]]
@@ -3120,8 +3110,8 @@ Maven plugins are configured using properties that are defined by goals within a
 To describe a particular plugin, use the +help:describe+ goal from the command line as follows:
 
 ----
-$ +mvn help:describe -Dcmd=compiler:compile+
-[INFO] [help:describe {execution: default-cli}]
+$ mvn help:describe -Dcmd=compiler:compile
+[INFO] \[help:describe \\{execution: default-cli}]
 [INFO] 'compiler:compile' is a plugin goal (aka mojo).
 Mojo: 'compiler:compile'
 compiler:compile
@@ -3132,8 +3122,8 @@ Deprecated. No reason given
 For more information about the available configuration parameters, run the same command with the +-Ddetail+ argument:
 
 ----
-$ +mvn help:describe -Dcmd=compiler:compile -Ddetail+
-[INFO] [help:describe {execution: default-cli}]
+$ mvn help:describe -Dcmd=compiler:compile -Ddetail
+[INFO] \[help:describe \\{execution: default-cli}]
 [INFO] 'compiler:compile' is a plugin goal (aka mojo).
 Mojo: 'compiler:compile'
 compiler:compile
@@ -3250,8 +3240,8 @@ Deprecated. No reason given
 If you need to get a list of plugin goals which are contained in a plugin, you can run the help:describe goal and pass in the plugin parameter. The plugin parameter accepts a plugin prefix or a +groupId+ and an +artifactId+ for a plugin as shown in the following examples:
 
 ----
-$ +mvn help:describe -Dplugin=compiler+
-[INFO] [help:describe {execution: default-cli}]
+$ mvn help:describe -Dplugin=compiler
+[INFO] [help:describe \{execution: default-cli}]
 [INFO] org.apache.maven.plugins:maven-compiler-plugin:2.0.2
 
 Name: Maven Compiler Plugin
@@ -3276,7 +3266,7 @@ Deprecated. No reason given
 You can use the +groupId+ and the +artifactId+ of the plugin and get the same list of plugin goals.
 
 ----
-$ +mvn help:describe -Dplugin=org.apache.maven.plugins:maven-compiler-plugin+
+$ mvn help:describe -Dplugin=org.apache.maven.plugins:maven-compiler-plugin
 
 ----
 
@@ -3515,7 +3505,7 @@ The Assembly plugin can be executed in two ways: you can invoke it directly from
 As an example of the direct invocation of the Assembly plugin, imagine that you wanted to ship off a copy of your project which people could build from source. Instead of just deploying the end-product of the build, you wanted to include the source as well. You won’t need to do this often, so it doesn’t make sense to add the configuration to your +POM+. Instead, you can use the following command:
 
 ----
-$ +mvn -DdescriptorId=project assembly:single+ 
+$ mvn -DdescriptorId=project assembly:single 
 ...
 [INFO] [assembly:single] 
 [INFO] Building tar : /Users/~/mvn-examples-1.0/assemblies/direct-invocation/\
@@ -3589,23 +3579,23 @@ There are two things to notice about the configuration above. First, we’re usi
 Now, you can produce the executable JAR simply by executing +mvn package+. Afterward, we’ll also get a directory listing for the target directory, just to verify that the executable JAR was generated. Finally, just to prove that we actually do have an executable JAR, we’ll try executing it:
 
 ----
-$ +mvn package+
+$ mvn package
 ... (output omitted) ...
 [INFO] [jar:jar]
 [INFO] Building jar: ~/mvn-examples-1.0/assemblies/executable-jar/target/\
 executable-jar-1.0-SNAPSHOT.jar
-[INFO] [assembly:single {execution: create-executable-jar}]
+[INFO] [assembly:single \{execution: create-executable-jar}]
 [INFO] Processing DependencySet (output=)
 [INFO] Building jar: ~/mvn-examples-1.0/assemblies/executable-jar/target/\
 executable-jar-1.0-SNAPSHOT-jar-with-dependencies.jar
 ... (output omitted) ...
-$ +ls -1 target+
+$ ls -1 target
 ... (output omitted) ...
 executable-jar-1.0-SNAPSHOT-jar-with-dependencies.jar
 executable-jar-1.0-SNAPSHOT.jar
 ... (output omitted) ...
-$ +java -jar \
-target/executable-jar-1.0-SNAPSHOT-jar-with-dependencies.jar +
+$ java -jar \
+target/executable-jar-1.0-SNAPSHOT-jar-with-dependencies.jar
 Hello, World!
 ----
 
@@ -3675,7 +3665,7 @@ Each project POM references the managed plugin configuration from <<ex-top-pom-a
 To produce the set of project assemblies, run +mvn install+ from the top-level directory. You should see Maven installing artifacts with classifiers in your local repository.
 
 ----
-$ +mvn install+
+$ mvn install
 ...
 Installing ~/mvn-examples-1.0/assemblies/as-dependencies/project-parent/\
 second-project/target/second-project-1.0-SNAPSHOT-project.tar.gz to 
@@ -3758,9 +3748,9 @@ This bundling project's POM references the two assemblies from +first-project+ a
 This example illustrates how the basic capabilities of the Maven Assembly plugin can be combined without the need for a custom assembly descriptor. It achieves the purpose of creating a single archive that contains the project directories for multiple projects side-by-side. This time, the +jar-with-dependencies+ is just a storage format, so we don’t need to specify a +Main-Class+ manifest attribute. To build the bundle, we just build the +project-bundle+ project normally:
 
 ----
-$ +mvn package+
+$ mvn package
 ...
-[INFO] [assembly:single {execution: bundle-project-sources}]
+[INFO] [assembly:single \{execution: bundle-project-sources}]
 [INFO] Processing DependencySet (output=)
 [INFO] Building jar: ~/downloads/mvn-examples-1.0/assemblies/as-dependencies/\
 project-bundle/target/project-bundle-1.0-SNAPSHOT-jar-with-dependencies.jar
@@ -3770,8 +3760,8 @@ project-bundle/target/project-bundle-1.0-SNAPSHOT-jar-with-dependencies.jar
 To verify that the project-bundle assembly contains the unpacked contents of the assembly dependencies, run +jar tf+:
 
 ----
-$ +jar tf \
-target/project-bundle-1.0-SNAPSHOT-jar-with-dependencies.jar+
+$ jar tf \
+target/project-bundle-1.0-SNAPSHOT-jar-with-dependencies.jar
 ...
 first-project-1.0-SNAPSHOT/pom.xml
 first-project-1.0-SNAPSHOT/src/main/java/org/sonatype/mavenbook/App.java
@@ -4157,7 +4147,9 @@ All of these pattern formats support the wildcard character ‘*’, which can m
 In the example given above, where the key distinction is the artifact type zip, and none of the dependencies have classifiers, the following pattern would match resource dependencies assuming that they were of type +zip+:
 
 ----
-*:zip
+
+ \*:zip
+
 ----
 
 The pattern above makes use of the second dependency identity: the dependency’s conflict id. Now that we have a pattern that distinguishes resource dependencies from binary dependencies, we can modify our dependency sets to handle resource archives differently:
@@ -4201,7 +4193,7 @@ In <<ex-complex-dependencySet>>, the runtime-scoped dependency set from our last
 <<ex-complex-dependencySet>> was based upon the assumption that our shared resources project dependency had a type which differed from all of the other dependencies. What if the share resource dependency had the same type as all of the other dependencies? How could you differentiate the dependency? In this case if the shared resource dependency had been bundled as a JAR with the classifier +resources+, you can change to the identity pattern and match those dependencies instead:
 
 ----
-*:jar:resources
+\*:jar:resources
 ----
 
 Instead of matching on artifacts with a type of +zip+ and no classifier, we’re matching on artifacts with a classifier of resources and a type of +jar+.
@@ -4547,7 +4539,7 @@ Notice the path of our +web-fragment+ descriptor file. By default, Maven include
 Remember, this project is separate from your actual +web-fragment+ project now; the assembly descriptor has become its own artifact with its own version and, possibly, its own release cycle. Once you install this new project using Maven, you’ll be able to reference it in your +web-fragment+ projects. For clarity, the build process should look something like this:
 
 ----
-$ +mvn install+
+$ mvn install
 (...)
 [INFO] [install:install]
 [INFO] Installing (...)/web-fragment-descriptor/target/\
@@ -4678,7 +4670,7 @@ As an example, consider the assembly descriptor below, designed to be used from 
 Given a parent project - called app-parent - with three modules called +app-core+, +app-web+, and +app-addons+, notice what happens when we try to execute this multi-module build:
 
 ----
-$ +mvn package+
+$ mvn package
 [INFO] Reactor build order: 
 [INFO]   app-parent <----- PARENT BUILDS FIRST
 [INFO]   app-core
@@ -4689,7 +4681,7 @@ $ +mvn package+
 [INFO]task-segment: [package]
 [INFO] ---------------------------------------------------------------
 [INFO] [site:attach-descriptor]
-[INFO] [assembly:single {execution: distro}]
+[INFO] [assembly:single \{execution: distro}]
 [INFO] Reading assembly descriptor: src/main/assembly/distro.xml
 [INFO] ---------------------------------------------------------------
 [ERROR] BUILD ERROR
@@ -4706,7 +4698,7 @@ The parent project - +app-parent+ - builds first. This is because each of the ot
 One workaround for this is to remove the executions section of the Assembly-plugin declaration, that binds the plugin to the +package+ lifecycle phase in the parent POM, keeping the configuration section intact. Then, execute Maven with two command-line tasks: the first, +package+, to build the multi-module project graph, and a second, +assembly:assembly+, as a direct invocation of the assembly plugin to consume the artifacts built on the previous run, and create the distribution assembly. The command line for such a build might look like this:
 
 ----
-$ +mvn package assembly:assembly+
+$ mvn package assembly:assembly
 ----
 
 However, this approach has several drawbacks. First, it makes the distribution-assembly process more of a manual task that can increase the complexity and potential for error in the overall build process significantly. Additionally, it could mean that attached artifacts - which are associated in memory as the project build executes - are not reachable on the second pass without resorting to file-system references.
@@ -4780,7 +4772,7 @@ Next, when we move the 'distro.xml' assembly descriptor into the +app-distributi
 This time, if we run the build from the top-level project directory, we get better news:
 
 ----
-$ +mvn package+
+$ mvn package
 (...)
 [INFO] ---------------------------------------------------------------
 [INFO] Reactor Summary:
@@ -4825,7 +4817,9 @@ If you've been using property references in your POM, you should also know that 
 You can use Maven properties in a 'pom.xml' file or in any resource that is being processed by the Maven Resource plugin's filtering features. A property is always surrounded by +\${+ and +}+. For example, to reference the +project.version+ property, one would write:
 
 ----
-\1.0
+
+ 1.0
+ 
 ----
 
 There are some implicit properties available in any Maven project, these implicit properties are:
@@ -5090,9 +5084,9 @@ Your program would read this file at runtime, and your build is going to replace
 The four variables are defined in the +properties+ element, and resource filtering is activated for resources under 'src/main/resources'. Resource filtering is deactivated by default, and to activate it you must explicitly set +filtering+ to +true+ for the resources stored in your project. Filtering is deactivated by default to prevent accidental, unintentional filtering during your build. If you build a project with the resource from <<ex-filter-spring>> and the POM from <<ex-filter-pom>> and if you list the contents of the resource in target/classes, you should see that it contains the filtered resource:
 
 ----
-$ +mvn install+
+$ mvn install
 ...
-$ +cat target/classes/applicationContext.xml+
+$ cat target/classes/applicationContext.xml
 ...
 <bean id="dataSource" destroy-method="close" 
       class="org.apache.commons.dbcp.BasicDataSource">
@@ -5107,9 +5101,9 @@ $ +cat target/classes/applicationContext.xml+
 The POM in <<ex-filter-pom>> also defines a +production+ profile under the +profiles/profile+ element which overrides the default properties with values that would be appropriate for a production environment. In this particular POM, the default values for the database connection are for a local MySQL database installed on a developer's machine. When the project is built with the production profile activated, Maven will configure the system to connect to a production Oracle database using a different driver class, URL, username, and password. If you build a project with the resource from <<ex-filter-spring>> and the POM from <<ex-filter-pom>> with the +production+ profile activated and if you list the contents of the resource in target/classes, you should see that it contains the filtered resource with production values:
 
 ----
-$ +mvn -Pproduction install+
+$ mvn -Pproduction install
 ...
-$ +cat target/classes/applicationContext.xml+
+$ cat target/classes/applicationContext.xml
 ...
 <bean id="dataSource" destroy-method="close" 
       class="org.apache.commons.dbcp.BasicDataSource">
@@ -5148,8 +5142,8 @@ $ mvn archetype:create -DgroupId=org.sonatype.mavenbook -DartifactId=sample-proj
 This creates the simplest possible Maven project with one Java class in 'src/main/java' and a simple POM. You can then build a Maven site by simply running +mvn site+. To build the site and preview the result in a browser, you can run +mvn site:run+, this will build the site and start an embedded instance of Jetty.
 
 ----
-$ +cd sample-project+
-$ +mvn site:run+
+$ cd sample-project
+$ mvn site:run
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'site'.
 [INFO] ------------------------------------------------------------------------
@@ -5718,16 +5712,16 @@ After modifying the default site template, you'll need to configure your project
 Now, you should be able to regenerate your project website. When you do so you may notice that the resources and CSS for the maven site are missing. When a Maven project customizes the site template, the Site plugin expects the project to supply all of the default images and CSS. To seed your project's resources, you may want to copy the resources from the default Doxia site renderer project to your own project's resources directory by executing the following commands:
 
 ----
-$ +svn co \
-http://svn.apache.org/repos/asf/maven/doxia/doxia-sitetools/\
-trunk/doxia-site-renderer+
-$ +rm \
-doxia-site-renderer/src/main/resources/org/apache/maven/\
-doxia/siterenderer/resources/css/maven-theme.css+
-$ +cp -rf \
-doxia-site-renderer/src/main/resources/org/apache/maven/\
-doxia/siterenderer/resources/* \
-sample-project/src/site/resources+
+$ svn co \
+      http://svn.apache.org/repos/asf/maven/doxia/doxia-sitetools/\
+      trunk/doxia-site-renderer
+$ rm \
+      doxia-site-renderer/src/main/resources/org/apache/maven/\
+      doxia/siterenderer/resources/css/maven-theme.cs+
+$ cp -rf \
+      doxia-site-renderer/src/main/resources/org/apache/maven/\
+      doxia/siterenderer/resources/* \
+      sample-project/src/site/resources
 ----
 
 Check out the +doxia-site-renderer+ project, remove the default 'maven-theme.css' file and then copy all the resources to your project's 'src/site/resources' directory.
@@ -5778,18 +5772,16 @@ Creating a custom skin is a simple matter of wrapping your customized 'maven-the
 Before we can start writing our custom CSS, we need to create a separate Maven project to allow the +sample-project+ site descriptor to reference it. First, use Maven's archetype plugin to create a basic project. Issue the following command from the directory above the +sample-project+ project's root directory:
 
 ----
-$ +mvn archetype:create -DartifactId=sample-site-skin 
--DgroupId=org.sonatype.mavenbook+
-
+$ mvn archetype:create -DartifactId=sample-site-skin 
+      -DgroupId=org.sonatype.mavenbook
 ----
 
 This will create a project (and a directory) called +sample-site-skin+. Change directories to the new +sample-site-skin+ directory, remove all of the source code and tests, and create a directory to store your skin's resources:
 
 ----
-$ +cd sample-site-skin+
-$ +rm -rf src/main/java src/test+
-$ +mkdir src/main/resources+
-
+$ cd sample-site-skin
+$ rm -rf src/main/java src/test
+$ mkdir src/main/resources
 ----
 
 [[site-generation-sect-custom-theme-css]]
@@ -6320,11 +6312,11 @@ When you write a custom plugin, you are going to be writing a series of Mojos (g
 To create a plugin project, you should use the Maven Archetype plugin. The following command-line will create a plugin with a +groupId+ of +org.sonatype.mavenbook.plugins+ and the +artifactId+ of +first-maven-plugin+:
 
 ----
-$ +mvn archetype:create \
--DgroupId=org.sonatype.mavenbook.plugins \
--DartifactId=first-maven-plugin \
--DarchetypeGroupId=org.apache.maven.archetypes \
--DarchetypeArtifactId=maven-archetype-mojo+
+$ mvn archetype:create \
+      -DgroupId=org.sonatype.mavenbook.plugins \
+      -DartifactId=first-maven-plugin \
+      -DarchetypeGroupId=org.apache.maven.archetypes \
+      -DarchetypeArtifactId=maven-archetype-mojo
 ----
 
 The Archetype plugin is going to create a directory named my-first-plugin which contains the following POM.
@@ -6388,38 +6380,37 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
-* Echos an object string to the output screen.
-* @goal echo
-* @requiresProject false
-*/
+ * Echos an object string to the output screen.
+ * @goal echo
+ * @requiresProject false
+ */
 public class EchoMojo extends AbstractMojo
 {
-/**
-* Any Object to print out.
-* @parameter expression="\${echo.message}" default-value="Hello World..."
-*/
-private Object message;
+    /**
+     * Any Object to print out.
+     * @parameter expression="\${echo.message}" default-value="Hello World..."
+     */
+    private Object message;
 
-public void execute()
-throws MojoExecutionException, MojoFailureException
-{
-getLog().info( message.toString() );
+    public void execute()
+        throws MojoExecutionException, MojoFailureException
+    {
+        getLog().info( message.toString() );
+    }
 }
-}
-
 ----
 
 If you create this Mojo in +\${basedir}+ under 'src/main/java' in 'org/sonatype/mavenbook/mojo/EchoMojo.java' in the project created in the previous section and run +mvn install+, you should be able to invoke this goal directly from the command-line with:
 
 ----
-$ +mvn org.sonatype.mavenbook.plugins:first-maven-plugin:1.0-SNAPSHOT:echo+
+$ mvn org.sonatype.mavenbook.plugins:first-maven-plugin:1.0-SNAPSHOT:echo
 ----
 
 That large command-line is +mvn+ followed by the +groupId:artifactId:version:goal+. When you run this command-line you should see output that contains the output of the echo goal with the default message: "Hello Maven World...". If you want to customize the message, you can pass the value of the message parameter with the following command-line:
 
 ----
-$ +mvn org.sonatype.mavenbook.plugins:first-maven-plugin:1.0-SNAPSHOT:echo \
--Decho.message="The Eagle has Landed"+
+$ mvn org.sonatype.mavenbook.plugins:first-maven-plugin:1.0-SNAPSHOT:echo \
+      -Decho.message="The Eagle has Landed"
 ----
 
 The previous command-line is going to execute the +EchoMojo+ and print out the message "The Eagle has Landed". 
@@ -7086,7 +7077,7 @@ Once you run the +generate+ goal using the previously listed command line, you w
 The simplest way to use the Maven Archetype plugin to generate a new Maven project from an archetype is to run the +archetype:generate+ goal in interactive mode. When +interactiveMode+ is set to +true+, the +generate+ goal will present you with a list of archetypes and prompt you to select an archetype and supply the necessary identifiers. Since the default value of the parameter +interactiveMode+ is +true+, all you have to do to generate a new Maven project is run +mvn archetype:generate+.
 
 ----
-$ +mvn archetype:generate+
+$ mvn archetype:generate
 [INFO] ------------------------------------------------------------------------
 [INFO] Building Maven Default Project
 [INFO]task-segment: [archetype:generate] (aggregator-style)
@@ -7292,15 +7283,15 @@ For more information about developing Confluence plugins with Maven 2, see http:
 Apache Wicket is a component-oriented web framework which focused on managing the server-side state of a number of components written in Java and simple HTML. Where a framework like Spring MVC or Ruby on Rails focuses on merging objects within a request with a series of page templates, Wicket is very strongly focused on capturing interactions and page structure in a series of POJO Java classes. In an age where hype-driven tech media outlets are proclaiming the "Death of Java", Wicket is a contrarian approach to the design and assembly of web applications. To generate a Wicket project with the Maven Archetype plugin:
 
 ----
-$ +mvn archetype:generate+
+$ mvn archetype:generate
 ... (select the "wicket-archetype-quickstart" artifact from the interactive \
 menu) ...
 ... (supply a groupId, artifactId, version, package) ...
 ... (assuming the artifactId is "ex-wicket") ...
-$ +cd ex-wicket+
-$ +mvn install+
+$ cd ex-wicket
+$ mvn install
 ... (a lot of Maven activity) ...
-$ +mvn jetty:run+
+$ mvn jetty:run
 ... (Jetty will start listening on port 8080) ...
 ----
 
@@ -7593,11 +7584,11 @@ If you have been developing Flash Applications with Adobe Flash CS4 or Adobe Fle
 To install this player and add it to your PATH on an OSX machine, run the following commands:
 
 ----
-$ +wget http://download.macromedia.com/pub/flashplayer/updaters/10/\
-flashplayer_10_sa_debug.app.zip+
-$ +unzip flashplayer_10_sa_debug.app.zip+
-$ +sudo cp -r Flash\ Player.app /Applications/+
-$ +export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}+
+$ wget http://download.macromedia.com/pub/flashplayer/updaters/10/\
+       flashplayer_10_sa_debug.app.zip
+$ unzip flashplayer_10_sa_debug.app.zip
+$ sudo cp -r Flash\ Player.app /Applications/
+$ export PATH=/Applications/Flash\ Player.app/Contents/MacOS:${PATH}
 ----
 
 Instead of adding the path for the Flash Player to your PATH on the command-line, you should configure your environment to automatically configure these variables. If you are using bash, you would add the last export command to your '~/.bash_profile'. 
@@ -7618,13 +7609,13 @@ If you need to run FlexMojos goals from the command-line, it will be more conven
  Once you've added these plugin groups to your Maven Settings you can invoke a FlexMojos goal using the plugin prefix +flexmojos+. Without this configuration, calling the +flexbuilder+ goal would involve the following command-line:
 
 ----
-$ +mvn org.sonatype.flexmojos:flexmojos-maven-plugin:${flexmojos.version}:flexbuilder+
+$ mvn org.sonatype.flexmojos:flexmojos-maven-plugin:${flexmojos.version}:flexbuilder
 ----
 
 With the org.sonatype.plugins group in your Maven settings, the same goal can be invoked with:
 
 ----
-$ +mvn flexmojos:flexbuilder+
+$ mvn flexmojos:flexbuilder
 ----
 
 [[flex-dev-sect-creating-with-archetype]]
@@ -7650,11 +7641,11 @@ flexmojos-archetypes-modular-webapp::
 To create a Flex Library Project, execute the following command at the command-line:
 
 ----
-$ +mvn archetype:generate \
+$ mvn archetype:generate \
 -DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
 -DarchetypeGroupId=org.sonatype.flexmojos \
 -DarchetypeArtifactId=flexmojos-archetypes-library \
--DarchetypeVersion=${flexmojos.version}+
+-DarchetypeVersion=${flexmojos.version}
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
@@ -7804,29 +7795,28 @@ While this code is underwhelming, it does provide you with a quick model and a q
 ----
 package org.sonatype.test {
 
-import flexunit.framework.TestCase;
+    import flexunit.framework.TestCase;
 
-public class TestApp extends TestCase {
+    public class TestApp extends TestCase {
 
-/**
-* Tests our greeting() method
-*/
-public function testGreeting():void {
-var name:String = "Buck Rogers";
-var expectedGreeting:String = "Hello, Buck Rogers";
+        /**
+         * Tests our greeting() method
+         */
+        public function testGreeting():void {
+            var name:String = "Buck Rogers";
+            var expectedGreeting:String = "Hello, Buck Rogers";
 
-var result:String = App.greeting(name);
-assertEquals("Greeting is incorrect", expectedGreeting, result);
+            var result:String = App.greeting(name);
+            assertEquals("Greeting is incorrect", expectedGreeting, result);
+        }
+    }
 }
-}
-}
-
 ----
 
 To run this build, go to the sample-library project directory and run mvn install.
 
 ----
-$ +mvn install+ 
+$ mvn install
 [INFO] Scanning for projects...
 [INFO] ------------------------------------------------------------------------
 [INFO] Building sample-library Flex
@@ -7893,11 +7883,11 @@ To create a Flex application from a Maven archetype,
 execute the following command:
 
 ----
-$ +mvn archetype:generate \
--DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
--DarchetypeGroupId=org.sonatype.flexmojos \
--DarchetypeArtifactId=flexmojos-archetypes-application \
--DarchetypeVersion=${flexmojos.version}+
+$ mvn archetype:generate \
+      -DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
+      -DarchetypeGroupId=org.sonatype.flexmojos \
+      -DarchetypeArtifactId=flexmojos-archetypes-application \
+      -DarchetypeVersion=${flexmojos.version}
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
@@ -8041,20 +8031,19 @@ Building an application from the Application archetype produces the following PO
 package org.sonatype.test 
 {
 
-import flexunit.framework.TestCase;
-import Main;
+    import flexunit.framework.TestCase;
+    import Main;
 
-public class TestApp extends TestCase 
-{
+    public class TestApp extends TestCase 
+    {
 
-public function testNothing():void 
-{
-//TODO un implemented
-trace("Hello test"); 
+        public function testNothing():void 
+        {
+            //TODO un implemented
+            trace("Hello test"); 
+        }
+    }
 }
-}
-}
-
 ----
 
 [[flex-dev-sect-multimodule-archetype]]
@@ -8063,11 +8052,11 @@ trace("Hello test");
 To create a multi-module project consisting of a Flex Library project referenced by a Flex Application, referenced by a Web Application.
 
 ----
-$ +mvn archetype:generate \
--DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
--DarchetypeGroupId=org.sonatype.flexmojos \
--DarchetypeArtifactId=flexmojos-archetypes-modular-webapp \
--DarchetypeVersion=${flexmojos.version}+
+$ mvn archetype:generate \
+      -DarchetypeRepository=http://repository.sonatype.org/content/groups/public\
+      -DarchetypeGroupId=org.sonatype.flexmojos \
+      -DarchetypeArtifactId=flexmojos-archetypes-modular-webapp \
+      -DarchetypeVersion=${flexmojos.version}
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'archetype'.
 [INFO] com.sonatype.maven.plugins: checking for updates from central
@@ -8591,7 +8580,7 @@ FlexMojos contains a number of goals which compile Actionscript and MXML into SW
 To generate Flex Builder project files for a FlexMojos project, configure the plugin groups as described in <<flex-dev-sect-plugin-group>>, and run the +flexbuilder+ goal:
 
 ----
-$ +mvn flexmojos:flexbuilder+
+$ mvn flexmojos:flexbuilder
 ----
 
 Running this goal will create a '.project', '.settings/org.eclipse.core.resources.prefs', '.actionScriptProperties', and '.flexLibProperties'.  
@@ -8682,10 +8671,10 @@ image::figs/web/flex-dev-subversion.png[]
 If you are interested in participating in the Flexmojos project, you will likely want to checkout the current Flexmojos source code to your local machine. To checkout the Flexmojos source using Subversion, execute the following command at the command line:
 
 ----
-$ +svn co http://svn.sonatype.org/flexmojos/trunk flexmojos+
+$ svn co http://svn.sonatype.org/flexmojos/trunk flexmojos
 A flexmojos
 ...
-$ +ls+
+$ ls
 COPYRIGHT   flexmojos-sandbox pom.xml
 flexmojos-archetypesflexmojos-super-poms  src
 flexmojos-maven-plugin  flexmojos-testing
@@ -9598,7 +9587,7 @@ image::figs/web/settings_password-encryption.png[]
 To configure encrypted passwords, create a master password by running +mvn -emp+ or +mvn --encrypt-master-password+ followed by your master password.
 
 ----
-$ +mvn -emp mypassword+
+$ mvn -emp mypassword
 {rsB56BJcqoEHZqEZ0R1VR4TIspmODx1Ln8/PVvsgaGw=}
 ----
 
@@ -9615,7 +9604,7 @@ Maven prints out an encrypted copy of the password to standard out. Copy this en
 After you have created a master password, you can then encrypt passwords for use in your Maven Settings. To encrypt a password with the master password, run +mvn -ep+ or +mvn --encrypt-password+. Assume that you have a repository manager and you need to send a username of "deployment" and a password of "qualityFIRST". To encrypt this particular password, you would run the following command:
 
 ----
-$ +mvn -ep qualityFIRST+
+$ mvn -ep qualityFIRST
 {uMrbEOEf/VQHnc0W2X49Qab75j9LSTwiM3mg2LCrOzI=}
 ----
 
@@ -9728,6 +9717,7 @@ This work is licensed under a Creative Commons Attribution-Noncommercial-No Deri
 If you redistribute this work on a web page, you must include the following link with the URL in the about attribute listed on a single line (remove the backslashes and join all URL parameters):
 
 ----
+
 <div xmlns:cc="http://creativecommons.org/ns#" 
      about="http://creativecommons.org/license/results-one?q_1=2&q_1=1\
             &field_commercial=n&field_derivatives=n&field_jurisdiction=us\
@@ -9742,6 +9732,7 @@ If you redistribute this work on a web page, you must include the following link
        href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/">
         CC BY-NC-ND 3.0</a>
 </div>
+
 ----
 
 When downloaded or distributed in a jurisdiction other than the United States of America, this work shall be covered by the appropriate ported version of Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 license for the specific jurisdiction. If the Creative Commons Attribution-Noncommercial-No Derivative Works version 3.0 license is not available for a specific jurisdiction, this work shall be covered under the Creative Commons Attribution-Noncommercial-No Derivate Works version 2.5 license for the jurisdiction in which the work was downloaded or distributed. A comprehensive list of jurisdictions for which a Creative Commons license is available can be found on the Creative Commons International web site at http://creativecommons.org/international[http://creativecommons.org/international].
