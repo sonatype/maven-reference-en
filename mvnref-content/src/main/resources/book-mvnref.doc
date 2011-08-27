@@ -641,7 +641,7 @@ POM relationships::
 
   A project rarely stands alone; it depends on other projects, inherits POM settings from parent projects, defines its own coordinates, and may include submodules.
 
-[[pom-relationships-sect-super-pom" label="]]
+[[pom-relationships-sect-super-pom]]
 ==== The Super POM
 
 Before we dive into some examples of POMs, let's take a quick look at the Super POM. All Maven project POMs extend the Super POM, which defines a set of defaults shared by all projects. This Super POM is a part of the Maven installation and can be found in the 'maven-${maven.version}-uber.jar' file in '\${M2_HOME}/lib'. If you look in this JAR file, you will find a file named 'pom-4.0.0.xml' under the +org.apache.maven.project+ package. The Super POM for Maven is shown in <<ex-super-pom>>.
@@ -1077,7 +1077,7 @@ In an ideal world, you wouldn’t have to use optional dependencies. Instead of 
 
   Inclusive quantifiers
 
-For example, if you wished to access any <code>JUnit</code> version greater than or equal to 3.8 but less than 4.0, your dependency would be as shown in <<ex-dep-range>>.
+For example, if you wished to access any +JUnit+ version greater than or equal to 3.8 but less than 4.0, your dependency would be as shown in <<ex-dep-range>>.
 
 [[ex-dep-range]]
 .Specifying a Dependency Range: JUnit 3.8 - JUnit 4.0
@@ -1106,7 +1106,7 @@ If you want to depend on any version of JUnit no higher than 3.8.1, you would sp
                     
 ----
 
-                </example>
+                
 
 A version before or after the comma is not required, and means +/- infinity. For example, "[4.0,)" means any version greater than or equal to 4.0. "(,2.0)" is any version less than 2.0. "[1.2]" means only version 1.2, and nothing else.
 
@@ -1115,14 +1115,14 @@ NOTE: When declaring a "normal" version such as 3.8.2 for Junit, internally this
 [[pom-relationships-sect-transitive]]
 ==== Transitive Dependencies
 
-   <see>transitive dependencies</see>  +project-a+ depends on +project-b+, which in turn depends on +project-c+, then +project-c+ is considered a transitive dependency of +project-a+. If +project-c+ depended on +project-d+, then +project-d+ would also be considered a transitive dependency of +project-a+. Part of Maven’s appeal is that it can manage transitive dependencies and shield the developer from having to keep track of all of the dependencies required to compile and run an application. You can just depend on something like the Spring Framework and not have to worry about tracking down every last dependency of the Spring Framework.
++project-a+ depends on +project-b+, which in turn depends on +project-c+, then +project-c+ is considered a transitive dependency of +project-a+. If +project-c+ depended on +project-d+, then +project-d+ would also be considered a transitive dependency of +project-a+. Part of Maven’s appeal is that it can manage transitive dependencies and shield the developer from having to keep track of all of the dependencies required to compile and run an application. You can just depend on something like the Spring Framework and not have to worry about tracking down every last dependency of the Spring Framework.
 
 Maven accomplishes this by building a graph of dependencies and dealing with any conflicts and overlaps that might occur. For example, if Maven sees that two projects depend on the same +groupId+ and +artifactId+, it will sort out which dependency to use automatically, always favoring the more recent version of a dependency. Although this sounds convenient, there are some edge cases where transitive dependencies can cause some configuration issues. For these scenarios, you can use a dependency exclusion.
 
 [[pom-relationships-sect-transitive-scope]]
 ===== Transitive Dependencies and Scope
 
-Each of the scopes outlined earlier in the section <<pom-relationships-sect-dependency-scope>> affects not just the scope of the dependency in the declaring project, but also how it acts as a transitive dependency. The easiest way to convey this information is through a table, as in <xref linkend="table-transitive-dep-and-scope>>. Scopes in the top row represent the scope of a transitive dependency. Scopes in the leftmost column represent the scope of a direct dependency. The intersection of the row and column is the scope that is assigned to a transitive dependency. A blank cell in this table means that the transitive dependency will be omitted.
+Each of the scopes outlined earlier in the section <<pom-relationships-sect-dependency-scope>> affects not just the scope of the dependency in the declaring project, but also how it acts as a transitive dependency. The easiest way to convey this information is through a table, as in <<table-transitive-dep-and-scope>>. Scopes in the top row represent the scope of a transitive dependency. Scopes in the leftmost column represent the scope of a direct dependency. The intersection of the row and column is the scope that is assigned to a transitive dependency. A blank cell in this table means that the transitive dependency will be omitted.
 
 
 
@@ -1162,8 +1162,6 @@ There will be times when you need to exclude a transitive dependency, such as wh
                             &lt;/dependency&gt;
 ----
 
-                </example>
-
 Often, you will want to replace a transitive dependency with another implementation. For example, if you are depending on a library that depends on the Sun JTA API, you may want to replace the declared transitive dependency. Hibernate is one example. Hibernate depends on the Sun JTA API JAR, which is not available in the central Maven repository because it cannot be freely redistributed. Fortunately, the Apache Geronimo project has created an independent implementation of this library that can be freely redistributed. To replace a transitive dependency with another dependency, you would exclude the transitive dependency and declare a dependency on the project you wanted instead. <<ex-exclude-replace>> shows an example of a such replacement.
 
 [[ex-exclude-replace]]
@@ -1189,7 +1187,7 @@ Often, you will want to replace a transitive dependency with another implementat
                         &lt;/dependencies&gt;
 ----
 
-                </example>
+                
 
 In <<ex-exclude-replace>>, there is nothing marking the dependency on +geronimo-jta_1.1_spec+ as a replacement, it just happens to be a library which provides the same API as the original JTA dependency. Here are some other reasons you might want to exclude or replace transitive dependencies:
 
@@ -1256,7 +1254,7 @@ Then, in a child project, you can add a dependency to the MySQL Java Connector u
 
 You should notice that the child project did not have to explicitly list the version of the +mysql-connector-java+ dependency. Because this dependency was defined in the top-level POM's +dependencyManagement+ element, the version number is going to propagate to the child project's dependency on +mysql-connector-java+. Note that if this child project did define a version, it would override the version listed in the top-level POM's +dependencyManagement+ section. That is, the +dependencyManagement+ version is only used when the child does not declare a version directly.
 
-Dependency management in a top-level POM is different from just defining a dependency on a widely shared parent POM. For starters, all dependencies are inherited. If +mysql-connector-java+ were listed as a dependency of the top-level parent project, every single project in the hierarchy would have a reference to this dependency. Instead of adding in unnecessary dependencies, using +dependencyManagement+ allows you to consolidate and centralize the management of dependency versions without adding dependencies which are inherited by all children. In other words, the +dependencyManagement+ element is equivalent to an environment variable which allows you to declare a dependency anywhere below a project without specifying a version number. </example>  
+Dependency management in a top-level POM is different from just defining a dependency on a widely shared parent POM. For starters, all dependencies are inherited. If +mysql-connector-java+ were listed as a dependency of the top-level parent project, every single project in the hierarchy would have a reference to this dependency. Instead of adding in unnecessary dependencies, using +dependencyManagement+ allows you to consolidate and centralize the management of dependency versions without adding dependencies which are inherited by all children. In other words, the +dependencyManagement+ element is equivalent to an environment variable which allows you to declare a dependency anywhere below a project without specifying a version number.   
 
 [[pom-relationships-sect-project-relationships]]
 === Project Relationships
@@ -1314,7 +1312,7 @@ All Maven POMs inherit values from a parent POM. If a POM does not specify a dir
                     
 ----
 
-                </example>
+                
 
 Running +mvn help:effective-pom+ in +project-a+ would show a POM that is the result of merging the Super POM with the POM defined by +a-parent+ and the POM defined in +project-a+. The implicit and explicit inheritance relationships for +project-a+ are shown in <<fig-inheritance>>.
 
@@ -1803,7 +1801,7 @@ To use one of these custom packaging types, you need two things: a plugin which 
                         
 ----
 
-                </example>
+                
 
 In <<writing-plugins-sect-plugins-lifecycle>>, we show you how to create your own packaging type with a customized lifecycle. This example should give you an idea of what you'll need to do to reference a custom packaging type. All you need to do is reference the plugin which supplies the custom packaging type. The Israfil Flex plugin is a third-party Maven plugin hosted at Google Code, for more information about this plugin and how to use Maven to compile Adobe Flex go to http://code.google.com/p/israfil-mojo[http://code.google.com/p/israfil-mojo]. This plugin supplies the following lifecycle for the SWF packaging type:
 
@@ -1847,7 +1845,7 @@ jdbc.url=jdbc:hsqldb:mem:mydb
                         jdbc.password=
 ----
 
-                </example>
+                
 
 To configure resource filtering with this 'default.properties' file, we need to specify two things in a project's POM: a list of properties files in the +filters+ element of the build configuration, and a flag to Maven that the resources directory is to be filtered. The default Maven behavior is to skip filtering and just copy the resources to the output directory; you'll need to explicitly configure resource filter, or Maven will skip the step altogether. This default ensures that Maven's resource filtering feature doesn't surprise you out of nowhere and clobbering any +\${...}+ references you didn't want it to replace.
 
@@ -1866,7 +1864,7 @@ To configure resource filtering with this 'default.properties' file, we need to 
                             &lt;/build&gt;
 ----
 
-                </example>
+                
 
 As with all directories in Maven, the resources directory does not need to be in 'src/main/resources'. This is just the default value defined in the Super POM. You should also note that you don't need to consolidate all of your resources into a single directory. You can always separate resources into separate directories under 'src/main'. Assume that you have a project which contains hundreds of XML documents and hundreds of images. Instead of mixing the resources in the 'src/main/resources' directory, you might want to create two directories 'src/main/xml' and 'src/main/images' to hold this content. To add directories to the list of resource directories, you would add the following +resource+ elements to your build configuration.
 
@@ -1890,7 +1888,7 @@ As with all directories in Maven, the resources directory does not need to be in
                         &lt;/build&gt;
 ----
 
-                </example>
+                
 
 When you are building a project that produces a console application or a command-line tool, you'll often find yourself writing simple shell scripts that need to reference the JAR produced by a build. When you are using the assembly plugin to produce a distribution for an application as a ZIP or TAR, you might place all of your scripts in a directory like 'src/main/command'. In the following POM resource configuration, you'll see how we can use resource filtering and a reference to the project variable to capture the final output name of the JAR. For more information about the Maven Assembly plugin, see <<assemblies>>.
 
@@ -1920,7 +1918,7 @@ When you are building a project that produces a console application or a command
                             &lt;/build&gt;
 ----
 
-                </example>
+                
 
 If you run 'mvn process-resources' in this project, you will end up with two files, 'run.sh' and 'run.bat', in +\${basedir}+. We've singled out these two files in a +resource+ element, configuring filtering, and set the +targetPath+ to be +\${basedir}+. In a second +resource+ element, we've configured the default resources path to be copied to the default output directory without any filtering. <<ex-filter-script>> shows you how to declare two resource directories and supply them with different filtering and target directory preferences. The project from <<ex-filter-script>> would contain a 'run.bat' file in 'src/main/command' with the following content:
 
@@ -1966,7 +1964,7 @@ Most lifecycles bind the Compiler plugin's +compile+ goal to the +compile+ phase
                         
 ----
 
-                </example>
+                
 
 Notice we are configuring the Compiler plugin, and not the specific +compile:compile+ goal. If we were going to configure the source and target for just the +compile:compile+ goal, we would place the +configuration+ element below an +execution+ element for the +compile:compile+ goal. We've configured the target and source for the plugin because +compile:compile+ isn't the only goal we're interested in configuring. The Compiler plugin is reused when Maven compiles tests using the +compile:testCompile+ goal, and configuring target and source at the plugin level allows us to define it once for all goals in a plugin.
 
@@ -1982,9 +1980,9 @@ If you need to customize the location of the source code, you can do so by chang
                         &lt;/build&gt;
 ----
 
-                </example>
+                
 
-WARNING: While it might seem necessary to bend Maven to your own idea of project directory structure, we can't emphasize enough that you should sacrifice your own ideas of directory structure in favor of the Maven defaults. This isn't because we're trying to brainwash you into accepting the Maven Way, but it will be easier for people to understand your project if it adheres to the most basic conventions. Just forget about this. Don't do it. </warning> 
+WARNING: While it might seem necessary to bend Maven to your own idea of project directory structure, we can't emphasize enough that you should sacrifice your own ideas of directory structure in favor of the Maven defaults. This isn't because we're trying to brainwash you into accepting the Maven Way, but it will be easier for people to understand your project if it adheres to the most basic conventions. Just forget about this. Don't do it.
 
 [[lifecycle-sect-process-test-resources-phase]]
 ==== Process Test Resources
@@ -2012,7 +2010,7 @@ As with the source code directory, if you want to customize the location of the 
 [[lifecycle-sect-test-phase]]
 ==== Test
 
-Most lifecycles bind the test goal of the Surefire plugin to the test phase. The Surefire plugin is Maven's unit testing plugin, the default behavior of Surefire is to look for all classes ending in *Test in the test source directory and to run them as http://www.junit.org">JUnit</ulink> tests. The Surefire plugin can also be configured to run <ulink url="http://www.testng.org[TestNG] unit tests.
+Most lifecycles bind the test goal of the Surefire plugin to the test phase. The Surefire plugin is Maven's unit testing plugin, the default behavior of Surefire is to look for all classes ending in *Test in the test source directory and to run them as http://www.junit.org[JUnit] tests. The Surefire plugin can also be configured to run http://www.testng.org[TestNG] unit tests.
 
 After running +mvn test+, you should also notice that the Surefire produces a number of reports in 'target/surefire-reports'. This reports directory will have two files for each test executed by the Surefire plugin: an XML document containing execution information for the test, and a text file containing the output of the unit test. If there is a problem during the test phase and a unit test has failed, you can use the output of Maven and the contents of this directory to track down the cause of a test failure. This 'surefire-reports/' directory is also used during site generation to create an easy to read summary of all the unit tests in a project.
 
@@ -2155,13 +2153,13 @@ A profile in Maven is an alternative set of configuration values which set or ov
 
 In this example, we've added a profile named +production+ that overrides the default configuration of the Maven Compiler plugin. Let's examine the syntax of this profile in detail.
 
-<1> The +profiles+ element is in the 'pom.xml', it contains one or more +profile+ elements. Since profiles override the default settings in a 'pom.xml', the +profiles+ element is usually listed as the last element in a 'pom.xml'. </callout>
+<1> The +profiles+ element is in the 'pom.xml', it contains one or more +profile+ elements. Since profiles override the default settings in a 'pom.xml', the +profiles+ element is usually listed as the last element in a 'pom.xml'.
 
-<2> Each profile has to have an +id+ element. This +id+ element contains the name which is used to invoke this profile from the command-line. A profile is invoked by passing the +-P&lt;profile_id&gt;+ command-line argument to Maven. </callout>
+<2> Each profile has to have an +id+ element. This +id+ element contains the name which is used to invoke this profile from the command-line. A profile is invoked by passing the +-P&lt;profile_id&gt;+ command-line argument to Maven.
 
-<3> A +profile+ element can contain many of the elements which can appear under the +project+ element of a POM XML Document. In this example, we're overriding the behavior of the Compiler plugin and we have to override the plugin configuration which is normally enclosed in a +build+ and a +plugins+ element. </callout>
+<3> A +profile+ element can contain many of the elements which can appear under the +project+ element of a POM XML Document. In this example, we're overriding the behavior of the Compiler plugin and we have to override the plugin configuration which is normally enclosed in a +build+ and a +plugins+ element. 
 
-<4> We're overriding the configuration of the Maven Compiler plugin. We're making sure that the bytecode produced by the production profile doesn't contain debug information and that the bytecode has gone through the compiler's optimization routines. </callout> </calloutlist>
+<4> We're overriding the configuration of the Maven Compiler plugin. We're making sure that the bytecode produced by the production profile doesn't contain debug information and that the bytecode has gone through the compiler's optimization routines.
 
 To execute +mvn install+ under the +production+ profile, you need to pass the +-Pproduction+ argument on the command-line. To verify that the +production+ profile overrides the default Compiler plugin configuration, execute Maven with debug output enabled (+-X+) as follows:
 
@@ -2223,7 +2221,7 @@ While the previous example showed you how to override the default configuration 
                         
 ----
 
-</example> A profile can override an element shown with ellipses. A profile can override the final name of a project's artifact in a profile, the dependencies, and the behavior of a project's build via plugin configuration. A profile can also override the configuration of distribution settings depending on the profile; for example, if you need to publish an artifact to a staging server in a staging profile, you would create a staging profile which overrides the +distributionManagement+ element in a profile.  
+ A profile can override an element shown with ellipses. A profile can override the final name of a project's artifact in a profile, the dependencies, and the behavior of a project's build via plugin configuration. A profile can also override the configuration of distribution settings depending on the profile; for example, if you need to publish an artifact to a staging server in a staging profile, you would create a staging profile which overrides the +distributionManagement+ element in a profile.  
 
 [[profiles-sect-activation]]
 === Profile Activation
@@ -2273,9 +2271,9 @@ When someone runs +mvn install+ with a Java 6 JDK, you want the build to include
 
 If you run +mvn install+ under Java 1.6, you will see Maven descending into the 'simple-script' subdirectory to build the +simple-script+ project. If you are running +mvn install+ in Java 1.5, the build will not try to build the +simple-script+ submodule. Exploring this activation configuration in more detail:
 
-<1> The +activation+ element lists the conditions for profile activation. In this example, we've specified that this profile will be activated by Java versions that begin with "1.6". This would include "1.6.0_03", "1.6.0_02", or any other string that began with "1.6". Activation parameters are not limited to Java version, for a full list of activation parameters, see <<profiles-sect-activation-config" xrefstyle="select:title>>. </callout>
+<1> The +activation+ element lists the conditions for profile activation. In this example, we've specified that this profile will be activated by Java versions that begin with "1.6". This would include "1.6.0_03", "1.6.0_02", or any other string that began with "1.6". Activation parameters are not limited to Java version, for a full list of activation parameters, see <<profiles-sect-activation-config>>. 
 
-<2> In this profile we are adding the module +simple-script+. Adding this module will cause Maven to look in the 'simple-script/' subdirectory for a 'pom.xml'. </callout> </calloutlist>
+<2> In this profile we are adding the module +simple-script+. Adding this module will cause Maven to look in the 'simple-script/' subdirectory for a 'pom.xml'.
 
 [[profiles-sect-activation-config]]
 ==== Activation Configuration
@@ -2315,17 +2313,17 @@ Activations can contain one of more selectors including JDK versions, Operating 
                         
 ----
 
-</example> This previous example defines a very narrow set of activation parameters. Let's examine each activation criterion in detail:
+ This previous example defines a very narrow set of activation parameters. Let's examine each activation criterion in detail:
 
-<1> The +activeByDefault+ element controls whether this profile is considered active by default. </callout>
+<1> The +activeByDefault+ element controls whether this profile is considered active by default. 
 
-<2> <callout arearefs="coDef-profiles-active2-2" id="coRef-profiles-active2-2"> This profile will only be active for JDK versions that begin with "1.5". This includes "1.5.0_01", "1.5.1". </callout>
+<2> <callout arearefs="coDef-profiles-active2-2" id="coRef-profiles-active2-2"> This profile will only be active for JDK versions that begin with "1.5". This includes "1.5.0_01", "1.5.1". 
 
-<3> <callout arearefs="coDef-profiles-active2-3" id="coRef-profiles-active2-3"> This profile targets a very specific version of Windows XP, version 5.1.2600 on a 32-bit platform. If your project uses the native plugin to build a C program, you might find yourself writing projects for specific platforms. </callout>
+<3> <callout arearefs="coDef-profiles-active2-3" id="coRef-profiles-active2-3"> This profile targets a very specific version of Windows XP, version 5.1.2600 on a 32-bit platform. If your project uses the native plugin to build a C program, you might find yourself writing projects for specific platforms. 
 
-<4> <callout arearefs="coDef-profiles-active2-4" id="coRef-profiles-active2-4"> The +property+ element tells Maven to activate this profile if the property +customProperty+ is set to the value +BLUE+. </callout>
+<4> <callout arearefs="coDef-profiles-active2-4" id="coRef-profiles-active2-4"> The +property+ element tells Maven to activate this profile if the property +customProperty+ is set to the value +BLUE+. 
 
-<5> <callout arearefs="coDef-profiles-active2-5" id="coRef-profiles-active2-5"> The +file+ element allows us to activate a profile based on the presence (or absence) of files. The +dev+ profile will be activated if a file named 'file2.properties' exists in the base directory of the project. The +dev+ profile will only be activated if there is no file named 'file1.properties' file in the base directory of the project. </callout> </calloutlist> 
+<5> <callout arearefs="coDef-profiles-active2-5" id="coRef-profiles-active2-5"> The +file+ element allows us to activate a profile based on the presence (or absence) of files. The +dev+ profile will be activated if a file named 'file2.properties' exists in the base directory of the project. The +dev+ profile will only be activated if there is no file named 'file1.properties' file in the base directory of the project. 
 
 [[profiles-sect-activation-by-absence]]
 ==== Activation by the Absence of a Property
@@ -2564,7 +2562,7 @@ If the Operating System is in the Windows family, this 'pom.xml' qualifies the J
                         
 ----
 
-In this 'pom.xml', each profile doesn't need to include a +build+ element to configure the Jar plugin. Instead, each profile is activated by the Operating System family and sets the +envClassifier+ property to either +win+ or +linux+. This +envClassifier+ is then referenced in the default 'pom.xml' +build+ element to add a classifier to the project's JAR artifact. The JAR artifact will be named <code>\${finalName}-\${envClassifier}.jar</code> and included as a dependency using the following dependency syntax:
+In this 'pom.xml', each profile doesn't need to include a +build+ element to configure the Jar plugin. Instead, each profile is activated by the Operating System family and sets the +envClassifier+ property to either +win+ or +linux+. This +envClassifier+ is then referenced in the default 'pom.xml' +build+ element to add a classifier to the project's JAR artifact. The JAR artifact will be named +\${finalName}-\${envClassifier}.jar+ and included as a dependency using the following dependency syntax:
 
 .Depending on a Qualified Artifact
 ----
@@ -2945,7 +2943,7 @@ If you go into the 'sample-parent/' project directory and run +mvn clean+, you w
                         [INFO]   sample-admin-gui
 ----
 
-                </example>
+                
             
 
 ==== Resuming Builds
@@ -3409,7 +3407,7 @@ You can configure plugin parameters for specific executions of a plugin goal. <<
                     
 ----
 
-                </example>
+                
             
 
 ==== Setting Default Command Line Execution Parameters
@@ -4011,11 +4009,12 @@ Finally, if you want to ensure that all file-matching patterns are used, you can
 [[assemblies-sect-default-excludes]]
 ==== Default Exclusion Patterns for
 
-When you use the default exclusion patterns, the Maven Assembly plugin is going to be ignoring more than just SVN and CVS information. By default the exclusion patterns are defined by the http://svn.codehaus.org/plexus/plexus-utils/trunk/src/main/java/org/codehaus/plexus/util/DirectoryScanner.java">DirectoryScanner</ulink> class in the <ulink url="http://plexus.codehaus.org/plexus-utils/[plexus-utils] project hosted at Codehaus. The array of exclude patterns is defined as a static, final +String+ array named +DEFAULTEXCLUDES+ in +DirectoryScanner+. The contents of this variable are shown in <<ex-default-excludes>>.
+When you use the default exclusion patterns, the Maven Assembly plugin is going to be ignoring more than just SVN and CVS information. By default the exclusion patterns are defined by the http://svn.codehaus.org/plexus/plexus-utils/trunk/src/main/java/org/codehaus/plexus/util/DirectoryScanner.java[DirectoryScanner] class in the http://plexus.codehaus.org/plexus-utils/[plexus-utils] project hosted at Codehaus. The array of exclude patterns is defined as a static, final +String+ array named +DEFAULTEXCLUDES+ in +DirectoryScanner+. The contents of this variable are shown in <<ex-default-excludes>>.
 
 [[ex-default-excludes]]
 .Definition of Default Exclusion Patterns from Plexus Utils
-                    <programlisting language="java">   public static final String[] DEFAULTEXCLUDES = {
+----
+public static final String[] DEFAULTEXCLUDES = {
                         // Miscellaneous typical temporary files
                         "**/*~",
                         "**/#*#",
@@ -4130,14 +4129,14 @@ The artifact expressions available for these two elements vary only slightly. In
  . If the expression matches the pattern +\${artifact.*}+:
  .. Match against the dependency’s +Artifact+ instance (resolves: +groupId+, +artifactId+, +version+, +baseVersion+, +scope+, +classifier+, and +file.*+) 
  .. Match against the dependency’s +ArtifactHandler+ instance (resolves: +expression+) 
- .. Match against the project instance associated with the dependency’s Artifact (resolves: mainly POM properties)  </orderedlist> 
+ .. Match against the project instance associated with the dependency’s Artifact (resolves: mainly POM properties)   
 . If the expression matches the patterns +\${pom.*}+ or +\${project.*}+:
 .. Match against the project instance (+MavenProject+) of the current build. 
 . If the expression matches the pattern +\${dashClassifier?}+ and the Artifact instance contains a non-null classifier, resolve to the classifier preceded by a dash (-classifier). Otherwise, resolve to an empty string. 
 .. Attempt to resolve the expression against the project instance of the current build. 
 .. Attempt to resolve the expression against the POM properties of the current build. 
 .. Attempt to resolve the expression against the available system properties. 
-.. Attempt to resolve the expression against the available operating-system environment variables.  </orderedlist>
+.. Attempt to resolve the expression against the available operating-system environment variables.  
 
 The +outputDirectory+ value is interpolated in much the same way, with the difference being that there is no available +\${artifact.*}+ information, only the +\${project.*}+ instance for the particular artifact. Therefore, the expressions listed above associated with those classes (1a, 1b, and 3 in the process listing above) are unavailable.
 
@@ -4147,7 +4146,7 @@ How do you know when to use +outputDirectory+ and +outputFileNameMapping+? When 
 &lt;archive-root-dir&gt;/&lt;outputDirectory&gt;/&lt;outputFileNameMapping&gt;
 ----
 
-When +outputDirectory+ is missing, it is not used. When +outputFileNameMapping+ is missing, its default value is: <code>\${artifact.artifactId}-\${artifact.version}\${dashClassifier?}.\${artifact.extension}</code> 
+When +outputDirectory+ is missing, it is not used. When +outputFileNameMapping+ is missing, its default value is: +\${artifact.artifactId}-\${artifact.version}\${dashClassifier?}.\${artifact.extension}+ 
 
 [[assemblies-sect-include-by-scope]]
 ===== Including and Excluding Dependencies by Scope
@@ -4178,7 +4177,7 @@ For instance, if we plan to bundle a web application with http://www.mortbay.org
                             &lt;/assembly&gt;
 ----
 
-</example> Provided-scoped dependencies are added to the 'lib/' directory in the assembly root, which is assumed to be a libraries directory that will be included in the Jetty global runtime classpath. We’re using a subdirectory named for the project’s +artifactId+ in order to make it easier to track the origin of a particular library. Runtime dependencies are included in the 'WEB-INF/lib' path of the web application, which is located within a subdirectory of the standard Jetty 'webapps/' directory that is named using a custom POM property called +webContextName+. What we've done in the previous example is separate application-specific dependencies from dependencies which will be present in a Servlet contains global classpath.
+ Provided-scoped dependencies are added to the 'lib/' directory in the assembly root, which is assumed to be a libraries directory that will be included in the Jetty global runtime classpath. We’re using a subdirectory named for the project’s +artifactId+ in order to make it easier to track the origin of a particular library. Runtime dependencies are included in the 'WEB-INF/lib' path of the web application, which is located within a subdirectory of the standard Jetty 'webapps/' directory that is named using a custom POM property called +webContextName+. What we've done in the previous example is separate application-specific dependencies from dependencies which will be present in a Servlet contains global classpath.
 
 However, simply separating according to scope may not be enough, particularly in the case of a web application. It’s conceivable that one or more runtime dependencies will actually be bundles of standardized, non-compiled resources for use in the web application. For example, consider a set of web application which reuse a common set of Javascript, CSS, SWF, and image resources. To make these resources easy to standardize, it’s a common practice to bundle them up in an archive and deploy them to the Maven repository. At that point, they can be referenced as standard Maven dependencies - possibly with a dependency type of +zip+ - that are normally specified with a runtime scope. Remember, these are resources, not binary dependencies of the application code itself; therefore, it’s not appropriate to blindly include them in the 'WEB-INF/lib' directory. Instead, these resource archives should be separated from binary runtime dependencies, and unpacked into the web application document root somewhere. In order to achieve this kind of separation, we’ll need to use inclusion and exclusion patterns that apply to the coordinates of a specific dependency.
 
@@ -4264,7 +4263,7 @@ Just like the +fileSets+ section, +dependencySets+ support the +useStrictFilteri
 
 The +dependencySet+ section supports two more general mechanisms for tuning the subset of matching artifacts: transitive selection options, and options for working with project artifacts. Both of these features are a product of the need to support legacy configurations that applied a somewhat more liberal definition of the word “dependency”. As a prime example, consider the project’s own main artifact. Typically, this would not be considered a dependency; yet older versions of the Assembly plugin included the project artifact in calculations of dependency sets. To provide backward compatibility with this “feature”, the 2.2 releases (currently at 2.2-beta-2) of the Assembly plugin support a flag in the +dependencySet+ called +useProjectArtifact+, whose default value is +true+. By default, dependency sets will attempt to include the project artifact itself in calculations about which dependency artifacts match and which don’t. If you’d rather deal with the project artifact separately, set this flag to +false+.
 
-TIP: The authors of this book recommend that you always set +useProjectArtifact+ to +false+. </tip>
+TIP: The authors of this book recommend that you always set +useProjectArtifact+ to +false+.
 
 As a natural extension to the inclusion of the project artifact, the project’s attached artifacts can also be managed within a +dependencySet+ using the +useProjectAttachments+ flag (whose default value is +false+). Enabling this flag allows patterns that specify classifiers and types to match on artifacts that are “attached” to the main project artifact; that is, they share the same basic +groupId+/+artifactId+/+version+ identity, but differ in +type+ and +classifier+ from the main artifact. This could be useful for including JavaDoc or source jars in an assembly.
 
@@ -4274,7 +4273,7 @@ The other transitive-resolution flag is far more subtle. It’s called +useTrans
 
 If you’re considering using transitive filtering, be careful! A given artifact can be included from multiple places in the transitive-dependency graph, but as of Maven 2.0.9, only the first inclusion’s trail will be tracked for this type of matching. This can lead to subtle problems when collecting the dependencies for your project.
 
-WARNING: Most assemblies don’t really need this level of control over dependency sets; consider carefully whether yours truly does. Hint: It probably doesn't. </warning> 
+WARNING: Most assemblies don’t really need this level of control over dependency sets; consider carefully whether yours truly does. Hint: It probably doesn't.
  
 [[assemblies-sect-unpack]]
 ===== Advanced Unpacking Options
@@ -4381,11 +4380,11 @@ Suppose you want to include the source of all modules in your project's assembly
                             &lt;/assembly&gt;
 ----
 
-</example> In <<ex-include-exclude-moduleSet>>, since we’re dealing with each module’s sources it’s simpler to deal only with direct modules of the current project, handling sub-modules using file-path wildcard patterns in the file set. We set the +includeSubModules+ element to +false+ so we don't have to worry about submodules showing up in the root directory of the assembly archive. The +exclude+ element will take care of excluding the +secret-sauce+ module. We’re not going to include the project sources for the secret-sauce module; they’re, well, secret.
+ In <<ex-include-exclude-moduleSet>>, since we’re dealing with each module’s sources it’s simpler to deal only with direct modules of the current project, handling sub-modules using file-path wildcard patterns in the file set. We set the +includeSubModules+ element to +false+ so we don't have to worry about submodules showing up in the root directory of the assembly archive. The +exclude+ element will take care of excluding the +secret-sauce+ module. We’re not going to include the project sources for the secret-sauce module; they’re, well, secret.
 
 Normally, module sources are included in the assembly under a subdirectory named after the module’s +artifactId+. However, since Maven allows modules that are not in directories named after the module project’s +artifactId+, it’s often better to use the expression +\${module.basedir.name}+ to preserve the module directory’s actual name (+\${module.basedir.name}+ is the same as calling +MavenProject.getBasedir().getName()+). It is critical to remember that modules are not required to be subdirectories of the project that declares them. If your project has a particularly strange directory structure, you may need to resort to special +moduleSet+ declarations that include specific project and account for your own project's idiosyncrasies.
 
-WARNING: Try to minimize your own project's idiosyncrasies, while Maven is flexible, if you find yourself doing too much configuration there is likely an easier way. </warning>
+WARNING: Try to minimize your own project's idiosyncrasies, while Maven is flexible, if you find yourself doing too much configuration there is likely an easier way.
 
 Continuing through <<ex-include-exclude-moduleSet>>, since we’re not processing sub-modules explicitly in this module set, we need to make sure sub-module directories are not excluded from the source directories we consider for each direct module. By setting the +excludeSubModuleDirectories+ flag to +false+, this allows us to apply the same file pattern to directory structures within a sub-module of the one we’re processing. Finally in <<ex-include-exclude-moduleSet>>, we’re not interested in any output of the build process for this module set. We exclude the target/ directory from all modules.
 
@@ -4540,7 +4539,7 @@ The +componentDescriptors+ section allows you to reference external assembly-des
 . Relative file paths: 'src/main/assembly/component.xml' 
 . Artifact references: +groupId:artifactId:version[:type[:classifier]]+ 
 . Classpath resources: '/assemblies/component.xml' 
-. URLs: http://www.sonatype.com/component.xml[http://www.sonatype.com/component.xml]  </orderedlist>
+. URLs: http://www.sonatype.com/component.xml[http://www.sonatype.com/component.xml]  
 
 Incidentally, when resolving a component descriptor, the Assembly plugin tries those different strategies in that exact order. The first one to succeed is used.
 
@@ -4955,7 +4954,7 @@ The POM is also represented in the 'pom.xml' document present in all Maven proje
 
 +project.baseUri+::
 
-   If you need a valid URI for your project's base directory, you can use the +${project.baseUri}+ property. If your project is stored in the directory '/tmp/simple', +${project.baseUri}+ will resolve to <uri>file:/private/tmp/simple/</uri>.  
+   If you need a valid URI for your project's base directory, you can use the +${project.baseUri}+ property. If your project is stored in the directory '/tmp/simple', +${project.baseUri}+ will resolve to file:/private/tmp/simple/.  
 
 Other Project Property references::
 
@@ -5073,7 +5072,7 @@ The previous example defines two properties: +arbitrary.property.a+ and +hiberna
                         &lt;/project&gt;
 ----
 
-</example> The previous example demonstrates the process of defining a user-defined property in a profile from a Maven POM. For more information about user-defined properties and profiles, see <<profiles>>.  
+ The previous example demonstrates the process of defining a user-defined property in a profile from a Maven POM. For more information about user-defined properties and profiles, see <<profiles>>.  
 
 [[resource-filtering-sect-description]]
 === Resource Filtering
@@ -5603,14 +5602,14 @@ The easiest way to affect the look and feel of your project's web site is throug
 
 When you regenerate the website, the menu headers should be framed by a gray background and separated from the rest of the menu by some extra margin space. Using this file, any structure in the Maven-generated website can be decorated with custom CSS. When you change 'site.css' in a specific Maven project, the changes will apply to that specific project. If you are interested in making changes that will apply to more than one Maven project, you can create a custom skin for the Maven Site plugin.
 
-TIP: There is no good reference for the structure of the default Maven site template. If you are attempting to customize the style of your Maven project, you should use a Firefox extension like Firebug as a tool to explore the DOM for your project's pages. </tip> 
+TIP: There is no good reference for the structure of the default Maven site template. If you are attempting to customize the style of your Maven project, you should use a Firefox extension like Firebug as a tool to explore the DOM for your project's pages.
 
 [[site-generation-sect-custom-template]]
 ==== Create a Custom Site Template
 
 If the default Maven Site structure just doesn't do it for you, you can always customize the Maven site template. Customizing the Maven Site template gives you complete control over the ultimate output of the Maven plugin, and it is possible to customize your project's site template to the point where it hardly resembles the structure of a default Maven site template.
 
-The Site plugin uses a rendering engine called Doxia, which in turn uses a Velocity template to render the XHTML for each page. To change the page structure that is rendered by default, we can configure the site plugin in our POM to use a custom page template. The site template is fairly complex, and you'll need to have a good starting point for your customization. Start by copying the default Velocity template from Doxia's Subversion repository http://svn.apache.org/viewvc/maven/doxia/doxia-sitetools/trunk/doxia-site-renderer/src/main/resources/org/apache/maven/doxia/siterenderer/resources/default-site.vm?revision=595592">default-site.vm</ulink> to 'src/site/site.vm'. This template is written in a templating language called Velocity. Velocity is a simple templating language which supports simple macro definition and allows you to access an object's methods and properties using simple notation. A full introduction is beyond the scope of this book, for more information about Velocity and a full introduction please go to the Velocity project site at <ulink url="http://velocity.apache.org[http://velocity.apache.org].
+The Site plugin uses a rendering engine called Doxia, which in turn uses a Velocity template to render the XHTML for each page. To change the page structure that is rendered by default, we can configure the site plugin in our POM to use a custom page template. The site template is fairly complex, and you'll need to have a good starting point for your customization. Start by copying the default Velocity template from Doxia's Subversion repository http://svn.apache.org/viewvc/maven/doxia/doxia-sitetools/trunk/doxia-site-renderer/src/main/resources/org/apache/maven/doxia/siterenderer/resources/default-site.vm?revision=595592[default-site.vm] to 'src/site/site.vm'. This template is written in a templating language called Velocity. Velocity is a simple templating language which supports simple macro definition and allows you to access an object's methods and properties using simple notation. A full introduction is beyond the scope of this book, for more information about Velocity and a full introduction please go to the Velocity project site at http://velocity.apache.org[http://velocity.apache.org].
 
 The 'default-site.xml' template is fairly involved, but the change required to customize the left-hand menu is relatively straightforward. If you are trying to change the appearance of a +menuItem+, locate the +menuItem+ macro. It resides in a section that looks like this:
 
@@ -6123,7 +6122,7 @@ In addition to its advanced document rendering features, Doxia also provides a m
                         
 ----
 
-WARNING: Doxia macros MUST NOT be indented in APT source documents. Doing so will result in the APT parser skipping the macro altogether. </warning>
+WARNING: Doxia macros MUST NOT be indented in APT source documents. Doing so will result in the APT parser skipping the macro altogether.
 
 For more information about defining snippets in your code for reference by the snippet macro, see the Guide to the Snippet Macro on the Maven website, at http://maven.apache.org/guides/mini/guide-snippet-macro.html[http://maven.apache.org/guides/mini/guide-snippet-macro.html].   
 
@@ -6170,7 +6169,7 @@ Setter Injection::
 
 Field Injection::
 
-   Both Constructor and Setter injection rely on a call to a public method. Using Field injection, an IoC container populates a component's dependencies by setting an object's fields directly. For example, if you were working with a +Person+ object that had two fields +name+ and +job+, your IoC container would populate these dependencies by setting these fields directly (i.e. <code>person.name = "Thomas"; person.job = job;</code>)    
+   Both Constructor and Setter injection rely on a call to a public method. Using Field injection, an IoC container populates a component's dependencies by setting an object's fields directly. For example, if you were working with a +Person+ object that had two fields +name+ and +job+, your IoC container would populate these dependencies by setting these fields directly (i.e. +person.name = "Thomas"; person.job = job;+)    
 
 [[writing-plugins-why-plexus]]
 ==== Why Plexus?
@@ -6184,7 +6183,8 @@ NOTE: Just because Maven is based on Plexus doesn't mean that the Maven communit
 [[writing-plugins-what-is-plugin]]
 ==== What is a Plugin?
 
-A Maven Plugin is a Maven artifact which contains a plugin descriptor and one or more Mojos. A Mojo can be thought of as a goal in Maven, and every goal corresponds to a Mojo. The +compiler:compile+ goal corresponds to the +CompilerMojo+ class in the Maven Compiler Plugin, and the +jar:jar+ goal corresponds to the +JarMojo+ class in the Maven Jar Plugin. When you write your own plugin, you are simply grouping together a set of related Mojos (or goals) in a single plugin artifact.<footnote id="foot-mojo-def"> "mojo." The American Heritage® Dictionary of the English Language, Fourth Edition. Houghton Mifflin Company, 2004. Answers.com 02 Mar. 2008. http://www.answers.com/topic/mojo-1[http://www.answers.com/topic/mojo-1] </footnote>
+A Maven Plugin is a Maven artifact which contains a plugin descriptor and one or more Mojos. A Mojo can be thought of as a goal in Maven, and every goal corresponds to a Mojo. The +compiler:compile+ goal corresponds to the +CompilerMojo+ class in the Maven Compiler Plugin, and the +jar:jar+ goal corresponds to the +JarMojo+ class in the Maven Jar Plugin. When you write your own plugin, you are simply grouping together a set of related Mojos (or goals) in a single plugin artifact.
+footnote:["mojo." The American Heritage® Dictionary of the English Language, Fourth Edition. Houghton Mifflin Company, 2004. Answers.com 02 Mar. 2008]
 
 NOTE: Mojo? What is a Mojo? The word mojo is defined as "a magic charm or spell", "an amulet, often in a small flannel bag containing one or more magic items", and "personal magnetism; charm". Maven uses the term Mojo because it is a play on the word Pojo (Plain-old Java Object). 
 
@@ -6380,7 +6380,7 @@ configuration::
 
 requirements::
 
-   This is where the descriptor gets interesting. A Mojo is a component that is managed by Plexus, and, because of this, it has the opportunity to reference other components managed by Plexus. This element allows you to define dependencies on other components in Plexus. <!--TODO: Insert an XREF to an example?-->   
+   This is where the descriptor gets interesting. A Mojo is a component that is managed by Plexus, and, because of this, it has the opportunity to reference other components managed by Plexus. This element allows you to define dependencies on other components in Plexus.
 
 While you should know how to read a Plugin Descriptor, you will almost never need to write one of these descriptor files by hand. Plugin Descriptor files are generated automatically off of a set of annotations in the source for a Mojo. 
 
@@ -6870,7 +6870,7 @@ package org.sonatype.mavenbook.plugins
                     
 ----
 
-To configure a multi-valued Mojo parameter, you use a series of elements for each value. If the name of the multi-valued parameter is +includes+, you would use an element +includes+ with child elements +include+. If the multi-valued parameter is +excludes+, you would use an element +excludes+ with child elements +exclude+. To configure the +ZipMojo+ to ignore all files ending in +.txt+ and all files ending in a tilde, you would use the following plugin configuration. </example>
+To configure a multi-valued Mojo parameter, you use a series of elements for each value. If the name of the multi-valued parameter is +includes+, you would use an element +includes+ with child elements +include+. If the multi-valued parameter is +excludes+, you would use an element +excludes+ with child elements +exclude+. To configure the +ZipMojo+ to ignore all files ending in +.txt+ and all files ending in a tilde, you would use the following plugin configuration. 
 
 ----
 &lt;project&gt;
@@ -7274,7 +7274,7 @@ Once this interactive portion of the +archetype:generate+ goal execution is fini
 [[archetype-sect-using-m2eclipse]]
 ==== Using an Archetype from m2eclipse
 
-m2eclipse makes creating a new Maven project from a Maven Archetype very easy by providing an intuitive wizard for searching for, selecting, and configuring a Maven Archetype. For more information about generating a Maven project from a Maven Archetype using m2eclipse, see http://www.sonatype.com/books/m2eclipse-book/reference/eclipse-sect-creating-project.html#eclipse-sect-m2e-create-archetype">"Creating a Maven Project from a Maven Archetype"</ulink> in <ulink url="http://www.sonatype.com/books/m2eclipse-book/["Developing with Eclipse and Maven"].  
+m2eclipse makes creating a new Maven project from a Maven Archetype very easy by providing an intuitive wizard for searching for, selecting, and configuring a Maven Archetype. For more information about generating a Maven project from a Maven Archetype using m2eclipse, see http://www.sonatype.com/books/m2eclipse-book/reference/eclipse-sect-creating-project.html#eclipse-sect-m2e-create-archetype[Creating a Maven Project from a Maven Archetype] in http://www.sonatype.com/books/m2eclipse-book/["Developing with Eclipse and Maven"].  
 
 [[archetype-sect-available]]
 === Available Archetypes
@@ -7306,7 +7306,7 @@ This archetype creates a simple project with +maven-plugin+ packaging and a sing
 [[archetype-sect-third-party]]
 ==== Notable Third-Party Archetypes
 
-This section is going to give you a brief overview of some of the archetypes available from third-parties not associated with the Apache Maven project. If you are looking for a more comprehensive list of available archetypes, take a look at the list of archetypes in m2eclipse. m2eclipse allows you to create a new Maven project from an ever growing list of approximately 80 archetypes which span an amazing number of projects and technologies. http://www.sonatype.com/books/m2eclipse-book/reference/eclipse-sect-creating-project.html#eclipse-sect-m2e-create-archetype">"Creating a Maven Project from a Maven Archetype"</ulink> in <ulink url="http://www.sonatype.com/books/m2eclipse-book/["Developing with Eclipse and Maven"] contains a list of archetypes which are immediately available to you when you use m2eclipse. The archetypes listed in this section are available on the default list of archetypes generated by the interactive execution of the +generate+ goal.
+This section is going to give you a brief overview of some of the archetypes available from third-parties not associated with the Apache Maven project. If you are looking for a more comprehensive list of available archetypes, take a look at the list of archetypes in m2eclipse. m2eclipse allows you to create a new Maven project from an ever growing list of approximately 80 archetypes which span an amazing number of projects and technologies. http://www.sonatype.com/books/m2eclipse-book/reference/eclipse-sect-creating-project.html#eclipse-sect-m2e-create-archetype[Creating a Maven Project from a Maven Archetype] in http://www.sonatype.com/books/m2eclipse-book/["Developing with Eclipse and Maven"] contains a list of archetypes which are immediately available to you when you use m2eclipse. The archetypes listed in this section are available on the default list of archetypes generated by the interactive execution of the +generate+ goal.
 
 [[archetype-sect-appfuse]]
 ===== AppFuse
@@ -7373,7 +7373,7 @@ From generating a project with the AppFuse archetype to running a web applicatio
 
 Atlassian has created some archetypes for people interested in developing plugins for both Confluence and JIRA. Confluence and JIRA are, respectively, a Wiki and an issue tracker both of which have gained a large open source user base through granting free licenses for open source projects. Both the +jira-plugin-archetype+ and the +confluence-maven-archetype+ artifacts are under the com.atlassian.maven.archetypes groupId. When you generate a Confluence plugin, the archetype will generate a pom.xml which contains the necessary references to the Atlassian repositories and a dependency on the confluence artifact. The resulting Confluence plugin project will have a single example macro class and an atlassian-plugin.xml descriptor. Generating a project from the Jira archetype creates a project with a single, blank +MyPlugin+ class and an atlassian-plugin.xml descriptor in '\${basedir}/src/main/resources'.
 
-For more information about developing Confluence plugins with Maven 2, see http://confluence.atlassian.com/display/DISC/Developing+Confluence+Plugins+with+Maven+2">Developing Confluence Plugins with Maven 2</ulink> on the Confluence project's Wiki. For more information about developing Jira plugins with Maven 2, see <ulink url="http://confluence.atlassian.com/display/DEVNET/How+to+Build+an+Atlassian+Plugin[How to Build and Atlassian Plugin] on the Atlassian Developer Network. 
+For more information about developing Confluence plugins with Maven 2, see http://confluence.atlassian.com/display/DISC/Developing+Confluence+Plugins+with+Maven+2[Developing Confluence Plugins with Maven 2] on the Confluence project's Wiki. For more information about developing Jira plugins with Maven 2, see http://confluence.atlassian.com/display/DEVNET/How+to+Build+an+Atlassian+Plugin[How to Build and Atlassian Plugin] on the Atlassian Developer Network. 
 
 [[archetype-sect-wicket]]
 ===== Wicket
@@ -7543,7 +7543,7 @@ Flexmojos depends on a few artifacts which are not currently available from the 
                         
 ----
 
-</example> The XML shown in <<ex-flex-dev-repository>>, will add this repository to the list of repositories Maven will consult when it attempts to download artifacts and plugins. 
+ The XML shown in <<ex-flex-dev-repository>>, will add this repository to the list of repositories Maven will consult when it attempts to download artifacts and plugins. 
 
 [[flex-dev-sect-proxy-nexus]]
 ===== Proxying Sonatype's Flexmojos Repository with Nexus
@@ -7555,11 +7555,11 @@ Instead of pointing directly at the Sonatype Flexmojos repository, Sonatype reco
 
 Once Nexus is installed and started, complete the following steps to add a proxy repository for the Sonatype public repository. To add a new proxy repository:
 
-.  Click on the <guimenuitem>Repositories</guimenuitem> link under <guisubmenu>Views/Repositories</guisubmenu> in the <guimenu>Nexus</guimenu> menu on the left-hand side of the Nexus user interface. 
+.  Click on the *Repositories* link under *Views/Repositories* in the *Nexus* menu on the left-hand side of the Nexus user interface. 
 
-.  Click on <guimenuitem>Repositories</guimenuitem> to load the <guilabel>Repositories</guilabel> panel. 
+.  Click on *Repositories* to load the *Repositories* panel. 
 
-.  In the <guilabel>Repositories</guilabel> panel, click on the <guibutton>Add..</guibutton> button and select Proxy Repository as shown in <<fig-flex-dev-add-proxy-repos>>.  </orderedlist>
+.  In the *Repositories* panel, click on the *Add..* button and select Proxy Repository as shown in <<fig-flex-dev-add-proxy-repos>>.  
 
 [[fig-flex-dev-add-proxy-repos]]
 .Adding a Proxy Repository to Sonatype Nexus
@@ -7577,13 +7577,13 @@ Once you've created a new Proxy repository, you will need to configure it to poi
 
 ..  Repository Name is "Sonatype Flexmojos Proxy" 
 
-..  The Remote Storage Location is ${flexmojos.repository}[${flexmojos.repository}]    </orderedlist>
+..  The Remote Storage Location is ${flexmojos.repository}[${flexmojos.repository}]    
 
 [[fig-flex-dev-sonatype-public-proxy]]
 .Configuring the Sonatype Flexmojos Proxy Repository
 image::figs/web/flex-dev-nexus-sonatype-proxy.png[]
 
-Once you have populated the fields shown in <<fig-flex-dev-sonatype-public-proxy>> click the <guibutton>Save</guibutton> button to save the proxy repository and start proxying the Sonatype Flexmojos repository. 
+Once you have populated the fields shown in <<fig-flex-dev-sonatype-public-proxy>> click the *Save* button to save the proxy repository and start proxying the Sonatype Flexmojos repository. 
 
 
 ===== Add the Flexmojos Proxy Repository to a Group
@@ -7594,15 +7594,15 @@ Nexus ships with a public repository group, which combines several repositories 
 
 .  Click on the Public Repositories group, and then 
 
-.  Click on the Configuration tab in the lower half of the Repository panel. Clicking the Configuration tab will expose the Group configuration form shown in <<fig-flex-dev-adding-sonatype-to-group>>.  </orderedlist>
+.  Click on the Configuration tab in the lower half of the Repository panel. Clicking the Configuration tab will expose the Group configuration form shown in <<fig-flex-dev-adding-sonatype-to-group>>.  
 
 [[fig-flex-dev-adding-sonatype-to-group]]
 .Adding the Sonatype Flexmojos Proxy to the Public Repositories Group
 image::figs/web/flex-dev-nexus-sonatype-to-group.png[]
 
-.  To add the <guilabel>Sonatype Public Proxy</guilabel> to the <guilabel>Public Repositories</guilabel> group simply drag and drop the <guilabel>Sonatype Public Proxy</guilabel> repository from the <guilabel>Available Repositories</guilabel> list to the <guilabel>Ordered Group Repositories</guilabel> list. 
+.  To add the *Sonatype Public Proxy* to the *Public Repositories* group simply drag and drop the *Sonatype Public Proxy* repository from the *Available Repositories* list to the *Ordered Group Repositories* list. 
 
-.  Click <guibutton>Save</guibutton>, and you have successfully added a proxy of the Sonatype Flexmojos repository to your Nexus installation.  </orderedlist>
+.  Click *Save*, and you have successfully added a proxy of the Sonatype Flexmojos repository to your Nexus installation.  
 
 Whenever a client requests an artifact from this repository group, if Nexus has not already cached a matching artifact, it will query the Sonatype Flexmojos repository at ${flexmojos.repository}[${flexmojos.repository}]. Your Nexus installation will maintain a local cache of all artifacts retrieved from the Sonatype Flexmojos repository. This local cache gives you more control and contributes to a more stable build environment. If you are setting up a group of developers to rely upon artifacts from the Sonatype public repository, you'll have a completely self-contained build environment that won't be subject to the availability of the Sonatype repository once the necessary artifacts have been cached by your Nexus instance. 
 
@@ -7709,7 +7709,7 @@ If you need to run FlexMojos goals from the command-line, it will be more conven
                     
 ----
 
-</example> Once you've added these plugin groups to your Maven Settings you can invoke a FlexMojos goal using the plugin prefix +flexmojos+. Without this configuration, calling the +flexbuilder+ goal would involve the following command-line:
+ Once you've added these plugin groups to your Maven Settings you can invoke a FlexMojos goal using the plugin prefix +flexmojos+. Without this configuration, calling the +flexbuilder+ goal would involve the following command-line:
 
 ----
 $ +mvn org.sonatype.flexmojos:flexmojos-maven-plugin:${flexmojos.version}:flexbuilder+
@@ -7878,7 +7878,7 @@ The product of the simple Flex library archetype only contains three files: a PO
 
 <<fig-flex-dev-simple-lib-pom>> is very simple, the key to this POM is the +flexmojos-maven-plugin+ configuration which sets +extensions+ to +true+. This configuration customizes the lifecycle for the +swc+ packaging which is defined in the +flexmojos-maven-plugin+. The archetype then includes the +flex-framework+ dependency and the +flexmojos-unittest-support+ test-scoped dependency. The +flex-framework+ dependency is a POM which contains references to the SWC libraries and resources required to compile Flex applications.
 
-In <<fig-flex-dev-simple-lib-pom>>, the packaging is very critical. A POMs packaging type controls the lifecycle it uses to produce build output. The value +swc+ in the packaging element is Maven's cue to look for the Flex-specific lifecycle customizations which are provided by the +flexmojos-maven-plugin+. The other important part of this POM is the build element which specifies the location of the Flex source code and the Flex unit tests. Next, let's take a quick look at <xref linkend="ex-flex-dev-lib-as>> which contains the sample Actionscript which was created by this archetype.
+In <<fig-flex-dev-simple-lib-pom>>, the packaging is very critical. A POMs packaging type controls the lifecycle it uses to produce build output. The value +swc+ in the packaging element is Maven's cue to look for the Flex-specific lifecycle customizations which are provided by the +flexmojos-maven-plugin+. The other important part of this POM is the build element which specifies the location of the Flex source code and the Flex unit tests. Next, let's take a quick look at <<ex-flex-dev-lib-as>> which contains the sample Actionscript which was created by this archetype.
 
 [[ex-flex-dev-lib-as]]
 .Flex Library Archetype's Sample App Class
@@ -8121,7 +8121,7 @@ Building an application from the Application archetype produces the following PO
                         &lt;/project&gt;
 ----
 
-</example> The difference between <<ex-flex-dev-app-pom>> and <xref linkend="fig-flex-dev-simple-lib-pom>> is that the +packaging+ element is +swf+ instead of +swc+. By setting the packaging to +swf+, the project will produce a Flex application in 'target/sample-application-1.0-SNAPSHOT.swf'. The sample application created by this archetype displays the Text "Hello World". 'Main.mxml' can be found in 'src/main/flex'.
+ The difference between <<ex-flex-dev-app-pom>> and <<fig-flex-dev-simple-lib-pom>> is that the +packaging+ element is +swf+ instead of +swc+. By setting the packaging to +swf+, the project will produce a Flex application in 'target/sample-application-1.0-SNAPSHOT.swf'. The sample application created by this archetype displays the Text "Hello World". 'Main.mxml' can be found in 'src/main/flex'.
 
 .Sample Application Main.mxml
 ----
@@ -8131,7 +8131,7 @@ Building an application from the Application archetype produces the following PO
                     
 ----
 
-</example> This application also creates a simple FlexUnit test that does nothing more than print out a trace message. The sample unit test is in 'src/test/flex/org/sonatype/test'.
+ This application also creates a simple FlexUnit test that does nothing more than print out a trace message. The sample unit test is in 'src/test/flex/org/sonatype/test'.
 
 .Unit Test for Main.mxml
 ----
@@ -8643,7 +8643,7 @@ image::figs/web/flex-dev_asdoc-browser.png[]
 [[flex-dev-sect-compiling]]
 ==== Compiling Flex Source
 
-FlexMojos contains a number of goals which compile Actionscript and MXML into SWCs and SWFs. The compile-swc and compile-swf goals are used to generate output from a project's source, and test-compile is used to compile unit tests. In the simple projects created by the FlexMojos archetypes, the compile-swc and compile-swf goals are called because the project customizes the lifecycle and binds either compile-swc or compile-swf to the compile phase and test-compile to the test-compile phase. If you need to configure the options for the FlexMojos compiler, you would configure the FlexMojos plugin configuration. For example, if you wanted the application with the POM shown in <<ex-flex-dev-app-pom>> to ignore certain code-level warnings on compile and use some customized font settings, you might use the plugin configuration shown in <xref linkend="ex-flex-dev-customizing-compiler>>.
+FlexMojos contains a number of goals which compile Actionscript and MXML into SWCs and SWFs. The compile-swc and compile-swf goals are used to generate output from a project's source, and test-compile is used to compile unit tests. In the simple projects created by the FlexMojos archetypes, the compile-swc and compile-swf goals are called because the project customizes the lifecycle and binds either compile-swc or compile-swf to the compile phase and test-compile to the test-compile phase. If you need to configure the options for the FlexMojos compiler, you would configure the FlexMojos plugin configuration. For example, if you wanted the application with the POM shown in <<ex-flex-dev-app-pom>> to ignore certain code-level warnings on compile and use some customized font settings, you might use the plugin configuration shown in <<ex-flex-dev-customizing-compiler>>.
 
 [[ex-flex-dev-customizing-compiler]]
 .Customizing the Compiler Plugin
@@ -8819,7 +8819,7 @@ Before you attempt to build your Android libraries and applications with Maven, 
 [[android-dev-sect-sdk-install]]
 ==== Installing the Android SDK
 
-The Maven Android Plugin requires the presence of the Android SDK in your development environment. The +ANDROID_HOME+ environment variable should be configured to point to the installation directory of the Android SDK. The SDK should be installed following the directions on the Android Developer web site at <uri>http://developer.android.com/sdk/index.html</uri>. For example if the SDK is installed in /opt/android-sdk-linux this can be achieved with 
+The Maven Android Plugin requires the presence of the Android SDK in your development environment. The +ANDROID_HOME+ environment variable should be configured to point to the installation directory of the Android SDK. The SDK should be installed following the directions on the Android Developer web site at http://developer.android.com/sdk/index.html. For example if the SDK is installed in /opt/android-sdk-linux this can be achieved with 
 
 ----
 export ANDROID_HOME=/opt/android-sdk-linux
@@ -8833,14 +8833,14 @@ set ANDROID_HOME=C:\\opt\android-sdk-linux
 
 on a Windows system.
 
-In addition to the SDK, the various platform versions you need for development should also be installed. Instructions for this process are located at <uri>http://developer.android.com/sdk/adding-components.html</uri>. You can install a subset of available platforms or simply install all available versions. Optionally, the path +ANDROID_HOME/tools+ can be added to the PATH variable to allow easy command line execution of the various tools provided with the SDK. 
+In addition to the SDK, the various platform versions you need for development should also be installed. Instructions for this process are located at http://developer.android.com/sdk/adding-components.html. You can install a subset of available platforms or simply install all available versions. Optionally, the path +ANDROID_HOME/tools+ can be added to the PATH variable to allow easy command line execution of the various tools provided with the SDK. 
 
 [[android-dev-sect-repository-install]]
 ==== Android artifact install into Maven repository
 
 Once the SDK is installed you will need to provide the API JAR files to Maven in a repository. The Maven Android SDK Deployer tool allows you to do that for a single machine in a local repository as well as for any number of machines in a remote repository server. <!-- TODO link to nexus... in general how much do we have to explain here about this stuff, i would prefer to add links to the nexus book chapters somehow.. --> The Maven Android SDK deployer tool is available for download at:
 
-* <uri>http://github.com/mosabua/maven-android-sdk-deployer</uri>
+* http://github.com/mosabua/maven-android-sdk-deployer
 
 Simply click on the +Download Source+ button and extract the downloaded zip or tar archive in a folder of your choice. A folder with a naming pattern of mosabua-maven-android-sdk-deployer-XXX with XXX being a revision number like df824df will be created. Change directories to this new maven-android-sdk directory: 
 
@@ -8880,7 +8880,7 @@ As a first step you will need to edit the +repo.url+ property in the pom.xml in 
                             
 ----
 
-</example>Once that configuration is completed you can deploy the artifacts with the command +mvn deploy+. As a result you should find the artifact in the repository of your remote server. 
+Once that configuration is completed you can deploy the artifacts with the command +mvn deploy+. As a result you should find the artifact in the repository of your remote server. 
 
 [[android-dev-sect-repository-install-parts]]
 ===== Installation of a subset of all platforms
@@ -8914,7 +8914,7 @@ In order to use the Maven Android Plugin goals on the command line with the shor
 [[android-dev-sect-helloandroidexample]]
 ==== HelloFlashlight Example
 
-The HelloFlashlight example application serves as a starting point to introduce you to the usage of the Maven Android Plugin. You can follow the same steps to introduce an Maven Android Plugin based build to your Android application. After the initial environment setup documented above, the Android Development Tools from <uri>http://developer.android.com/sdk/eclipse-adt.html</uri> were installed and used to create a new Android project.
+The HelloFlashlight example application serves as a starting point to introduce you to the usage of the Maven Android Plugin. You can follow the same steps to introduce an Maven Android Plugin based build to your Android application. After the initial environment setup documented above, the Android Development Tools from http://developer.android.com/sdk/eclipse-adt.html were installed and used to create a new Android project.
 
 To enable a Maven based build of the project the following pom.xml file was added in the root folder of the project:
 
@@ -8997,7 +8997,7 @@ mvn clean install android:deploy
 <!--TODO potentially add commandline output for build here-->
 ////
 
-The code for the example application is available as part of the maven-android-plugin-samples available at <uri>http://code.google.com/p/maven-android-plugin/wiki/Samples</uri>. 
+The code for the example application is available as part of the maven-android-plugin-samples available at http://code.google.com/p/maven-android-plugin/wiki/Samples. 
 
 [[android-dev-sect-test]]
 ==== Testing Android Application Code
@@ -9017,7 +9017,7 @@ The Maven Android plugin includes the execution of the Surefire plugin and as su
                                 ...          
 ----
 
-</example>Alternatively the Maven conventions can be implemented by moving the source code for the application and the test source code into +src/main/java+ and +src/test/java+ and reconfiguring the Eclipse project files. 
+Alternatively the Maven conventions can be implemented by moving the source code for the application and the test source code into +src/main/java+ and +src/test/java+ and reconfiguring the Eclipse project files. 
 
 [[android-dev-sect-test-instrumentation]]
 ===== Instrumentation tests
@@ -9117,7 +9117,7 @@ Dependencies to other Android projects sources::
                                 
 ----
 
-More details can be found at <uri>http://code.google.com/p/maven-android-plugin/wiki/ApkSourcesDependency</uri>.    
+More details can be found at http://code.google.com/p/maven-android-plugin/wiki/ApkSourcesDependency.    
 
 [[android-dev-sect-custom-details]]
 === Maven Android Plugin Details
@@ -9524,15 +9524,15 @@ mvn help:active-profiles
 
 Maven properties are value placeholder, like properties in Ant. Their values are accessible anywhere within a POM by using the notation +\${X}+, where X is the property. They come in five different styles, all accessible from the settings.xml file:
 
-+env.+<replaceable>X</replaceable>::
++env.+X::
 
    Prefixing a variable with +env.+ will return the shell’s environment variable. For example, +\${env.PATH}+ contains the +$path+ environment variable. (+%PATH%+ in Windows.)  
 
-+project.+<replaceable>x</replaceable>::
++project.+x::
 
    A dot-notated (.) path in the POM will contain the corresponding elements value.  
 
-+settings.+<replaceable>x</replaceable>::
++settings.+x::
 
    A dot-notated (.) path in the 'settings.xml' will contain the corresponding elements value.  
 
@@ -9540,7 +9540,7 @@ Java system properties::
 
    All properties accessible via +java.lang.System.getProperties()+ are available as POM properties, such as +\${java.home}+.  
 
-<replaceable>x</replaceable>::
+x::
 
    Set within a +properties+ element or an external file, the value may be used as <varname role="keep-together">\${someVar}+.   
 
@@ -9770,7 +9770,7 @@ The developer would then store the 'settings-security.xml' file at '/Volumes/usb
 [[appendix-enterprise]]
 == Appendix: Sun Specification Alternatives
 
-The Apache Geronimo project maintains implementations of various enterprise Java specifications. <<table-spec-alternatives>> lists the artifactId and artifact version for all of the specifications implemented by the Geronimo project. To use one of these dependencies, use a groupId of +org.apache.geronimo.specs+, locate the version of the Specification you want to use and reference the dependency with the Artifact Id and Artifact Version listed in <xref linkend="table-spec-alternatives>>.
+The Apache Geronimo project maintains implementations of various enterprise Java specifications. <<table-spec-alternatives>> lists the artifactId and artifact version for all of the specifications implemented by the Geronimo project. To use one of these dependencies, use a groupId of +org.apache.geronimo.specs+, locate the version of the Specification you want to use and reference the dependency with the Artifact Id and Artifact Version listed in <<table-spec-alternatives>>.
 
 NOTE: All artifacts in <<table-spec-alternatives>>, have a groupId of +org.apache.geronimo.specs+. 
 
@@ -9812,7 +9812,7 @@ NOTE: All artifacts in <<table-spec-alternatives>>, have a groupId of +org.apach
 | Servlet | 2.5 | geronimo-servlet_2.5_spec | 1.1.1 
 | STaX API | 1.0 | geronimo-stax-api_1.0_spec | 1.0.1 
 | WS Metadata | 2.0 | geronimo-ws-metadata_2.0_spec | 1.1.1 
-
+|=======================================
 
 NOTE: The version numbers in the Artifact Version column may be out of date by the time you read this book. To check on the version number, visit http://repo1.maven.org/maven2/org/apache/geronimo/specs/[http://repo1.maven.org/maven2/org/apache/geronimo/specs/] in a web browser, and click on the artifactId you want to add. Choose the highest version of the spec you want to depend upon.
 
