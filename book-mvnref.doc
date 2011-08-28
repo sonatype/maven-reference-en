@@ -678,7 +678,7 @@ Before we dive into some examples of POMs, let's take a quick look at the Super 
             <outputDirectory>
                 \${project.build.directory}/classes
             </outputDirectory>
-            <finalName>\${project.artifactId}-\1.0</finalName>
+            <finalName>\${project.artifactId}-\${project.version}</finalName>
             <testOutputDirectory>
                 \${project.build.directory}/test-classes
             </testOutputDirectory>
@@ -1804,7 +1804,7 @@ To illustrate resource filtering, assume that you have a project with an XML fil
 .Using Properties in Project Resources
 ----
 <service>
-    <!-- This URL was set by project version \1.0 -->
+    <!-- This URL was set by project version \${project.version} -->
     <url>\${jdbc.url}</url>
     <user>\${jdbc.username}</user>
     <password>\${jdbc.password}</password>
@@ -4458,7 +4458,7 @@ Now that we’ve made it through the main body of the assembly descriptor, we ca
 
 Some may consider it a stylistic concern, but it’s often important to have control over the name of the root directory for your assembly, or whether the root directory is there at all. Fortunately, two configuration options in the root of the assembly descriptor make managing the archive root directory simple: +includeBaseDirectory+ and +baseDirectory+. In cases like executable jar files, you probably don’t want a root directory at all. To skip it, simply set the +includeBaseDirectory+ flag to +false+ (it’s +true+ by default). This will result in an archive that, when unpacked, may create more than one directory in the unpack target directory. While this is considered bad form for archives that are meant to be unpacked before use, it’s not so bad for archives that are consumable as-is.
 
-In other cases, you may want to guarantee the name of the archive root directory regardless of the POM’s version or other information. By default, the +baseDirectory+ element has a value equal to +\${project.artifactId}-\1.0+. However, we can easily set this element to any value that consists of literal strings and expressions which can be interpolated from the current POM, such as +\${project.groupId}-\${project.artifactId}+. This could be very good news for your documentation team! (We all have those, right?)
+In other cases, you may want to guarantee the name of the archive root directory regardless of the POM’s version or other information. By default, the +baseDirectory+ element has a value equal to +\${project.artifactId}-\${project.version}+. However, we can easily set this element to any value that consists of literal strings and expressions which can be interpolated from the current POM, such as +\${project.groupId}-\${project.artifactId}+. This could be very good news for your documentation team! (We all have those, right?)
 
 Another configuration available is the +includeSiteDirectory+ flag, whose default value is +false+. If your project build has also constructed a website document root using the site lifecycle or the Site plugin goals, that output can be included by setting this flag to +true+. However, this feature is a bit limited, since it only includes the +outputDirectory+ from the reporting section of the current POM (by default, 'target/site') and doesn’t take into consideration any site directories that may be available in module projects. Use it if you want, but a good +fileSet+ specification or +moduleSet+ specification with sources configured could serve equally well, if not better. This is yet another example of legacy configuration currently supported by the Assembly plugin for the purpose of backward compatibility. Your mileage may vary. If you really want to include a site that is aggregated from many modules, you'll want to consider using a +fileSet+ or +moduleSet+ instead of setting +includeSiteDirectory+ to +true+. 
 
@@ -4801,7 +4801,7 @@ Assemblies are useful for a wide array of applications, but are most commonly us
 [[resource-filtering-sect-intro]]
 === Introduction
 
-Throughout this book, you will notice references to properties which can be used in a POM file. Sibling dependencies in a multi-project build can be referenced using the +\${project.groupId}+ and +\1.0+ properties and any part of the POM can be referenced by prefixing the variable name with "project.". Environment variables and Java System properties can be referenced, as well as values from your '~/.m2/settings.xml' file. What you haven't seen yet is an enumeration of the possible property values and some discussion about how they can be used to help you create portable builds. This chapter provides such an enumeration.
+Throughout this book, you will notice references to properties which can be used in a POM file. Sibling dependencies in a multi-project build can be referenced using the +\${project.groupId}+ and +\${project.version}+ properties and any part of the POM can be referenced by prefixing the variable name with "project.". Environment variables and Java System properties can be referenced, as well as values from your '~/.m2/settings.xml' file. What you haven't seen yet is an enumeration of the possible property values and some discussion about how they can be used to help you create portable builds. This chapter provides such an enumeration.
 
 If you've been using property references in your POM, you should also know that Maven has a feature called Resource Filtering which allows you to replace property references in any resource files stored under 'src/main/resources'. By default this feature is disabled to prevent accidental replacement of property references. This feature can be used to target builds toward a specific platform and to externalize important build variables to properties files, POMs, or profiles. This chapter introduces the resource filtering feature and provides a brief discussion of how it can be used to create portable enterprise builds. 
 
@@ -4839,7 +4839,7 @@ In addition to the implicit properties listed above, a Maven POM, Maven Settings
 [[resource-filtering-sect-project-properties]]
 ==== Maven Project Properties
 
-When a Maven Project Property is referenced, the property name is referencing a property of the Maven Project Object Model (POM). Specifically, you are referencing a property of the +org.apache.maven.model.Model+ class which is being exposed as the implicit variable +project+. When you reference a property using this implicit variable, you are using simple dot notation to reference a bean property of the +Model+ object. For example, when you reference +\1.0+, you are really invoking the +getVersion()+ method on the instance of +Model+ that is being exposed as +project+.
+When a Maven Project Property is referenced, the property name is referencing a property of the Maven Project Object Model (POM). Specifically, you are referencing a property of the +org.apache.maven.model.Model+ class which is being exposed as the implicit variable +project+. When you reference a property using this implicit variable, you are using simple dot notation to reference a bean property of the +Model+ object. For example, when you reference +\${project.version}+, you are really invoking the +getVersion()+ method on the instance of +Model+ that is being exposed as +project+.
 
 The POM is also represented in the 'pom.xml' document present in all Maven projects. Anything in a Maven POM can be referenced with a property. A complete reference for the POM structure is available at http://maven.apache.org/ref/3.0.3/maven-model/maven.html[http://maven.apache.org/ref/3.0.3/maven-model/maven.html]. The following list shows some common property references from the Maven project.
 
@@ -4852,7 +4852,7 @@ The POM is also represented in the 'pom.xml' document present in all Maven proje
     <dependency>
         <groupId>\${project.groupId}</groupId>
         <artifactId>sibling-project</artifactId>
-        <version>\1.0</version>
+        <version>\${project.version}</version>
     </dependency>
 </dependencies>
 ----
@@ -6694,7 +6694,7 @@ If we wanted to run the +EchoMojo+ twice at difference phases in a lifecycle, an
                         <goal>echo</goal>
                     </goals>
                     <configuration>
-                        <message>\1.0</message>
+                        <message>\${project.version}</message>
                     </configuration>
                 </execution>
             </executions>
