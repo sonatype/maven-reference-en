@@ -192,7 +192,7 @@ Don't let the fact that Maven is a "project management" tool scare you away. If 
 
 Convention over configuration is a simple concept. Systems, libraries, and frameworks should assume reasonable defaults. Without requiring unnecessary configuration, systems should "just work". Popular frameworks such as http://www.rubyonrails.org/[Ruby on Rails] and EJB3 have started to adhere to these principles in reaction to the configuration complexity of frameworks such as the initial EJB 2.1 specifications. An illustration of convention over configuration is something like EJB3 persistence: all you need to do to make a particular bean persistent is to annotate that class with +@Entity. + The framework assumes table and column names based on the name of the class and the names of the properties. Hooks are provided for you to override these default, assumed names if the need arises, but, in most cases, you will find that using the framework-supplied defaults results in a faster project execution.
 
-Maven incorporates this concept by providing sensible default behavior for projects. Without customization, source code is assumed to be in '\${basedir}/src/main/java' and resources are assumed to be in '\${basedir}/src/main/resources'. Tests are assumed to be in '\${basedir}/src/test', and a project is assumed to produce a JAR file. Maven assumes that you want the compile byte code to '\${basedir}/target/classes' and then create a distributable JAR file in '\${basedir}/target'. While this might seem trivial, consider the fact that most Ant-based builds have to define the locations of these directories. Ant doesn't ship with any built-in idea of where source code or resources might be in a project; you have to supply this information. Maven's adoption of convention over configuration goes farther than just simple directory locations, Maven's core plugins apply a common set of conventions for compiling source code, packaging distributions, generating web sites, and many other processes. Maven's strength comes from the fact that it is "opinionated", it has a defined life-cycle and a set of common plugins that know how to build and assemble software. If you follow the conventions, Maven will require almost zero effort - just put your source in the correct directory, and Maven will take care of the rest.
+Maven incorporates this concept by providing sensible default behavior for projects. Without customization, source code is assumed to be in '+++${basedir}/src/main/java+++' and resources are assumed to be in '+++${basedir}/src/main/resources+++'. Tests are assumed to be in '+++${basedir}/src/test+++', and a project is assumed to produce a JAR file. Maven assumes that you want the compile byte code to '+++${basedir}/target/classes+++' and then create a distributable JAR file in '+++${basedir}/target+++'. While this might seem trivial, consider the fact that most Ant-based builds have to define the locations of these directories. Ant doesn't ship with any built-in idea of where source code or resources might be in a project; you have to supply this information. Maven's adoption of convention over configuration goes farther than just simple directory locations, Maven's core plugins apply a common set of conventions for compiling source code, packaging distributions, generating web sites, and many other processes. Maven's strength comes from the fact that it is "opinionated", it has a defined life-cycle and a set of common plugins that know how to build and assemble software. If you follow the conventions, Maven will require almost zero effort - just put your source in the correct directory, and Maven will take care of the rest.
 
 One side-effect of using systems that follow "convention over configuration" is that end-users might feel that they are forced to use a particular methodology or approach. While it is certainly true that Maven has some core opinions that shouldn't be challenged, most of the defaults can be customized. For example, the location of a project's source code and resources can be customized, names of JAR files can be customized, and through the development of custom plugins, almost any behavior can be tailored to your specific environment's requirements. If you don't care to follow convention, Maven will allow you to customize defaults in order to adapt to your specific requirements.
 
@@ -271,36 +271,36 @@ Ant excels at build process, it is a build system modeled after make with target
         <!-- Create the time stamp -->
         <tstamp/>
         <!-- Create the build directory structure used by compile -->
-        <mkdir dir="\${build}"/>
+        <mkdir dir="${build}"/>
     </target>
 
     <target name="compile" depends="init"
             description="compile the source " >
-        <!-- Compile the java code from \${src} into \${build} -->
-        <javac srcdir="\${src}" destdir="\${build}"/>
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${src}" destdir="${build}"/>
     </target>
 
     <target name="dist" depends="compile"
             description="generate the distribution" >
         <!-- Create the distribution directory -->
-        <mkdir dir="\${dist}/lib"/>
+        <mkdir dir="${dist}/lib"/>
 
-        <!-- Put everything in \${build} into the MyProject-\${DSTAMP}.jar file -->
-        <jar jarfile="\${dist}/lib/MyProject-\${DSTAMP}.jar" basedir="\${build}"/>
+        <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+        <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
     </target>
 
     <target name="clean"
             description="clean up" >
-        <!-- Delete the \${build} and \${dist} directory trees -->
-        <delete dir="\${build}"/>
-        <delete dir="\${dist}"/>
+        <!-- Delete the ${build} and ${dist} directory trees -->
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
     </target>
 </project>
 ----
 
 In this simple Ant example, you can see how you have to tell Ant exactly what to do. There is a compile goal which includes the +javac+ task that compiles the source in the 'src/main/java' directory to the 'target/classes' directory. You have to tell Ant exactly where your source is, where you want the resulting bytecode to be stored, and how to package this all into a JAR file. While there are some recent developments that help make Ant less procedural, a developer's experience with Ant is in coding a procedural language written in XML.
 
-Contrast the previous Ant example with a Maven example. In Maven, to create a JAR file from some Java source, all you need to do is create a simple 'pom.xml', place your source code in '\${basedir}/src/main/java' and then run +mvn install+ from the command line. The example Maven 'pom.xml' that achieves the same results as the simple Ant file listed in <<ex-ant-sample>> is shown in <<ex-maven-sample>>.
+Contrast the previous Ant example with a Maven example. In Maven, to create a JAR file from some Java source, all you need to do is create a simple 'pom.xml', place your source code in '+++${basedir}/src/main/java+++' and then run +mvn install+ from the command line. The example Maven 'pom.xml' that achieves the same results as the simple Ant file listed in <<ex-ant-sample>> is shown in <<ex-maven-sample>>.
 
 [[ex-maven-sample]]
 .A Sample Maven pom.xml
@@ -336,7 +336,7 @@ The differences between Ant and Maven in this example are:
 
 ** Maven has a lifecycle which was invoked when you executed +mvn install+. This command told Maven to execute a series of sequential lifecycle phases until it reached the install lifecycle phase. As a side-effect of this journey through the lifecycle, Maven executed a number of default plugin goals which did things like compile and create a JAR.
 
-Maven has built-in intelligence about common project tasks in the form of Maven plugins. If you wanted to write and execute unit tests, all you would need to do is write the tests, place them in '\${basedir}/src/test/java', add a test-scoped dependency on either TestNG or JUnit, and run +mvn test+. If you wanted to deploy a web application and not a JAR, all you would need to do is change your project type to +war+ and put your docroot in '\${basedir}/src/main/webapp'. Sure, you can do all of this with Ant, but you will be writing the instructions from scratch. In Ant, you would first have to figure out where the JUnit JAR file should be. Then you would have to create a classpath that includes the JUnit JAR file. Then you would tell Ant where it should look for test source code, write a goal that compiles the test source to bytecode, and execute the unit tests with JUnit.
+Maven has built-in intelligence about common project tasks in the form of Maven plugins. If you wanted to write and execute unit tests, all you would need to do is write the tests, place them in '+++${basedir}/src/test/java+++', add a test-scoped dependency on either TestNG or JUnit, and run +mvn test+. If you wanted to deploy a web application and not a JAR, all you would need to do is change your project type to +war+ and put your docroot in '+++${basedir}/src/main/webapp+++'. Sure, you can do all of this with Ant, but you will be writing the instructions from scratch. In Ant, you would first have to figure out where the JUnit JAR file should be. Then you would have to create a classpath that includes the JUnit JAR file. Then you would tell Ant where it should look for test source code, write a goal that compiles the test source to bytecode, and execute the unit tests with JUnit.
 
 Without supporting technologies like antlibs and Ivy (even with these supporting technologies), Ant has the feeling of a c`ustom procedural build. An efficient set of Maven POMs in a project which adheres to Maven's assumed conventions has surprisingly little XML compared to the Ant alternative. Another benefit of Maven is the reliance on widely-shared Maven plugins. Everyone uses the Maven Surefire plugin for unit testing, and if someone adds support for a new unit testing framework, you can gain new capabilities in your own build by just incrementing the version of a particular Maven plugin in your project's POM.
 
@@ -398,7 +398,7 @@ You can download a binary release of Maven from http://maven.apache.org/download
 /usr/local % cd /usr/local
 /usr/local % ln -s apache-maven-3.0.3 maven
 /usr/local % export M2_HOME=/usr/local/maven
-/usr/local % export PATH=\${M2_HOME}/bin:\${PATH}
+/usr/local % export PATH=${M2_HOME}/bin:${PATH}
 ----
 
 Once Maven is installed, you need to do a couple of things to make it work correctly. You need to add its 'bin' directory in the distribution (in this example, '/usr/local/maven/bin') to your command path. You also need to set the environment variable +M2_HOME+ to the top-level directory you installed (in this example, '/usr/local/maven').
@@ -409,7 +409,7 @@ You'll need to add both +M2_HOME+ and +PATH+ to a script that will run every tim
 
 ----
 export M2_HOME=/usr/local/maven
-export PATH=\${M2_HOME}/bin:\${PATH}
+export PATH=${M2_HOME}/bin:${PATH}
 ----
 
 Once you've added these lines to your own environment, you will be able to run Maven from the command line.
@@ -563,7 +563,7 @@ www.sonatype.com::
 [[installation-sect-license]]
 === About the Apache Software License
 
-Apache Maven is released under the Apache Software License, Version 2.0. If you want to read this license, you can read '\${M2_HOME}/LICENSE.txt' or read this license on the Open Source Initiative's web site here: http://www.opensource.org/licenses/apache2.0.php[http://www.opensource.org/licenses/apache2.0.php].
+Apache Maven is released under the Apache Software License, Version 2.0. If you want to read this license, you can read '+++${M2_HOME}/LICENSE.txt+++' or read this license on the Open Source Initiative's web site here: http://www.opensource.org/licenses/apache2.0.php[http://www.opensource.org/licenses/apache2.0.php].
 
 There's a good chance that, if you are reading this book, you are not a lawyer. If you are wondering what the Apache License, Version 2.0 means, the Apache Software Foundation has assembled a very helpful Frequently Asked Questions (FAQ) page about the license available here: http://www.apache.org/foundation/licence-FAQ.html[http://www.apache.org/foundation/licence-FAQ.html]. Here's is the answer to the question "I am not a lawyer. What does it all mean?"
 
@@ -637,7 +637,7 @@ POM relationships::
 [[pom-relationships-sect-super-pom]]
 ==== The Super POM
 
-Before we dive into some examples of POMs, let's take a quick look at the Super POM. All Maven project POMs extend the Super POM, which defines a set of defaults shared by all projects. This Super POM is a part of the Maven installation and can be found in the 'maven-3.0.3-uber.jar' file in '\${M2_HOME}/lib'. If you look in this JAR file, you will find a file named 'pom-4.0.0.xml' under the +org.apache.maven.project+ package. The Super POM for Maven is shown in <<ex-super-pom>>.
+Before we dive into some examples of POMs, let's take a quick look at the Super POM. All Maven project POMs extend the Super POM, which defines a set of defaults shared by all projects. This Super POM is a part of the Maven installation and can be found in the 'maven-3.0.3-uber.jar' file in '+++${M2_HOME}/lib+++'. If you look in this JAR file, you will find a file named 'pom-4.0.0.xml' under the +org.apache.maven.project+ package. The Super POM for Maven is shown in <<ex-super-pom>>.
 
 [[ex-super-pom]]
 .The Super POM
@@ -674,29 +674,29 @@ Before we dive into some examples of POMs, let's take a quick look at the Super 
     </pluginRepositories>
 
     <build> <3>
-            <directory>\${project.basedir}/target</directory>
+            <directory>${project.basedir}/target</directory>
             <outputDirectory>
-                \${project.build.directory}/classes
+                ${project.build.directory}/classes
             </outputDirectory>
-            <finalName>\${project.artifactId}-\${project.version}</finalName>
+            <finalName>${project.artifactId}-${project.version}</finalName>
             <testOutputDirectory>
-                \${project.build.directory}/test-classes
+                ${project.build.directory}/test-classes
             </testOutputDirectory>
             <sourceDirectory>
-                \${project.basedir}/src/main/java
+                ${project.basedir}/src/main/java
             </sourceDirectory>
             <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
             <testSourceDirectory>
-                \${project.basedir}/src/test/java
+                ${project.basedir}/src/test/java
             </testSourceDirectory>
             <resources>
                 <resource>
-                    <directory>\${project.basedir}/src/main/resources</directory>
+                    <directory>${project.basedir}/src/main/resources</directory>
                 </resource>
             </resources>
             <testResources>
                 <testResource>
-                    <directory>\${project.basedir}/src/test/resources</directory>
+                    <directory>${project.basedir}/src/test/resources</directory>
                 </testResource>
             </testResources>
 
@@ -887,7 +887,7 @@ preceded by a dollar sign and surrounded by two curly braces. For example, consi
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <build>
-        <finalName>\${project.groupId}-\${project.artifactId}</finalName>
+        <finalName>${project.groupId}-${project.artifactId}</finalName>
     </build>
 </project>
 ----
@@ -900,31 +900,31 @@ If you put this XML in a 'pom.xml' and run +mvn help:effective-pom+, you will se
 ...
 ----
 
-When Maven reads a POM, it replaces references to properties when it loads the POM XML. Maven properties occur frequently in advanced Maven usage, and are similar to properties in other systems such as Ant or Velocity. They are simply variables delimited by +\${...}+. Maven provides three implicit variables which can be used to access environment variables, POM information, and Maven Settings:
+When Maven reads a POM, it replaces references to properties when it loads the POM XML. Maven properties occur frequently in advanced Maven usage, and are similar to properties in other systems such as Ant or Velocity. They are simply variables delimited by '+++${...}+++'. Maven provides three implicit variables which can be used to access environment variables, POM information, and Maven Settings:
 
 env::
 
-  The +env+ variable exposes environment variables exposed by your operating system or shell. For example, a reference to +\${env.PATH}+ in a Maven POM would be replaced by the +\${PATH}+ environment variable (or +%PATH%+ in Windows).
+  The +env+ variable exposes environment variables exposed by your operating system or shell. For example, a reference to '+++${env.PATH}+++' in a Maven POM would be replaced by the '+++${PATH}+++' environment variable (or +%PATH%+ in Windows).
 
 project::
 
-  The +project+ variable exposes the POM. You can use a dot-notated (.) path to reference the value of a POM element. For example, in this section we used the +groupId+ and +artifactId+ to set the +finalName+ element in the build configuration. The syntax for this property reference was: \${project.groupId}-\${project.artifactId}.
+  The +project+ variable exposes the POM. You can use a dot-notated (.) path to reference the value of a POM element. For example, in this section we used the +groupId+ and +artifactId+ to set the +finalName+ element in the build configuration. The syntax for this property reference was: '+++${project.groupId}-${project.artifactId}+++'.
 
 settings::
 
-  The +settings+ variable exposes Maven settings information. You can use a dot-notated (.) path to reference the value of an element in a 'settings.xml' file. For example, +\${settings.offline}+ would reference the value of the +offline+ element in '~/.m2/settings.xml'.
+  The +settings+ variable exposes Maven settings information. You can use a dot-notated (.) path to reference the value of an element in a 'settings.xml' file. For example, '+++${settings.offline}+++' would reference the value of the +offline+ element in '~/.m2/settings.xml'.
 
-NOTE: You may see older builds that use +\${pom.xxx}+ or just +\${xxx}+ to reference POM properties. These methods have been deprecated and only +\${project.xxx}+ should be used.
+NOTE: You may see older builds that use '+++${pom.xxx}+++' or just '+++${xxx}+++' to reference POM properties. These methods have been deprecated and only '+++${project.xxx}+++' should be used.
 
 In addition to the three implicit variables, you can reference system properties and any custom properties set in the Maven POM or in a build profile:
 
 Java System Properties::
 
-  All properties accessible via +getProperties()+ on +java.lang.System+ are exposed as POM properties. Some examples of system properties are: +\${user.name}+, <varname role="keep-together">\${user.home}+, +\${java.home}+, and +\${os.name}+. A full list of system properties can be found in the Javadoc for the +java.lang.System+ class.
+  All properties accessible via +getProperties()+ on +java.lang.System+ are exposed as POM properties. Some examples of system properties are: '+++${user.name}+++', <varname role="keep-together">'+++${user.home}+++', '+++${java.home}+++', and '+++${os.name}+++'. A full list of system properties can be found in the Javadoc for the +java.lang.System+ class.
 
 x::
 
-  Arbitrary properties can be set with a +properties+ element in a 'pom.xml' or <filename moreinfo="none" role="keep-together">settings.xml', or properties can be loaded from external files. If you set a property named +fooBar+ in your 'pom.xml', that same property is referenced with +\${fooBar}+. Custom properties come in handy when you are building a system that filters resources and targets different deployment platforms. Here is the syntax for setting +\${foo}=bar+ in a POM:
+  Arbitrary properties can be set with a +properties+ element in a 'pom.xml' or <filename moreinfo="none" role="keep-together">settings.xml', or properties can be loaded from external files. If you set a property named +fooBar+ in your 'pom.xml', that same property is referenced with '+++${fooBar}+++'. Custom properties come in handy when you are building a system that filters resources and targets different deployment platforms. Here is the syntax for setting '+++${foo}=bar+++' in a POM:
 
 ----
 <properties>
@@ -1358,22 +1358,22 @@ If you have a set of dependencies which are logically grouped together. You can 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>\${hibernateVersion}</version>
+            <version>${hibernateVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>\${hibernateAnnotationsVersion}</version>
+            <version>${hibernateAnnotationsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-hibernate3</artifactId>
-            <version>\${springVersion}</version>
+            <version>${springVersion}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>\${mysqlVersion}</version>
+            <version>${mysqlVersion}</version>
         </dependency>
     </dependencies>
     <properties>
@@ -1466,7 +1466,7 @@ The first lifecycle you'll be interested in is the simplest lifecycle in Maven. 
 * +clean+
 * +post-clean+
 
-The interesting phase in the clean lifecycle is the +clean+ phase. The Clean plugin's clean goal (+clean:clean+) is bound to the +clean+ phase in the +clean+ lifecycle. The +clean:clean+ goal deletes the output of a build by deleting the build directory. If you haven't customized the location of the build directory it will be the '\${basedir}/target' directory as defined by the Super POM. When you execute the +clean:clean+ goal you do not do so by executing the goal directly with +mvn clean:clean+, you do so by executing the +clean+ phase of the clean lifecycle. Executing the +clean+ phase gives Maven an opportunity to execute any other goals which may be bound to the +pre-clean+ phase.
+The interesting phase in the clean lifecycle is the +clean+ phase. The Clean plugin's clean goal (+clean:clean+) is bound to the +clean+ phase in the +clean+ lifecycle. The +clean:clean+ goal deletes the output of a build by deleting the build directory. If you haven't customized the location of the build directory it will be the '+++${basedir}/target+++' directory as defined by the Super POM. When you execute the +clean:clean+ goal you do not do so by executing the goal directly with +mvn clean:clean+, you do so by executing the +clean+ phase of the clean lifecycle. Executing the +clean+ phase gives Maven an opportunity to execute any other goals which may be bound to the +pre-clean+ phase.
 
 For example, suppose you wanted to trigger an +antrun:run+ goal task to echo a notification on +pre-clean+, or to make an archive of a project's build directory before it is deleted. Simply running the +clean:clean+ goal will not execute the lifecycle at all, but specifying the +clean+ phase will use the +clean+ lifecycle and advance through the three lifecycle phases until it reaches the +clean+ phase. <<ex-trigger-pre-clean>> shows an example of build configuration which binds the +antrun:run+ goal to the +pre-clean+ phase to echo an alert that the project artifact is about to be deleted. In this example, the +antrun:run+ goal is being used to execute some arbitrary Ant commands to check for an existing project artifact. If the project's artifact is about to be deleted it will print this to the screen
 
@@ -1490,7 +1490,7 @@ For example, suppose you wanted to trigger an +antrun:run+ goal task to echo a n
                                 <!-- adds the ant-contrib tasks (if/then/else used below) -->
                                 <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
                                 <available 
-                                     file="\${project.build.directory}/\${project.build.finalName}.\${project.packaging}"
+                                     file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
                                      property="file.exists" value="true" />
 
                                 <if>
@@ -1499,12 +1499,12 @@ For example, suppose you wanted to trigger an +antrun:run+ goal task to echo a n
                                     </not>
                                     <then>
                                         <echo>No
-                                            \${project.build.finalName}.\${project.packaging} to
+                                            ${project.build.finalName}.${project.packaging} to
                                             delete</echo>
                                     </then>
                                     <else>
                                         <echo>Deleting
-                                            \${project.build.finalName}.\${project.packaging}</echo>
+                                            ${project.build.finalName}.${project.packaging}</echo>
                                     </else>
                                 </if>
                             </tasks>
@@ -1532,7 +1532,7 @@ Running +mvn clean+ on a project with this build configuration will produce outp
 [INFO] Building Your Project
 [INFO]task-segment: [clean]
 [INFO] ----------------------------------------------------------------------
-[INFO] [antrun:run \{execution: file-exists}]
+[INFO] [antrun:run {execution: file-exists}]
 [INFO] Executing tasks
 [echo] Deleting your-project-1.0-SNAPSHOT.jar
 [INFO] Executed tasks
@@ -1768,7 +1768,7 @@ To use one of these custom packaging types, you need two things: a plugin which 
                 <extensions>true</extensions>
                 <configuration>
                     <debug>true</debug>
-                    <flexHome>\${flex.home}</flexHome>
+                    <flexHome>${flex.home}</flexHome>
                     <useNetwork>true</useNetwork>
                     <main>org/sonatype/mavenbook/Main.mxml</main>
                 </configuration>
@@ -1797,17 +1797,17 @@ Many of the packaging lifecycles have similar goals. If you look at the goals bo
 [[lifecycle-sect-process-resources-phase]]
 ==== Process Resources
 
- The +process-resources+ phase "processes" resources and copies them to the output directory. If you haven't customized the default directory locations defined in the Super POM, this means that Maven will copy the files from '\${basedir}/src/main/resources' to '\${basedir}/target/classes' or the directory defined in '\${project.build.outputDirectory}'. In addition to copying the resources to the output directory, Maven can also apply a filter to the resources that allows you to replace tokens within resource file. Just like variables are referenced in a POM using +\${...}+ notation, you can reference variables in your project's resources using the same syntax. Coupled with build profiles, such a facility can be used to produce build artifacts which target different deployment platforms. This is something that is common in environments which need to produce output for development, testing, staging, and production platforms from the same project. For more information about build profiles, see <<profiles>>.
+ The +process-resources+ phase "processes" resources and copies them to the output directory. If you haven't customized the default directory locations defined in the Super POM, this means that Maven will copy the files from '+++${basedir}/src/main/resources+++' to '+++${basedir}/target/classes+++' or the directory defined in '+++${project.build.outputDirectory}+++'. In addition to copying the resources to the output directory, Maven can also apply a filter to the resources that allows you to replace tokens within resource file. Just like variables are referenced in a POM using '+++${...}+++' notation, you can reference variables in your project's resources using the same syntax. Coupled with build profiles, such a facility can be used to produce build artifacts which target different deployment platforms. This is something that is common in environments which need to produce output for development, testing, staging, and production platforms from the same project. For more information about build profiles, see <<profiles>>.
 
 To illustrate resource filtering, assume that you have a project with an XML file in 'src/main/resources/META-INF/service.xml'. You want to externalize some configuration variables to a properties file. In other words, you might want to reference a JDBC URL, username, and password for your database, and you don't want to put these values directly into the 'service.xml' file. Instead, you would like to use a properties file to capture all of the configuration points for your program. Doing this will allow you to consolidate all configuration into a single properties file and make it easier to change configuration values when you need to target a new deployment environment. First, take a look at the contents of 'service.xml' in 'src/main/resources/META-INF'.
 
 .Using Properties in Project Resources
 ----
 <service>
-    <!-- This URL was set by project version \${project.version} -->
-    <url>\${jdbc.url}</url>
-    <user>\${jdbc.username}</user>
-    <password>\${jdbc.password}</password>
+    <!-- This URL was set by project version ${project.version} -->
+    <url>${jdbc.url}</url>
+    <user>${jdbc.username}</user>
+    <password>${jdbc.password}</password>
 </service>
 ----
 
@@ -1820,7 +1820,7 @@ jdbc.username=sa
 jdbc.password=
 ----
 
-To configure resource filtering with this 'default.properties' file, we need to specify two things in a project's POM: a list of properties files in the +filters+ element of the build configuration, and a flag to Maven that the resources directory is to be filtered. The default Maven behavior is to skip filtering and just copy the resources to the output directory; you'll need to explicitly configure resource filter, or Maven will skip the step altogether. This default ensures that Maven's resource filtering feature doesn't surprise you out of nowhere and clobbering any +\${...}+ references you didn't want it to replace.
+To configure resource filtering with this 'default.properties' file, we need to specify two things in a project's POM: a list of properties files in the +filters+ element of the build configuration, and a flag to Maven that the resources directory is to be filtered. The default Maven behavior is to skip filtering and just copy the resources to the output directory; you'll need to explicitly configure resource filter, or Maven will skip the step altogether. This default ensures that Maven's resource filtering feature doesn't surprise you out of nowhere and clobbering any '+++${...}+++' references you didn't want it to replace.
 
 .Filter Resources (Replacing Properties)
 ----
@@ -1873,29 +1873,29 @@ When you are building a project that produces a console application or a command
     <resources>
         <resource>
             <filtering>true</filtering>
-            <directory>\${basedir}/src/main/command</directory>
+            <directory>${basedir}/src/main/command</directory>
             <includes>
                 <include>run.bat</include>
                 <include>run.sh</include>
             </includes>
-            <targetPath>\${basedir}</targetPath>
+            <targetPath>${basedir}</targetPath>
         </resource>
         <resource>
-            <directory>\${basedir}/src/main/resources</directory>
+            <directory>${basedir}/src/main/resources</directory>
         </resource>
     </resources>
     ...
 </build>
 ----
 
-If you run 'mvn process-resources' in this project, you will end up with two files, 'run.sh' and 'run.bat', in +\${basedir}+. We've singled out these two files in a +resource+ element, configuring filtering, and set the +targetPath+ to be +\${basedir}+. In a second +resource+ element, we've configured the default resources path to be copied to the default output directory without any filtering. <<ex-filter-script>> shows you how to declare two resource directories and supply them with different filtering and target directory preferences. The project from <<ex-filter-script>> would contain a 'run.bat' file in 'src/main/command' with the following content:
+If you run 'mvn process-resources' in this project, you will end up with two files, 'run.sh' and 'run.bat', in '+++${basedir}+++'. We've singled out these two files in a +resource+ element, configuring filtering, and set the +targetPath+ to be '+++${basedir}+++'. In a second +resource+ element, we've configured the default resources path to be copied to the default output directory without any filtering. <<ex-filter-script>> shows you how to declare two resource directories and supply them with different filtering and target directory preferences. The project from <<ex-filter-script>> would contain a 'run.bat' file in 'src/main/command' with the following content:
 
 ----
 @echo off
-java -jar \${project.build.finalName}.jar %*
+java -jar ${project.build.finalName}.jar %*
 ----
 
-After running +mvn process-resources+, a file named 'run.bat' would appear in +\${basedir}+ with the following content:
+After running +mvn process-resources+, a file named 'run.bat' would appear in '+++${basedir}+++' with the following content:
 
 ----
 @echo off
@@ -1950,7 +1950,7 @@ WARNING: While it might seem necessary to bend Maven to your own idea of project
 [[lifecycle-sect-process-test-resources-phase]]
 ==== Process Test Resources
 
-The +process-test-resources+ phase is almost indistinguishable from the +process-resources+ phase. There are some trivial differences in the POM, but most everything the same. You can filter test resources just as you filter regular resources. The default location for test resources is defined in the Super POM as 'src/test/resources', and the default output directory for test resources is 'target/test-classes' as defined in +\${project.build.testOutputDirectory}+. 
+The +process-test-resources+ phase is almost indistinguishable from the +process-resources+ phase. There are some trivial differences in the POM, but most everything the same. You can filter test resources just as you filter regular resources. The default location for test resources is defined in the Super POM as 'src/test/resources', and the default output directory for test resources is 'target/test-classes' as defined in '+++${project.build.testOutputDirectory}+++'. 
 
 [[lifecycle-sect-test-compile-phase]]
 ==== Test Compile
@@ -2304,12 +2304,12 @@ You can activate a profile based on the value of a property like +environment.ty
 </project>
 ----
 
-Note the exclamation point prefixing the property name. The exclamation point is often referred to as the "bang" character and signifies "not". This profile is activated when no +\${environment.type}+ property is set.  
+Note the exclamation point prefixing the property name. The exclamation point is often referred to as the "bang" character and signifies "not". This profile is activated when no '+++${environment.type}+++' property is set.  
 
 [[profiles-sect-listing-active-profiles]]
 === Listing Active Profiles
 
-Maven profiles can be defined in either 'pom.xml', 'profiles.xml', '~/.m2/settings.xml', or '\${M2_HOME}/conf/settings.xml'. With these four levels, there's no good way of keeping track of profiles available to a particular project without remembering which profiles are defined in these four files. To make it easier to keep track of which profiles are available, and where they have been defined, the Maven Help plugin defines a goal, +active-profiles+, which lists all the active profiles and where they have been defined. You can run the +active-profiles+ goal, as follows:
+Maven profiles can be defined in either 'pom.xml', 'profiles.xml', '~/.m2/settings.xml', or '+++${M2_HOME}/conf/settings.xml+++'. With these four levels, there's no good way of keeping track of profiles available to a particular project without remembering which profiles are defined in these four files. To make it easier to keep track of which profiles are available, and where they have been defined, the Maven Help plugin defines a goal, +active-profiles+, which lists all the active profiles and where they have been defined. You can run the +active-profiles+ goal, as follows:
 
 ----
 $ mvn help:active-profiles
@@ -2481,7 +2481,7 @@ If the Operating System is in the Windows family, this 'pom.xml' qualifies the J
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <classifier>\${envClassifier}</classifier>
+                    <classifier>${envClassifier}</classifier>
                 </configuration>
             </plugin>
         </plugins>
@@ -2514,7 +2514,7 @@ If the Operating System is in the Windows family, this 'pom.xml' qualifies the J
 </project>
 ----
 
-In this 'pom.xml', each profile doesn't need to include a +build+ element to configure the Jar plugin. Instead, each profile is activated by the Operating System family and sets the +envClassifier+ property to either +win+ or +linux+. This +envClassifier+ is then referenced in the default 'pom.xml' +build+ element to add a classifier to the project's JAR artifact. The JAR artifact will be named +\${finalName}-\${envClassifier}.jar+ and included as a dependency using the following dependency syntax:
+In this 'pom.xml', each profile doesn't need to include a +build+ element to configure the Jar plugin. Instead, each profile is activated by the Operating System family and sets the +envClassifier+ property to either +win+ or +linux+. This +envClassifier+ is then referenced in the default 'pom.xml' +build+ element to add a classifier to the project's JAR artifact. The JAR artifact will be named '+++${finalName}-${envClassifier}.jar+++' and included as a dependency using the following dependency syntax:
 
 .Depending on a Qualified Artifact
 ----
@@ -2859,7 +2859,7 @@ Starting with the Maven 2.1 release, there are new Maven command line options wh
 The example in this section is a skeleton of a complex multimodule project that is used to illustrate the advanced reactor options. While it is possible to read this section without the example code, you might want to download the example code and follow along, experimenting with the various options as you learn how to use the advanced reactor options. This section’s example project may be downloaded with the book’s example code at:
 
 ----
-${examples.download.url}
+http://www.sonatype.com/books/mvnref-book/mvnref-examples.zip
 ----
 
 Unzip this archive in any directory, and then go to the 'ch-running/' directory. There you will see a directory named 'sample-parent/'. All of the examples in this section will be executed from the 'examples/ch-running/sample-parent/' directory in the examples distribution. The sample-parent/ directory contains the multimodule project structure shown in <<fig-running-aro-dir-struct>>.
@@ -3105,7 +3105,7 @@ To describe a particular plugin, use the +help:describe+ goal from the command l
 
 ----
 $ mvn help:describe -Dcmd=compiler:compile
-[INFO] \[help:describe \\{execution: default-cli}]
+[INFO] [help:describe {execution: default-cli}]
 [INFO] 'compiler:compile' is a plugin goal (aka mojo).
 Mojo: 'compiler:compile'
 compiler:compile
@@ -3117,7 +3117,7 @@ For more information about the available configuration parameters, run the same 
 
 ----
 $ mvn help:describe -Dcmd=compiler:compile -Ddetail
-[INFO] \[help:describe \\{execution: default-cli}]
+[INFO] [help:describe {execution: default-cli}]
 [INFO] 'compiler:compile' is a plugin goal (aka mojo).
 Mojo: 'compiler:compile'
 compiler:compile
@@ -3235,7 +3235,7 @@ If you need to get a list of plugin goals which are contained in a plugin, you c
 
 ----
 $ mvn help:describe -Dplugin=compiler
-[INFO] [help:describe \{execution: default-cli}]
+[INFO] [help:describe {execution: default-cli}]
 [INFO] org.apache.maven.plugins:maven-compiler-plugin:2.0.2
 
 Name: Maven Compiler Plugin
@@ -3339,9 +3339,9 @@ You can configure plugin parameters for specific executions of a plugin goal. <<
             </goals>
             <configuration>
                 <tasks>
-                    <echo>\${PATH}=\${env.PATH}</echo>
-                    <echo>User's Home Directory: \${user.home}</echo>
-                    <echo>Project's Base Director: \${basedir}</echo>
+                    <echo>${PATH}=${env.PATH}</echo>
+                    <echo>User's Home Directory: ${user.home}</echo>
+                    <echo>Project's Base Director: ${basedir}</echo>
                 </tasks>
             </configuration>
         </execution>
@@ -3578,7 +3578,7 @@ $ mvn package
 [INFO] [jar:jar]
 [INFO] Building jar: ~/mvn-examples-1.0/assemblies/executable-jar/target/\
 executable-jar-1.0-SNAPSHOT.jar
-[INFO] [assembly:single \{execution: create-executable-jar}]
+[INFO] [assembly:single {execution: create-executable-jar}]
 [INFO] Processing DependencySet (output=)
 [INFO] Building jar: ~/mvn-examples-1.0/assemblies/executable-jar/target/\
 executable-jar-1.0-SNAPSHOT-jar-with-dependencies.jar
@@ -3744,7 +3744,7 @@ This example illustrates how the basic capabilities of the Maven Assembly plugin
 ----
 $ mvn package
 ...
-[INFO] [assembly:single \{execution: bundle-project-sources}]
+[INFO] [assembly:single {execution: bundle-project-sources}]
 [INFO] Processing DependencySet (output=)
 [INFO] Building jar: ~/downloads/mvn-examples-1.0/assemblies/as-dependencies/\
 project-bundle/target/project-bundle-1.0-SNAPSHOT-jar-with-dependencies.jar
@@ -3916,7 +3916,7 @@ If we want more control over this file set, we can specify it more explicitly. <
 
 The +includes+ section uses a list of +include+ elements, which contain path patterns. These patterns may contain wildcards such as ‘**’ which matches one or more directories or ‘*’ which matches part of a file name, and ‘?’ which matches a single character in a file name. <<ex-explicit-fileSet>> uses a +fileMode+ entry to specify that files in this set should be readable by all, but only writable by the owner. Since the +fileSet+ includes directories, we also have the option of specifying a +directoryMode+ that works in much the same way as the +fileMode+. Since a directories’ execute permission is what allows users to list their contents, we want to make sure directories are executable in addition to being readable. Like files, only the owner can write to directories in this set.
 
-The +fileSet+ entry offers some other options as well. First, it allows for an +excludes+ section with a form identical to the +includes+ section. These exclusion patterns allow you to exclude specific file patterns from a +fileSet+. Include patterns take precedence over exclude patterns. Additionally, you can set the +filtering+ flag to true if you want to substitute property values for expressions within the included files. Expressions can be delimited either by +\${+ and +}+ (standard Maven expressions like +\${project.groupId}+) or by +@+ and +@+ (standard Ant expressions like +@project.groupId@+). You can adjust the line ending of your files using the +lineEnding+ element; valid values for +lineEnding+ are:
+The +fileSet+ entry offers some other options as well. First, it allows for an +excludes+ section with a form identical to the +includes+ section. These exclusion patterns allow you to exclude specific file patterns from a +fileSet+. Include patterns take precedence over exclude patterns. Additionally, you can set the +filtering+ flag to true if you want to substitute property values for expressions within the included files. Expressions can be delimited either by '+++${+++' and '+++}+++' (standard Maven expressions like '+++${project.groupId}+++') or by +@+ and +@+ (standard Ant expressions like +@project.groupId@+). You can adjust the line ending of your files using the +lineEnding+ element; valid values for +lineEnding+ are:
 
 keep::
 
@@ -4025,7 +4025,7 @@ There are two configuration options that are used in concert to define the locat
     ...
     <dependencySets>
         <dependencySet>
-            <outputDirectory>\${artifact.groupId}</outputDirectory>
+            <outputDirectory>${artifact.groupId}</outputDirectory>
         </dependencySet>
     </dependencySets>
     ...
@@ -4041,9 +4041,9 @@ If you wanted to perform a further customization and remove the version numbers 
     ...
     <dependencySets>
         <dependencySet>
-            <outputDirectory>\${artifact.groupId}</outputDirectory>
+            <outputDirectory>${artifact.groupId}</outputDirectory>
             <outputFileNameMapping>
-                \${artifact.artifactId}.\${artifact.extension} 
+                ${artifact.artifactId}.${artifact.extension} 
             </outputFileNameMapping>
         </dependencySet>
     </dependencySets>
@@ -4058,21 +4058,21 @@ In the previous example, a dependency on +commons:commons-codec+ version 1.3, wo
 
 As mentioned in the Assembly Interpolation section above, neither of these elements are interpolated with the rest of the assembly descriptor, because their raw values have to be interpreted using additional, artifact-specific expression resolvers.
 
-The artifact expressions available for these two elements vary only slightly. In both cases, all of the +\${project.\*}+, +\${pom.\*}+, and +\${*}+ expressions that are available in the POM and the rest of the assembly descriptor are also available here. For the +outputFileNameMapping+ element, the following process is applied to resolve expressions:
+The artifact expressions available for these two elements vary only slightly. In both cases, all of the '+++${project.\*}+++', '+++${pom.\*}+++', and '+++${*}+++' expressions that are available in the POM and the rest of the assembly descriptor are also available here. For the +outputFileNameMapping+ element, the following process is applied to resolve expressions:
 
- . If the expression matches the pattern +\${artifact.*}+:
+ . If the expression matches the pattern '+++${artifact.*}+++':
  .. Match against the dependency’s +Artifact+ instance (resolves: +groupId+, +artifactId+, +version+, +baseVersion+, +scope+, +classifier+, and +file.*+) 
  .. Match against the dependency’s +ArtifactHandler+ instance (resolves: +expression+) 
  .. Match against the project instance associated with the dependency’s Artifact (resolves: mainly POM properties)   
-. If the expression matches the patterns +\${pom.\*}+ or +\${project.*}+:
+. If the expression matches the patterns '+++${pom.\*}+++' or '+++${project.*}+++':
 .. Match against the project instance (+MavenProject+) of the current build. 
-. If the expression matches the pattern +\${dashClassifier?}+ and the Artifact instance contains a non-null classifier, resolve to the classifier preceded by a dash (-classifier). Otherwise, resolve to an empty string. 
+. If the expression matches the pattern '+++${dashClassifier?}+++' and the Artifact instance contains a non-null classifier, resolve to the classifier preceded by a dash (-classifier). Otherwise, resolve to an empty string. 
 .. Attempt to resolve the expression against the project instance of the current build. 
 .. Attempt to resolve the expression against the POM properties of the current build. 
 .. Attempt to resolve the expression against the available system properties. 
 .. Attempt to resolve the expression against the available operating-system environment variables.  
 
-The +outputDirectory+ value is interpolated in much the same way, with the difference being that there is no available +\${artifact.\*}+ information, only the +\${project.*}+ instance for the particular artifact. Therefore, the expressions listed above associated with those classes (1a, 1b, and 3 in the process listing above) are unavailable.
+The +outputDirectory+ value is interpolated in much the same way, with the difference being that there is no available '+++${artifact.\*}+++' information, only the '+++${project.*}+++' instance for the particular artifact. Therefore, the expressions listed above associated with those classes (1a, 1b, and 3 in the process listing above) are unavailable.
 
 How do you know when to use +outputDirectory+ and +outputFileNameMapping+? When dependencies are unpacked only the +outputDirectory+ is used to calculate the output location. When dependencies are managed as whole files (not unpacked), both +outputDirectory+ and +outputFileNameMapping+ can be used together. When used together, the result is the equivalent of:
 
@@ -4080,7 +4080,7 @@ How do you know when to use +outputDirectory+ and +outputFileNameMapping+? When 
 <archive-root-dir>/<outputDirectory>/<outputFileNameMapping>
 ----
 
-When +outputDirectory+ is missing, it is not used. When +outputFileNameMapping+ is missing, its default value is: +\${artifact.artifactId}-\${artifact.version}\${dashClassifier?}.\${artifact.extension}+ 
+When +outputDirectory+ is missing, it is not used. When +outputFileNameMapping+ is missing, its default value is: '+++${artifact.artifactId}-${artifact.version}-${dashClassifier?}.${artifact.extension}+++' 
 
 [[assemblies-sect-include-by-scope]]
 ===== Including and Excluding Dependencies by Scope
@@ -4098,12 +4098,12 @@ For instance, if we plan to bundle a web application with http://www.mortbay.org
     <dependencySets>
         <dependencySet>
             <scope>provided</scope>
-            <outputDirectory>lib/\${project.artifactId}</outputDirectory>
+            <outputDirectory>lib/${project.artifactId}</outputDirectory>
         </dependencySet>
         <dependencySet>
             <scope>runtime</scope>
             <outputDirectory>
-                webapps/\${webContextName}/WEB-INF/lib
+                webapps/${webContextName}/WEB-INF/lib
             </outputDirectory>
         </dependencySet>
     </dependencySets>
@@ -4156,12 +4156,12 @@ The pattern above makes use of the second dependency identity: the dependency’
     <dependencySets>
         <dependencySet>
             <scope>provided</scope>
-            <outputDirectory>lib/\${project.artifactId}</outputDirectory>
+            <outputDirectory>lib/${project.artifactId}</outputDirectory>
         </dependencySet>
         <dependencySet>
             <scope>runtime</scope>
             <outputDirectory>
-                webapps/\${webContextName}/WEB-INF/lib
+                webapps/${webContextName}/WEB-INF/lib
             </outputDirectory>
             <excludes>
                 <exclude>*:zip</exclude>
@@ -4170,7 +4170,7 @@ The pattern above makes use of the second dependency identity: the dependency’
         <dependencySet>
             <scope>runtime</scope>
             <outputDirectory>
-                webapps/\${webContextName}/resources
+                webapps/${webContextName}/resources
             </outputDirectory>
             <includes>
                 <include>*:zip</include>
@@ -4226,7 +4226,7 @@ To continue our web-application example, suppose some of the resource dependenci
         <dependencySet>
             <scope>runtime</scope>
             <outputDirectory>
-                webapps/\${webContextName}/resources
+                webapps/${webContextName}/resources
             </outputDirectory>
             <includes>
                 <include>*:zip</include>
@@ -4245,7 +4245,7 @@ To continue our web-application example, suppose some of the resource dependenci
 
 Notice that the +exclude+ we’re using looks very similar to those used in +fileSet+ declarations. Here, we’re blocking any file starting with the word 'LICENSE' in any directory within our resource artifacts. You can think of the unpack options section as a lightweight +fileSet+ applied to each dependency matched within that dependency set. In other words, it is a +fileSet+ by way of an unpacked dependency. Just as we specified an exclusion pattern for files within resource dependencies in order to block certain files, you can also choose which restricted set of files to include using the includes section. The same code that processes inclusions and exclusions on +fileSets+ has been reused for processing +unpackOptions+.
 
-In addition to file inclusion and exclusion, the unpack options on a dependency set also provides a +filtering+ flag, whose default value is +false+. Again, this should be familiar from our discussion of file sets above. In both cases, expressions using either the Maven syntax of +\${property}+ or the Ant syntax of +@property@+ are supported. Filtering is a particularly nice feature to have for dependency sets, though, since it effectively allows you to create standardized, versioned resource templates that are then customized to each assembly as they are included. Once you start mastering the use of filtered, unpacked dependencies which store shared resources, you will be able to start abstracting repeated resources into common resource projects.  
+In addition to file inclusion and exclusion, the unpack options on a dependency set also provides a +filtering+ flag, whose default value is +false+. Again, this should be familiar from our discussion of file sets above. In both cases, expressions using either the Maven syntax of '+++${property}+++' or the Ant syntax of +@property@+ are supported. Filtering is a particularly nice feature to have for dependency sets, though, since it effectively allows you to create standardized, versioned resource templates that are then customized to each assembly as they are included. Once you start mastering the use of filtered, unpacked dependencies which store shared resources, you will be able to start abstracting repeated resources into common resource projects.  
 
 [[assemblies-sect-summarizing]]
 ===== Summarizing Dependency Sets
@@ -4279,7 +4279,7 @@ Once we’ve determined how module selection should proceed for the module set i
 [[assemblies-sect-sources-section]]
 ===== Sources Section
 
-Suppose you want to include the source of all modules in your project's assembly, but you would like to exclude a particular module. Maybe you have a project named +secret-sauce+ which contains secret and sensitive code that you don't want to distribute with your project. The simplest way to accomplish this is to use a +moduleSet+ which includes each project's directory in +\${module.basedir.name}+ and which excludes the +secret-sauce+ module from the assembly.
+Suppose you want to include the source of all modules in your project's assembly, but you would like to exclude a particular module. Maybe you have a project named +secret-sauce+ which contains secret and sensitive code that you don't want to distribute with your project. The simplest way to accomplish this is to use a +moduleSet+ which includes each project's directory in '+++${module.basedir.name}+++' and which excludes the +secret-sauce+ module from the assembly.
 
 [[ex-include-exclude-moduleSet]]
 .Includes and Excluding Modules with a +moduleSet+
@@ -4296,7 +4296,7 @@ Suppose you want to include the source of all modules in your project's assembly
             </excludes>
             <sources>
                 <outputDirectoryMapping>
-                    \${module.basedir.name}
+                    ${module.basedir.name}
                 </outputDirectoryMapping>
                 <excludeSubModuleDirectories>
                     false
@@ -4318,7 +4318,7 @@ Suppose you want to include the source of all modules in your project's assembly
 
  In <<ex-include-exclude-moduleSet>>, since we’re dealing with each module’s sources it’s simpler to deal only with direct modules of the current project, handling sub-modules using file-path wildcard patterns in the file set. We set the +includeSubModules+ element to +false+ so we don't have to worry about submodules showing up in the root directory of the assembly archive. The +exclude+ element will take care of excluding the +secret-sauce+ module. We’re not going to include the project sources for the secret-sauce module; they’re, well, secret.
 
-Normally, module sources are included in the assembly under a subdirectory named after the module’s +artifactId+. However, since Maven allows modules that are not in directories named after the module project’s +artifactId+, it’s often better to use the expression +\${module.basedir.name}+ to preserve the module directory’s actual name (+\${module.basedir.name}+ is the same as calling +MavenProject.getBasedir().getName()+). It is critical to remember that modules are not required to be subdirectories of the project that declares them. If your project has a particularly strange directory structure, you may need to resort to special +moduleSet+ declarations that include specific project and account for your own project's idiosyncrasies.
+Normally, module sources are included in the assembly under a subdirectory named after the module’s +artifactId+. However, since Maven allows modules that are not in directories named after the module project’s +artifactId+, it’s often better to use the expression '+++${module.basedir.name}+++' to preserve the module directory’s actual name ('+++${module.basedir.name}+++' is the same as calling +MavenProject.getBasedir().getName()+). It is critical to remember that modules are not required to be subdirectories of the project that declares them. If your project has a particularly strange directory structure, you may need to resort to special +moduleSet+ declarations that include specific project and account for your own project's idiosyncrasies.
 
 WARNING: Try to minimize your own project's idiosyncrasies, while Maven is flexible, if you find yourself doing too much configuration there is likely an easier way.
 
@@ -4331,7 +4331,7 @@ It’s also worth mentioning that the +sources+ section supports +fileSet+-like 
 
 In <<assemblies-sect-output-location>>, we used the element +outputDirectoryMapping+ to change the name of the directory under which each module’s sources would be included. The expressions contained in this element are resolved in exactly the same way as the +outputFileNameMapping+, used in dependency sets (see the explanation of this algorithm in <<assemblies-sect-output-algorithm>>).
 
-In <<ex-include-exclude-moduleSet>>, we used the expression +\${module.basedir.name}+. You might notice that the root of that expression, +module+, is not listed in the mapping-resolution algorithm from the dependency sets section; this object root is specific to configurations within +moduleSets+. It works in exactly the same way as the +\${artifact.*}+ references available in the +outputFileNameMapping+ element, except it is applied to the module’s +MavenProject+, +Artifact+, and +ArtifactHandler+ instances instead of those from a dependency artifact. 
+In <<ex-include-exclude-moduleSet>>, we used the expression '+++${module.basedir.name}+++'. You might notice that the root of that expression, +module+, is not listed in the mapping-resolution algorithm from the dependency sets section; this object root is specific to configurations within +moduleSets+. It works in exactly the same way as the '+++${artifact.*}+++' references available in the +outputFileNameMapping+ element, except it is applied to the module’s +MavenProject+, +Artifact+, and +ArtifactHandler+ instances instead of those from a dependency artifact. 
 
 [[assemblies-sect-binaries]]
 ===== Binaries section
@@ -4360,7 +4360,7 @@ Suppose we want to include the javadoc jars for each of our modules inside our a
 
 In <<ex-include-javadoc-moduleset>>, we don’t explicitly set the +includeSubModules+ flag, since it’s +true+ by default. However, we definitely want to process all modules - even sub-modules - using this module set, since we’re not using any sort of file pattern that could match on sub-module directory structures within. The +attachmentClassifier+ grabs the attached artifact with the javadoc classifier for each module processed. The +includeDependencies+ element tells the Assembly plugin that we're not interested in any of the module's dependencies, just the javadoc attachment. Finally, the +outputDirectory+ element tells the Assembly plugin to put all of the javadoc jars into a directory named 'apidoc-jars/' off of the assembly root directory.
 
-Although we’re not doing anything too complicated in this example, it’s important to understand that the same changes to the expression-resolution algorithm discussed for the +outputDirectoryMapping+ element of the sources section also applies here. That is, whatever was available as +\${artifact.\*}+ inside a +dependencySet+’s +outputFileNameMapping+ configuration is also available here as +\${module.*}+. The same applies for +outputFileNameMapping+ when used directly within a +binaries+ section.
+Although we’re not doing anything too complicated in this example, it’s important to understand that the same changes to the expression-resolution algorithm discussed for the +outputDirectoryMapping+ element of the sources section also applies here. That is, whatever was available as '+++${artifact.\*}+++' inside a +dependencySet+’s +outputFileNameMapping+ configuration is also available here as '+++${module.*}+++'. The same applies for +outputFileNameMapping+ when used directly within a +binaries+ section.
 
 Finally, let’s examine an example where we simply want to process the module’s artifact and its runtime dependencies. In this case, we want to separate the artifact set for each module into separate directory structures, according to the module’s +artifactId+ and +version+. The resulting module set is surprisingly simply, and it looks like the listing in <<ex-the-big-include>>:
 
@@ -4373,7 +4373,7 @@ Finally, let’s examine an example where we simply want to process the module�
         <moduleSet>
             <binaries>
                 <outputDirectory>
-                    \${module.artifactId}-\${module.version}
+                    ${module.artifactId}-${module.version}
                 </outputDirectory>
                 <dependencySets>
                     <dependencySet/>
@@ -4458,7 +4458,7 @@ Now that we’ve made it through the main body of the assembly descriptor, we ca
 
 Some may consider it a stylistic concern, but it’s often important to have control over the name of the root directory for your assembly, or whether the root directory is there at all. Fortunately, two configuration options in the root of the assembly descriptor make managing the archive root directory simple: +includeBaseDirectory+ and +baseDirectory+. In cases like executable jar files, you probably don’t want a root directory at all. To skip it, simply set the +includeBaseDirectory+ flag to +false+ (it’s +true+ by default). This will result in an archive that, when unpacked, may create more than one directory in the unpack target directory. While this is considered bad form for archives that are meant to be unpacked before use, it’s not so bad for archives that are consumable as-is.
 
-In other cases, you may want to guarantee the name of the archive root directory regardless of the POM’s version or other information. By default, the +baseDirectory+ element has a value equal to +\${project.artifactId}-\${project.version}+. However, we can easily set this element to any value that consists of literal strings and expressions which can be interpolated from the current POM, such as +\${project.groupId}-\${project.artifactId}+. This could be very good news for your documentation team! (We all have those, right?)
+In other cases, you may want to guarantee the name of the archive root directory regardless of the POM’s version or other information. By default, the +baseDirectory+ element has a value equal to '+++${project.artifactId}-${project.version}+++'. However, we can easily set this element to any value that consists of literal strings and expressions which can be interpolated from the current POM, such as '+++${project.groupId}-${project.artifactId}+++'. This could be very good news for your documentation team! (We all have those, right?)
 
 Another configuration available is the +includeSiteDirectory+ flag, whose default value is +false+. If your project build has also constructed a website document root using the site lifecycle or the Site plugin goals, that output can be included by setting this flag to +true+. However, this feature is a bit limited, since it only includes the +outputDirectory+ from the reporting section of the current POM (by default, 'target/site') and doesn’t take into consideration any site directories that may be available in module projects. Use it if you want, but a good +fileSet+ specification or +moduleSet+ specification with sources configured could serve equally well, if not better. This is yet another example of legacy configuration currently supported by the Assembly plugin for the purpose of backward compatibility. Your mileage may vary. If you really want to include a site that is aggregated from many modules, you'll want to consider using a +fileSet+ or +moduleSet+ instead of setting +includeSiteDirectory+ to +true+. 
 
@@ -4675,7 +4675,7 @@ $ mvn package
 [INFO]task-segment: [package]
 [INFO] ---------------------------------------------------------------
 [INFO] [site:attach-descriptor]
-[INFO] [assembly:single \{execution: distro}]
+[INFO] [assembly:single {execution: distro}]
 [INFO] Reading assembly descriptor: src/main/assembly/distro.xml
 [INFO] ---------------------------------------------------------------
 [ERROR] BUILD ERROR
@@ -4801,14 +4801,14 @@ Assemblies are useful for a wide array of applications, but are most commonly us
 [[resource-filtering-sect-intro]]
 === Introduction
 
-Throughout this book, you will notice references to properties which can be used in a POM file. Sibling dependencies in a multi-project build can be referenced using the +\${project.groupId}+ and +\${project.version}+ properties and any part of the POM can be referenced by prefixing the variable name with "project.". Environment variables and Java System properties can be referenced, as well as values from your '~/.m2/settings.xml' file. What you haven't seen yet is an enumeration of the possible property values and some discussion about how they can be used to help you create portable builds. This chapter provides such an enumeration.
+Throughout this book, you will notice references to properties which can be used in a POM file. Sibling dependencies in a multi-project build can be referenced using the '+++${project.groupId}+++' and '+++${project.version}+++' properties and any part of the POM can be referenced by prefixing the variable name with "project.". Environment variables and Java System properties can be referenced, as well as values from your '~/.m2/settings.xml' file. What you haven't seen yet is an enumeration of the possible property values and some discussion about how they can be used to help you create portable builds. This chapter provides such an enumeration.
 
 If you've been using property references in your POM, you should also know that Maven has a feature called Resource Filtering which allows you to replace property references in any resource files stored under 'src/main/resources'. By default this feature is disabled to prevent accidental replacement of property references. This feature can be used to target builds toward a specific platform and to externalize important build variables to properties files, POMs, or profiles. This chapter introduces the resource filtering feature and provides a brief discussion of how it can be used to create portable enterprise builds. 
 
 [[resource-filtering-sect-properties]]
 === Maven Properties
 
-You can use Maven properties in a 'pom.xml' file or in any resource that is being processed by the Maven Resource plugin's filtering features. A property is always surrounded by +\${+ and +}+. For example, to reference the +project.version+ property, one would write:
+You can use Maven properties in a 'pom.xml' file or in any resource that is being processed by the Maven Resource plugin's filtering features. A property is always surrounded by '+++${+++' and '+++}+++'. For example, to reference the +project.version+ property, one would write:
 
 ----
 
@@ -4839,7 +4839,7 @@ In addition to the implicit properties listed above, a Maven POM, Maven Settings
 [[resource-filtering-sect-project-properties]]
 ==== Maven Project Properties
 
-When a Maven Project Property is referenced, the property name is referencing a property of the Maven Project Object Model (POM). Specifically, you are referencing a property of the +org.apache.maven.model.Model+ class which is being exposed as the implicit variable +project+. When you reference a property using this implicit variable, you are using simple dot notation to reference a bean property of the +Model+ object. For example, when you reference +\${project.version}+, you are really invoking the +getVersion()+ method on the instance of +Model+ that is being exposed as +project+.
+When a Maven Project Property is referenced, the property name is referencing a property of the Maven Project Object Model (POM). Specifically, you are referencing a property of the +org.apache.maven.model.Model+ class which is being exposed as the implicit variable +project+. When you reference a property using this implicit variable, you are using simple dot notation to reference a bean property of the +Model+ object. For example, when you reference '+++${project.version}+++', you are really invoking the +getVersion()+ method on the instance of +Model+ that is being exposed as +project+.
 
 The POM is also represented in the 'pom.xml' document present in all Maven projects. Anything in a Maven POM can be referenced with a property. A complete reference for the POM structure is available at http://maven.apache.org/ref/3.0.3/maven-model/maven.html[http://maven.apache.org/ref/3.0.3/maven-model/maven.html]. The following list shows some common property references from the Maven project.
 
@@ -4850,9 +4850,9 @@ The POM is also represented in the 'pom.xml' document present in all Maven proje
 ----
 <dependencies>
     <dependency>
-        <groupId>\${project.groupId}</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>sibling-project</artifactId>
-        <version>\${project.version}</version>
+        <version>${project.version}</version>
     </dependency>
 </dependencies>
 ----
@@ -4863,7 +4863,7 @@ The POM is also represented in the 'pom.xml' document present in all Maven proje
 
 ----
 <build>
-    <finalName>\${project.artifactId}</finalName>
+    <finalName>${project.artifactId}</finalName>
 </build>
 ----
 
@@ -4892,7 +4892,7 @@ Other Project Property references::
 
    There are hundreds of properties to reference in a POM. A complete reference for the POM structure is available at http://maven.apache.org/ref/3.0.3/maven-model/maven.html[http://maven.apache.org/ref/3.0.3/maven-model/maven.html].   
 
-For a full list of properties available on the Maven +Model+ object, take a look at the JavaDoc for the +maven-model+ project here http://maven.apache.org/ref/3.0.3/maven-model/apidocs/index.html[http://maven.apache.org/ref/3.0.3/maven-model/apidocs/index.html]. Once you load this JavaDoc, take a look at the +Model+ class. From this +Model+ class JavaDoc, you should be able to navigate to the POM property you wish to reference. If you needed to reference the output directory of the build, you can use the Maven Model JavaDoc to see that the output directory is referenced via +model.getBuild().getOutputDirectory()+; this method call would be translated to the Maven property reference +\${project.build.outputDirectory}+.
+For a full list of properties available on the Maven +Model+ object, take a look at the JavaDoc for the +maven-model+ project here http://maven.apache.org/ref/3.0.3/maven-model/apidocs/index.html[http://maven.apache.org/ref/3.0.3/maven-model/apidocs/index.html]. Once you load this JavaDoc, take a look at the +Model+ class. From this +Model+ class JavaDoc, you should be able to navigate to the POM property you wish to reference. If you needed to reference the output directory of the build, you can use the Maven Model JavaDoc to see that the output directory is referenced via +model.getBuild().getOutputDirectory()+; this method call would be translated to the Maven property reference '+++${project.build.outputDirectory}+++'.
 
 For more information about the Maven Model module, the module which defines the structure of the POM, see the Maven Model project page at http://maven.apache.org/ref/3.0.3/maven-model[http://maven.apache.org/ref/3.0.3/maven-model]. 
 
@@ -4914,17 +4914,17 @@ Environment variables can be referenced with the env.* prefix. Some interesting 
 
 +env.HOME+::
 
-   (On *nix systems) this variable points to a user's home directory. Instead of referencing this, you should use the \${user.home}  
+   (On *nix systems) this variable points to a user's home directory. Instead of referencing this, you should use the '+++${user.home}+++'
 
 +env.JAVA_HOME+::
 
-   Contains the Java installation directory. This can point to either a Java Development Kit (JDK) installation or a Java Runtime Environment (JRE). Instead of using this, you should consider referencing the \${java.home} property.  
+   Contains the Java installation directory. This can point to either a Java Development Kit (JDK) installation or a Java Runtime Environment (JRE). Instead of using this, you should consider referencing the '+++${java.home}+++' property.  
 
 +env.M2_HOME+::
 
    Contains the Maven 2 installation directory.   
 
-While they are available, you should always use the Java System properties if you have the choice. If you need a user's home directory use +\${user.home}+ instead of +\${env.HOME}+. If you do this, you'll end up with a more portable build that is more likely to adhere to the Write-Once-Run-Anywhere (WORA) promise of the Java platform. 
+While they are available, you should always use the Java System properties if you have the choice. If you need a user's home directory use '+++${user.home}+++' instead of '+++${env.HOME}+++'. If you do this, you'll end up with a more portable build that is more likely to adhere to the Write-Once-Run-Anywhere (WORA) promise of the Java platform. 
 
 [[resource-filtering-sect-system-properties]]
 ==== Java System Properties
@@ -4979,7 +4979,7 @@ In addition to the implicit properties provided by the POM, Maven Settings, envi
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>\${hibernate.version}</version>
+            <version>${hibernate.version}</version>
         </dependency>  
     </dependencies>
     ...
@@ -5009,7 +5009,7 @@ The previous example defines two properties: +arbitrary.property.a+ and +hiberna
 [[resource-filtering-sect-description]]
 === Resource Filtering
 
-You can use Maven to perform variable replacement on project resources. When resource filtering is activated, Maven will scan resources for property references surrounded by +\${+ and +}+. When it finds these references it will replace them with the appropriate value in much the same way the properties defined in the previous section can be referenced from a POM. This feature is especially helpful when you need to parameterize a build with different configuration values depending on the target deployment platform.
+You can use Maven to perform variable replacement on project resources. When resource filtering is activated, Maven will scan resources for property references surrounded by '+++${+++' and '+++}+++'. When it finds these references it will replace them with the appropriate value in much the same way the properties defined in the previous section can be referenced from a POM. This feature is especially helpful when you need to parameterize a build with different configuration values depending on the target deployment platform.
 
 Often a '.properties' file or an XML document in 'src/main/resources' will contain a reference to an external resource such as a database or a network location which needs to be configured differently depending on the target deployment environment. For example, a system which reads data from a database has an XML document which contains the JDBC URL along with credentials for the database. If you need to use a different database in development and a different database in production. You can either use a technology like JNDI to externalize the configuration from the application in an application server, or you can create a build which knows how to replace variables with different values depending on the target platform.
 
@@ -5029,10 +5029,10 @@ Using Maven resource filtering you can reference Maven properties and then use M
 
     <bean id="dataSource" destroy-method="close" 
           class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="\${jdbc.driverClassName}"/>
-        <property name="url" value="\${jdbc.url}"/>
-        <property name="username" value="\${jdbc.username}"/>
-        <property name="password" value="\${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
 </beans>
 ----
@@ -5191,7 +5191,7 @@ When you add content to the site, you are going to want to modify the left-hand 
 </project>
 ----
 
-This site descriptor references one image. This 'logo.png' image should be placed in '\${basedir}/src/site/resources/images'. In addition to the change to the site descriptor, you'll want to create a simple 'index.apt' page in '\${basedir}/src/site/apt'. Put the following content in 'index.apt', it will be transformed to the 'index.html' and serve as the first page a user sees when they come to your project's Maven-generated web site. 
+This site descriptor references one image. This 'logo.png' image should be placed in '+++${basedir}/src/site/resources/images+++'. In addition to the change to the site descriptor, you'll want to create a simple 'index.apt' page in '+++${basedir}/src/site/apt+++'. Put the following content in 'index.apt', it will be transformed to the 'index.html' and serve as the first page a user sees when they come to your project's Maven-generated web site. 
 
 ----
   Welcome to the Sample Project, we hope you enjoy your time
@@ -5246,7 +5246,7 @@ To customize the graphics which appear in the upper left-hand and right-hand cor
 </project>
 ----
 
-Both the +bannerLeft+ and +bannerRight+ elements take +name+, +src+, and +href+ child elements. In the site descriptor shown above, the Maven Site plugin will generate a site with 'banner-left.png' in the left-hand corner of the page and banner-right in the right-hand corner of the page. Maven is going to look in '\${basedir}/src/site/resources/images' for these images. 
+Both the +bannerLeft+ and +bannerRight+ elements take +name+, +src+, and +href+ child elements. In the site descriptor shown above, the Maven Site plugin will generate a site with 'banner-left.png' in the left-hand corner of the page and banner-right in the right-hand corner of the page. Maven is going to look in '+++${basedir}/src/site/resources/images+++' for these images. 
 
 [[site-generation-sect-custom-nav]]
 ==== Customizing the Navigation Menu
@@ -5646,7 +5646,7 @@ The change to the +menuItem+ macro introduced an +expand()+ Javascript function.
 <head>
     ...
     <meta http-equiv="Content-Type" 
-          content="text/html; charset=\${outputEncoding}" />
+          content="text/html; charset=${outputEncoding}" />
     ...
 </head>
 ----
@@ -5657,7 +5657,7 @@ and replace it with this:
 <head>
     ...
     <meta http-equiv="Content-Type" 
-          content="text/html; charset=\${outputEncoding}" />
+          content="text/html; charset=${outputEncoding}" />
     <script type="text/javascript">
         function expand( item ) {
         var expandIt = document.getElementById( item );
@@ -6151,9 +6151,9 @@ When you are writing custom Maven plugins, you will almost never need to think a
             </parameters>
             <configuration>
                 <buildDirectory implementation="java.io.File">
-                    \${project.build.directory}</buildDirectory>
+                    ${project.build.directory}</buildDirectory>
                 <baseDirectory implementation="java.io.File">
-                    \${basedir}</baseDirectory>
+                    ${basedir}</baseDirectory>
             </configuration>
             <requirements>
                 <requirement>
@@ -6274,7 +6274,7 @@ required::
 
 editable::
 
-   If a parameter is not editable (if +editable+ is set to +false+), then the value of the parameter cannot be set in the POM. For example, if the plugin descriptor defines the value of +buildDirectory+ to be +\${basedir}+ in the descriptor, a POM cannot override this value to be another value in a POM.  
+   If a parameter is not editable (if +editable+ is set to +false+), then the value of the parameter cannot be set in the POM. For example, if the plugin descriptor defines the value of +buildDirectory+ to be '+++${basedir}+++' in the descriptor, a POM cannot override this value to be another value in a POM.  
 
 description::
 
@@ -6382,7 +6382,7 @@ public class EchoMojo extends AbstractMojo
 {
     /**
      * Any Object to print out.
-     * @parameter expression="\${echo.message}" default-value="Hello World..."
+     * @parameter expression="${echo.message}" default-value="Hello World..."
      */
     private Object message;
 
@@ -6394,7 +6394,7 @@ public class EchoMojo extends AbstractMojo
 }
 ----
 
-If you create this Mojo in +\${basedir}+ under 'src/main/java' in 'org/sonatype/mavenbook/mojo/EchoMojo.java' in the project created in the previous section and run +mvn install+, you should be able to invoke this goal directly from the command-line with:
+If you create this Mojo in '+++${basedir}+++' under 'src/main/java' in 'org/sonatype/mavenbook/mojo/EchoMojo.java' in the project created in the previous section and run +mvn install+, you should be able to invoke this goal directly from the command-line with:
 
 ----
 $ mvn org.sonatype.mavenbook.plugins:first-maven-plugin:1.0-SNAPSHOT:echo
@@ -6465,8 +6465,8 @@ If you wanted to be able to run the +first-maven-plugin+'s echo goal by running 
 
 You can now run +mvn first:echo+ from any directory and see that Maven will properly resolve the goal prefix to the appropriate plugin identifiers. This worked because our project adhered to a naming convention for Maven plugins. If your plugin project has an +artifactId+ which follows the pattern +maven-first-plugin+ or +first-maven-plugin+. Maven will automatically assign a plugin goal prefix of +first+ to your plugin. In other words, when the Maven Plugin Plugin is generating the Plugin descriptor for your plugin and you have not explicitly set the +goalPrefix+ in your project, the +plugin:descriptor+ goal will extract the prefix from your plugin's +artifactId+ when it matches the following patterns:
 
-* +\${prefix}-maven-plugin+, OR 
-* maven-\${prefix}-plugin
+* '+++${prefix}-maven-plugin+++', OR 
+* maven-'+++${prefix}+++'-plugin
 
 If you would like to set an explicit plugin prefix, you'll need to configure the Maven Plugin Plugin. The Maven Plugin Plugin is a plugin that is responsible for building the Plugin descriptor and performing plugin specific tasks during the package and load phases. The Maven Plugin Plugin can be configured just like any other plugin in the build element. To set the plugin prefix for your plugin, add the following build element to the +first-maven-plugin+ project's 'pom.xml'.
 
@@ -6570,7 +6570,7 @@ In +first-maven-plugin+, you didn't write the plugin descriptor yourself, you re
 
 @execute [goal=goalName|phase=phaseName [lifecycle=lifecycleId]]::
 
-   This annotation can be used in a number of ways. If a phase is supplied, Maven will execute a parallel lifecycle ending in the specified phase. The results of this separate execution will be made available in the Maven property +\${executedProperty}+.
+   This annotation can be used in a number of ways. If a phase is supplied, Maven will execute a parallel lifecycle ending in the specified phase. The results of this separate execution will be made available in the Maven property '+++${executedProperty}+++'.
 
 The second way of using this annotation is to specify an explicit goal using the +prefix:goal+ notation. When you specify just a goal, Maven will execute this goal in a parallel environment that will not affect the current Maven build.
 
@@ -6621,14 +6621,14 @@ In EchoMojo we declared the message parameter with the following annotations:
 /**
 * Any Object to print out.
 * @parameter
-*   expression="\${echo.message}"
+*   expression="${echo.message}"
 *   default-value="Hello Maven World"
 */
 private Object message;
 
 ----
 
-The default expression for this parameter is +\${echo.message}+, this means that Maven will try to use the value of the +echo.message+ property to set the value for message. If the value of the +echo.message+ property is null, the default-value attribute of the +@parameter+ annotation will be used instead. Instead of using the +echo.message+ property, we can configure a value for the message parameter of the EchoMojo directly in a project's POM.
+The default expression for this parameter is '+++${echo.message}+++', this means that Maven will try to use the value of the +echo.message+ property to set the value for message. If the value of the +echo.message+ property is null, the default-value attribute of the +@parameter+ annotation will be used instead. Instead of using the +echo.message+ property, we can configure a value for the message parameter of the EchoMojo directly in a project's POM.
 
 There are a few ways to populate the message parameter in the +EchoMojo+. First we can pass in a value from the command-line like this (assuming that you've added +org.sonatype.mavenbook.plugins+ to your +pluginGroups+):
 
@@ -6694,7 +6694,7 @@ If we wanted to run the +EchoMojo+ twice at difference phases in a lifecycle, an
                         <goal>echo</goal>
                     </goals>
                     <configuration>
-                        <message>\${project.version}</message>
+                        <message>${project.version}</message>
                     </configuration>
                 </execution>
             </executions>
@@ -6725,19 +6725,19 @@ public class ZipMojo extends AbstractMojo
 /**
 * The Zip archiver.
 * @parameter \
-expression="\${component.org.codehaus.plexus.archiver.Archiver#zip}"
+expression="${component.org.codehaus.plexus.archiver.Archiver#zip}"
 */
 private ZipArchiver zipArchiver;
 
 /**
 * Directory containing the build files.
-* @parameter expression="\${project.build.directory}"
+* @parameter expression="${project.build.directory}"
 */
 private File buildDirectory;
 
 /**
 * Base directory of the project.
-* @parameter expression="\${basedir}"
+* @parameter expression="${basedir}"
 */
 private File baseDirectory;
 
@@ -6816,9 +6816,9 @@ When Maven instantiates this Mojo, it will then attempt to retrieve the Plexus c
 Unless you insist on writing your Plugin descriptors by hand, you'll never have to write that XML. Instead, the Maven Plugin Plugin has a +plugin:descriptor+ goal bound to the generate-resources phase. This goal generates the plugin descriptor from annotations on your Mojo. To configure a Mojo parameter, you should use the following annotations on either the private member variables for each of your Mojo's parameters on public setter methods for each property. The most common convention for Maven plugins is to annotate private member variables directly.
 
 
- @parameter [alias="someAlias"] [expression="\${someExpression}"] [default-value="value"]::
+@parameter [alias="someAlias"] [expression="'+++${someExpression}+++'"] [default-value="value"]::
 
-   Marks a private field (or a setter method) as a parameter. The +alias+ provides the name of the parameter. If +alias+ is omitted, Maven will use the name of the variable as the parameter name. The +expression+ is an expression that Maven will evaluate to obtain a value. Usually the expression is a property reference like +\${echo.message}+. +default-value+ is the value that this Mojo will use if no value can be derived from the expression or if a value was not explicitly supplied via plugin configuration in a POM.  
+   Marks a private field (or a setter method) as a parameter. The +alias+ provides the name of the parameter. If +alias+ is omitted, Maven will use the name of the variable as the parameter name. The +expression+ is an expression that Maven will evaluate to obtain a value. Usually the expression is a property reference like '+++${echo.message}+++'. +default-value+ is the value that this Mojo will use if no value can be derived from the expression or if a value was not explicitly supplied via plugin configuration in a POM.  
 
 @required::
 
@@ -6826,7 +6826,7 @@ Unless you insist on writing your Plugin descriptors by hand, you'll never have 
 
 @readonly::
 
-   If this annotation is present, the user cannot directly configure this parameter in the POM. You would use this annotation with the expression attribute of the parameter annotation. For example, if you wanted to make sure that a particular parameter always had the value of the +finalName+ POM property, you would list an expression of +\${build.finalName}+ and then add the +@readOnly+ annotation. If this were the case, the user could only change the value of this parameter by changing the value of +finalName+ in the POM.  
+   If this annotation is present, the user cannot directly configure this parameter in the POM. You would use this annotation with the expression attribute of the parameter annotation. For example, if you wanted to make sure that a particular parameter always had the value of the +finalName+ POM property, you would list an expression of '+++${build.finalName}+++' and then add the +@readOnly+ annotation. If this were the case, the user could only change the value of this parameter by changing the value of +finalName+ in the POM.  
 
 @component::
 
@@ -6839,7 +6839,7 @@ Unless you insist on writing your Plugin descriptors by hand, you'll never have 
 This would have the effect of retrieving the +ZipArchiver+ from Plexus. The +ZipArchiver+ is the Archiver which corresponds to the role hint +zip+. Instead of component, you could also use the @parameter annotation with an expression attribute of:
 
 ----
-@parameter expression="\${component.org.codehaus.plexus.archiver.Archiver#zip}"
+@parameter expression="'+++${component.org.codehaus.plexus.archiver.Archiver#zip}+++'"
 ----
 
 While the two annotations are effectively the same, the +@component+ annotation is the preferred way to configure dependencies on Plexus components.  
@@ -7180,7 +7180,7 @@ As more and more projects adopt Maven, more and more artifacts are being publish
 [[archetype-sect-common-maven]]
 ==== Common Maven Archetypes
 
-Some of the most straightforward Maven archetypes are contained in the org.apache.maven.archetypes groupId. Most of the basic archetypes under org.apache.maven.archetypes are very basic templates that include few options. You'll use them only to provide the most basic features that distinguish a Maven project from a non-Maven project. For example, the webapp archetype plugin described in this section just includes a stub of a 'web.xml' file in '\${basedir}/src/main/webapp/WEB-INF', and it doesn't even go as far as providing a Servlet for you to customize. In <<archetype-sect-third-party>> you'll see a quick survey of some of the more notable third-party archetypes such as the AppFuse and Cocoon artifacts.
+Some of the most straightforward Maven archetypes are contained in the org.apache.maven.archetypes groupId. Most of the basic archetypes under org.apache.maven.archetypes are very basic templates that include few options. You'll use them only to provide the most basic features that distinguish a Maven project from a non-Maven project. For example, the webapp archetype plugin described in this section just includes a stub of a 'web.xml' file in '+++${basedir}/src/main/webapp/WEB-INF+++', and it doesn't even go as far as providing a Servlet for you to customize. In <<archetype-sect-third-party>> you'll see a quick survey of some of the more notable third-party archetypes such as the AppFuse and Cocoon artifacts.
 
 The following archetypes can be found in the groupId +org.apache.maven.archetypes+:
 
@@ -7192,7 +7192,7 @@ The quickstart archetype is a simple project with JAR packaging and a single dep
 [[archetype-sect-webapp]]
 ===== maven-archetype-webapp
 
-This archetype creates a simple project with WAR packaging and a single dependency on JUnit. '\${basedir}/src/main/webapp' contains a simple shell of a web application: an 'index.jsp' page and the simplest possible 'web.xml' file. Even though the archetype includes a dependency on JUnit, this archetype does not create any unit tests. If you were looking for a functional web application, this archetype is going to disappoint you. For more relevant web archetypes, see <<archetype-sect-third-party>>. 
+This archetype creates a simple project with WAR packaging and a single dependency on JUnit. '+++${basedir}/src/main/webapp+++' contains a simple shell of a web application: an 'index.jsp' page and the simplest possible 'web.xml' file. Even though the archetype includes a dependency on JUnit, this archetype does not create any unit tests. If you were looking for a functional web application, this archetype is going to disappoint you. For more relevant web archetypes, see <<archetype-sect-third-party>>. 
 
 [[archetype-sect-mojo]]
 ===== maven-archetype-mojo
@@ -7267,7 +7267,7 @@ From generating a project with the AppFuse archetype to running a web applicatio
 [[archetype-sect-atlassian]]
 ===== Confluence and JIRA plugins
 
-Atlassian has created some archetypes for people interested in developing plugins for both Confluence and JIRA. Confluence and JIRA are, respectively, a Wiki and an issue tracker both of which have gained a large open source user base through granting free licenses for open source projects. Both the +jira-plugin-archetype+ and the +confluence-maven-archetype+ artifacts are under the com.atlassian.maven.archetypes groupId. When you generate a Confluence plugin, the archetype will generate a pom.xml which contains the necessary references to the Atlassian repositories and a dependency on the confluence artifact. The resulting Confluence plugin project will have a single example macro class and an atlassian-plugin.xml descriptor. Generating a project from the Jira archetype creates a project with a single, blank +MyPlugin+ class and an atlassian-plugin.xml descriptor in '\${basedir}/src/main/resources'.
+Atlassian has created some archetypes for people interested in developing plugins for both Confluence and JIRA. Confluence and JIRA are, respectively, a Wiki and an issue tracker both of which have gained a large open source user base through granting free licenses for open source projects. Both the +jira-plugin-archetype+ and the +confluence-maven-archetype+ artifacts are under the com.atlassian.maven.archetypes groupId. When you generate a Confluence plugin, the archetype will generate a pom.xml which contains the necessary references to the Atlassian repositories and a dependency on the confluence artifact. The resulting Confluence plugin project will have a single example macro class and an atlassian-plugin.xml descriptor. Generating a project from the Jira archetype creates a project with a single, blank +MyPlugin+ class and an atlassian-plugin.xml descriptor in '+++${basedir}/src/main/resources+++'.
 
 For more information about developing Confluence plugins with Maven 2, see http://confluence.atlassian.com/display/DISC/Developing+Confluence+Plugins+with+Maven+2[Developing Confluence Plugins with Maven 2] on the Confluence project's Wiki. For more information about developing Jira plugins with Maven 2, see http://confluence.atlassian.com/display/DEVNET/How+to+Build+an+Atlassian+Plugin[How to Build and Atlassian Plugin] on the Atlassian Developer Network. 
 
@@ -8517,7 +8517,7 @@ flexmojos:wrapper::
 [[flex-dev-sect-gen-asdoc]]
 ==== Generating Actionscript Documentation
 
-You can run the asdoc or asdoc-report goals to generate documentation for Actionscript. Once the goals has completed, the documentation will be saved to '\${basedir}/target/asdoc' as HTML. <<fig-flex-dev-actionscript>> shows the result of running the +asdoc+ goal against the Flexmojos application archetype project.
+You can run the asdoc or asdoc-report goals to generate documentation for Actionscript. Once the goals has completed, the documentation will be saved to '+++${basedir}/target/asdoc+++' as HTML. <<fig-flex-dev-actionscript>> shows the result of running the +asdoc+ goal against the Flexmojos application archetype project.
 
 
 [[fig-flex-dev-actionscript]]
@@ -8554,7 +8554,7 @@ FlexMojos contains a number of goals which compile Actionscript and MXML into SW
                         <englishRange>U+0020-U+007E</englishRange>
                     </languages>
                     <localFontsSnapshot>
-                        \${basedir}/src/main/resources/fonts.ser
+                        ${basedir}/src/main/resources/fonts.ser
                     </localFontsSnapshot>
                     <managers>
                         <manager>flash.fonts.BatikFontManager</manager>
@@ -8710,7 +8710,7 @@ export ANDROID_HOME=/opt/android-sdk-linux
 on a Unix/bash based system or 
 
 ----
-set ANDROID_HOME=C:\\opt\android-sdk-linux
+set ANDROID_HOME=C:\opt\android-sdk-linux
 ----
 
 on a Windows system.
@@ -9157,7 +9157,7 @@ Half of the top-level settings elements are simple values, representing a range 
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                               http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>\${user.dir}/.m2/repository</localRepository>
+    <localRepository>${user.dir}/.m2/repository</localRepository>
     <interactiveMode>true</interactiveMode>
     <usePluginRegistry>false</usePluginRegistry>
     <offline>false</offline>
@@ -9173,7 +9173,7 @@ The simple top-level elements are:
 
 localRepository::
 
-   This value is the path of this build system's local repository. The default value is '\${user.dir}/.m2/repository'.  
+   This value is the path of this build system's local repository. The default value is '+++${user.dir}/.m2/repository+++'.  
 
 interactiveMode::
 
@@ -9181,7 +9181,7 @@ interactiveMode::
 
 usePluginRegistry::
 
-   +true+ if Maven should use the '\${user.dir}/.m2/plugin-registry.xml' file to manage plugin versions, defaults to +false+.  
+   +true+ if Maven should use the '+++${user.dir}/.m2/plugin-registry.xml+++' file to manage plugin versions, defaults to +false+.  
 
 offline::
 
@@ -9208,7 +9208,7 @@ The +distributionManagement+ element of the POM defines the repositories for dep
             <id>server001</id>
             <username>my_login</username>
             <password>my_password</password>
-            <privateKey>\${user.home}/.ssh/id_dsa</privateKey>
+            <privateKey>${user.home}/.ssh/id_dsa</privateKey>
             <passphrase>some_passphrase</passphrase>
             <filePermissions>664</filePermissions>
             <directoryPermissions>775</directoryPermissions>
@@ -9231,7 +9231,7 @@ username, password::
 
 privateKey, passphrase::
 
-   Like the previous two elements, this pair specifies a path to a private key (default is '\${user.home}/.ssh/id_dsa') and a passphrase, if required. The passphrase and password elements may be externalized in the future, but for now they must be set plain-text in the 'settings.xml' file.   
+   Like the previous two elements, this pair specifies a path to a private key (default is '+++${user.home}/.ssh/id_dsa+++') and a passphrase, if required. The passphrase and password elements may be externalized in the future, but for now they must be set plain-text in the 'settings.xml' file.   
 
 filePermissions, directoryPermissions::
 
@@ -9353,8 +9353,8 @@ Activations are the key of a profile. Like the POM's profiles, the power of a pr
                     <value>2.0.3</value>
                 </property>
                 <file>
-                    <exists>\${basedir}/file2.properties</exists>
-                    <missing>\${basedir}/file1.properties</missing>
+                    <exists>${basedir}/file2.properties</exists>
+                    <missing>${basedir}/file1.properties</missing>
                 </file>
             </activation>
             ...
@@ -9376,7 +9376,7 @@ os::
 
 property::
 
-   The profile will activate if Maven detects a property (a value which can be dereferenced within the POM by \${name}) of the corresponding name=value pair.  
+   The profile will activate if Maven detects a property (a value which can be dereferenced within the POM by '+++${name}+++') of the corresponding name=value pair.  
 
 file::
 
@@ -9393,11 +9393,11 @@ mvn help:active-profiles
 [[appendix-settings-sect-properties]]
 ==== Properties
 
-Maven properties are value placeholder, like properties in Ant. Their values are accessible anywhere within a POM by using the notation +\${X}+, where X is the property. They come in five different styles, all accessible from the settings.xml file:
+Maven properties are value placeholder, like properties in Ant. Their values are accessible anywhere within a POM by using the notation '+++${X}+++', where X is the property. They come in five different styles, all accessible from the settings.xml file:
 
 +env.+X::
 
-   Prefixing a variable with +env.+ will return the shell’s environment variable. For example, +\${env.PATH}+ contains the +$path+ environment variable. (+%PATH%+ in Windows.)  
+   Prefixing a variable with +env.+ will return the shell’s environment variable. For example, '+++${env.PATH}+++' contains the +++$path+++ environment variable. (+%PATH%+ in Windows.)  
 
 +project.+x::
 
@@ -9409,13 +9409,13 @@ Maven properties are value placeholder, like properties in Ant. Their values are
 
 Java system properties::
 
-   All properties accessible via +java.lang.System.getProperties()+ are available as POM properties, such as +\${java.home}+.  
+   All properties accessible via +java.lang.System.getProperties()+ are available as POM properties, such as '+++${java.home}+++'.  
 
 x::
 
-   Set within a +properties+ element or an external file, the value may be used as <varname role="keep-together">\${someVar}+.   
+   Set within a +properties+ element or an external file, the value may be used as <varname role="keep-together">'+++${someVar}+++'.   
 
-.Setting the \${user.install} property in settings.xml
+.Setting the '+++${user.install}+++' property in settings.xml
 ----
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9426,7 +9426,7 @@ x::
         <profile>
             ...
             <properties>
-                <user.install>\${user.dir}/our-project</user.install>
+                <user.install>${user.dir}/our-project</user.install>
             </properties>
             ...
         </profile>
@@ -9435,7 +9435,7 @@ x::
 </settings>
 ----
 
-The property +\${user.install}+ is accessible from a POM if this profile is active. 
+The property '+++${user.install}+++' is accessible from a POM if this profile is active. 
 
 [[appendix-settings-sect-settings-repository]]
 ==== Repositories
