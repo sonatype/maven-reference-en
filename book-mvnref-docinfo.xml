@@ -1,6 +1,6 @@
         <isbn>9780984243341</isbn>
 
-        <edition>${project.version}</edition>
+        <edition>1.0</edition>
 
         <authorgroup role="Primary Authors">
             <author>
