@@ -13448,25 +13448,29 @@ flexmojos-parentflexmojos-touchstone
 [[android-dev-sect-intro]]
 === Introduction
 
-Android is a mobile phone and embedded device operating system
-developed by the Open Handset Alliance. It is based on a Linux kernel
-with a virtual machine environment for managed application code using
-Java bytecode for the runtime code generation. The development
-environment is based on the Java language and JVM/JDK based
-tooling. The generated Java bytecode is transformed into Dalvik
-executable code optimized for constrained devices. Java is the default
-programming language and the API's are all Java based.
+http://www.android.com[Android] is an open source mobile phone and
+embedded device operating system developed by the
+http://www.openhandsetalliance.com/[Open Handset Alliance]. It is
+based on a Linux kernel with a virtual machine environment for managed
+application code using Java bytecode for the runtime code
+generation. The development environment is based on the Java language
+and JVM/JDK based tooling. The generated Java bytecode is transformed
+into Dalvik executable code optimized for constrained devices. Java is
+the default programming language and the API's are all Java based.
 
 In most cases, development of Android applications is done within the
 Eclipse based Android Development Toolkit ADT. The optionally
 generated Apache Ant based build can be used to build applications
-outside the IDE. The http://code.google.com/p/maven-android-plugin/[Android Maven Plugin] was created to allow
-development teams to build, deploy and release Android applications
-with Apache Maven, taking advantage of all the powerful features
-available like dependency management, reporting, code analysis and
-much more.
+outside the IDE. The
+http://code.google.com/p/maven-android-plugin/[Android Maven Plugin]
+was created to allow development teams to build, deploy and release
+Android applications with Apache Maven, taking advantage of all the
+powerful features available like dependency management, reporting,
+code analysis and much more.
 
-TIP: The Android Maven Plugin is rapidly evolving. The documentation below applies to version 3.0.0-alpha-12 and higher. For up to date information refer to the plugin documentatio.
+TIP: The Android Maven Plugin is rapidly evolving. The documentation
+below applies to version 3.0.0-alpha-12 and higher. For up to date
+information refer to the plugin website.
 
 [[android-dev-sect-config-build]]
 === Configuring Build Environment for Android Development
@@ -13478,20 +13482,19 @@ tasks:
 * Install the Android SDK
 
 * Potentially install the Android API jar files into your local Maven
-  repository or your used repository server
-
-* Configure Maven for simplified usage of the Android Maven Plugin
+  repository or your repository server
 
 [[android-dev-sect-sdk-install]]
 ==== Installing the Android SDK
 
 The Android Maven Plugin requires the presence of the Android SDK in
-your development environment. The +ANDROID_HOME+ environment variable
-should be configured to point to the installation directory of the
-Android SDK. The SDK should be installed following the directions on
-the Android Developer web site at
-http://developer.android.com/sdk/index.html. For example if the SDK is
-installed in /opt/android-sdk-linux this can be achieved with
+your development environment. Install the SDK following the directions
+on the http://developer.android.com/sdk/index.html[Android Developer
+web site].
+
+The +ANDROID_HOME+ environment variable should be configured to point
+to the installation directory of the Android SDK. For example if the
+SDK is installed in /opt/android-sdk-linux this can be achieved with
 
 ----
 export ANDROID_HOME=/opt/android-sdk-linux
@@ -13506,11 +13509,12 @@ set ANDROID_HOME=C:\opt\android-sdk-linux
 on a Windows system.
 
 In addition to the SDK, the various platform versions you need for
-development should also be installed. Instructions for this process
-are located at
-http://developer.android.com/sdk/adding-components.html. You can
-install a subset of available platforms or simply install all
-available versions. Optionally, the path +ANDROID_HOME/tools+ and
+development should also be installed following the
+http://developer.android.com/sdk/adding-components.html[instructions].
+You can install a subset of available platforms or simply install all
+available versions. 
+
+Optionally, the path +ANDROID_HOME/tools+ and
 +ANDROID_HOME/platform-tools+ can be added to the PATH variable to
 allow easy command line execution of the various tools provided with
 the SDK.
@@ -13523,13 +13527,14 @@ needs access to the Android API for the specific platform version the
 project is configured against. The Android SDK ships this as
 android.jar files in the different platform folders. In order for
 Maven to access these libraries, they need to be available in the
-local Maven repository. Typically artifacts are available in Maven
-Central, however only the platform versions available in the Android
-Open Source Project are published to Maven Central. Newer version
-including the compatibility package and proprietary extensions like
-the Google Maps support are not available there and need to be
-published to your Maven repository if you want to use them in your
-Android project.
+local Maven repository. 
+
+Typically artifacts are available in Maven Central, however only the
+platform versions available in the Android Open Source Project are
+published to Maven Central. Newer version including the compatibility
+package and proprietary extensions like the Google Maps support are
+not available there and need to be published to your Maven repository
+if you want to use them in your Android project.
 
 The artifacts published to Maven central are available as dependencies
 under the groupId +com.google.android+ with the artifactId +android+
@@ -13540,31 +13545,27 @@ SDK Deployer] has been created to publish artifacts from the Android
 SDK into your local repository or repository server when using
 components that are not available in Central.
 
-The Maven Android SDK Deployer tool is available for download at:
+Download the tool by clicking on the +Download Source+ button and
+extract the downloaded zip or tar archive in a folder of your
+choice. A folder with a naming pattern of
+mosabua-maven-android-sdk-deployer-XXX with XXX being a revision
+number like df824df will be created. 
 
-* http://github.com/mosabua/maven-android-sdk-deployer
-
-Simply click on the +Download Source+ button and extract the
-downloaded zip or tar archive in a folder of your choice. A folder
-with a naming pattern of mosabua-maven-android-sdk-deployer-XXX with
-XXX being a revision number like df824df will be created. Change
-directories to this new maven-android-sdk directory:
-
-----
-cd mosabua-maven-android-sdk-deployer-df824df
-----
 
 [[android-dev-sect-repository-install-local]]
 ===== Installation to local repository
 
-In order to install the android API jar files from the different platform revisions into your local repository you run the command in the deployer folder.
+In order to install the android API jar files from the different
+platform revisions into your local repository you run the command in
+the deployer folder.
 
 ----
+cd mosabua-maven-android-sdk-deployer-df824df
 mvn clean install
 ----
 
 By default this will install all android.jar, maps.jar, usb.jar files
-and the compatibilty package into your local Maven repository. You
+and the compatibilty packages into your local Maven repository. You
 should find all newly installed files in the +android+,
 +com.google.android.maps+, +com.android.future+ and +android.support+
 group identifiers under '~/.m2/repository'.
@@ -13635,19 +13636,15 @@ complex examples are available as part of the
 http://code.google.com/p/maven-android-plugin/wiki/Samples.[plugin
 samples project].
 
-You can follow the following steps to introduce an Android Maven
-Plugin based build to your Android application. After the initial
-environment setup documented above, the Android Development Tools from
-http://developer.android.com/sdk/eclipse-adt.html were installed and
-used to create a new Android project.
-
-To enable a Maven based build of the project the following pom.xml
-file was added in the root folder of the project:
+To enable a Maven based build of an Android project a pom.xml has to
+be added in the root folder of the project:
 
 .The HelloFlashlight pom.xml file
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.simpligility.android</groupId>
     <artifactId>helloflashlight</artifactId>
@@ -13705,10 +13702,10 @@ The highlights of this pom.xml are:
 
 * the +packaging+ type of +apk+
 
-* the dependency to the Android platform jar
+* the +dependency+ to the Android platform jar
 
 * and the build configuration with the Android Maven Plugin and the
-   Compiler Plugin
+   Maven Compiler Plugin
 
 The Android Package +packaging+ type +apk+ is what activates the
 Android-specific lifecycle modifications of the Android Maven
@@ -13716,18 +13713,20 @@ Plugin. It takes care of all the specific calls to the Android SDK
 tools, that process resources, convert Java bytecode and so on. The Android Plugin needs to be configured with extensions set to true for this to work as visible in the pluginManagement section.
 
 The declared dependency to the android platform jar is available in
-http://search.maven.org[Maven Central]. Check there for available
-versions. Alternatively you could use an Android jar from the Maven
-Android SDK Deployer with the modified groupId and artifactId. Check
-the documentation for the deployer or your local repository to see
-what the exact GAV parameters are. The scope of +provided+ is
-important since it signals to Maven that the contents of the jar will
-not need to packed into the application package since they are
-available at runtime on the device as part of the environment. In
-addition the android jar artifacts only contain exception throwing
+http://search.maven.org[Maven Central] with various platform versions.
+Alternatively you could use an Android jar from the Maven Android SDK
+Deployer with the modified groupId and artifactId. The documentation
+of the deployer shows all valid dependencies.
+
+ The scope of +provided+ is important since it signals to Maven that
+the contents of the jar will not need to be packaged into the
+application package, since they are available at runtime on the device
+as part of the environment.
+
+In addition the android jar artifacts only contain exception throwing
 stubs for all methods in order to define the API for the
-compiler. They can not be executed on the development machine but rely
-on an emulator or device runtime environment.
+compiler. They can not be executed on the development machine, but
+rely on an emulator or device runtime environment.
 
 The configuration of the Maven Compiler Plugin in the build is
 necessary since Android uses Java 5 language specification code with
@@ -13741,28 +13740,44 @@ number as documented
 http://developer.android.com/guide/appendix/api-levels.html[on the
 Android developer documentation].
 
-To build the application and run it on an already started emulator you
-could use
+To build the application and run it on an already started emulator or
+attached device you could use
 
 ----
-mvn clean install android:deploy
+mvn clean install android:deploy android:run
 ----
 
 [[android-dev-sect-archetype]]
 === Creating New Projects with the Android Maven Archetypes
 
-tbd
+When starting a fresh project it is easy to use the Maven Archetype
+Plugin to create a skeleton to start working with. Fortunately
+multiple archetypes for Android projects are https://github.com/akquinet/android-archetypes/wiki[available]. 
+
+You can create a new android-quickstart project, which is similar to the helloflashlight example on the command line with
+----
+ mvn archetype:generate \
+  -DarchetypeArtifactId=android-quickstart \
+  -DarchetypeGroupId=de.akquinet.android.archetypes \
+  -DarchetypeVersion=1.0.6 \
+  -DgroupId=your.company \
+  -DartifactId=my-android-application
+----
+
+Other archetypes available are an Android project including test
+execution with the archetypeArtifactId +android-with-test-archetype+
+and a project with release process configuration
++android-release-archetype+.
+
 
 [[android-dev-sect-maps]]
-=== Using Add Ons like the Google Maps Extension
+=== Using Add Ons
 
 For many applications the normal Android SDK artifact (android.jar)
 will be sufficient, however some applications require add-ons. One of
-the more commonly used add-ons is the Google Maps add-on which
+the more commonly used add-ons is the Google Maps add-on, which
 provides access to the Google Maps API. The Maps add-on is deployed to
-your Maven repository by the Maven Android SDK Deployer tool. In order
-to access the API in your application you need to add a dependency to
-the add-on to your pom.xml like this:
+your Maven repository by the Maven Android SDK Deployer tool. 
 
 .The dependency to the Google Maps API
 ----
@@ -13772,6 +13787,17 @@ the add-on to your pom.xml like this:
     <version>7_r1</version>
     <scope>provided</scope>
 </dependency>  
+----
+
+Another common add on is the compatibility library. It needs to be included in the produced apk and there does not have provided scope.
+
+.The dependency to the compatibility library for API v4 and up
+----
+<dependency>
+  <groupId>android.support</groupId>
+  <artifactId>compatibility-v4</artifactId>
+  <version>r3</version>
+</dependency>
 ----
 
 [[android-dev-sect-multimodule]]
