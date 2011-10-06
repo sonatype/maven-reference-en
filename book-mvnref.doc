@@ -13475,15 +13475,15 @@ tasks:
 
 * Install the Android SDK
 
-* Install the Android API jar files into a local or remote Maven
-   repository
+* Potentially install the Android API jar files into your local Maven
+  repository or your used repository server
 
-* Configure Maven for simplified usage of the Maven Android Plugin
+* Configure Maven for simplified usage of the Android Maven Plugin
 
 [[android-dev-sect-sdk-install]]
 ==== Installing the Android SDK
 
-The Maven Android Plugin requires the presence of the Android SDK in
+The Android Maven Plugin requires the presence of the Android SDK in
 your development environment. The +ANDROID_HOME+ environment variable
 should be configured to point to the installation directory of the
 Android SDK. The SDK should be installed following the directions on
@@ -13508,21 +13508,37 @@ development should also be installed. Instructions for this process
 are located at
 http://developer.android.com/sdk/adding-components.html. You can
 install a subset of available platforms or simply install all
-available versions. Optionally, the path +ANDROID_HOME/tools+ can be
-added to the PATH variable to allow easy command line execution of the
-various tools provided with the SDK.
+available versions. Optionally, the path +ANDROID_HOME/tools+ and
++ANDROID_HOME/platform-tools+ can be added to the PATH variable to
+allow easy command line execution of the various tools provided with
+the SDK.
 
 [[android-dev-sect-repository-install]]
 ==== Android artifact install into Maven repository
 
-Once the SDK is installed you will need to provide the API JAR files
-to Maven in a repository. The Maven Android SDK Deployer tool allows
-you to do that for a single machine in a local repository as well as
-for any number of machines in a remote repository server. <!-- TODO
-link to nexus... in general how much do we have to explain here about
-this stuff, i would prefer to add links to the nexus book chapters
-somehow.. --> The Maven Android SDK deployer tool is available for
-download at:
+When building an Android application with Maven the compile process
+needs access to the Android API for the specific platform version the
+project is configured against. The Android SDK ships this as
+android.jar files in the different platform folders. In order for
+Maven to access these libraries, they need to be available in the
+local Maven repository. Typically artifacts are available in Maven
+Central, however only the platform versions available in the Android
+Open Source Project are published to Maven Central. Newer version
+including the compatibility package and proprietary extensions like
+the Google Maps support are not available there and need to be
+published to your Maven repository if you want to use them in your
+Android project.
+
+The artifacts published to Maven central are available as dependencies
+under the groupId +com.google.android+ with the artifactId +android+
+and +android-test+.
+
+The http://github.com/mosabua/maven-android-sdk-deployer[Maven Android
+SDK Deployer] has been created to publish artifacts from the Android
+SDK into your local repository or repository server when using
+components that are not available in Central.
+
+The Maven Android SDK Deployer tool is available for download at:
 
 * http://github.com/mosabua/maven-android-sdk-deployer
 
@@ -13545,10 +13561,11 @@ In order to install the android API jar files from the different platform revisi
 mvn clean install
 ----
 
-By default this will install all android.jar and maps.jar files into
-your local Maven repository. You should find all newly installed files
-in the +android+ and +com.google.android.maps+ group identifiers under
-'~/.m2/repository'.
+By default this will install all android.jar, maps.jar, usb.jar files
+and the compatibilty package into your local Maven repository. You
+should find all newly installed files in the +android+,
++com.google.android.maps+, +com.android.future+ and +android.support+
+group identifiers under '~/.m2/repository'.
 
 [[android-dev-sect-repository-install-remote]]
 ===== Installation to remote repository
@@ -13565,9 +13582,12 @@ Installation chapter] in the free, online Nexus book.
 
 As a first step you will need to edit the +repo.url+ property in the
 pom.xml in the top folder of the Maven Android SDK Deployer tool to
-point to the repository you want to publish to. Then you need to add a
-server with the correct access credentials for the server to your
-Maven Settings file ('~/.m2/settings.xml').
+point to the repository you want to publish to. Alternatively you can
+provide this property in the settings file or with +-Drepo.url=.."+ on
+the command line.
+
+Then you need to add a server with the correct access credentials for
+the server to your Maven Settings file ('~/.m2/settings.xml').
 
 .Snippet for settings.xml for the repository server access credentials
 ----
@@ -13594,18 +13614,18 @@ or deploy all versions of the platforms artifacts into a
 repository. If you decide to only install a subset of the components
 the tool can be used with profile options to only install or deploy
 some artifacts. This can be done by specifying the platform API
-versions as a profile name:
+versions as a profile name. 
 
 ----
-mvn install -P 2.1
+mvn install -P 3.2
 ----
 
-Available profile names are +1.1+, +1.5+, +1.6+, +2.0+ and +2.1+.
+Further details are available in the README.markdown file of the tool.
 
 [[android-dev-sect-plugin-config]]
-==== Configuring Maven for usage of the Maven Android Plugin
+==== Configuring Maven for usage of the Android Maven Plugin
 
-In order to use the Maven Android Plugin goals on the command line
+In order to use the Android Maven Plugin goals on the command line
 with the short plugin name +android+, you have to add the following
 +pluginGroups+ snippet to your +settings.xml+ file.
 
@@ -13618,6 +13638,9 @@ with the short plugin name +android+, you have to add the following
 </pluginGroups>
 ----
 
+TIP: This is only necessary for command line invocation of the Android
+Maven Plugin outside a project folder.
+
 [[android-dev-sect-using]]
 === Android Application Development with the Maven Android Plugin
 
@@ -13625,8 +13648,8 @@ with the short plugin name +android+, you have to add the following
 ==== HelloFlashlight Example
 
 The HelloFlashlight example application serves as a starting point to
-introduce you to the usage of the Maven Android Plugin. You can follow
-the same steps to introduce an Maven Android Plugin based build to
+introduce you to the usage of the Android Maven Plugin. You can follow
+the same steps to introduce an Android Maven Plugin based build to
 your Android application. After the initial environment setup
 documented above, the Android Development Tools from
 http://developer.android.com/sdk/eclipse-adt.html were installed and
@@ -13638,51 +13661,55 @@ file was added in the root folder of the project:
 .The HelloFlashlight pom.xml file
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.simpligility.android</groupId>
     <artifactId>helloflashlight</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>apk</packaging>
     <name>HelloFlashlight</name>
 
     <dependencies>
         <dependency>
-            <groupId>android</groupId>
+            <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>2.1_r1</version>
+            <version>1.6_r2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>${project.artifactId}</finalName>
         <sourceDirectory>src</sourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>3.0.0-SNAPSHOT</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>
-                    com.jayway.maven.plugins.android.generation2
-                </groupId>
-                <artifactId>maven-android-plugin</artifactId>
-                <version>2.2.3-SNAPSHOT</version>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
                 <configuration>
+                    <run>
+                        <debug>true</debug>
+                    </run>
                     <sdk>
-                        <platform>2.1</platform>
+                        <platform>4</platform>
                     </sdk>
-                    <deleteConflictingFiles>
-                        true
-                    </deleteConflictingFiles>
+                    <emulator>
+                        <avd>16</avd>
+                    </emulator>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
-                <extensions>true</extensions>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
+                <version>2.3</version>
             </plugin>
         </plugins>
     </build>
@@ -13695,30 +13722,24 @@ The highlights of this pom.xml are:
 
 * the dependency to the Android platform jar
 
-* and the build configuration with the Maven Android Plugin and the
+* and the build configuration with the Android Maven Plugin and the
    Compiler Plugin
 
 The Android Package +packaging+ type +apk+ is what activates the
-Android-specific lifecycle modifications of the Maven Android
+Android-specific lifecycle modifications of the Android Maven
 Plugin. It takes care of all the specific calls to the Android SDK
-tools, that process resources, convert Java bytecode and so on.
+tools, that process resources, convert Java bytecode and so on. The Android Plugin needs to be configured with extensions set to true for this to work as visible in the pluginManagement section.
 
-The declared dependency to the android platform jar has to use the
-version of the target platform as published into the Maven repository
-by the Maven Android SDK Deployer. It, in turn, takes the library
-version from the + Platform.Version+ and the +Pkg.Revision+ values in
-the +source.properties+ file in the respective platforms folder of the
-Android SDK. The current valid values are +1.1_r1+, +1.5_r3+,
-+1.6_r2+, +2.0_r1+, +2.0.1_r1+ and +2.1_r1+. Simply browse the android
-folder of your maven repository/repository server to see what the
-exact versions are.
+The declared dependency to the android platform jar is available in http://search.maven.org[Maven Central]. Check there for available versions. Alternatively you could use an Android jar from the Maven Android SDK Deployer with the modified groupId and artifactId. Check the documentation for the deployer or your local repository to see what the
+exact GAV parameters are. The scope of +provided+ is important since it signals to Maven that the contents of the jar will not need to packed into the application package since they are available at runtime on the device as part of the environment.
 
 The configuration of the Maven Compiler Plugin in the build is
 necessary since Android uses Java 5 language specification code with
 annotations, foreach loop and so on and the Java compiler needs to
-know that. The main configuration of the Maven Android Plugin is done
-in the build section, but out of the box only limited configuration is
-necessary.
+know that. 
+
+The configuration of the Android Maven Plugin is done
+in the build section. Initially only the sdk platform parameter is required to be specified. You can use either a platform version number or a API level number as documented http://developer.android.com/guide/appendix/api-levels.html[on the Android developer documentation].
 
 To build the application and run it on an already started emulator you
 could use
@@ -13727,11 +13748,8 @@ could use
 mvn clean install android:deploy
 ----
 
-////
-<!--TODO potentially add commandline output for build here-->
-////
-
-The code for the example application is available as part of the
+The code for the helloflashlight example application as well as
+various more complex examples are available as part of the
 maven-android-plugin-samples available at
 http://code.google.com/p/maven-android-plugin/wiki/Samples.
 
@@ -13745,7 +13763,7 @@ integration type testing called instrumentation testing.
 [[android-dev-sect-test-unit]]
 ===== Unit tests
 
-The Maven Android plugin includes the execution of the Surefire plugin
+The Android Maven Plugin includes the execution of the Surefire plugin
 and as such unit tests can be included in the project like in any
 other project. The default path for test classes in the Eclipse and
 therefore Android Development Toolkit is +test+ and therefore Maven
@@ -13773,12 +13791,12 @@ to run instrumentation tests would be two parallel projects, one for
 the application and one for the instrumentation tests. These modules
 are tied together as modules of a parent pom.
 
-The Maven Android Plugin Samples codebase contains two examples for a
+The Android Maven Plugin samples contains two examples for a
 project set up in this manner. The setup of the instrumentation test
-application with the Maven Android Plugin is the same as for a normal
+application with the Android Maven Plugin is the same as for a normal
 application with the added dependency to the application that needs to
 be tested. It is important to add the +type+ of +apk+ to the
-dependency to allow the Maven Android Plugin to find the Android
+dependency to allow the Android Maven Plugin to find the Android
 package of the application.
 
 ----
@@ -13811,14 +13829,10 @@ the add-on to your pom.xml like this:
 </dependency>  
 ----
 
-The valid versions currently are +3_r3+, +4_r2+, +5_r1+, +6_r1+ and
-+7_r1+. Simply browse the android folder of your maven
-repository/repository server to see what the versions are.
-
 [[android-dev-sect-multimodule]]
-==== Multi Module Maven Android Projects
+==== Multi Module Android Projects
 
-The Maven Android Plugin can be used in a multi-module project
+The Android Maven Plugin can be used in a multi-module project
 setup. An example setup would be 3 different modules linked via a
 parent pom.
 
@@ -13846,7 +13860,7 @@ and business logic.
 [[android-dev-sect-dependencies]]
 ==== Using external dependencies
 
-When using the Maven Android plugin there are three types of
+When using the Android Maven Plugin there are three types of
 dependencies that are treated differently.
 
 Regular dependencies to other Java libraries::
@@ -13900,10 +13914,10 @@ More details can be found at
 http://code.google.com/p/maven-android-plugin/wiki/ApkSourcesDependency.
 
 [[android-dev-sect-custom-details]]
-=== Maven Android Plugin Details
+=== Android Maven Plugin Details
 
 [[android-dev-sect-custom-lifecycle]]
-==== Maven Android Plugin Lifecycle
+==== Android Maven Plugin Lifecycle
 
 The Android Maven plugin customizes the lifecycle based on the
 packaging. If your project has a +packaging+ of type+apk+ the Android
@@ -13942,9 +13956,14 @@ integration-test Phase::
    application.
 
 [[android-dev-sect-goals]]
-==== Maven Android Plugin Goals
+==== Android Maven Plugin Goals
 
- The Maven Android Plugin contains the following goals:
+The Android Maven Plugin supports a number of goals that are part of
+the default lifecycle and are invoked automatically as well as a
+various goals that can be invoked separately on the command line or
+bound to a lifecycle phase in your plugin configuration in the build
+or in a separate profile.
+
 
 android:apk::
 
@@ -13962,7 +13981,7 @@ android:deploy::
    apk, to a connected device or emulator. This goal is automatically
    performed when running through the +integration-test+ lifecycle
    phase on a project with instrumentation tests (e.g. +mvn install+
-   or +mvn integration-test+).
+   or +mvn integration-test+). 
 
 android:deploy-dependencies::
 
@@ -13983,7 +14002,7 @@ android:dex::
 android:emulator-start::
 
    The +emulator-start+ goal starts the Android device emulator. The
-   start up parameters can be configured in the Maven Android Plugin
+   start up parameters can be configured in the Android Maven Plugin
    configuration in the pom.xml file
 
 ----
