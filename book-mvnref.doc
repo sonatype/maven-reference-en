@@ -13460,11 +13460,13 @@ programming language and the API's are all Java based.
 In most cases, development of Android applications is done within the
 Eclipse based Android Development Toolkit ADT. The optionally
 generated Apache Ant based build can be used to build applications
-outside the IDE. The Maven Android Plugin was created to allow
+outside the IDE. The http://code.google.com/p/maven-android-plugin/[Android Maven Plugin] was created to allow
 development teams to build, deploy and release Android applications
 with Apache Maven, taking advantage of all the powerful features
 available like dependency management, reporting, code analysis and
 much more.
+
+TIP: The Android Maven Plugin is rapidly evolving. The documentation below applies to version 3.0.0-alpha-12 and higher. For up to date information refer to the plugin documentatio.
 
 [[android-dev-sect-config-build]]
 === Configuring Build Environment for Android Development
@@ -13623,17 +13625,19 @@ mvn install -P 3.2
 Further details are available in the README.markdown file of the tool.
 
 
-[[android-dev-sect-using]]
-=== Android Application Development with the Maven Android Plugin
-
 [[android-dev-sect-helloandroidexample]]
-==== HelloFlashlight Example
+=== Getting Started 
 
 The HelloFlashlight example application serves as a starting point to
-introduce you to the usage of the Android Maven Plugin. You can follow
-the same steps to introduce an Android Maven Plugin based build to
-your Android application. After the initial environment setup
-documented above, the Android Development Tools from
+introduce you to the usage of the Android Maven Plugin. The code for
+the helloflashlight example application as well as various more
+complex examples are available as part of the
+http://code.google.com/p/maven-android-plugin/wiki/Samples.[plugin
+samples project].
+
+You can follow the following steps to introduce an Android Maven
+Plugin based build to your Android application. After the initial
+environment setup documented above, the Android Development Tools from
 http://developer.android.com/sdk/eclipse-adt.html were installed and
 used to create a new Android project.
 
@@ -13697,7 +13701,6 @@ file was added in the root folder of the project:
     </build>
 </project>
 ----
-
 The highlights of this pom.xml are:
 
 * the +packaging+ type of +apk+
@@ -13731,8 +13734,12 @@ necessary since Android uses Java 5 language specification code with
 annotations, foreach loop and so on and the Java compiler needs to
 know that. 
 
-The configuration of the Android Maven Plugin is done
-in the build section. Initially only the sdk platform parameter is required to be specified. You can use either a platform version number or a API level number as documented http://developer.android.com/guide/appendix/api-levels.html[on the Android developer documentation].
+The configuration of the Android Maven Plugin is done in the build
+section. Initially only the sdk platform parameter is required to be
+specified. You can use either a platform version number or a API level
+number as documented
+http://developer.android.com/guide/appendix/api-levels.html[on the
+Android developer documentation].
 
 To build the application and run it on an already started emulator you
 could use
@@ -13741,68 +13748,13 @@ could use
 mvn clean install android:deploy
 ----
 
-The code for the helloflashlight example application as well as
-various more complex examples are available as part of the
-maven-android-plugin-samples available at
-http://code.google.com/p/maven-android-plugin/wiki/Samples.
+[[android-dev-sect-archetype]]
+=== Creating New Projects with the Android Maven Archetypes
 
-[[android-dev-sect-test]]
-==== Testing Android Application Code
-
-Testing Android Application code can be done in a unit test fashion
-with rich junit support as part of the Android SDK as well as
-integration type testing called instrumentation testing.
-
-[[android-dev-sect-test-unit]]
-===== Unit tests
-
-The Android Maven Plugin includes the execution of the Surefire plugin
-and as such unit tests can be included in the project like in any
-other project. The default path for test classes in the Eclipse and
-therefore Android Development Toolkit is +test+ and therefore Maven
-has to be configured to access code from there with the configuration
-
-.Adding the test folder to the build configuration
-----
-<build>
-    <testSourceDirectory>test</testSourceDirectory>
-    ...  
-----
-
-Alternatively the Maven conventions can be implemented by moving the
-source code for the application and the test source code into
-+src/main/java+ and +src/test/java+ and reconfiguring the Eclipse
-project files.
-
-[[android-dev-sect-test-instrumentation]]
-===== Instrumentation tests
-
-Instrumentation tests are integration tests bundled into an
-application that run on the emulator or device and interact with
-another deployed application to test the behaviour. The common setup
-to run instrumentation tests would be two parallel projects, one for
-the application and one for the instrumentation tests. These modules
-are tied together as modules of a parent pom.
-
-The Android Maven Plugin samples contains two examples for a
-project set up in this manner. The setup of the instrumentation test
-application with the Android Maven Plugin is the same as for a normal
-application with the added dependency to the application that needs to
-be tested. It is important to add the +type+ of +apk+ to the
-dependency to allow the Android Maven Plugin to find the Android
-package of the application.
-
-----
-<dependency>
-    <groupId>com.simpligility.android</groupId>
-    <artifactId>intents</artifactId>
-    <version>0.1</version>
-    <type>apk</type>
-</dependency>
-----
+tbd
 
 [[android-dev-sect-maps]]
-==== Using Add Ons like the Google Maps Extension
+=== Using Add Ons like the Google Maps Extension
 
 For many applications the normal Android SDK artifact (android.jar)
 will be sufficient, however some applications require add-ons. One of
@@ -13823,7 +13775,7 @@ the add-on to your pom.xml like this:
 ----
 
 [[android-dev-sect-multimodule]]
-==== Multi Module Android Projects
+=== Multi Module Android Projects
 
 The Android Maven Plugin can be used in a multi-module project
 setup. An example setup would be 3 different modules linked via a
@@ -13851,7 +13803,7 @@ server side web application sharing e.g. the code for the core objects
 and business logic.
 
 [[android-dev-sect-dependencies]]
-==== Using external dependencies
+=== Using external dependencies
 
 When using the Android Maven Plugin there are three types of
 dependencies that are treated differently.
@@ -13910,9 +13862,9 @@ http://code.google.com/p/maven-android-plugin/wiki/ApkSourcesDependency.
 [[android-dev-sect-custom-lifecycle]]
 === The Custom Lifecycle from the Android Maven Plugin
 
-The Android Maven plugin customizes the lifecycle based on the
-packaging. If your project has a +packaging+ of type+apk+ the Android
-plugin will execute a customized lifecycle.
+The Android Maven Plugin customizes the lifecycle based on the
+packaging. If your project has a +packaging+ of type +apk+ 
+the customized lifecycle will be used.
 
 The customised life cycle has the following additional executions in
 the default lifecycle.
@@ -13948,6 +13900,8 @@ integration-test Phase::
 
 [[android-dev-sect-config]]
 === Plugin Configuration Parameters
+
+tbd
 
 
 [[android-dev-sect-device]]
@@ -14005,6 +13959,8 @@ android:run::
 [[android-dev-sect-emulator]]
 === Emulator Interaction
 
+tbd
+
 ==== Start
 
 The +emulator-start+ goal starts the Android device emulator. The
@@ -14034,15 +13990,32 @@ mvn android:emulator-start \
 
 ==== Stop
 
-The +emulator-stop+ and +emulator-stop-all+ goals stop the Android device emulator(s) and can be used inside or outside a Maven project folder.
+The +emulator-stop+ and +emulator-stop-all+ goals stop the Android
+device emulator(s) and can be used inside or outside a Maven project
+folder.
+
+[[android-dev-sect-goals-useful]]
+=== Useful Android Maven Plugin Goals
+
+A number of plugin goals are useful for manual execution or custom
+binding to a lifecycle phase e.g. in a release profile.
+
+manifest-update tbd
+
+zipalign tbd
+
+help
 
 
-
-[[android-dev-sect-goals]]
-=== Other Android Maven Plugin Goals
+[[android-dev-sect-goals-internal]]
+=== Internal Android Maven Plugin Goals
 
 The Android Maven Plugin supports a number of goals that are part of
-the default lifecycle and are invoked automatically as well as a
+the default lifecycle and are invoked automatically. In most cases you
+will not have to invoke these goals directly, but it can be useful to
+know about them and their configuration options.
+
+ as well as a
 various goals that can be invoked separately on the command line or
 bound to a lifecycle phase in your plugin configuration in the build
 or in a separate profile.
@@ -14105,18 +14078,78 @@ android:internal-pre-integration-test::
    them. The goal is internal to the plugin lifecycle and should not
    be used as separate invocation on the command line.
 
-manifest-update tbd
+[[android-dev-sect-test]]
+=== Testing Android Application Code
 
-zipalign tbd
+Testing Android Application code can be done in a unit test fashion
+with rich junit support as part of the Android SDK as well as
+integration type testing called instrumentation testing. 
+
+[[android-dev-sect-test-unit]]
+==== Unit tests
+
+The Android Maven Plugin includes the execution of the Surefire plugin
+and as such unit tests can be included in the project like in any
+other project. The default path for test classes in the Eclipse and
+therefore Android Development Toolkit is +test+ and therefore Maven
+has to be configured to access code from there with the configuration
+
+.Adding the test folder to the build configuration
+----
+<build>
+    <testSourceDirectory>test</testSourceDirectory>
+    ...  
+----
+
+Alternatively the Maven conventions can be implemented by moving the
+source code for the application and the test source code into
++src/main/java+ and +src/test/java+ and reconfiguring the Eclipse
+project files.
+
+[[android-dev-sect-test-instrumentation]]
+==== Instrumentation tests
+
+Instrumentation tests are integration tests bundled into an
+application that run on the emulator or device and interact with
+another deployed application to test the behaviour. The common setup
+to run instrumentation tests would be two parallel projects, one for
+the application and one for the instrumentation tests. These modules
+are tied together as modules of a parent pom.
+
+The Android Maven Plugin samples contains two examples for a
+project set up in this manner. The setup of the instrumentation test
+application with the Android Maven Plugin is the same as for a normal
+application with the added dependency to the application that needs to
+be tested. It is important to add the +type+ of +apk+ to the
+dependency to allow the Android Maven Plugin to find the Android
+package of the application.
+
+----
+<dependency>
+    <groupId>com.simpligility.android</groupId>
+    <artifactId>intents</artifactId>
+    <version>0.1</version>
+    <type>apk</type>
+</dependency>
+----
+
 
 [[android-dev-sect-tips]]
 === Tips and Tricks
 
+tbd
+
+[[android-dev-sect-release]]
+==== Performing a Release Build
+
+use jarsigner plugin, ziplalign goal and proguard plugin... see morseflash example
+
 [[android-dev-sect-plugin-config]]
-==== Configuring Maven for usage of the Android Maven Plugin
+==== Configuring command line usage
 
 In order to use the Android Maven Plugin goals on the command line
-with the short plugin name +android+, you have to add the following
+with the short plugin name +android+ outside a directory that contains
+a reference to the plugin, you have to add the following
 +pluginGroups+ snippet to your +settings.xml+ file.
 
 .Snippet for settings.xml to enable short plugin name usage
@@ -14127,12 +14160,6 @@ with the short plugin name +android+, you have to add the following
     </pluginGroup>
 </pluginGroups>
 ----
-
-TIP: This is only necessary for command line invocation of the Android
-Maven Plugin outside a project folder.
-
-
-==== jarsigner and proguard for release
 
 [[appendix-settings]]
 == Appendix: Settings Details
