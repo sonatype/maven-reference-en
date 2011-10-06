@@ -13946,6 +13946,10 @@ integration-test Phase::
    Run the instrumentation test classes against the deployed
    application.
 
+[[android-dev-sect-config]]
+=== Plugin Configuration Parameters
+
+
 [[android-dev-sect-device]]
 === Device Interaction 
 
@@ -13972,6 +13976,9 @@ android:undeploy::
    The undeploy goal removes the apk of the current project, or
    another specified apk, from the connected device(s).
 
+android:redeploy:: 
+
+  TBD
 
 android:instrument::
 
@@ -13991,14 +13998,18 @@ android:push::
    device. Configuration is done with the android.push.source and
    android.push.destination parameters.
 
+android:run::
+
+   TBD
+
 [[android-dev-sect-emulator]]
 === Emulator Interaction
 
-android:emulator-start::
+==== Start
 
-   The +emulator-start+ goal starts the Android device emulator. The
-   start up parameters can be configured in the Android Maven Plugin
-   configuration in the pom.xml file
+The +emulator-start+ goal starts the Android device emulator. The
+start up parameters can be configured in the Android Maven Plugin
+configuration in the pom.xml file
 
 ----
 <configuration>
@@ -14021,10 +14032,9 @@ mvn android:emulator-start \
 -Dandroid.emulator.wait=10000  
 ----
 
-android:emulator-stop::
+==== Stop
 
-   The +emulator-stops+ stops the Android device emulator and can be
-   used inside or outside a Maven project folder.
+The +emulator-stop+ and +emulator-stop-all+ goals stop the Android device emulator(s) and can be used inside or outside a Maven project folder.
 
 
 
@@ -14095,6 +14105,9 @@ android:internal-pre-integration-test::
    them. The goal is internal to the plugin lifecycle and should not
    be used as separate invocation on the command line.
 
+manifest-update tbd
+
+zipalign tbd
 
 [[android-dev-sect-tips]]
 === Tips and Tricks
@@ -14118,6 +14131,8 @@ with the short plugin name +android+, you have to add the following
 TIP: This is only necessary for command line invocation of the Android
 Maven Plugin outside a project folder.
 
+
+==== jarsigner and proguard for release
 
 [[appendix-settings]]
 == Appendix: Settings Details
