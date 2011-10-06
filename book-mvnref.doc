@@ -13622,24 +13622,6 @@ mvn install -P 3.2
 
 Further details are available in the README.markdown file of the tool.
 
-[[android-dev-sect-plugin-config]]
-==== Configuring Maven for usage of the Android Maven Plugin
-
-In order to use the Android Maven Plugin goals on the command line
-with the short plugin name +android+, you have to add the following
-+pluginGroups+ snippet to your +settings.xml+ file.
-
-.Snippet for settings.xml to enable short plugin name usage
-----
-<pluginGroups>
-    <pluginGroup>
-        com.jayway.maven.plugins.android.generation2
-    </pluginGroup>
-</pluginGroups>
-----
-
-TIP: This is only necessary for command line invocation of the Android
-Maven Plugin outside a project folder.
 
 [[android-dev-sect-using]]
 === Android Application Development with the Maven Android Plugin
@@ -13730,8 +13712,19 @@ Android-specific lifecycle modifications of the Android Maven
 Plugin. It takes care of all the specific calls to the Android SDK
 tools, that process resources, convert Java bytecode and so on. The Android Plugin needs to be configured with extensions set to true for this to work as visible in the pluginManagement section.
 
-The declared dependency to the android platform jar is available in http://search.maven.org[Maven Central]. Check there for available versions. Alternatively you could use an Android jar from the Maven Android SDK Deployer with the modified groupId and artifactId. Check the documentation for the deployer or your local repository to see what the
-exact GAV parameters are. The scope of +provided+ is important since it signals to Maven that the contents of the jar will not need to packed into the application package since they are available at runtime on the device as part of the environment.
+The declared dependency to the android platform jar is available in
+http://search.maven.org[Maven Central]. Check there for available
+versions. Alternatively you could use an Android jar from the Maven
+Android SDK Deployer with the modified groupId and artifactId. Check
+the documentation for the deployer or your local repository to see
+what the exact GAV parameters are. The scope of +provided+ is
+important since it signals to Maven that the contents of the jar will
+not need to packed into the application package since they are
+available at runtime on the device as part of the environment. In
+addition the android jar artifacts only contain exception throwing
+stubs for all methods in order to define the API for the
+compiler. They can not be executed on the development machine but rely
+on an emulator or device runtime environment.
 
 The configuration of the Maven Compiler Plugin in the build is
 necessary since Android uses Java 5 language specification code with
@@ -13913,11 +13906,9 @@ Dependencies to other Android projects sources::
 More details can be found at
 http://code.google.com/p/maven-android-plugin/wiki/ApkSourcesDependency.
 
-[[android-dev-sect-custom-details]]
-=== Android Maven Plugin Details
 
 [[android-dev-sect-custom-lifecycle]]
-==== Android Maven Plugin Lifecycle
+=== The Custom Lifecycle from the Android Maven Plugin
 
 The Android Maven plugin customizes the lifecycle based on the
 packaging. If your project has a +packaging+ of type+apk+ the Android
@@ -13955,49 +13946,53 @@ integration-test Phase::
    Run the instrumentation test classes against the deployed
    application.
 
-[[android-dev-sect-goals]]
-==== Android Maven Plugin Goals
+[[android-dev-sect-device]]
+=== Device Interaction 
 
-The Android Maven Plugin supports a number of goals that are part of
-the default lifecycle and are invoked automatically as well as a
-various goals that can be invoked separately on the command line or
-bound to a lifecycle phase in your plugin configuration in the build
-or in a separate profile.
+The Android Maven Plugin has a powerful features for interacting with
+attached devices and emulators implemented in a number of goals. Many
+of them use the +android.device+ parameter to determine a specific
+device as specified by the serial number, all connected emulators or
+all connected devices should be affected. A value of +emulator+ will
+trigger execution on all emulators connected via adb and a value of
++usb+ will affect all devices.
 
-
-android:apk::
-
-   The +apk+ goal creates the android package (apk) file. By default
-   the plugin signs the file with the debug keystore. The
-   configuration parameter can be used to disable the signing process.
-
-----
-<sign><debug>false<debug><sign>
-----
-
+The following goals support support the device parameter.
+ 
 android:deploy::
 
    The +deploy+ goal deploys the built apk file, or another specified
-   apk, to a connected device or emulator. This goal is automatically
+   apk, to the connected device(s). This goal is automatically
    performed when running through the +integration-test+ lifecycle
    phase on a project with instrumentation tests (e.g. +mvn install+
    or +mvn integration-test+). 
 
-android:deploy-dependencies::
+android:undeploy::
 
-   The +deploy-dependencies+ goal deploys all directly declared
-   dependencies of +<type>apk</type>+ in this project. This goal is
-   usually used in a project with instrumentation tests, to deploy the
-   apk to test onto the device before running the deploying and
-   running the instrumentation tests apk. The goal is automatically
-   performed when running through the integration-test life cycle
-   phase on a project with instrumentation tests (e.g. +mvn install+
-   or +mvn integration-test+).
+   The undeploy goal removes the apk of the current project, or
+   another specified apk, from the connected device(s).
 
-android:dex::
 
-   The +dex+ goal converts compiled Java classes to the Android Dalivk
-   Executable (dex) format.
+android:instrument::
+
+   The +instrument+ goal runs the instrumentation android package on
+   the device/emulator.
+
+
+android:pull::
+
+   The pull goal can be used to copy files from the device. Source and
+   destination file have to be specified with the android.pull.source
+   and android.pull.destination configuration paramters.
+
+android:push::
+
+   The pull goal can be used to copy files or directories to the
+   device. Configuration is done with the android.push.source and
+   android.push.destination parameters.
+
+[[android-dev-sect-emulator]]
+=== Emulator Interaction
 
 android:emulator-start::
 
@@ -14031,6 +14026,46 @@ android:emulator-stop::
    The +emulator-stops+ stops the Android device emulator and can be
    used inside or outside a Maven project folder.
 
+
+
+[[android-dev-sect-goals]]
+=== Other Android Maven Plugin Goals
+
+The Android Maven Plugin supports a number of goals that are part of
+the default lifecycle and are invoked automatically as well as a
+various goals that can be invoked separately on the command line or
+bound to a lifecycle phase in your plugin configuration in the build
+or in a separate profile.
+
+
+android:apk::
+
+   The +apk+ goal creates the android package (apk) file. By default
+   the plugin signs the file with the debug keystore. The
+   configuration parameter can be used to disable the signing process.
+
+----
+<sign><debug>false<debug><sign>
+----
+
+
+android:deploy-dependencies::
+
+   The +deploy-dependencies+ goal deploys all directly declared
+   dependencies of +<type>apk</type>+ in this project. This goal is
+   usually used in a project with instrumentation tests, to deploy the
+   apk to test onto the device before running the deploying and
+   running the instrumentation tests apk. The goal is automatically
+   performed when running through the integration-test life cycle
+   phase on a project with instrumentation tests (e.g. +mvn install+
+   or +mvn integration-test+).
+
+android:dex::
+
+   The +dex+ goal converts compiled Java classes to the Android Dalivk
+   Executable (dex) format.
+
+
 android:generate-sources::
 
    The +generate-sources+ goal generates +R.java+ based on the
@@ -14041,11 +14076,6 @@ android:generate-sources::
    source directory, deletes any .java files with the same name as an
    .aidl file found in the source directory and deletes any Thumbs.db
    files found in the resource directory.
-
-android:instrument::
-
-   The +instrument+ goal runs the instrumentation android package on
-   the device/emulator.
 
 android:internal-integration-test::
 
@@ -14065,20 +14095,28 @@ android:internal-pre-integration-test::
    them. The goal is internal to the plugin lifecycle and should not
    be used as separate invocation on the command line.
 
-android:pull::
 
-   The pull goal can be used to copy files or directories from the
-   device.
+[[android-dev-sect-tips]]
+=== Tips and Tricks
 
-android:push::
+[[android-dev-sect-plugin-config]]
+==== Configuring Maven for usage of the Android Maven Plugin
 
-   The pull goal can be used to copy files or directories to the
-   device.
+In order to use the Android Maven Plugin goals on the command line
+with the short plugin name +android+, you have to add the following
++pluginGroups+ snippet to your +settings.xml+ file.
 
-android:undeploy::
+.Snippet for settings.xml to enable short plugin name usage
+----
+<pluginGroups>
+    <pluginGroup>
+        com.jayway.maven.plugins.android.generation2
+    </pluginGroup>
+</pluginGroups>
+----
 
-   The undeploy goal removes the apk of the current project, or
-   another specified apk, from the connected device.
+TIP: This is only necessary for command line invocation of the Android
+Maven Plugin outside a project folder.
 
 
 [[appendix-settings]]
