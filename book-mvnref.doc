@@ -14118,12 +14118,8 @@ android:apk::
 
    The +apk+ goal creates the android package (apk) file. By default
    the plugin signs the file with the debug keystore. The
-   configuration parameter can be used to disable the signing process.
-
-----
-<sign><debug>false<debug><sign>
-----
-
+   configuration parameter +<sign><debug>false<debug><sign>+ can be
+   used to disable the signing process.
 
 android:deploy-dependencies::
 
@@ -14141,7 +14137,7 @@ android:dex::
    The +dex+ goal converts compiled Java classes to the Android Dalivk
    Executable (dex) format. The dex execution can be configured with
    the parameters +dex.jvmArguments+, +dex.coreLibrary+,
-   +dex.noLocals+ and dex.optimize+.
+   +dex.noLocals+ and +dex.optimize+.
 
 android:generate-sources::
 
@@ -14210,13 +14206,13 @@ to run instrumentation tests would be two parallel projects, one for
 the application and one for the instrumentation tests. These modules
 are tied together as modules of a parent pom.
 
-The Android Maven Plugin samples contains two examples for a
-project set up in this manner. The setup of the instrumentation test
-application with the Android Maven Plugin is the same as for a normal
-application with the added dependency to the application that needs to
-be tested. It is important to add the +type+ of +apk+ to the
-dependency to allow the Android Maven Plugin to find the Android
-package of the application.
+The Android Maven Plugin samples contains the morseflash as well as
+theapidemos-15 examples for a project set up in this manner. The setup
+of the instrumentation test application with the Android Maven Plugin
+is the same as for a normal application with the added dependency to
+the application that needs to be tested. It is important to add the
++type+ of +apk+ to the dependency to allow the Android Maven Plugin to
+find the Android package of the application.
 
 ----
 <dependency>
@@ -14227,7 +14223,12 @@ package of the application.
 </dependency>
 ----
 
-TBD.. document all the parameters from
+Instrumentation test execution supports a large number of
+configuration parameters that are displayed in the plugin
+configuration layout in <<android-dev-test-config>>.
+
+[[android-dev-test-config]]
+Available parameters for instrumentation testing
 ----
 <test>
   <skip>true|false|auto</skip>
@@ -14246,6 +14247,11 @@ TBD.. document all the parameters from
   </packages>
 </test>
 ----
+
+Unless +createreport+ is set to false the instrumentation test run
+will produce junit xml compatible test output in the build output
+folder for test results +target/surefire-reports+ for each device or
+emulator the tests run on.
 
 [[android-dev-sect-native]]
 === Native Application Builds
