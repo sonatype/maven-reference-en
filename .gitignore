@@ -9,3 +9,5 @@ pom.xml~
 release.properties
 *.releaseBackup
 *.versionsBackup
+*.iml
+*.idea
