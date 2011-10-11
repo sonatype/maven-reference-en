@@ -74,7 +74,9 @@ http://www.getsatisfaction.com/sonatype/products/sonatype_maven_the_complete_ref
 
 Tim O'Brien (tobrien@sonatype.com)
 
-May, 2011
+Manfred Moser (manfred@simpligility.com)
+
+October, 2011
 
 [[preface-1]]
 [preface]
@@ -1671,16 +1673,14 @@ Java System Properties::
 
   All properties accessible via +getProperties()+ on
   +java.lang.System+ are exposed as POM properties. Some examples of
-  system properties are: '+++${user.name}+++', <varname
-  role="keep-together">'+++${user.home}+++', '+++${java.home}+++', and
+  system properties are: '+++${user.name}+++', '+++${user.home}+++', '+++${java.home}+++', and
   '+++${os.name}+++'. A full list of system properties can be found in
-  the Javadoc for the +java.lang.System+ class.
+  the Javadoc for the System class.
 
 x::
 
   Arbitrary properties can be set with a +properties+ element in a
-  'pom.xml' or <filename moreinfo="none"
-  role="keep-together">settings.xml', or properties can be loaded from
+  'pom.xml' or 'settings.xml', or properties can be loaded from
   external files. If you set a property named +fooBar+ in your
   'pom.xml', that same property is referenced with
   '+++${fooBar}+++'. Custom properties come in handy when you are
@@ -2086,7 +2086,7 @@ replacement.
 ----
 
 In <<ex-exclude-replace>>, there is nothing marking the dependency on
-+geronimo-jta_1.1_spec+ as a replacement, it just happens to be a
+geronimo-jta_1.1_spec as a replacement, it just happens to be a
 library which provides the same API as the original JTA
 dependency. Here are some other reasons you might want to exclude or
 replace transitive dependencies:
@@ -2194,7 +2194,7 @@ Connector using the following dependency XML:
 You should notice that the child project did not have to explicitly
 list the version of the +mysql-connector-java+ dependency. Because
 this dependency was defined in the top-level POM's
-+dependencyManagement+ element, the version number is going to
+dependencyManagement element, the version number is going to
 propagate to the child project's dependency on
 +mysql-connector-java+. Note that if this child project did define a
 version, it would override the version listed in the top-level POM's
@@ -9671,7 +9671,7 @@ none::
 By default, the publication date will be formatted using the date
 format string +MM/dd/yyyy+. You can change this format by using the
 standard notation found in the JavaDocs for
-+java.text.SimpleDateFormat+ (see JavaDoc for
+SimpleDateFormat (see JavaDoc for
 http://java.sun.com/j2se/1.5.0/docs/api/java/text/SimpleDateFormat.html[SimpleDateFormat]
 for more information). To reformat the date using +yyyy-MM-dd+, use
 the following +publishDate+ element.
@@ -14664,7 +14664,7 @@ Java system properties::
 x::
 
    Set within a +properties+ element or an external file, the value
-   may be used as <varname role="keep-together">'+++${someVar}+++'.
+   may be used as '+++${someVar}+++'.
 
 .Setting the '+++${user.install}+++' property in settings.xml
 ----
