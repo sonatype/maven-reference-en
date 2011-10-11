@@ -13691,10 +13691,6 @@ be added in the root folder of the project:
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3</version>
-            </plugin>
         </plugins>
     </build>
 </project>
@@ -13705,8 +13701,7 @@ The highlights of this pom.xml are:
 
 * the +dependency+ to the Android platform jar
 
-* and the build configuration with the Android Maven Plugin and the
-   Maven Compiler Plugin
+* and the build configuration with the Android Maven Plugin 
 
 The Android Package +packaging+ type +apk+ is what activates the
 Android-specific lifecycle modifications of the Android Maven
@@ -13730,11 +13725,6 @@ In addition the android jar artifacts only contain exception throwing
 stubs for all methods in order to define the API for the
 compiler. They can not be executed on the development machine, but
 rely on an emulator or device runtime environment.
-
-The configuration of the Maven Compiler Plugin in the build is
-necessary, since Android uses Java 5 language specification code with
-annotations, foreach loop and so on and the Java compiler needs to
-know that. 
 
 The configuration of the Android Maven Plugin is done in the build
 section. Initially only the sdk platform parameter is required to be
