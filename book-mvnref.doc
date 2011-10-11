@@ -13843,7 +13843,7 @@ to set up a multi module build for an Android application as well as a
 server side web application sharing e.g. the code for the core objects
 and business logic.
 
-A comprehensive example setup like this called morseflash and is
+A comprehensive example setup like this called morseflash is
 part of the samples project for the plugin.
 
 [[android-dev-sect-dependencies]]
@@ -13883,12 +13883,12 @@ Dependencies to other Android projects::
 </dependency>
 ----
 
-Dependencies to other Android projects sources::
+Dependencies to other Android projects' sources::
 
    Other Android Maven projects with packaging type apk declared as
    source dependencies are pulled into the current Android application
    with assets and resources and used to build an application
-   combining all artifacts including resources
+   combining all artifacts including resources.
 
 ----
 <dependency>
@@ -13900,10 +13900,10 @@ Dependencies to other Android projects sources::
 ----
 
 TIP: A common use case for using Android libraries is to separate out
-all application code that is independent of the application store the
-apk will be made available. Then you can have an application per store
-that depends on the library and add any specific code for e.g. market
-access or release build requirements.
+all application code that is independent of the application store in
+which the apk will be made available. Then you can have one apk
+per store that depends on the library and add any specific code for
+e.g. market access or release build requirements.
 
 [[android-dev-sect-custom-lifecycle]]
 === The Custom Lifecycle from the Android Maven Plugin
@@ -13970,7 +13970,7 @@ command line parameters.
 .Configuration as properties in pom.xml
 ----
 <properties>
-    <emulator.avd>21</emulator.avd>
+    <android.emulator.avd>21</android.emulator.avd>
 <properties>
 ----
 
@@ -13985,7 +13985,7 @@ can be customized if desired.
 
 - androidManifestFile
 
-- assestDirectory
+- assetsDirectory
 
 - resourceDirectory
 
@@ -13996,7 +13996,7 @@ Some of the other useful parameters are
 device::
 
    Specify +usb+, +emulator+ or a specific serial number. Read
-   <<android-dev-sect-device for more information.
+   <<android-dev-sect-device>> for more information.
 
 undeployBeforeDeploy::
 
