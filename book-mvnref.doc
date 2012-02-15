@@ -2251,9 +2251,12 @@ groupId::
   A +groupId+ groups a set of related artifacts. Group identifiers
   generally resemble a Java package name. For example, the +groupId+
   +org.apache.maven+ is the base groupId for all artifacts produced by
-  the Apache Maven project. Group identifiers are translated into
-  paths in the Maven Repository; for example, the org.apache.maven
-  groupId can be found in '/maven2/org/apache/maven' on
+  the Apache Maven project. Note that, however, while dash '-' is
+  commonly used in +groupId+s, it's illegal in Java package name. So
+  sometimes Java package name has to be different from +groupId+.
+  Group identifiers are translated into paths in the Maven Repository;
+  for example, the org.apache.maven groupId can be found in
+  '/maven2/org/apache/maven' on
   http://repo1.maven.org/maven2/org/apache/maven[repo1.maven.org].
 
 artifactId::
