@@ -44,7 +44,7 @@
         qandaset toc
     </xsl:param>
     <!-- Show only Sections up to level 2 in the TOCs -->
-    <xsl:param name="toc.section.depth">3</xsl:param>
+    <xsl:param name="toc.section.depth">1</xsl:param>
     <!--###################################################
                          Labels
     ################################################### -->
@@ -70,19 +70,28 @@
         procedure before
     </xsl:param>
     <xsl:template match="author" mode="titlepage.mode">
-        <xsl:if test="name(preceding-sibling::*[1]) = 'author'">
-            <xsl:text>, </xsl:text>
-        </xsl:if>
         <span class="{name(.)}">
-            <xsl:call-template name="person.name"/> 
-            (<xsl:value-of select="affiliation"/>)
+            <xsl:call-template name="person.name"/>
             <xsl:apply-templates mode="titlepage.mode" select="./contrib"/>
         </span>
     </xsl:template>
     <xsl:template match="authorgroup" mode="titlepage.mode">
+        <div class="toc_intro">
+          <p>Learning Maven can be a daunting and frustrating task.
+          While there are a number of references for Maven online,
+          there is no single, well-written narrative for introducing
+          Maven that can serve as both an authoritative reference and
+          an introduction. Sonatype maintains two books focused on
+          Maven: an example-driven introduction to Maven, <a
+          href="http://www.sonatype.com/books/mvnex-book/reference/public-book.html">"Maven
+          by Example"</a> and this reference book.  If you are new to
+          Maven, you are encouraged to read <a
+          href="http://www.sonatype.com/books/mvnex-book/reference/public-book.html">"Maven
+          by Example"</a> as it will guide you through the first steps
+          you'll take with Maven.</p>
+        </div>
         <div class="{name(.)}">
             <h2>Authors</h2>
-            <p/>
             <xsl:apply-templates mode="titlepage.mode"/>
         </div>
     </xsl:template>
