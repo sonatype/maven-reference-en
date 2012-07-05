@@ -40,10 +40,6 @@
             </author>
         </authorgroup>
 
-        <publisher>
-            <publishername>Sonatype, Inc.</publishername>
-        </publisher>
-
         <mediaobject role="cover">
             <imageobject remap="lrg" role="front-large">
                 <imagedata fileref="covers/cvr_lrg.jpg" format="JPEG" width="600px" />

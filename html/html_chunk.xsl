@@ -35,7 +35,7 @@
         qandaset toc
     </xsl:param>
     <!-- Show only Sections up to level 2 in the TOCs -->
-    <xsl:param name="toc.section.depth">3</xsl:param>
+    <xsl:param name="toc.section.depth">2</xsl:param>
     <!--###################################################
                          Labels
     ################################################### -->
@@ -66,7 +66,6 @@
         </xsl:if>
         <span class="{name(.)}">
             <xsl:call-template name="person.name"/> 
-            (<xsl:value-of select="affiliation"/>)
             <xsl:apply-templates mode="titlepage.mode" select="./contrib"/>
         </span>
     </xsl:template>
