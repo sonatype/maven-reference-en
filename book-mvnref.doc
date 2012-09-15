@@ -6626,10 +6626,10 @@ wildcards. Each string value can match dependencies in a few different
 ways. Generally speaking, three identity pattern formats are
 supported:
 
-groupId:artifactId+ - version-less key::
++groupId:artifactId+ - version-less key::
 
    You would use this pattern to match a dependency by only the
-   groupId and the artifactId
+   groupId and the artifactId.
 
 +groupId:artifactId:type[:classifier]+ - conflict id::
 
@@ -6654,7 +6654,7 @@ pattern would match resource dependencies assuming that they were of
 type +zip+:
 
 ----
-\*:zip
+*:zip
 ----
 
 The pattern above makes use of the second dependency identity: the
@@ -6716,15 +6716,14 @@ of the other dependencies. What if the share resource dependency had
 the same type as all of the other dependencies? How could you
 differentiate the dependency? In this case if the shared resource
 dependency had been bundled as a JAR with the classifier +resources+,
-you can change to the identity pattern and match those dependencies
-instead:
+you would match that dependency with the following identity pattern:
 
 ----
-\*:jar:resources
+*:jar:resources
 ----
 
 Instead of matching on artifacts with a type of +zip+ and no
-classifier, we’re matching on artifacts with a classifier of resources
+classifier, we’re matching on artifacts with a classifier of +resources+
 and a type of +jar+.
 
 Just like the +fileSets+ section, +dependencySets+ support the
