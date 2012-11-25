@@ -1,0 +1,25 @@
+= Maven: The Complete Reference
+:data-uri:
+:icons:
+:docinfo:
+:quotes.~:
+
+include::preface.asciidoc[]
+include::chapter-introduction.asciidoc[]
+include::chapter-installation.asciidoc[]
+include::chapter-pom-relationships.asciidoc[]
+include::chapter-lifecycle.asciidoc[]
+include::chapter-profiles.asciidoc[]
+include::chapter-running.asciidoc[]
+include::chapter-configuring.asciidoc[]
+include::chapter-assemblies.asciidoc[]
+include::chapter-resource-filtering.asciidoc[]
+include::chapter-site-generation.asciidoc[]
+include::chapter-writing-plugins.asciidoc[]
+include::chapter-archetypes.asciidoc[]
+include::chapter-flex-dev.asciidoc[]
+include::chapter-android-dev.asciidoc[]
+include::appendix-settings.asciidoc[]
+include::appendix-enterprise.asciidoc[]
+include::appendix-license.asciidoc[]
+include::preface-copyright.asciidoc[]
