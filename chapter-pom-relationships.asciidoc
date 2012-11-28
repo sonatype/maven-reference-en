@@ -1,0 +1,1538 @@
+[[pom-relationships]]
+== The Project Object Model
+
+[[pom-relationships-sect-intro]]
+=== Introduction
+
+This chapter covers the central concept of Maven—the Project Object
+Model. The POM is where a project’s identity and structure are
+declared, builds are configured, and projects are related to one
+another. The presence of a 'pom.xml' file defines a Maven project.
+
+[[pom-relationships-sect-pom]]
+=== The POM
+
+Maven projects, dependencies, builds, artifacts: all of these are
+objects to be modeled and described. These objects are described by an
+XML file called a Project Object Model. The POM tells Maven what sort
+of project it is dealing with and how to modify default behavior to
+generate output from source. In the same way a Java web application
+has a 'web.xml' that describes, configures, and customizes the
+application, a Maven project is defined by the presence of a
+'pom.xml'. It is a descriptive declaration of a project for Maven; it
+is the figurative “map” that Maven needs to understand what it is
+looking at when it builds your project.
+
+You could also think of the 'pom.xml' as analogous to a 'Makefile' or
+an Ant 'build.xml'. When you are using GNU *make* to build something
+like MySQL, you’ll usually have a file named 'Makefile' that contains
+explicit instructions for building a binary from source. When you are
+using Apache Ant, you likely have a file named 'build.xml' that
+contains explicit instructions for cleaning, compiling, packaging, and
+deploying an application. *make*, Ant, and Maven are similar in that
+they rely on the presence of a commonly named file such as 'Makefile',
+'build.xml', or 'pom.xml', but that is where the similarities end. If
+you look at a Maven 'pom.xml', the majority of the POM is going to
+deal with descriptions: Where is the source code? Where are the
+resources? What is the packaging? If you look at an Ant 'build.xml'
+file, you’ll see something entirely different. You’ll see explicit
+instructions for tasks such as compiling a set of Java classes. The
+Maven POM is declarative, and although you can certainly choose to
+include some procedural customizations via the Maven Ant plugin, for
+the most part you will not need to get into the gritty procedural
+details of your project’s build.
+
+The POM is also not specific to building Java projects. While most of
+the examples in this book are geared towards Java applications, there
+is nothing Java-specific in the definition of a Maven Project Object
+Model. While Maven's default plugins are targeted at building JAR
+artifacts from a set of source, tests, and resources, there is nothing
+preventing you from defining a POM for a project that contains C#
+sources and produces some proprietary Microsoft binary using Microsoft
+tools. Similarly, there is nothing stopping you from defining a POM
+for a technical book. In fact, the source for this book and this
+book's examples is captured in a multi-module Maven project which uses
+one of the many Maven Docbook plugins to apply the standard Docbook
+XSL to a series of chapter XML files. Others have created Maven
+plugins to build Adobe Flex code into SWCs and SWFs, and yet others
+have used Maven to build projects written in C.
+
+We've established that the POM describes and declares, it is unlike
+Ant or Make in that it doesn't provide explicit instructions, and
+we've noted that POM concepts are not specific to Java. Diving into
+more specifics, take a look at <<fig-pom>> for a survey of the
+contents of a POM.
+
+[[fig-pom]]
+.The Project Object Model
+image::figs/web/pom-relationships_pom-small.png[]
+
+The POM contains four categories of description and configuration:
+
+General project information::
+
+  This includes a project’s name, the URL for a project, the
+  sponsoring organization, and a list of developers and contributors
+  along with the license for a project.
+
+Build settings::
+
+  In this section, we customize the behavior of the default Maven
+  build. We can change the location of source and tests, we can add
+  new plugins, we can attach plugin goals to the lifecycle, and we can
+  customize the site generation parameters.
+
+Build environment::
+
+  The build environment consists of profiles that can be activated for
+  use in different environments. For example, during development you
+  may want to deploy to a development server, whereas in production
+  you want to deploy to a production server. The build environment
+  customizes the build settings for specific environments and is often
+  supplemented by a custom 'settings.xml' in '~/.m2'. This settings
+  file is discussed in <<profiles>> and in the section
+  <<appendix-settings-sect-details>>.
+
+POM relationships::
+
+  A project rarely stands alone; it depends on other projects,
+  inherits POM settings from parent projects, defines its own
+  coordinates, and may include submodules.
+
+[[pom-relationships-sect-super-pom]]
+==== The Super POM
+
+Before we dive into some examples of POMs, let's take a quick look at
+the Super POM. All Maven project POMs extend the Super POM, which
+defines a set of defaults shared by all projects. This Super POM is a
+part of the Maven installation and can be found in the
+'maven-3.0.3-uber.jar' file in '+++${M2_HOME}/lib+++'. If you look in
+this JAR file, you will find a file named 'pom-4.0.0.xml' under the
++org.apache.maven.project+ package. The Super POM for Maven is shown
+in <<ex-super-pom>>.
+
+[[ex-super-pom]]
+.The Super POM
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Maven Default Project</name>
+
+    <repositories>
+        <repository>
+            <id>central</id> <1>
+                <name>Maven Repository Switchboard</name>
+                <layout>default</layout>
+                <url>http://repo1.maven.org/maven2</url>
+                <snapshots>
+                    <enabled>false</enabled>
+                </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id> <2>
+                <name>Maven Plugin Repository</name>
+                <url>http://repo1.maven.org/maven2</url>
+                <layout>default</layout>
+                <snapshots>
+                    <enabled>false</enabled>
+                </snapshots>
+                <releases>
+                    <updatePolicy>never</updatePolicy>
+                </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build> <3>
+            <directory>${project.basedir}/target</directory>
+            <outputDirectory>
+                ${project.build.directory}/classes
+            </outputDirectory>
+            <finalName>${project.artifactId}-${project.version}</finalName>
+            <testOutputDirectory>
+                ${project.build.directory}/test-classes
+            </testOutputDirectory>
+            <sourceDirectory>
+                ${project.basedir}/src/main/java
+            </sourceDirectory>
+            <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+            <testSourceDirectory>
+                ${project.basedir}/src/test/java
+            </testSourceDirectory>
+            <resources>
+                <resource>
+                    <directory>${project.basedir}/src/main/resources</directory>
+                </resource>
+            </resources>
+            <testResources>
+                <testResource>
+                    <directory>${project.basedir}/src/test/resources</directory>
+                </testResource>
+            </testResources>
+
+
+            <pluginManagement> <4>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-antrun-plugin</artifactId>
+                            <version>1.3</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <version>2.2-beta-2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-clean-plugin</artifactId>
+                            <version>2.2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>2.0.2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-dependency-plugin</artifactId>
+                            <version>2.0</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>2.4</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-ear-plugin</artifactId>
+                            <version>2.3.1</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-ejb-plugin</artifactId>
+                            <version>2.1</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-install-plugin</artifactId>
+                            <version>2.2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <version>2.2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>2.5</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-plugin-plugin</artifactId>
+                            <version>2.4.3</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-rar-plugin</artifactId>
+                            <version>2.2</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-release-plugin</artifactId>
+                            <version>2.0-beta-8</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>2.3</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-site-plugin</artifactId>
+                            <version>2.0-beta-7</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-source-plugin</artifactId>
+                            <version>2.0.4</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>2.4.3</version>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-war-plugin</artifactId>
+                            <version>2.1-alpha-2</version>
+                        </plugin>
+                    </plugins>
+            </pluginManagement>
+
+            <reporting>
+                <outputDirectory>target/site</outputDirectory>
+            </reporting>
+</project>
+----
+
+The Super POM defines some standard configuration variables that are
+inherited by all projects. Those values are captured in the annotated
+sections:
+
+<1> The default Super POM defines a single remote Maven repository
+with an ID of +central+. This is the central Maven repository that all
+Maven clients are configured to read from by default. This setting can
+be overridden by a custom 'settings.xml' file. Note that the default
+Super POM has disabled snapshot artifacts on the central Maven
+repository. If you need to use a snapshot repository, you will need to
+customize repository settings in your 'pom.xml' or in your
+'settings.xml'. Settings and profiles are covered in <<profiles>> and
+in <<appendix-settings-sect-details>>.
+
+<2> The central Maven repository also contains Maven plugins. The
+default plugin repository is the central Maven repository. Snapshots
+are disabled, and the update policy is set to “never,” which means
+that Maven will never automatically update a plugin if a new version
+is released.
+
+<3> The +build+ element sets the default values for directories in the
+Maven Standard Directory layout.
+
+<4> Starting in Maven 2.0.9, default versions of core plugins have
+been provided in the Super POM. This was done to provide some
+stability for users that are not specifying versions in their POMs.
+
+[[fig-super-always-base]]
+.The Super POM is always the base Parent
+image::figs/web/pom-relationships_pom-inherit-simple-super.png[]
+
+[[pom-relationships-sect-simplest-pom]]
+==== The Simplest POM
+
+All Maven POMs inherit defaults from the Super POM (introduced earlier
+in the section <<pom-relationships-sect-super-pom>>). If you are just
+writing a simple project that produces a JAR from some source in
+'src/main/java', want to run your JUnit tests in 'src/test/java', and
+want to build a project site using +mvn site+, you don’t have to
+customize anything. All you would need, in this case, is the simplest
+possible POM shown in <<ex-simplest-pom>>. This POM defines a
++groupId+, +artifactId+, and +version+: the three required coordinates
+for every project.
+
+[[ex-simplest-pom]]
+.The Simplest POM
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mavenbook.ch08</groupId>
+    <artifactId>simplest-project</artifactId>
+    <version>1</version>
+</project>
+----
+
+Such a simple POM would be more than adequate for a simple
+project—e.g., a Java library that produces a JAR file. It isn’t
+related to any other projects, it has no dependencies, and it lacks
+basic information such as a name and a URL. If you were to create this
+file and then create the subdirectory 'src/main/java' with some source
+code, running +mvn package+ would produce a JAR in
+'target/simple-project-1.jar'.
+
+[[pom-relationships-sect-effective-pom]]
+==== The Effective POM
+
+----
+$ mvn help:effective-pom
+----
+
+Executing the +effective-pom+ goal should print out an XML document
+capturing the merge between the Super POM and the POM from
+<<ex-simplest-pom>>.
+
+[[pom-relationships-sect-real-poms]]
+==== Real POMs
+
+Maven is something of a chameleon; you can pick and choose the
+features you want to take advantage of. Some open source projects may
+value the ability to list developers and contributors, generate clean
+project documentation, and manage releases automatically using the
+Maven Release plugin. On the other hand, someone working in a
+corporate environment on a small team might not be interested in the
+distribution management capabilities of Maven nor the ability to list
+developers. The remainder of this chapter is going to discuss features
+of the POM in isolation. Instead of bombarding you with a 10-page
+listing of a set of related POMs, we’re going to focus on creating a
+good reference for specific sections of the POM. In this chapter, we
+discuss relationships between POMs, but we don’t illustrate such a
+project here.
+
+[[pom-relationships-sect-pom-syntax]]
+=== POM Syntax
+
+The POM is always in a file named 'pom.xml' in the base directory of a
+Maven project. This XML document can start with the XML declaration,
+or you can choose to omit it. All values in a POM are captured as XML
+elements.
+
+[[pom-reationships-sect-versions]]
+==== Project Versions
+
+A project's version number is used to group and order releases. Maven
+versions contain the following parts: major version, minor version,
+incremental version, and qualifier. In a version, these parts
+correspond to the following format:
+
+----
+<major version>.<minor version>.<incremental version>-<qualifier>
+----
+
+For example, the version "1.3.5" has a major version of 1, a minor
+version of 3, and an incremental version of 5. The version "5" has a
+major version of 5 and no minor or incremental version. The qualifier
+exists to capture milestone builds: alpha and beta releases, and the
+qualifier is separated from the major, minor, and incremental versions
+by a hyphen. For example, the version "1.3-beta-01" has a major
+version of 1, a minor version of 3, and a qualifier of "beta-01".
+
+Keeping your version numbers aligned with this standard will become
+very important when you want to start using version ranges in your
+POMs. Version ranges, introduced in
+<<pom-relationships-sect-version-ranges>>, allow you to specify a
+dependency on a range of versions, and they are only supported because
+Maven has the ability to sort versions based on the version release
+number format introduced in this section.
+
+If your version release number matches the format
++<major>.<minor>.<incremental>-<qualifier>+ then your versions will be
+compared properly; "1.2.3" will be evaluated as a more recent build
+than "1.0.2", and the comparison will be made using the numeric values
+of the major, minor, and incremental versions. If your version release
+number does not fit the standard introduced in this section, then your
+versions will be compared as strings; "1.0.1b" will be compared to
+"1.2.0b" using a String comparison.
+
+[[pom-relationships-sect-version-build-numbers]]
+===== Version Build Numbers
+
+One gotcha for release version numbers is the ordering of the
+qualifiers. Take the version release numbers “1.2.3-alpha-2” and
+“1.2.3-alpha-10,” where the “alpha-2” build corresponds to the 2nd
+alpha build, and the “alpha-10” build corresponds to the 10th alpha
+build. Even though “alpha-10” should be considered more recent than
+“alpha-2,” Maven is going to sort “alpha-10” before “alpha-2” due to a
+known issue in the way Maven handles version numbers.
+
+Maven is supposed to treat the number after the qualifier as a build
+number. In other words, the qualifier should be "alpha", and the build
+number should be 2. Even though Maven has been designed to separate
+the build number from the qualifier, this parsing is currently
+broken. As a result, "alpha-2" and "alpha-10" are compared using a
+String comparison, and "alpha-10" comes before "alpha-2"
+alphabetically. To get around this limitation, you will need to
+left-pad your qualified build numbers. If you use "alpha-02" and
+"alpha-10" this problem will go away, and it will continue to work
+once Maven properly parses the version build number.
+
+[[pom-relationships-sect-snapshot-versions]]
+===== SNAPSHOT Versions
+
+Maven versions can contain a string literal to signify that a project
+is currently under active development. If a version contains the
+string “-SNAPSHOT,” then Maven will expand this token to a date and
+time value converted to UTC (Coordinated Universal Time) when you
+install or release this component. For example, if your project has a
+version of “1.0-SNAPSHOT” and you deploy this project’s artifacts to a
+Maven repository, Maven would expand this version to
+“1.0-20080207-230803-1” if you were to deploy a release at 11:08 PM on
+February 7th, 2008 UTC. In other words, when you deploy a snapshot,
+you are not making a release of a software component; you are
+releasing a snapshot of a component at a specific time.
+
+Why would you use this? SNAPSHOT versions are used for projects under
+active development. If your project depends on a software component
+that is under active development, you can depend on a SNAPSHOT
+release, and Maven will periodically attempt to download the latest
+snapshot from a repository when you run a build. Similarly, if the
+next release of your system is going to have a version "1.4", your
+project would have a version "1.4-SNAPSHOT" until it was formally
+released.
+
+As a default setting, Maven will not check for SNAPSHOT releases on
+remote repositories. To depend on SNAPSHOT releases, users must
+explicitly enable the ability to download snapshots using a
++repository+ or +pluginRepository+ element in the POM.
+
+When releasing a project, you should resolve all dependencies on
+SNAPSHOT versions to dependencies on released versions. If a project
+depends on a SNAPSHOT, it is not stable as the dependencies may change
+over time. Artifacts published to non-snapshot Maven repositories such
+as http://repo1.maven.org/maven2[http://repo1.maven.org/maven2] cannot
+depend on SNAPSHOT versions, as Maven's Super POM has snapshot's
+disabled from the Central repository. SNAPSHOT versions are for
+development only.
+
+[[pom-relationships-sect-property-refs]]
+==== Property References
+
+preceded by a dollar sign and surrounded by two curly braces. For
+example, consider the following POM:
+
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>project-a</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <build>
+        <finalName>${project.groupId}-${project.artifactId}</finalName>
+    </build>
+</project>
+----
+
+If you put this XML in a 'pom.xml' and run +mvn help:effective-pom+,
+you will see that the output contains the line:
+
+----
+...
+<finalName>org.sonatype.mavenbook-project-a</finalName>
+...
+----
+
+When Maven reads a POM, it replaces references to properties when it
+loads the POM XML. Maven properties occur frequently in advanced Maven
+usage, and are similar to properties in other systems such as Ant or
+Velocity. They are simply variables delimited by '+++${...}+++'. Maven
+provides three implicit variables which can be used to access
+environment variables, POM information, and Maven Settings:
+
+env::
+
+  The +env+ variable exposes environment variables exposed by your
+  operating system or shell. For example, a reference to
+  '+++${env.PATH}+++' in a Maven POM would be replaced by the
+  '+++${PATH}+++' environment variable (or +%PATH%+ in Windows).
+
+project::
+
+  The +project+ variable exposes the POM. You can use a dot-notated
+  (.) path to reference the value of a POM element. For example, in
+  this section we used the +groupId+ and +artifactId+ to set the
+  +finalName+ element in the build configuration. The syntax for this
+  property reference was:
+  '+++${project.groupId}-${project.artifactId}+++'.
+
+settings::
+
+  The +settings+ variable exposes Maven settings information. You can
+  use a dot-notated (.) path to reference the value of an element in a
+  'settings.xml' file. For example, '+++${settings.offline}+++' would
+  reference the value of the +offline+ element in
+  '~/.m2/settings.xml'.
+
+NOTE: You may see older builds that use '+++${pom.xxx}+++' or just
+'+++${xxx}+++' to reference POM properties. These methods have been
+deprecated and only '+++${project.xxx}+++' should be used.
+
+In addition to the three implicit variables, you can reference system
+properties and any custom properties set in the Maven POM or in a
+build profile:
+
+Java System Properties::
+
+  All properties accessible via +getProperties()+ on
+  +java.lang.System+ are exposed as POM properties. Some examples of
+  system properties are: '+++${user.name}+++', '+++${user.home}+++', '+++${java.home}+++', and
+  '+++${os.name}+++'. A full list of system properties can be found in
+  the Javadoc for the System class.
+
+x::
+
+  Arbitrary properties can be set with a +properties+ element in a
+  'pom.xml' or 'settings.xml', or properties can be loaded from
+  external files. If you set a property named +fooBar+ in your
+  'pom.xml', that same property is referenced with
+  '+++${fooBar}+++'. Custom properties come in handy when you are
+  building a system that filters resources and targets different
+  deployment platforms. Here is the syntax for setting
+  '+++${foo}=bar+++' in a POM:
+
+----
+<properties>
+    <foo>bar</foo>
+</properties>
+----
+
+For a more comprehensive list of available properties, see
+<<resource-filtering>>.
+
+[[pom-relationships-sect-project-dependencies]]
+=== Project Dependencies
+
+Maven can manage both internal and external dependencies. An external
+dependency for a Java project might be a library such as Plexus, the
+Spring Framework, or Log4J. An internal dependency is illustrated by a
+web application project depending on another project that contains
+service classes, model objects, or persistence
+logic. <<ex-dependency>> shows some examples of project dependencies.
+
+[[ex-dependency]]
+.Project Dependencies
+----
+<project>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.xfire</groupId>
+            <artifactId>xfire-java5</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    ...
+</project>
+----
+
+The first dependency is a compile dependency on the XFire SOAP library
+from Codehaus. You would use this type of dependency if your project
+depended on this library for compilation, testing, and during
+execution. The second dependency is a +test+-scoped dependency on
+JUnit. You would use a +test+-scoped dependency when you need to
+reference this library only during testing. The last dependency in
+<<ex-dependency>> is a dependency on the Servlet 2.4 API. The last
+dependency is scoped as a provided dependency. You would use a
+provided scope when the application you are developing needs a library
+for compilation and testing, but this library is supplied by a
+container at runtime.
+
+[[pom-relationships-sect-dependency-scope]]
+==== Dependency Scope
+
+<<ex-dependency>> briefly introduced three of the five dependency
+scopes: +compile+, +test+, and +provided+. Scope controls which
+dependencies are available in which classpath, and which dependencies
+are included with an application. Let’s explore each scope in detail:
+
+compile::
+
+  compile+ is the default scope; all dependencies are +compile+-scoped
+  if a scope is not supplied. +compile+ dependencies are available in
+  all classpaths, and they are packaged.
+
+provided::
+
+  provided+ dependencies are used when you expect the JDK or a
+  container to provide them. For example, if you were developing a web
+  application, you would need the Servlet API available on the compile
+  classpath to compile a servlet, but you wouldn’t want to include the
+  Servlet API in the packaged WAR; the Servlet API JAR is supplied by
+  your application server or servlet container. +provided+
+  dependencies are available on the compilation classpath (not
+  runtime). They are not transitive, nor are they packaged.
+
+runtime::
+
+  runtime+ dependencies are required to execute and test the system,
+  but they are not required for compilation. For example, you may need
+  a JDBC API JAR at compile time and the JDBC driver implementation
+  only at runtime.
+
+test::
+
+  test+-scoped dependencies are not required during the normal
+  operation of an application, and they are available only during test
+  compilation and execution phases.
+
+system::
+
+  The +system+ scope is similar to +provided+ except that you have to
+  provide an explicit path to the JAR on the local file system. This
+  is intended to allow compilation against native objects that may be
+  part of the system libraries. The artifact is assumed to always be
+  available and is not looked up in a repository. If you declare the
+  scope to be +system+, you must also provide the +systemPath+
+  element. Note that this scope is not recommended (you should always
+  try to reference dependencies in a public or custom Maven
+  repository).
+
+[[pom-relationships-sect-optional]]
+==== Optional Dependencies
+
+Assume that you are working on a library that provides caching
+behavior. Instead of writing a caching system from scratch, you want
+to use some of the existing libraries that provide caching on the file
+system and distributed caches. Also assume that you want to give the
+end user an option to cache on the file system or to use an in-memory
+distributed cache. To cache on the file system, you’ll want to use a
+freely available library called EHCache
+(http://ehcache.sourceforge.net/[http://ehcache.sourceforge.net/]),
+and to cache in a distributed in-memory cache, you want to use another
+freely available caching library named SwarmCache (
+http://swarmcache.sourceforge.net/[http://swarmcache.sourceforge.net/]
+). You’ll code an interface and create a library that can be
+configured to use either EHCache or SwarmCache, but you want to avoid
+adding a dependency on both caching libraries to any project that
+depends on your library.
+
+In other words, you need both libraries to compile this library
+project, but you don't want both libraries to show up as transitive
+runtime dependencies for the project that uses your library. You can
+accomplish this by using optional dependencies as shown in
+<<ex-optional-depend>>.
+
+[[ex-optional-depend]]
+.Declaring Optional Dependencies
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>my-project</artifactId>
+    <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>1.4.1</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>swarmcache</groupId>
+            <artifactId>swarmcache</artifactId>
+            <version>1.0RC2</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+    </dependencies>
+</project>
+----
+
+Since you've declared these dependencies as optional in +my-project+,
+if you've defined a project that depends on +my-project+ which needs
+those dependencies, you'll have to include them explicitly in the
+project that depends on +my-project+. For example, if you were writing
+an application which depended on +my-project+ and wanted to use the
+EHCache implementation, you would need to add the following
++dependency+ element to your project.
+
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>my-application</artifactId>
+    <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.sonatype.mavenbook</groupId>
+            <artifactId>my-project</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>swarmcache</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+    </dependencies>
+</project>
+----
+
+In an ideal world, you wouldn’t have to use optional
+dependencies. Instead of having one large project with a series of
+optional dependencies, you would separate the EHCache-specific code to
+a +my-project-ehcache+ submodule and the SwarmCache-specific code to a
++my-project-swarmcache+ submodule. This way, instead of requiring
+projects that reference +my-project+ to specifically add a dependency,
+projects can just reference a particular implementation project and
+benefit from the transitive dependency.
+
+[[pom-relationships-sect-version-ranges]]
+==== Dependency Version Ranges
+
+dependency; you can specify a range of versions that would satisfy a
+given dependency. For example, you can specify that your project
+depends on version 3.8 or greater of JUnit, or anything between
+versions 1.2.10 and 1.2.14 of JUnit. You do this by surrounding one or
+more version numbers with the following characters:
+
+(, )::
+
+  Exclusive quantifiers
+
+[, ]::
+
+  Inclusive quantifiers
+
+For example, if you wished to access any +JUnit+ version greater than
+or equal to 3.8 but less than 4.0, your dependency would be as shown
+in <<ex-dep-range>>.
+
+[[ex-dep-range]]
+.Specifying a Dependency Range: JUnit 3.8 - JUnit 4.0
+----
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>[3.8,4.0)</version>
+    <scope>test</scope>
+</dependency>
+----
+
+If you want to depend on any version of JUnit no higher than 3.8.1,
+you would specify only an upper inclusive boundary, as shown in
+<<ex-dep-range-2>>.
+
+[[ex-dep-range-2]]
+.Specifying a Dependency Range: JUnit <= 3.8.1
+----
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>[,3.8.1]</version>
+    <scope>test</scope>
+</dependency>
+----
+
+A version before or after the comma is not required, and means +/-
+infinity. For example, "[4.0,)" means any version greater than or
+equal to 4.0. "(,2.0)" is any version less than 2.0. "[1.2]" means
+only version 1.2, and nothing else.
+
+NOTE: When declaring a "normal" version such as 3.8.2 for Junit,
+internally this is represented as "allow anything, but prefer 3.8.2."
+This means that when a conflict is detected, Maven is allowed to use
+the conflict algorithms to choose the best version. If you specify
+[3.8.2], it means that only 3.8.2 will be used and nothing else. If
+somewhere else there is a dependency that specifies [3.8.1], you would
+get a build failure telling you of the conflict. We point this out to
+make you aware of the option, but use it sparingly and only when
+really needed. The preferred way to resolve this is via
++dependencyManagement+.
+
+[[pom-relationships-sect-transitive]]
+==== Transitive Dependencies
+
++project-a+ depends on +project-b+, which in turn depends on
++project-c+, then +project-c+ is considered a transitive dependency of
++project-a+. If +project-c+ depended on +project-d+, then +project-d+
+would also be considered a transitive dependency of +project-a+. Part
+of Maven’s appeal is that it can manage transitive dependencies and
+shield the developer from having to keep track of all of the
+dependencies required to compile and run an application. You can just
+depend on something like the Spring Framework and not have to worry
+about tracking down every last dependency of the Spring Framework.
+
+Maven accomplishes this by building a graph of dependencies and
+dealing with any conflicts and overlaps that might occur. For example,
+if Maven sees that two projects depend on the same +groupId+ and
++artifactId+, it will sort out which dependency to use automatically,
+always favoring the more recent version of a dependency. Although this
+sounds convenient, there are some edge cases where transitive
+dependencies can cause some configuration issues. For these scenarios,
+you can use a dependency exclusion.
+
+[[pom-relationships-sect-transitive-scope]]
+===== Transitive Dependencies and Scope
+
+Each of the scopes outlined earlier in the section
+<<pom-relationships-sect-dependency-scope>> affects not just the scope
+of the dependency in the declaring project, but also how it acts as a
+transitive dependency. The easiest way to convey this information is
+through a table, as in <<table-transitive-dep-and-scope>>. Scopes in
+the top row represent the scope of a transitive dependency. Scopes in
+the leftmost column represent the scope of a direct dependency. The
+intersection of the row and column is the scope that is assigned to a
+transitive dependency. A blank cell in this table means that the
+transitive dependency will be omitted.
+
+[[table-transitive-dep-and-scope]]
+.How Scope Affects Transitive Dependencies
+[options="header"]
+|==========================
+| Direct Scope 4+| vs. Transitive Scope
+|  | compile  | provided | runtime  | test
+| compile  | compile  | -| runtime  | -
+| provided | provided | provided | provided | -
+| runtime  | runtime  | -| runtime  | -
+| test | test | -| test | -
+|==========================
+
+To illustrate the relationship of transitive dependency scope to
+direct dependency scope, consider the following example. If
++project-a+ contains a test scoped dependency on +project-b+ which
+contains a compile scoped dependency on +project-c+. +project-c+ would
+be a test-scoped transitive dependency of +project-a+.
+
+You can think of this as a transitive boundary which acts as a filter
+on dependency scope. Transitive dependencies which are provided and
+test scope usually do not affect a project. The exception to this rule
+is that a provided scoped transitive dependency to a provided scope
+direct dependency is still a provided dependency of a
+project. Transitive dependencies which are compile and runtime scoped
+usually affect a project regardless of the scope of a direct
+dependency. Transitive dependencies which are compile scoped will have
+the same scope regardless of the scope of the direct
+dependency. Transitive dependencies which are runtime scoped will
+generally have the same scope of the direct dependency except when the
+direct dependency has a scope of compile. When a transitive dependency
+is runtime scoped and a direct is compile scoped the direct dependency
+the transitive dependency will have an effective scope of runtime.
+
+[[pom-relationships-sect-conflict]]
+==== Conflict Resolution
+
+There will be times when you need to exclude a transitive dependency,
+such as when you are depending on a project that depends on another
+project, but you would like to either exclude the dependency
+altogether or replace the transitive dependency with another
+dependency that provides the same functionality. <<ex-exclude>> shows
+an example of a dependency element that adds a dependency on
++project-a+, but excludes the transitive dependency +project-b+.
+
+[[ex-exclude]]
+.Excluding a Transitive Dependency
+----
+<dependency>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>project-a</artifactId>
+    <version>1.0</version>
+    <exclusions>
+        <exclusion>
+            <groupId>org.sonatype.mavenbook</groupId>
+            <artifactId>project-b</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+----
+
+Often, you will want to replace a transitive dependency with another
+implementation. For example, if you are depending on a library that
+depends on the Sun JTA API, you may want to replace the declared
+transitive dependency. Hibernate is one example. Hibernate depends on
+the Sun JTA API JAR, which is not available in the central Maven
+repository because it cannot be freely redistributed. Fortunately, the
+Apache Geronimo project has created an independent implementation of
+this library that can be freely redistributed. To replace a transitive
+dependency with another dependency, you would exclude the transitive
+dependency and declare a dependency on the project you wanted
+instead. <<ex-exclude-replace>> shows an example of a such
+replacement.
+
+[[ex-exclude-replace]]
+.Excluding and Replacing a Transitive Dependency
+----
+<dependencies>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate</artifactId>
+        <version>3.2.5.ga</version>
+        <exclusions>
+            <exclusion>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-jta_1.1_spec</artifactId>
+        <version>1.1</version>
+    </dependency>
+</dependencies>
+----
+
+In <<ex-exclude-replace>>, there is nothing marking the dependency on
+geronimo-jta_1.1_spec as a replacement, it just happens to be a
+library which provides the same API as the original JTA
+dependency. Here are some other reasons you might want to exclude or
+replace transitive dependencies:
+
+. The +groupId+ or +artifactId+ of the artifact has changed, where the
+  current project requires an alternately named version from a
+  dependency's version - resulting in 2 copies of the same project in
+  the classpath. Normally Maven would capture this conflict and use a
+  single version of the project, but when +groupId+ or +artifactId+
+  are different, Maven will consider this to be two different
+  libraries.
+
+. An artifact is not used in your project and the transitive
+  dependency has not been marked as an optional dependency. In this
+  case, you might want to exclude a dependency because it isn't
+  something your system needs and you are trying to cut down on the
+  number of libraries distributed with an application.
+
+. An artifact which is provided by your runtime container thus should
+  not be included with your build. An example of this is if a
+  dependency depends on something like the Servlet API and you want to
+  make sure that the dependency is not included in a web application's
+  'WEB-INF/lib' directory.
+
+. To exclude a dependency which might be an API with multiple
+  implementations. This is the situation illustrated by
+  <<ex-exclude-replace>>; there is a Sun API which requires click-wrap
+  licensing and a time-consuming manual install into a custom
+  repository (Sun's JTA JAR) versus a freely distributed version of
+  the same API available in the central Maven repository (Geronimo's
+  JTA implementation).  [[pom-relationships-sect-dep-manage]] ====
+  Dependency Management
+
+Once you've adopted Maven at your super complex enterprise and you
+have two hundred and twenty inter-related Maven projects, you are
+going to start wondering if there is a better way to get a handle on
+dependency versions. If every single project that uses a dependency
+like the MySQL Java connector needs to independently list the version
+number of the dependency, you are going to run into problems when you
+need to upgrade to a new version. Because the version numbers are
+distributed throughout your project tree, you are going to have to
+manually edit each of the 'pom.xml' files that reference a dependency
+to make sure that you are changing the version number everywhere. Even
+with +find+, +xargs+, and +awk+, you are still running the risk of
+missing a single POM.
+
+Luckily, Maven provides a way for you to consolidate dependency
+version numbers in the +dependencyManagement+ element. You'll usually
+see the +dependencyManagement+ element in a top-level parent POM for
+an organization or project. Using the +dependencyManagement+ element
+in a 'pom.xml' allows you to reference a dependency in a child project
+without having to explicitly list the version. Maven will walk up the
+parent-child hierarchy until it finds a project with a
++dependencyManagement+ element, it will then use the version specified
+in this +dependencyManagement+ element.
+
+For example, if you have a large set of projects which make use of the
+MySQL Java connector version 5.1.2, you could define the following
++dependencyManagement+ element in your multi-module project's
+top-level POM.
+
+.Defining Dependency Versions in a Top-level POM
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>a-parent</artifactId>
+    <version>1.0.0</version>
+    ...
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.2</version>
+                <scope>runtime</scope>
+            </dependency>
+            ...
+            <dependencies>
+    </dependencyManagement>
+----
+
+Then, in a child project, you can add a dependency to the MySQL Java
+Connector using the following dependency XML:
+
+----
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.sonatype.mavenbook</groupId>
+        <artifactId>a-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>project-a</artifactId>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+    </dependencies>
+</project>
+----
+
+You should notice that the child project did not have to explicitly
+list the version of the +mysql-connector-java+ dependency. Because
+this dependency was defined in the top-level POM's
+dependencyManagement element, the version number is going to
+propagate to the child project's dependency on
++mysql-connector-java+. Note that if this child project did define a
+version, it would override the version listed in the top-level POM's
++dependencyManagement+ section. That is, the +dependencyManagement+
+version is only used when the child does not declare a version
+directly.
+
+Dependency management in a top-level POM is different from just
+defining a dependency on a widely shared parent POM. For starters, all
+dependencies are inherited. If +mysql-connector-java+ were listed as a
+dependency of the top-level parent project, every single project in
+the hierarchy would have a reference to this dependency. Instead of
+adding in unnecessary dependencies, using +dependencyManagement+
+allows you to consolidate and centralize the management of dependency
+versions without adding dependencies which are inherited by all
+children. In other words, the +dependencyManagement+ element is
+equivalent to an environment variable which allows you to declare a
+dependency anywhere below a project without specifying a version
+number.
+
+[[pom-relationships-sect-project-relationships]]
+=== Project Relationships
+
+One of the compelling reasons to use Maven is that it makes the
+process of tracking down dependencies (and dependencies of
+dependencies) very easy. When a project depends on an artifact
+produced by another project we say that this artifact is a
+dependency. In the case of a Java project, this can be as simple as a
+project depending on an external dependency like Log4J or JUnit. While
+dependencies can model external dependencies, they can also manage the
+dependencies between a set of related projects. If +project-a+ depends
+on +project-b+, Maven is smart enough to know that +project-b+ must be
+built before +project-a+.
+
+Relationships are not only about dependencies and figuring out what
+one project needs to be able to build an artifact. Maven can model the
+relationship of a project to a parent, and the relationship of a
+project to submodules. This section gives an overview of the various
+relationships between projects and how such relationships are
+configured.
+
+[[pom-relationships-sect-more-coordinates]]
+==== More on Coordinates
+
+Coordinates define a unique location for a project. Projects are
+related to one another using Maven Coordinates. +project-a+ doesn't
+just depend on +project-b+; a project with a +groupId+, +artifactId+,
+and +version+ depends on another project with a +groupId+,
++artifactId+, and +version+. To review, a Maven Coordinate is made up
+of three components:
+
+groupId::
+
+  A +groupId+ groups a set of related artifacts. Group identifiers
+  generally resemble a Java package name. For example, the +groupId+
+  +org.apache.maven+ is the base groupId for all artifacts produced by
+  the Apache Maven project. Group identifiers are translated into
+  paths in the Maven Repository; for example, the org.apache.maven
+  groupId can be found in '/maven2/org/apache/maven' on
+  http://repo1.maven.org/maven2/org/apache/maven[repo1.maven.org].
+
+artifactId::
+
+  The +artifactId+ is the project's main identifier. When you generate
+  an artifact, this artifact is going to be named with the
+  +artifactId+. When you refer to a project, you are going to refer to
+  it using the +artifactId+. The +artifactId+, +groupId+ combination
+  must be unique. In other words, you can't have two separate projects
+  with the same +artifactId+ and +groupId+; +artifactId+s are unique
+  within a particular +groupId+.
+
+NOTE: While '.'s are commonly used in +groupId+s, you should try to
+avoid using them in +artifactId+s. This can cause issues when trying
+to parse a fully qualified name down into the subcomponents.
+
+version::
+
+  When an artifact is released, it is released with a version
+  number. This version number is a numeric identifier such as "1.0",
+  "1.1.1", or "1.1.2-alpha-01". You can also use what is known as a
+  snapshot version. A snapshot version is a version for a component
+  which is under development, snapshot version numbers always end in
+  SNAPSHOT; for example, "1.0-SNAPSHOT", "1.1.1-SNAPSHOT", and
+  "1-SNAPSHOT". <<pom-relationships-sect-version-build-numbers>>
+  introduces versions and version ranges.
+
+There is a fourth, less-used qualifier:
+
+classifier::
+
+  You would use a classifier if you were releasing the same code but
+  needed to produce two separate artifacts for technical reasons. For
+  example, if you wanted to build two separate artifacts of a JAR, one
+  compiled with the Java 1.4 compiler and another compiled with the
+  Java 6 compiler, you might use the classifier to produce two
+  separate JAR artifacts under the same groupId:artifactId:version
+  combination. If your project uses native extensions, you might use
+  the classifier to produce an artifact for each target
+  platform. Classifiers are commonly used to package up an artifact's
+  sources, JavaDocs or binary assemblies.
+
+When we talk of dependencies in this book, we often use the following
+shorthand notation to describe a dependency:
++groupId+:+artifactId+:+version+. To refer to the 2.5 release of the
+Spring Framework, we would refer to it as
++org.springframework:spring:2.5+. When you ask Maven to print out a
+list of dependencies with the Maven Dependency plugin, you will also
+see that Maven tends to print out log messages with this shorthand
+dependency notation.
+
+[[pom-relationships-sect-project-inheritance]]
+==== Project Inheritance
+
+There are going to be times when you want a project to inherit values
+from a parent POM. You might be building a large system, and you don't
+want to have to repeat the same dependency elements over and over
+again. You can avoid repeating yourself if your projects make use of
+inheritance via the parent element. When a project specifies a parent,
+it inherits the information in the parent project's POM. It can then
+override and add to the values specified in this parent POM.
+
+All Maven POMs inherit values from a parent POM. If a POM does not
+specify a direct parent using the +parent+ element, that POM will
+inherit values from the Super POM. <<ex-inheritance>> shows the
++parent+ element of +project-a+ which inherits the POM defined by the
++a-parent+ project.
+
+[[ex-inheritance]]
+.Project Inheritance
+----
+<project>
+    <parent>
+        <groupId>com.training.killerapp</groupId>
+        <artifactId>a-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>project-a</artifactId>
+    ...
+</project>
+----
+
+Running +mvn help:effective-pom+ in +project-a+ would show a POM that
+is the result of merging the Super POM with the POM defined by
++a-parent+ and the POM defined in +project-a+. The implicit and
+explicit inheritance relationships for +project-a+ are shown in
+<<fig-inheritance>>.
+
+[[fig-inheritance]]
+.Project Inheritance for a-parent and project-a
+image::figs/web/pom_inheritance.png[]
+
+When a project specifies a parent project, Maven uses that parent POM
+as a starting point before it reads the current project's POM. It
+inherits everything, including the +groupId+ and +version+
+number. You'll notice that +project-a+ does not specify either, both
++groupId+ and +version+ are inherited from +a-parent+. With a parent
+element, all a POM really needs to define is an +artifactId+. This
+isn't mandatory, +project-a+ could have a different +groupId+ and
++version+, but by not providing values, Maven will use the values
+specified in the parent POM. If you start using Maven to manage and
+build large multi-module projects, you will often be creating many
+projects which share a common +groupId+ and +version+.
+
+When you inherit a POM, you can choose to live with the inherited POM
+information or to selectively override it. The following is a list of
+items a Maven POM inherits from its parent POM:
+
+* identifiers (at least one of +groupId+ or +artifactId+ must be
+  overridden.)
+
+* dependencies
+
+* developers and contributors 
+
+* plugin lists 
+
+* reports lists 
+
+* plugin executions (executions with matching ids are merged) 
+
+* plugin configuration  
+
+When Maven inherits dependencies, it will add dependencies of child
+projects to the dependencies defined in parent projects. You can use
+this feature of Maven to specify widely used dependencies across all
+projects which inherit from a top-level POM. For example, if your
+system makes universal use of the Log4J logging framework, you can
+list this dependency in your top-level POM. Any projects which inherit
+POM information from this project will automatically have Log4J as a
+dependency. Similarly, if you need to make sure that every project is
+using the same version of a Maven plugin, you can list this Maven
+plugin version explicitly in a top-level parent POM's
++pluginManagement+ section.
+
+Maven assumes that the parent POM is available from the local
+repository, or available in the parent directory ('../pom.xml') of the
+current project. If neither location is valid this default behavior
+may be overridden via the +relativePath+ element. For example, some
+organizations prefer a flat project structure where a parent project's
+'pom.xml' isn't in the parent directory of a child project. It might
+be in a sibling directory to the project. If your child project were
+in a directory './project-a' and the parent project were in a
+directory named './a-parent', you could specify the relative location
+of +parent-a+'s POM with the following configuration:
+
+----
+<project>
+    <parent>
+        <groupId>org.sonatype.mavenbook</groupId>
+        <artifactId>a-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../a-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>project-a</artifactId>
+</project>
+----
+
+[[pom-relationships-sect-pom-best-practice]]
+=== POM Best Practices
+
+Maven can be used to manage everything from simple, single-project
+systems to builds that involve hundreds of inter-related
+submodules. Part of the learning process with Maven isn't just
+figuring out the syntax for configuring Maven, it is learning the
+"Maven Way"—the current set of best practices for organizing and
+building projects using Maven. This section attempts to distill some
+of this knowledge to help you adopt best practices from the start
+without having to wade through years of discussions on the Maven
+mailing lists.
+
+[[pom-relationships-sect-grouping-deps]]
+==== Grouping Dependencies
+
+If you have a set of dependencies which are logically grouped
+together. You can create a project with pom packaging that groups
+dependencies together. For example, let's assume that your application
+uses Hibernate, a popular Object-Relational mapping framework. Every
+project which uses Hibernate might also have a dependency on the
+Spring Framework and a MySQL JDBC driver. Instead of having to include
+these dependencies in every project that uses Hibernate, Spring, and
+MySQL you could create a special POM that does nothing more than
+declare a set of common dependencies. You could create a project
+called +persistence-deps+ (short for Persistence Dependencies), and
+have every project that needs to do persistence depend on this
+convenience project:
+
+.Consolidating Dependencies in a Single POM Project
+----
+<project>
+    <groupId>org.sonatype.mavenbook</groupId>
+    <artifactId>persistence-deps</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>${hibernateVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>${hibernateAnnotationsVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-hibernate3</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlVersion}</version>
+        </dependency>
+    </dependencies>
+    <properties>
+        <mysqlVersion>(5.1,)</mysqlVersion>
+        <springVersion>(2.0.6,)</springVersion>
+        <hibernateVersion>3.2.5.ga</hibernateVersion>
+        <hibernateAnnotationsVersion>3.3.0.ga</hibernateAnnotationsVersion>
+    </properties>
+</project>
+----
+
+If you create this project in a directory named +persistence-deps+,
+all you need to do is create this 'pom.xml' and run +mvn
+install+. Since the packaging type is +pom+, this POM is installed in
+your local repository. You can now add this project as a dependency
+and all of its dependencies will be added as transitive dependencies
+to your project. When you declare a dependency on this
+persistence-deps project, don't forget to specify the dependency type
+as pom.
+
+.Declaring a Dependency on a POM
+----
+<project>
+    <description>This is a project requiring JDBC</description>
+    ...
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>org.sonatype.mavenbook</groupId>
+            <artifactId>persistence-deps</artifactId>
+            <version>1.0</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+</project>
+----
+
+If you later decide to switch to a different JDBC driver (for example,
+JTDS), just replace the dependencies in the +persistence-deps+ project
+to use +net.++sourceforge.jtds:jtds+ instead of
++mysql:mysql-java-connector+ and update the version number. All
+projects depending on +persistence-deps+ will use JTDS if they decide
+to update to the newer version. Consolidating related dependencies is
+a good way to cut down on the length of 'pom.xml' files that start
+having to depend on a large number of dependencies. If you need to
+share a large number of dependencies between projects, you could also
+just establish parent-child relationships between projects and
+refactor all common dependencies to the parent project, but the
+disadvantage of the parent-child approach is that a project can have
+only one parent. Sometimes it makes more sense to group similar
+dependencies together and reference a +pom+ dependency. This way, your
+project can reference as many of these consolidated dependency POMs as
+it needs.
+
+NOTE: Maven uses the depth of a dependency in the tree when resolving
+conflicts using a nearest-wins approach. Using the dependency grouping
+technique above pushes those dependencies one level down in the
+tree. Keep this in mind when choosing between grouping in a pom or
+using +dependencyManagement+ in a parent POM
+
+[[pom-relationships-sect-multi-vs-inherit]]
+==== Multi-module vs. Inheritance
+
+There is a difference between inheriting from a parent project and
+being managed by a multimodule project. A parent project is one that
+passes its values to its children. A multimodule project simply
+manages a group of other subprojects or modules. The multimodule
+relationship is defined from the topmost level downwards. When setting
+up a multimodule project, you are simply telling a project that its
+build should include the specified modules. Multimodule builds are to
+be used to group modules together in a single build. The parent-child
+relationship is defined from the leaf node upwards. The parent-child
+relationship deals more with the definition of a particular
+project. When you associate a child with its parent, you are telling
+Maven that a project’s POM is derived from another.
+
+To illustrate the decision process that goes into choosing a design
+that uses inheritance vs. multi-module or both approaches consider the
+following two examples: the Maven project used to generate this book
+and a hypothetical project that contains a number of logically grouped
+modules.
+
+[[pom-relationships-sect-simple-project]]
+===== Simple Project
+
+First, let's take a look at the maven-book project. The inheritance
+and multi-module relationships are shown in <<fig-maven-book>>.
+
+[[fig-maven-book]]
+.maven-book Multi-module vs. Inheritance
+image::figs/web/pom_book-example.png[]
+
+When we build this Maven book you are reading, we run +mvn package+ in
+a multi-module project named +maven-book+. This multi-module project
+includes two submodules: +book-examples+ and +book-chapters+. Neither
+of these projects share the same parent, they are related only in that
+they are modules in the +maven-book+ project. +book-examples+ builds
+the ZIP and TGZ archives you downloaded to get this book's
+example. When we run the +book-examples+ build from 'book-examples/'
+directory with +mvn package+, it has no knowledge that it is a part of
+the larger +maven-book+ project. +book-examples+ doesn't really care
+about +maven-book+, all it knows in life is that its parent is the
+top-most +sonatype+ POM and that it creates an archive of examples. In
+this case, the +maven-book+ project exists only as a convenience and
+as an aggregator of modules.
+
+Each of the three projects: +maven-book+, +book-examples+, and
++book-chapters+ all list a shared "corporate" parent —
++sonatype+. This is a common practice in organizations which have
+adopted Maven, instead of having every project extend the Super POM by
+default, some organizations define a top-level corporate POM that
+serves as the default parent when a project doesn't have any good
+reason to depend on another. In this book example, there is no
+compelling reason to have +book-examples+ and +book-chapters+ share
+the same parent POM, they are entirely different projects which have a
+different set of dependencies, a different build configuration, and
+use drastically different plugins to create the content you are now
+reading. The +sonatype+ POM gives the organization a chance to
+customize the default behavior of Maven and supply some
+organization-specific information to configure deployment settings and
+build profiles.
+
+[[pom-relationships-sect-multi-module-enterprise]]
+===== Multi-module Enterprise Project
+
+Let's take a look at an example that provides a more accurate picture
+of a real-world project where inheritance and multi-module
+relationships exist side by side. <<fig-multi-module>> shows a
+collection of projects that resemble a typical set of projects in an
+enterprise application. There is a top-level POM for the corporation
+with an +artifactId+ of +sonatype+. There is a multi-module project
+named +big-system+ which references sub-modules +server-side+ and
++client-side+.
+
+[[fig-multi-module]]
+.Enterprise Multi-module vs. Inheritance
+image::figs/web/pom_real_multi.png[]
+
+What's going on here? Let's try to deconstruct this confusing set of
+arrows. First, let's take a look at +big-system+. The +big-system+
+might be the project that you would run +mvn package+ on to build and
+test the entire system. +big-system+ references submodules
++client-side+ and +server-side+. Each of these projects effectively
+rolls up all of the code that runs on either the server or on the
+client. Let's focus on the +server-side+ project. Under the
++server-side+ project we have a project called +server-lib+ and a
+multi-module project named +web-apps+. Under +web-apps+ we have two
+Java web applications: +client-web+ and +admin-web+.
+
+Let's start with the parent/child relationships from +client-web+ and
++admin-web+ to +web-apps+. Since both of the web applications are
+implemented in the same web application framework (let's say Wicket),
+both projects would share the same set of core dependencies. The
+dependencies on the Servlet API, the JSP API, and Wicket would all be
+captured in the +web-apps+ project. Both +client-web+ and +admin-web+
+also need to depend on +server-lib+, this dependency would be defined
+as a dependency between +web-apps+ and +server-lib+. Because
++client-web+ and +admin-web+ share so much configuration by inheriting
+from +web-apps+, both +client-web+ and +admin-web+ will have very
+small POMs containing little more than identifiers, a parent
+declaration, and a final build name.
+
+Next we focus on the parent/child relationship from +web-apps+ and
++server-lib+ to +server-side+. In this case, let's just assume that
+there is a separate working group of developers which work on the
+server-side code and another group of developers that work on the
+client-side code. The list of developers would be configured in the
++server-side+ POM and inherited by all of the child projects
+underneath it: +web-apps+, +server-lib+, +client-web+, and
++admin-web+. We could also imagine that the +server-side+ project
+might have different build and deployment settings which are unique to
+the development for the server side. The +server-side+ project might
+define a build profile that only makes sense for all of the
++server-side+ projects. This build profile might contain the database
+host and credentials, or the +server-side+ project's POM might
+configure a specific version of the Maven Jetty plugin which should be
+universal across all projects that inherit the +server-side+ POM.
+
+In this example, the main reason to use parent/child relationships is
+shared dependencies and common configuration for a group of projects
+which are logically related. All of the projects below +big-system+
+are related to one another as submodules, but not all submodules are
+configured to point back to parent project that included it as a
+submodule. Everything is a submodule for reasons of convenience, to
+build the entire system just go to the +big-system+ project directory
+and run +mvn package+. Look more closely at the figure and you'll see
+that there is no parent/child relationship between +server-side+ and
++big-system+. Why is this? POM inheritance is very powerful, but it
+can be overused. When it makes sense to share dependencies and build
+configuration, a parent/child relationship should be used. When it
+doesn't make sense is when there are distinct differences between two
+projects. Take, for example, the +server-side+ and +client-side+
+projects. It is possible to create a system where +client-side+ and
++server-side+ inherited a common POM from +big-system+, but as soon as
+a significant divergence between the two child projects develops, you
+then have to figure out creative ways to factor out common build
+configuration to +big-system+ without affecting all of the
+children. Even though +client-side+ and +server-side+ might both
+depend on Log4J, they also might have distinct plugin configurations.
+
+There's a certain point defined more by style and experience where you
+decide that minimal duplication of configuration is a small price to
+pay for allowing projects like +client-side+ and +server-side+ to
+remain completely independent. Designing a huge set of thirty plus
+projects which all inherit five levels of POM configuration isn't
+always the best idea. In such a setup, you might not have to duplicate
+your Log4J dependency more than once, but you'll also end up having to
+wade through five levels of POM just figure out how Maven calculated
+your effective POM. All of this complexity to avoid duplicating five
+lines of dependency declaration. In Maven, there is a "Maven Way", but
+there are also many ways to accomplish the same thing. It all boils
+down to preference and style. For the most part, you won't go wrong if
+all of your submodules turn out to define back-references to the same
+project as a parent, but your use of Maven may evolve over time.
