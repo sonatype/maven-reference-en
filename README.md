@@ -4,7 +4,7 @@ Hello there.  Maven: The Complete Reference in an asciidoc format.  To
 edit asciidoc, use Emacs, use vi, use TextMate, use Notepad.  There's
 really just a single file you need to worry about:
 
-* book-mvnref.doc
+* book-mvnref.asciidoc
 
 Figures?  You want to add figures, look in the figs/web directory.
 You'll see a lot of distracting files in that directory.  For now, you

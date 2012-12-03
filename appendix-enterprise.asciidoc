@@ -1,0 +1,82 @@
+[[appendix-enterprise]]
+== Appendix: Sun Specification Alternatives
+
+The Apache Geronimo project maintains implementations of various
+enterprise Java specifications. <<table-spec-alternatives>> lists the
+artifactId and artifact version for all of the specifications
+implemented by the Geronimo project. To use one of these dependencies,
+use a groupId of +org.apache.geronimo.specs+, locate the version of
+the Specification you want to use and reference the dependency with
+the Artifact Id and Artifact Version listed in
+<<table-spec-alternatives>>.
+
+NOTE: All artifacts in <<table-spec-alternatives>>, have a groupId of
++org.apache.geronimo.specs+.
+
+[[table-spec-alternatives]]
+.Alternate Spec Implementations Artifacts
+|========================================
+| Specification | Spec Version | Artifact Id | Artifact Version 
+| Activation | 1.0.2 | geronimo-activation_1.0.2_spec | 1.2 
+| Activation | 1.1 | geronimo-activation_1.1_spec | 1.0.1 
+| Activation | 1.0 | geronimo-activation_1.0_spec | 1.1 
+| CommonJ | 1.1 | geronimo-commonj_1.1_spec | 1.0 
+| Corba | 2.3 | geronimo-corba_2.3_spec | 1.1 
+| Corba | 3.0 | geronimo-corba_3.0_spec | 1.2 
+| EJB | 2.1 | geronimo-ejb_2.1_spec | 1.1 
+| EJB | 3.0 | geronimo-ejb_3.0_spec | 1.0 
+| EL | 1.0 | geronimo-el_1.0_spec | 1.0 
+| Interceptor | 3.0 | geronimo-interceptor_3.0_spec | 1.0 
+| J2EE Connector | 1.5 | geronimo-j2ee-connector_1.5_spec | 1.1.1 
+| J2EE Deployment | 1.1 | geronimo-j2ee-deployment_1.1_spec | 1.1 
+| J2EE JACC | 1.0 | geronimo-j2ee-jacc_1.0_spec | 1.1.1 
+| J2EE Management | 1.0 | geronimo-j2ee-management_1.0_spec | 1.1 
+| J2EE Management | 1.1 | geronimo-j2ee-management_1.1_spec | 1.0 
+| J2EE | 1.4 | geronimo-j2ee_1.4_spec | 1.1 
+| JACC | 1.1 | geronimo-jacc_1.1_spec | 1.0 
+| JEE Deployment | 1.1MR3 | geronimo-javaee-deployment_1.1MR3_spec | 1.0 
+| JavaMail | 1.3.1 | geronimo-javamail_1.3.1_spec | 1.3 
+| JavaMail | 1.4 | geronimo-javamail_1.4_spec | 1.2 
+| JAXR | 1.0 | geronimo-jaxr_1.0_spec | 1.1 
+| JAXRPC | 1.1 | geronimo-jaxrpc_1.1_spec | 1.1 
+| JMS | 1.1 | geronimo-jms_1.1_spec | 1.1
+| JPA | 3.0 | geronimo-jpa_3.0_spec | 1.1 
+| JSP | 2.0 | geronimo-jsp_2.0_spec | 1.1 
+| JSP | 2.1 | geronimo-jsp_2.1_spec | 1.0 
+| JTA | 1.0.1B | geronimo-jta_1.0.1B_spec | 1.1.1 
+| JTA | 1.1 | geronimo-jta_1.1_spec | 1.1 
+| QName | 1.1 | geronimo-qname_1.1_spec | 1.1 
+| SAAJ | 1.1 | geronimo-saaj_1.1_spec | 1.1 
+| Servlet | 2.4 | geronimo-servlet_2.4_spec | 1.1.1 
+| Servlet | 2.5 | geronimo-servlet_2.5_spec | 1.1.1 
+| STaX API | 1.0 | geronimo-stax-api_1.0_spec | 1.0.1 
+| WS Metadata | 2.0 | geronimo-ws-metadata_2.0_spec | 1.1.1 
+|=======================================
+
+NOTE: The version numbers in the Artifact Version column may be out of
+date by the time you read this book. To check on the version number,
+visit
+http://repo1.maven.org/maven2/org/apache/geronimo/specs/[http://repo1.maven.org/maven2/org/apache/geronimo/specs/]
+in a web browser, and click on the artifactId you want to add. Choose
+the highest version of the spec you want to depend upon.
+
+To illustrate how one would use <<table-spec-alternatives>>, if we
+wanted to write some code in our project which interacted with the JTA
+1.0.1B specification, we would need to add the following dependency to
+our project:
+
+.Adding JTA 1.0.1B to a Maven Project
+----
+<dependency>
+    <groupId>org.apache.geronimo.specs</groupId>
+    <artifactId>geronimo-jta_1.0.1B_spec</artifactId>
+    <version>1.1.1</version>
+</dependency>
+----
+
+Notice how the version of the artifact isn't going to line up with the
+version of the specification—the previous dependency configuration
+adds version 1.0.1B of the JTA specification using the artifact
+version of 1.1.1. Be aware of this when depending on the alternate
+Geronimo implementations, and always double check that you are using
+the latest artifact version number for your specifications.
