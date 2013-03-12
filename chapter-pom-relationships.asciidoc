@@ -850,7 +850,7 @@ transitive dependency will be omitted.
 | Direct Scope 4+| vs. Transitive Scope
 |  | compile  | provided | runtime  | test
 | compile  | compile  | -| runtime  | -
-| provided | provided | provided | provided | -
+| provided | provided | -| provided | -
 | runtime  | runtime  | -| runtime  | -
 | test | test | -| test | -
 |==========================
