@@ -863,10 +863,8 @@ be a test-scoped transitive dependency of +project-a+.
 
 You can think of this as a transitive boundary which acts as a filter
 on dependency scope. Transitive dependencies which are provided and
-test scope usually do not affect a project. The exception to this rule
-is that a provided scoped transitive dependency to a provided scope
-direct dependency is still a provided dependency of a
-project. Transitive dependencies which are compile and runtime scoped
+test scope usually do not affect a project.
+Transitive dependencies which are compile and runtime scoped
 usually affect a project regardless of the scope of a direct
 dependency. Transitive dependencies which are compile scoped will have
 the same scope regardless of the scope of the direct
