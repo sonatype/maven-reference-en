@@ -190,7 +190,7 @@ The HelloFlashlight example application serves as a starting point to
 introduce you to the usage of the Android Maven Plugin. The code for
 the helloflashlight example application as well as various more
 complex examples are available as part of the
-http://code.google.com/p/maven-android-plugin/wiki/Samples.[plugin
+http://code.google.com/p/maven-android-plugin/wiki/Samples[plugin
 samples project].
 
 To enable a Maven based build of an Android project a pom.xml has to
