@@ -9,8 +9,10 @@ mkdir -p target/site/pdf
 cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvnref-examples.zip
 
 cp -r target/book-mvnref.chunked/* target/site/reference
+
 cp -r site/css target/site/reference
 cp -r site/assets target/site/reference
+cp -r site/js target/site/reference
 cp -r site/images target/site/reference
 
 cp target/book-mvnref.pdf target/site/pdf/mvnref-pdf.pdf
