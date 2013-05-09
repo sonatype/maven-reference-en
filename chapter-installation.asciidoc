@@ -5,7 +5,7 @@ This chapter contains very detailed instructions for installing Maven
 on a number of different platforms. Instead of assuming a level of
 familiarity with installing software and setting environment
 variables, we've opted to be as thorough as possible to minimize any
-problems that might arise do to a partial installation. The only thing
+problems that might arise due to a partial installation. The only thing
 this chapter assumes is that you've already installed a suitable Java
 Development Kit (JDK). If you are just interested in installation, you
 can move on to the rest of the book after reading through
