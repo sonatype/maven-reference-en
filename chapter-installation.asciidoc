@@ -181,8 +181,8 @@ environment variables—+PATH+ and +M2_HOME+. To set these environment
 variables from the command-line, type in the following commands:
 
 ----
-C:\Users\tobrien > +set M2_HOME=c:\Program Files\apache-maven-3.0.3+
-C:\Users\tobrien > +set PATH=%PATH%;%M2_HOME%\bin+
+C:\Users\tobrien >  set M2_HOME="c:\Program Files\apache-maven-3.0.3"
+C:\Users\tobrien >  set PATH=%PATH%;%M2_HOME%\bin
 ----
 
 Setting these environment variables on the command-line will allow you
