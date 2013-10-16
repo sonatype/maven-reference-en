@@ -824,8 +824,8 @@ specific file patterns from a +fileSet+. Include patterns take
 precedence over exclude patterns. Additionally, you can set the
 +filtering+ flag to true if you want to substitute property values for
 expressions within the included files. Expressions can be delimited
-either by '+++${+++' and '+++}+++' (standard Maven expressions like
-'+++${project.groupId}+++') or by +@+ and +@+ (standard Ant
+either by +${+ and +}+ (standard Maven expressions like
++${project.groupId}+) or by +@+ and +@+ (standard Ant
 expressions like +@project.groupId@+). You can adjust the line ending
 of your files using the +lineEnding+ element; valid values for
 +lineEnding+ are:
@@ -1054,7 +1054,7 @@ the assembly descriptor are also available here. For the
 +outputFileNameMapping+ element, the following process is applied to
 resolve expressions:
 
-. If the expression matches the pattern '+++${artifact.*}+++':
+. If the expression matches the pattern +${artifact.\*}+:
 
 .. Match against the dependency’s +Artifact+ instance (resolves:
    +groupId+, +artifactId+, +version+, +baseVersion+, +scope+,
@@ -1066,12 +1066,12 @@ resolve expressions:
 .. Match against the project instance associated with the dependency’s
    Artifact (resolves: mainly POM properties)
 
-. If the expression matches the patterns '+++${pom.\*}+++' or
-  '+++${project.*}+++':
+. If the expression matches the patterns +${pom.\*}+ or
+ +${project.\*}+:
 
 .. Match against the project instance (+MavenProject+) of the current build. 
 
-. If the expression matches the pattern '+++${dashClassifier?}+++' and
+. If the expression matches the pattern +${dashClassifier?}+ and
   the Artifact instance contains a non-null classifier, resolve to the
   classifier preceded by a dash (-classifier). Otherwise, resolve to
   an empty string.
@@ -1089,8 +1089,8 @@ resolve expressions:
    operating-system environment variables.
 
 The +outputDirectory+ value is interpolated in much the same way, with
-the difference being that there is no available '+++${artifact.\*}+++'
-information, only the '+++${project.*}+++' instance for the particular
+the difference being that there is no available +${artifact.\*}+
+information, only the +${project.\*}+ instance for the particular
 artifact. Therefore, the expressions listed above associated with
 those classes (1a, 1b, and 3 in the process listing above) are
 unavailable.
@@ -1108,7 +1108,7 @@ together. When used together, the result is the equivalent of:
 
 When +outputDirectory+ is missing, it is not used. When
 +outputFileNameMapping+ is missing, its default value is:
-'+++${artifact.artifactId}-${artifact.version}-${dashClassifier?}.${artifact.extension}+++'
++${artifact.artifactId}-${artifact.version}-${dashClassifier?}.${artifact.extension}+
 
 [[assemblies-sect-include-by-scope]]
 ===== Including and Excluding Dependencies by Scope
@@ -1489,7 +1489,7 @@ In addition to file inclusion and exclusion, the unpack options on a
 dependency set also provides a +filtering+ flag, whose default value
 is +false+. Again, this should be familiar from our discussion of file
 sets above. In both cases, expressions using either the Maven syntax
-of '+++${property}+++' or the Ant syntax of +@property@+ are
+of +${property}+ or the Ant syntax of +@property@+ are
 supported. Filtering is a particularly nice feature to have for
 dependency sets, though, since it effectively allows you to create
 standardized, versioned resource templates that are then customized to
@@ -1600,9 +1600,8 @@ project's assembly, but you would like to exclude a particular
 module. Maybe you have a project named +secret-sauce+ which contains
 secret and sensitive code that you don't want to distribute with your
 project. The simplest way to accomplish this is to use a +moduleSet+
-which includes each project's directory in
-'+++${module.basedir.name}+++' and which excludes the +secret-sauce+
-module from the assembly.
+which includes each project's directory in +${module.basedir.name}+
+and which excludes the +secret-sauce+ module from the assembly.
 
 [[ex-include-exclude-moduleSet]]
 .Includes and Excluding Modules with a +moduleSet+
@@ -1653,8 +1652,8 @@ Normally, module sources are included in the assembly under a
 subdirectory named after the module’s +artifactId+. However, since
 Maven allows modules that are not in directories named after the
 module project’s +artifactId+, it’s often better to use the expression
-'+++${module.basedir.name}+++' to preserve the module directory’s
-actual name ('+++${module.basedir.name}+++' is the same as calling
++${module.basedir.name}+ to preserve the module directory’s
+actual name (+${module.basedir.name}+ is the same as calling
 +MavenProject.getBasedir().getName()+). It is critical to remember
 that modules are not required to be subdirectories of the project that
 declares them. If your project has a particularly strange directory
@@ -1695,11 +1694,11 @@ contained in this element are resolved in exactly the same way as the
 of this algorithm in <<assemblies-sect-output-algorithm>>).
 
 In <<ex-include-exclude-moduleSet>>, we used the expression
-'+++${module.basedir.name}+++'. You might notice that the root of that
++${module.basedir.name}+. You might notice that the root of that
 expression, +module+, is not listed in the mapping-resolution
 algorithm from the dependency sets section; this object root is
 specific to configurations within +moduleSets+. It works in exactly
-the same way as the '+++${artifact.*}+++' references available in the
+the same way as the +${artifact.*}+ references available in the
 +outputFileNameMapping+ element, except it is applied to the module’s
 +MavenProject+, +Artifact+, and +ArtifactHandler+ instances instead of
 those from a dependency artifact.
@@ -1768,9 +1767,9 @@ Although we’re not doing anything too complicated in this example,
 it’s important to understand that the same changes to the
 expression-resolution algorithm discussed for the
 +outputDirectoryMapping+ element of the sources section also applies
-here. That is, whatever was available as '+++${artifact.\*}+++' inside
+here. That is, whatever was available as +${artifact.\*}+ inside
 a +dependencySet+’s +outputFileNameMapping+ configuration is also
-available here as '+++${module.*}+++'. The same applies for
+available here as +${module.*}+. The same applies for
 +outputFileNameMapping+ when used directly within a +binaries+
 section.
 
@@ -1924,10 +1923,10 @@ not so bad for archives that are consumable as-is.
 In other cases, you may want to guarantee the name of the archive root
 directory regardless of the POM’s version or other information. By
 default, the +baseDirectory+ element has a value equal to
-'+++${project.artifactId}-${project.version}+++'. However, we can
++${project.artifactId}-${project.version}+. However, we can
 easily set this element to any value that consists of literal strings
 and expressions which can be interpolated from the current POM, such
-as '+++${project.groupId}-${project.artifactId}+++'. This could be
+as +${project.groupId}-${project.artifactId}+. This could be
 very good news for your documentation team! (We all have those,
 right?)
 
