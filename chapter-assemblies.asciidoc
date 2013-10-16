@@ -1048,11 +1048,11 @@ descriptor, because their raw values have to be interpreted using
 additional, artifact-specific expression resolvers.
 
 The artifact expressions available for these two elements vary only
-slightly. In both cases, all of the '+++${project.\*}+++',
-'+++${pom.\*}+++', and '+++${*}+++' expressions that are available in
-the POM and the rest of the assembly descriptor are also available
-here. For the +outputFileNameMapping+ element, the following process
-is applied to resolve expressions:
+slightly. In both cases, all of the +${project.\*}+, +${pom.\*\*}+,
+and +${\*}+ expressions that are available in the POM and the rest of
+the assembly descriptor are also available here. For the
++outputFileNameMapping+ element, the following process is applied to
+resolve expressions:
 
 . If the expression matches the pattern '+++${artifact.*}+++':
 

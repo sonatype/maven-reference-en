@@ -611,45 +611,44 @@ are included with an application. Let’s explore each scope in detail:
 
 compile::
 
-  compile+ is the default scope; all dependencies are +compile+-scoped
-  if a scope is not supplied. +compile+ dependencies are available in
-  all classpaths, and they are packaged.
++compile+ is the default scope; all dependencies are +compile+-scoped
+if a scope is not supplied. +compile+ dependencies are available in
+all classpaths, and they are packaged.
 
 provided::
 
-  provided+ dependencies are used when you expect the JDK or a
-  container to provide them. For example, if you were developing a web
-  application, you would need the Servlet API available on the compile
-  classpath to compile a servlet, but you wouldn’t want to include the
-  Servlet API in the packaged WAR; the Servlet API JAR is supplied by
-  your application server or servlet container. +provided+
-  dependencies are available on the compilation classpath (not
-  runtime). They are not transitive, nor are they packaged.
++provided+ dependencies are used when you expect the JDK or a
+container to provide them. For example, if you were developing a web
+application, you would need the Servlet API available on the compile
+classpath to compile a servlet, but you wouldn’t want to include the
+Servlet API in the packaged WAR; the Servlet API JAR is supplied by
+your application server or servlet container. +provided+ dependencies
+are available on the compilation classpath (not runtime). They are not
+transitive, nor are they packaged.
 
 runtime::
 
-  runtime+ dependencies are required to execute and test the system,
-  but they are not required for compilation. For example, you may need
-  a JDBC API JAR at compile time and the JDBC driver implementation
-  only at runtime.
++runtime+ dependencies are required to execute and test the system,
+but they are not required for compilation. For example, you may need a
+JDBC API JAR at compile time and the JDBC driver implementation only
+at runtime.
 
 test::
 
-  test+-scoped dependencies are not required during the normal
-  operation of an application, and they are available only during test
-  compilation and execution phases.
++test+-scoped dependencies are not required during the normal
+operation of an application, and they are available only during test
+compilation and execution phases.
 
 system::
 
-  The +system+ scope is similar to +provided+ except that you have to
-  provide an explicit path to the JAR on the local file system. This
-  is intended to allow compilation against native objects that may be
-  part of the system libraries. The artifact is assumed to always be
-  available and is not looked up in a repository. If you declare the
-  scope to be +system+, you must also provide the +systemPath+
-  element. Note that this scope is not recommended (you should always
-  try to reference dependencies in a public or custom Maven
-  repository).
+The +system+ scope is similar to +provided+ except that you have to
+provide an explicit path to the JAR on the local file system. This is
+intended to allow compilation against native objects that may be part
+of the system libraries. The artifact is assumed to always be
+available and is not looked up in a repository. If you declare the
+scope to be +system+, you must also provide the +systemPath+
+element. Note that this scope is not recommended (you should always
+try to reference dependencies in a public or custom Maven repository).
 
 [[pom-relationships-sect-optional]]
 ==== Optional Dependencies
@@ -1115,11 +1114,11 @@ artifactId::
   +artifactId+. When you refer to a project, you are going to refer to
   it using the +artifactId+. The +artifactId+, +groupId+ combination
   must be unique. In other words, you can't have two separate projects
-  with the same +artifactId+ and +groupId+; +artifactId+s are unique
+  with the same +artifactId+ and +groupId+; +artifactId+ s are unique
   within a particular +groupId+.
 
-NOTE: While '.'s are commonly used in +groupId+s, you should try to
-avoid using them in +artifactId+s. This can cause issues when trying
+NOTE: While '.'s are commonly used in +groupId+ s, you should try to
+avoid using them in +artifactId+ s. This can cause issues when trying
 to parse a fully qualified name down into the subcomponents.
 
 version::

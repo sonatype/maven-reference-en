@@ -151,7 +151,7 @@ phase, you can also customize the Clean plugin to delete files in
 addition to the build output directory. You can configure the plugin
 to remove specific files in a +fileSet+. The example below configures
 clean to remove all '.class' files in a directory named
-'target-other/' using standard Ant file wildcards: \* and \**.
+'target-other/' using standard Ant file wildcards: +\*+ and +\**+.
 
 .Customizing Behavior of the Clean Plugin
 ----
