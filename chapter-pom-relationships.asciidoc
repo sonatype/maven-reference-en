@@ -105,11 +105,16 @@ POM relationships::
 Before we dive into some examples of POMs, let's take a quick look at
 the Super POM. All Maven project POMs extend the Super POM, which
 defines a set of defaults shared by all projects. This Super POM is a
-part of the Maven installation and can be found in the
-'maven-3.0.3-uber.jar' file in '+++${M2_HOME}/lib+++'. If you look in
-this JAR file, you will find a file named 'pom-4.0.0.xml' under the
-+org.apache.maven.project+ package. The Super POM for Maven is shown
-in <<ex-super-pom>>.
+part of the Maven installation. Depending on the Maven version it can
+be found in the +maven-x.y.z-uber.jar+ or
++maven-model-builder-xy.z.jar+ file in '+++${M2_HOME}/lib+++'. If you
+look in this JAR file, you will find a file named 'pom-4.0.0.xml'
+under the +org.apache.maven.model+ package. A Super POM for Maven is
+shown in <<ex-super-pom>>.
+
+TIP: An analogy to how the Super POM is the parent for all Maven POM
+files, would be how +java.lang.Object+ is the top of the class
+hierarchy for all Java classes.
 
 [[ex-super-pom]]
 .The Super POM
@@ -265,16 +270,16 @@ inherited by all projects. Those values are captured in the annotated
 sections:
 
 <1> The default Super POM defines a single remote Maven repository
-with an ID of +central+. This is the central Maven repository that all
+with an ID of +central+. This is the Central Repository that all
 Maven clients are configured to read from by default. This setting can
 be overridden by a custom 'settings.xml' file. Note that the default
-Super POM has disabled snapshot artifacts on the central Maven
-repository. If you need to use a snapshot repository, you will need to
+Super POM has disabled snapshot artifacts on the Central 
+Repository. If you need to use a snapshot repository, you will need to
 customize repository settings in your 'pom.xml' or in your
 'settings.xml'. Settings and profiles are covered in <<profiles>> and
 in <<appendix-settings-sect-details>>.
 
-<2> The central Maven repository also contains Maven plugins. The
+<2> The Central Repository also contains Maven plugins. The
 default plugin repository is the central Maven repository. Snapshots
 are disabled, and the update policy is set to “never,” which means
 that Maven will never automatically update a plugin if a new version
@@ -285,7 +290,10 @@ Maven Standard Directory layout.
 
 <4> Starting in Maven 2.0.9, default versions of core plugins have
 been provided in the Super POM. This was done to provide some
-stability for users that are not specifying versions in their POMs.
+stability for users that are not specifying versions in their POMs. In
+newer versions some of this has been migrated out of the file. However
+you can still see the versions that will be used in your project using
++mvn help:effective-pom+.
 
 [[fig-super-always-base]]
 .The Super POM is always the base Parent
@@ -1098,6 +1106,7 @@ and +version+ depends on another project with a +groupId+,
 of three components:
 
 groupId::
+
 
   A +groupId+ groups a set of related artifacts. Group identifiers
   generally resemble a Java package name. For example, the +groupId+
