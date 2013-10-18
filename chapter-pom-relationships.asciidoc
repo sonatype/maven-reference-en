@@ -109,8 +109,13 @@ part of the Maven installation. Depending on the Maven version it can
 be found in the +maven-x.y.z-uber.jar+ or
 +maven-model-builder-xy.z.jar+ file in '+++${M2_HOME}/lib+++'. If you
 look in this JAR file, you will find a file named 'pom-4.0.0.xml'
-under the +org.apache.maven.model+ package. A Super POM for Maven is
-shown in <<ex-super-pom>>.
+under the +org.apache.maven.model+ package. It is also published on
+the http://maven.apache.org/ref/[Maven reference site] that is
+available for each version of Maven separately and e.g. for Maven
+3.1.1 it can be found with the
+http://maven.apache.org/ref/3.1.1/maven-model-builder/super-pom.html[Maven
+Model Builder documentation]. A Super POM for Maven is shown in
+<<ex-super-pom>>.
 
 TIP: An analogy to how the Super POM is the parent for all Maven POM
 files, would be how +java.lang.Object+ is the top of the class
