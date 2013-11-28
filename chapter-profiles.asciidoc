@@ -461,28 +461,22 @@ parameters. Let's examine each activation criterion in detail:
 <1> The +activeByDefault+ element controls whether this profile is
 considered active by default.
 
-<2> <callout arearefs="coDef-profiles-active2-2"
-id="coRef-profiles-active2-2"> This profile will only be active for
-JDK versions that begin with "1.5". This includes "1.5.0_01", "1.5.1".
+<2> This profile will only be active for JDK versions that begin with
+"1.5". This includes "1.5.0_01", "1.5.1".
 
-<3> <callout arearefs="coDef-profiles-active2-3"
-id="coRef-profiles-active2-3"> This profile targets a very specific
-version of Windows XP, version 5.1.2600 on a 32-bit platform. If your
-project uses the native plugin to build a C program, you might find
-yourself writing projects for specific platforms.
+<3> This profile targets a very specific version of Windows XP,
+version 5.1.2600 on a 32-bit platform. If your project uses the native
+plugin to build a C program, you might find yourself writing projects
+for specific platforms.
 
-<4> <callout arearefs="coDef-profiles-active2-4"
-id="coRef-profiles-active2-4"> The +property+ element tells Maven to
-activate this profile if the property +customProperty+ is set to the
-value +BLUE+.
+<4> The +property+ element tells Maven to activate this profile if the
+property +customProperty+ is set to the value +BLUE+.
 
-<5> <callout arearefs="coDef-profiles-active2-5"
-id="coRef-profiles-active2-5"> The +file+ element allows us to
-activate a profile based on the presence (or absence) of files. The
-+dev+ profile will be activated if a file named 'file2.properties'
-exists in the base directory of the project. The +dev+ profile will
-only be activated if there is no file named 'file1.properties' file in
-the base directory of the project.
+<5> The +file+ element allows us to activate a profile based on the
+presence (or absence) of files. The +dev+ profile will be activated if
+a file named 'file2.properties' exists in the base directory of the
+project. The +dev+ profile will only be activated if there is no file
+named 'file1.properties' file in the base directory of the project.
 
 [[profiles-sect-activation-by-absence]]
 ==== Activation by the Absence of a Property
