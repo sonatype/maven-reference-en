@@ -2,7 +2,7 @@
 
 === About the Book
 
-An detailed reference for Apache Maven as formerly published as part of the
+A detailed reference for Apache Maven as formerly published as part of the
 book Maven: The Definitive Guide. 
 
 The book is available in HTML and PDF format at http://www.sonatype.com/resources/books/maven-the-complete-reference[http://www.sonatype.com/resources/books/maven-the-complete-reference].
@@ -54,7 +54,7 @@ else you might or might not end up in trouble.
 
 This book is CC licensed and we welcome your contributions. Please
 file issues and send pull requests on the github project. For further
-questions please contact mailto:book@sonatype.com[book@sonatype.com]
+questions please contact us at book@sonatype.com.
 
 Thanks
 
