@@ -6,6 +6,8 @@ rm -rf target/site/pdf
 mkdir -p target/site/reference
 mkdir -p target/site/pdf
 
+# this relies on the example project being build prior to this and is achieved
+# with a separate build step
 cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvnref-examples.zip
 
 cp -r target/book-mvnref.chunked/* target/site/reference
