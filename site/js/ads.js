@@ -1,6 +1,6 @@
 $(document).ready(function(){	
 	var ad1 = 	'<a onclick="_gaq.push([\'_trackEvent\',\'Book Ad\',\'Click\',\'Benefits of a Repo Manager\',\'1\']);_gaq.push([\'cdt._trackEvent\',\'Book Ad\',\'Click\',\'Benefits of a Repo Manager\',\'1\']);" href="http://www.sonatype.com/resources/whitepapers/the-benefits-of-utilizing-a-repository-manager?utm_source=Book%20Ads&utm_medium=Sidebar%20Click&utm_content=Benefits%20of%20a%20Repo%20Manager&utm_campaign=Book%20Ads%20-%20Benefits%20of%20a%20Repo%20Manager" target="_blank" class="book-ad">' +
-				'<img src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTQvMDEvMDYvMDcvMTEvMjYvODQ0L00xX0JlbmVmaXRzX1JlcG9fTWFuYWdlci5wbmciXV0/M1-Benefits-Repo-Manager.png" />' +
+				'<img src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTQvMDEvMTcvMjEvNDIvMTMvMTAwL0JlbmVmaXRzX1JlcG9fTWFuYWdlci5wbmciXV0/Benefits-Repo-Manager.png" />' +
 				'</a>',
 		ad2 = 	'<a onclick="_gaq.push([\'_trackEvent\',\'Book Ad\',\'Click\',\'Nexus Free Trial\',\'1\']);_gaq.push([\'cdt._trackEvent\',\'Book Ad\',\'Click\',\'Nexus Free Trial\',\'1\']);" href="http://www.sonatype.com/nexus/free-trial?utm_source=Book%20Ads&utm_medium=Sidebar%20Click&utm_content=Nexus%20Free%20Trial&utm_campaign=Book%20Ads%20-%20Nexus%20Free%20Trial" target="_blank" class="book-ad">' +
 				'<img src="http://www.sonatype.com/system/images/W1siZiIsIjIwMTQvMDEvMDYvMDcvMTEvMjMvMjgzL00yX05leHVzX1Byb190cmlhbC5wbmciXV0/M2-Nexus-Pro-trial.png" />' +
