@@ -16,6 +16,7 @@ cp -r site/css target/site/reference
 cp -r site/assets target/site/reference
 cp -r site/js target/site/reference
 cp -r site/images target/site/reference
+cp site/search.html target/site/reference
 
 cp target/book-mvnref.pdf target/site/pdf/mvnref-pdf.pdf
 
