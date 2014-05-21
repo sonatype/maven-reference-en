@@ -7,7 +7,7 @@ bookTitle = "Maven: The Complete Reference"
 bookId = "ss-book-mvnref"
 path = 'target/site/reference'
 for infile in glob.glob( os.path.join(path, '*.html') ):
-    if infile.endswith( 'search.html'):
+  if infile.endswith( 'search.html'):
     print( "  Ignoring search.html" )
   else:
     print "Reading File: " + infile
