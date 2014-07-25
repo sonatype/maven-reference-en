@@ -390,7 +390,8 @@ major version of 5 and no minor or incremental version. The qualifier
 exists to capture milestone builds: alpha and beta releases, and the
 qualifier is separated from the major, minor, and incremental versions
 by a hyphen. For example, the version "1.3-beta-01" has a major
-version of 1, a minor version of 3, and a qualifier of "beta-01".
+version of 1, a minor version of 3, no incremental version and 
+a qualifier of "beta-01".
 
 Keeping your version numbers aligned with this standard will become
 very important when you want to start using version ranges in your
