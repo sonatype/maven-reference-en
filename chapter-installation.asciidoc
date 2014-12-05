@@ -48,37 +48,22 @@ You can download Maven from the Apache Maven project website at
 http://maven.apache.org/download.html[http://maven.apache.org/download.html].
 
 When downloading Maven, you can download the latest available version
-of Maven 2 or the latest available version of Maven 3. The latest
-version of Maven 2 when this book was written was Maven 3.0.3, and the
-latest version of Maven 3 was 3.0.3. If you are not
+of Maven 2 or the latest available version of Maven 3 in various branches. The latest
+version of Maven 2 when this book was last updated was Maven 2.2.1 and the
+latest version of Maven 3 was 3.2.3. If you are not
 familiar with the Apache Software License, you should familiarize
 yourself with the terms of the license before you start using the
 product. More information on the Apache Software License can be found
 in <<installation-sect-license>>.
 
-==== Downloading Maven 2
+TIP: We recommend to avoid Maven 2 and use the latest version of Maven
+3 available and listed as the 'current stable version'.
 
-To download Maven 2, go to
+To download Maven , go to
 http://maven.apache.org/download.html[http://maven.apache.org/download.html]
-and select the appropriate archive format for your platform. shows the
-section of the download page that contains links to the Apache Maven
-3.0.3 archives.
+and select the appropriate binary archive format for your platform. The
+contents of the +zip+ or +tar.gz+ are the same.
 
-[[fig-installation-maven2-download]]
-.Downloading Maven 2 from the Apache Maven web site
-image::figs/web/installing-download-maven2.png[]
-
-==== Downloading Maven 3
-
-To download Maven 3, go to
-http://maven.apache.org/download.html[http://maven.apache.org/download.html]
-and select the appropriate archive format for your platform. shows the
-section of the download page that contains links to the Apache Maven
-3.0.3 archives.
-
-[[fig-installation-maven3-download]]
-.Downloading Maven 3 from the Apache Maven web site
-image::figs/web/installing-download-maven3.png[]
 
 [[installation-sect-maven-install]]
 === Installing Maven
