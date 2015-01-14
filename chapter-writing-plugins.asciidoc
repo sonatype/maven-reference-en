@@ -1406,18 +1406,18 @@ isn't going to affect the current build.
 @execute lifecycle="<lifecycle>" phase="<phase>"::
 
    This will execute the given alternate lifecycle. A custom lifecycle
-   can be defined in 'META-INF/maven/lifecycles.xml'.
+   can be defined in 'META-INF/maven/lifecycle.xml'.
 
 [[writing-plugins-sect-custom-lifecycle]]
 ==== Creating a Custom Lifecycle
 
 A custom lifecycle must be packaged in the plugin under the
-'META-INF/maven/lifecycles.xml' file. You can include a lifecycle
-under 'src/main/resources' in 'META-INF/maven/lifecycles.xml'. The
+'META-INF/maven/lifecycle.xml' file. You can include a lifecycle
+under 'src/main/resources' in 'META-INF/maven/lifecycle.xml'. The
 following 'lifecycle.xml' declares a lifecycle named +zipcycle+ that
 contains only the +zip+ goal in a +package+ phase.
 
-.Define a Custom Lifecycle in lifecycles.xml
+.Define a Custom Lifecycle in lifecycle.xml
 ----
 <lifecycles>
     <lifecycle>
