@@ -98,14 +98,6 @@ work correctly. You need to add its 'bin' directory in the
 distribution (in this example, '/opt/maven/bin') to your command
 path. 
 
-NOTE: It has been reported that Maven 2.0.6 is shipping with a preview
-release of XCode. If you have installed XCode, run +mvn+ from the
-command-line to check availability. XCode installs Maven in
-'/usr/share/maven'. We recommend installing the most recent version of
-Maven 3.2.5. Maven 2 is no longer supported and there have been a
-number of critical bug fixes and improvements since Maven 3.0.x was
-released.
-
 You'll need to add +PATH+ to a script that will run
 every time you login. To do this, add the following lines to
 +.bash_login+ or +.profile+
