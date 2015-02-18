@@ -48,15 +48,14 @@ You can download Maven from the Apache Maven project website at
 http://maven.apache.org/download.html[http://maven.apache.org/download.html].
 
 When downloading Maven, you can download the latest available version
-of Maven 2 or the latest available version of Maven 3 in various branches. The latest
-version of Maven 2 when this book was last updated was Maven 2.2.1 and the
-latest version of Maven 3 was 3.2.3. If you are not
-familiar with the Apache Software License, you should familiarize
-yourself with the terms of the license before you start using the
-product. More information on the Apache Software License can be found
-in <<installation-sect-license>>.
+the latest available version of Maven 3 in various branches. The
+latest version of Maven 3 when this book was last updated was Maven
+3.2.5. If you are not familiar with the Apache Software License, you
+should familiarize yourself with the terms of the license before you
+start using the product. More information on the Apache Software
+License can be found in <<installation-sect-license>>.
 
-TIP: We recommend to avoid Maven 2 and use the latest version of Maven
+TIP: We recommend to avoid Maven 2 as it is no longer maintained and use the latest version of Maven
 3 available and listed as the 'current stable version'.
 
 To download Maven , go to
@@ -83,40 +82,36 @@ http://maven.apache.org/download.html[http://maven.apache.org/download.html].
 Download the current release of Maven in a format that is convenient
 for you to work with. Pick an appropriate place for it to live, and
 expand the archive there. If you expanded the archive into the
-directory '/usr/local/apache-maven-3.0.3', you may want to create a
+directory '/opt/apache-maven-3.2.5', you may want to create a
 symbolic link to make it easier to work with and to avoid the need to
 change any environment configuration when you upgrade to a newer
 version:
 
 ----
-/usr/local % cd /usr/local
-/usr/local % ln -s apache-maven-3.0.3 maven
-/usr/local % export M2_HOME=/usr/local/maven
-/usr/local % export PATH=${M2_HOME}/bin:${PATH}
+/usr/local % cd /opt
+/usr/local % ln -s apache-maven-3.2.5 maven
+/usr/local % export PATH=/opt/maven/bin:${PATH}
 ----
 
 Once Maven is installed, you need to do a couple of things to make it
 work correctly. You need to add its 'bin' directory in the
 distribution (in this example, '/usr/local/maven/bin') to your command
-path. You also need to set the environment variable +M2_HOME+ to the
-top-level directory you installed (in this example,
-'/usr/local/maven').
+path. 
 
-NOTE: Installation instructions are the same for both OSX Tiger and
-OSX Leopard. It has been reported that Maven 2.0.6 is shipping with a
-preview release of XCode. If you have installed XCode, run +mvn+ from
-the command-line to check availability. XCode installs Maven in
+NOTE: It has been reported that Maven 2.0.6 is shipping with a preview
+release of XCode. If you have installed XCode, run +mvn+ from the
+command-line to check availability. XCode installs Maven in
 '/usr/share/maven'. We recommend installing the most recent version of
-Maven 3.0.3 as there have been a number of critical bug fixes and
-improvements since Maven 2.0.6 was released.
+Maven 3.2.5. Maven 2 is no longer supported and there have been a
+number of critical bug fixes and improvements since Maven 3.0.x was
+released.
 
-You'll need to add both +M2_HOME+ and +PATH+ to a script that will run
+You'll need to add +PATH+ to a script that will run
 every time you login. To do this, add the following lines to
-'.bash_login'.
++.bash_login+ or +.profile+
 
 ----
-export M2_HOME=/usr/local/maven
-export PATH=${M2_HOME}/bin:${PATH}
+export PATH=/opt/maven/bin:${PATH}
 ----
 
 Once you've added these lines to your own environment, you will be
@@ -158,16 +153,14 @@ http://www.macports.org/index.php[MacPorts project page].
 Installing Maven on Windows is very similar to installing Maven on Mac
 OSX, the main differences being the installation location and the
 setting of an environment variable. This book assumes a Maven
-installation directory of 'c:\Program Files\apache-maven-3.0.3', but
+installation directory of +c:\Program Files\apache-maven-3.2.5+, but
 it won't make a difference if you install Maven in another directory
 as long as you configure the proper environment variables. Once you've
-unpacked Maven to the installation directory, you will need to set two
-environment variables—+PATH+ and +M2_HOME+. To set these environment
-variables from the command-line, type in the following commands:
+unpacked Maven to the installation directory, you will need to set the +PATH+
+environment variable. You can use the following commands:
 
 ----
-C:\Users\tobrien >  set M2_HOME="c:\Program Files\apache-maven-3.0.3"
-C:\Users\tobrien >  set PATH=%PATH%;%M2_HOME%\bin
+C:\Users\tobrien >  set PATH=%PATH%;"c:\Program Files\apache-maven-3.2.5\bin"
 ----
 
 Setting these environment variables on the command-line will allow you
@@ -198,11 +191,12 @@ something resembling the following output.
 
 ----
 $ mvn -v
-Apache Maven 2.2.0 (r788681; 2009-06-26 08:04:01-0500)
-Java version: 1.5.0_19
-Java home: /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
-Default locale: en_US, platform encoding: MacRoman
-OS name: "mac os x" version: "10.5.7" arch: "i386" Family: "unix"
+Apache Maven 3.2.5 (12a6b3acb947671f09b81f49094c53f426d8cea1; 2014-12-14T09:29:23-08:00)
+Maven home: /opt/apache-maven-3.2.5
+Java version: 1.7.0_71, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.8.5", arch: "x86_64", family: "mac"
 ----
 
 If you see this output, you know that Maven is available and ready to
@@ -289,15 +283,15 @@ If you've installed Maven on a Mac OSX or Unix machine according to
 the details in <<installation-sect-maven-osx>> and
 <<installation-sect-maven-linux>>, it should be easy to upgrade to
 newer versions of Maven when they become available. Simply install the
-newer version of Maven ('/usr/local/maven-2.future') next to the
-existing version of Maven ('/usr/local/maven-3.0.3'). Then switch the
-symbolic link '/usr/local/maven' from '/usr/local/maven-3.0.3' to
-'/usr/local/maven-2.future'. Since, you've already set your +M2_HOME+
-variable to point to '/usr/local/maven', you won't need to change any
+newer version of Maven ('/opt/maven-3.future') next to the
+existing version of Maven ('/opt/maven-3.2.5'). Then switch the
+symbolic link '/opt/maven' from '/opt/maven-3.2.5' to
+'/opt/maven-2.future'. Since, you've already set your +M2_HOME+
+variable to point to '/opt/maven', you won't need to change any
 environment variables.
 
 If you have installed Maven on a Windows machine, simply unpack Maven
-to 'c:\Program Files\maven-2.future' and update your +M2_HOME+
+to 'c:\Program Files\maven-3.future' and update your +M2_HOME+
 variable.
 
 NOTE: If you have any customizations to the global 'settings.xml' in
@@ -305,9 +299,9 @@ NOTE: If you have any customizations to the global 'settings.xml' in
 'conf' directory of the new Maven installation.
 
 [[installation-sect-upgrade-detail]]
-==== Upgrading from Maven 1.x to Maven 2.x
+==== Upgrading from Maven 1.x to Maven 3.x
 
-If you are upgrading from Maven 1 to Maven 2, you are going to be
+If you are upgrading from Maven 1 to Maven 3, you are going to be
 using an entirely new POM and repository structure. If you have
 already created a custom Maven 1 repository to hold custom artifacts,
 you can use the Nexus Repository Manager to expose a Maven 1
