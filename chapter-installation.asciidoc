@@ -18,16 +18,16 @@ Software License, Version 2.0.
 [[installation-sect-java]]
 === Verify your Java Installation
 
-While Maven can run on Java 1.4, this book assumes that you are
-running at least Java 5. Go with the most recent stable Java
+While Maven can run on Java 1.6, this book assumes that you are
+running at least Java 7. Go with the most recent stable Java
 Development Kit (JDK) available for your operating system. Either Java
 5 or Java 6 will work with all of the examples in this book.
 
 ----
 % java -version
-java version "1.5.0_16"
-Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_16-b06-284)
-Java HotSpot(TM) Client VM (build 1.5.0_16-133, mixed mode, sharing)
+java version "1.7.0_71"
+Java(TM) SE Runtime Environment (build 1.7.0_71-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 24.71-b01, mixed mode)
 ----
 
 Maven works with all certified Java^TM^ compatible development kits,
@@ -88,14 +88,14 @@ change any environment configuration when you upgrade to a newer
 version:
 
 ----
-/usr/local % cd /opt
-/usr/local % ln -s apache-maven-3.2.5 maven
-/usr/local % export PATH=/opt/maven/bin:${PATH}
+$ cd /opt
+$ ln -s apache-maven-3.2.5 maven
+$ export PATH=/opt/maven/bin:${PATH}
 ----
 
 Once Maven is installed, you need to do a couple of things to make it
 work correctly. You need to add its 'bin' directory in the
-distribution (in this example, '/usr/local/maven/bin') to your command
+distribution (in this example, '/opt/maven/bin') to your command
 path. 
 
 NOTE: It has been reported that Maven 2.0.6 is shipping with a preview
@@ -119,33 +119,6 @@ able to run Maven from the command line.
 
 NOTE: These installation instructions assume that you are running
 bash.
-
-[[installation-sect-macports]]
-===== Installing Maven on OSX using MacPorts
-
-If you are using MacPorts, you can install the maven2 port by
-executing the following command-line:
-
-----
-$ sudo port install maven2
-Password: ******
---->  Fetching maven2
---->  Attempting to fetch apache-maven-3.0.3-bin.tar.bz2 
-from http://www.apache.org/dist/maven/binaries
---->  Verifying checksum(s) for maven2
---->  Extracting maven2
---->  Configuring maven2
---->  Building maven2 with target all
---->  Staging maven2 into destroot
---->  Installing maven2 3.0.3_0
---->  Activating maven2 3.0.3_0
---->  Cleaning maven2
-----
-
-For more information about the maven2 port, see the maven2
-http://trac.macports.org/browser/trunk/dports/java/maven2/Portfile[Portfile].
-For more information about MacPorts and how to install it, see the
-http://www.macports.org/index.php[MacPorts project page].
 
 [[installation-sect-windows]]
 ==== Installing Maven on Microsoft Windows
@@ -216,7 +189,7 @@ plugins to a local repository described in
 quick look at what is in Maven's installation directory.
 
 ----
-/usr/local/maven $ ls -p1
+$ ls /opt/maven -p1
 LICENSE.txt
 NOTICE.txt
 README.txt
@@ -286,7 +259,7 @@ newer versions of Maven when they become available. Simply install the
 newer version of Maven ('/opt/maven-3.future') next to the
 existing version of Maven ('/opt/maven-3.2.5'). Then switch the
 symbolic link '/opt/maven' from '/opt/maven-3.2.5' to
-'/opt/maven-2.future'. Since, you've already set your +M2_HOME+
+'/opt/maven-3.future'. Since, you've already set your +M2_HOME+
 variable to point to '/opt/maven', you won't need to change any
 environment variables.
 
@@ -297,49 +270,6 @@ variable.
 NOTE: If you have any customizations to the global 'settings.xml' in
 'M2_HOME/conf', you will need to copy this 'settings.xml' to the
 'conf' directory of the new Maven installation.
-
-[[installation-sect-upgrade-detail]]
-==== Upgrading from Maven 1.x to Maven 3.x
-
-If you are upgrading from Maven 1 to Maven 3, you are going to be
-using an entirely new POM and repository structure. If you have
-already created a custom Maven 1 repository to hold custom artifacts,
-you can use the Nexus Repository Manager to expose a Maven 1
-repository in a format that can be understood by Maven 2 clients. For
-more information about the Nexus Repository Manager, see
-http://www.sonatype.com/books/nexus-book/reference/[Repository
-Management with Nexus]. In addition to tools like Nexus, you can also
-configure references to repositories to use the +legacy+ layout
-format. For more information about configuring a reference to a legacy
-repository, see <<appendix-settings-sect-settings-repository>>.
-
-If you have a set of Maven 1 projects, you may want to know about the
-Maven One Plugin. The Maven One Plugin was designed to help projects
-migrate from Maven 1 to Maven 2. If you have a Maven 1 project, you
-can convert the project's POM by running the +one:convert+ goal as
-follows:
-
-----
-$ cd my-project
-$ mvn one:convert
-----
-
-+one:convert+ will read a 'project.xml' and produce a 'pom.xml' that
-is compatible with Maven 2. If you've customized a Maven 1 build using
-Jelly script in a 'maven.xml' file, you will need to investigate other
-options. While Maven 1 emphasized Jelly scripting for customizing
-builds, Maven 2 favors custom plugins or customization through
-scripting Plugins or the Maven Antrun Plugin.
-
-The most important thing to know about when upgrading from Maven 1 to
-Maven 2 is that Maven 2 is a completely different build
-framework. Maven 2 introduces the concept of the Maven Lifecycle and
-redefines the relationships between plugins. If you upgrade from Maven
-1 to Maven 2, you need to invest some time in learning about the
-differences between the two versions. Although it might seem
-straightforward to start learning about the new POM structure, you
-should focus on the Lifecycle first. If you understand the Maven
-Lifecycle, you will be able to use Maven to its fullest potential.
 
 [[installation-sect-uninstalling]]
 === Uninstalling Maven
