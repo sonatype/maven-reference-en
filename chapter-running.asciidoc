@@ -96,7 +96,6 @@ to activate
 -pl,--projects <arg>   Build specified reactor projects
 instead of all projects
 -q,--quiet Quiet output - only show errors
--r,--reactor   Dynamically build reactor from
 subdirectories
 -rf,--resume-from <arg>Resume reactor from specified
 project
