@@ -63,52 +63,7 @@ build projects that depend on
 projects on the list
 -B,--batch-modeRun in non-interactive (batch)
 mode
--C,--strict-checksums  Fail the build if checksums don't
-match
--c,--lax-checksums Warn if checksums don't match
--cpu,--check-plugin-updatesForce upToDate check for any
-relevant registered plugins
--D,--define <arg>  Define a system property
--e,--errorsProduce execution error messages
--emp,--encrypt-master-password <arg>   Encrypt master security password
--ep,--encrypt-password <arg>   Encrypt server password
--f,--file  Force the use of an alternate POM
-file.
--fae,--fail-at-end Only fail the build afterwards;
-allow all non-impacted builds to
-continue
--ff,--fail-fastStop at first failure in
-reactorized builds
--fn,--fail-never   NEVER fail the build, regardless
-of project result
--gs,--global-settings <arg>Alternate path for the global
-settings file
--h,--help  Display help information
--N,--non-recursive Do not recurse into sub-projects
--npr,--no-plugin-registry  Don't use
-~/.m2/plugin-registry.xml for
-plugin versions
--npu,--no-plugin-updates   Suppress upToDate check for any
-relevant registered plugins
--o,--offline   Work offline
--P,--activate-profiles <arg>   Comma-delimited list of profiles
-to activate
--pl,--projects <arg>   Build specified reactor projects
-instead of all projects
--q,--quiet Quiet output - only show errors
-subdirectories
--rf,--resume-from <arg>Resume reactor from specified
-project
--s,--settings <arg>Alternate path for the user
-settings file
--U,--update-snapshots  Forces a check for updated
-releases and snapshots on remote
-repositories
--up,--update-plugins   Synonym for cpu
--V,--show-version  Display version information
-WITHOUT stopping build
--v,--version   Display version information
--X,--debug Produce execution debug output
+...
 ----
 
 If you are looking for information about the goals and parameters
@@ -309,44 +264,6 @@ build if it encounters an artifact with a bad checksum.
 
 The +-U+ option is useful if you want to make sure that Maven is
 checking for the latest versions of all SNAPSHOT dependencies.
-
-[[running-sect-plugup-option]]
-.Controlling Plugin Updates
-
-The following command line options tell Maven how it should update (or
-not update) Maven plugins from remote repositories:
-
--npu, --no-plugin-updates::
-
-   Suppress upToDate check for any relevant registered
-   plugins. Providing this option will have the affect of stabilizing
-   Maven on all of the plugins versions that are currently available
-   in a local Maven repository. With +-npu+ active, Maven will not
-   consult the remote repository for newer Maven versions.
-
--cpu, --check-plugin-updates::
-
-   Force upToDate check for any relevant registered plugins. Forces
-   Maven to check for the latest released version of a Maven
-   plugin. Not that this will not affect your build if you are
-   explicitly specifying versions for Maven plugins in your project's
-   POM.
-
--up, --update-plugins::
-
-   Synonym for cpu.   
-
-The following command line option that affects the way Maven downloads
-plugins from a remote repository:
-
--npr, --no-plugin-registry::
-
-   Don't use ~/.m2/plugin-registry.xml for plugin versions.
-
-When preset, the +-npr+ command line option will tell Maven not to
-consult the Plugin Registry. For more information about the Plugin
-Registry, go here:
-http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html[http://maven.apache.org/guides/introduction/introduction-to-plugin-registry.html].
 
 [[running-sect-norecurse-option]]
 ==== Non-recursive Builds
