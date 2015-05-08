@@ -1,0 +1,3 @@
+[submodule "documentation-wrapper"]
+	path = documentation-wrapper
+	url = git@github.com:sonatype/documentation-wrapper.git

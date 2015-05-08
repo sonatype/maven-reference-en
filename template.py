@@ -1,8 +1,18 @@
 import airspeed
 import glob
 import os
+import argparse
 
-t = airspeed.Template(open("site/book-template.html", "r").read())
+parser = argparse.ArgumentParser(description='Script to wrap produces html into template for site deployment')
+parser.add_argument('-l','--laf',help='Path to the template html file providing the look and feel', required=True)
+
+args = parser.parse_args()
+laf = args.laf
+
+if not laf:
+  laf = "site/book-template.html"
+
+t = airspeed.Template(open(laf, "r").read())
 bookTitle = "Maven: The Complete Reference"
 bookId = "ss-book-mvnref"
 path = 'target/site/reference'
