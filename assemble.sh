@@ -13,12 +13,7 @@ cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvn
 cp -r target/book-mvnref.chunked/* target/site/reference
 
 laf=../documentation-wrapper
-cp -r $laf/css target/site/reference
-cp -r $laf/assets target/site/reference
-cp -r $laf/js target/site/reference
-cp -r $laf/images target/site/reference
-cp -r $laf/font target/site/reference
-cp $laf/search.html target/site/reference
+cp -r $laf/* target/site/reference
 
 cp target/book-mvnref.pdf target/site/pdf/mvnref-pdf.pdf
 

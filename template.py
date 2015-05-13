@@ -19,6 +19,8 @@ path = 'target/site/reference'
 for infile in glob.glob( os.path.join(path, '*.html') ):
   if infile.endswith( 'search.html'):
     print( "  Ignoring search.html" )
+  elif infile.endswith( 'template.html'):
+    print( "  Ignoring template.html" )
   else:
     print "Reading File: " + infile
     body = open(infile, "r").read()
