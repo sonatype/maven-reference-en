@@ -12,13 +12,15 @@ cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvn
 
 cp -r target/book-mvnref.chunked/* target/site/reference
 
-cp -r site/css target/site/reference
-cp -r site/assets target/site/reference
-cp -r site/js target/site/reference
-cp -r site/images target/site/reference
-cp site/search.html target/site/reference
+laf=../documentation-wrapper
+cp -r $laf/css target/site/reference
+cp -r $laf/assets target/site/reference
+cp -r $laf/js target/site/reference
+cp -r $laf/images target/site/reference
+cp -r $laf/font target/site/reference
+cp $laf/search.html target/site/reference
 
 cp target/book-mvnref.pdf target/site/pdf/mvnref-pdf.pdf
 
-python template.py
+python template.py -l=$laf/template.html
 cp target/site/reference/index.html target/site/reference/public-book.html
