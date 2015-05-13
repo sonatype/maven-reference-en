@@ -12,7 +12,7 @@ cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvn
 
 cp -r target/book-mvnref.chunked/* target/site/reference
 
-laf=documentation-wrapper
+laf=../documentation-wrapper
 cp -r $laf/css target/site/reference
 cp -r $laf/assets target/site/reference
 cp -r $laf/js target/site/reference
