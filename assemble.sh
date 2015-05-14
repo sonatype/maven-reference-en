@@ -6,8 +6,8 @@ pdf=target/site/pdf
 rm -rf $html
 rm -rf $pdf
 
-mkdir -p target/site/reference
-mkdir -p target/site/pdf
+mkdir -p $html
+mkdir -p $pdf
 
 # this relies on the example project being build prior to this and is achieved
 # with a separate build step
