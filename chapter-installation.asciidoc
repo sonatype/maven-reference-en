@@ -18,10 +18,10 @@ Software License, Version 2.0.
 [[installation-sect-java]]
 === Verify your Java Installation
 
-While Maven can run on Java 1.6, this book assumes that you are
-running at least Java 7. Go with the most recent stable Java
-Development Kit (JDK) available for your operating system. Either Java
-5 or Java 6 will work with all of the examples in this book.
+The latest version of Maven currently requires the usage of Java 7 or
+higher. While older Maven versions can run on older Java versions, this book
+assumes that you are running at least Java 7. Go with the most recent
+stable Java Development Kit (JDK) available for your operating system.
 
 ----
 % java -version
@@ -30,16 +30,13 @@ Java(TM) SE Runtime Environment (build 1.7.0_71-b14)
 Java HotSpot(TM) 64-Bit Server VM (build 24.71-b01, mixed mode)
 ----
 
+TIP: More details about Java version required for different Maven
+versions can be found http://maven.apache.org/docs/history.html[on theMaven site].
+
 Maven works with all certified Java^TM^ compatible development kits,
 and a few non-certified implementations of Java. The examples in this
 book were written and tested against the official Java Development Kit
-releases downloaded from the Sun Microsystems web site. If you’re
-working with a Linux distribution, you may need to download Sun’s JDK
-yourself and make sure it’s the version you’re invoking (by running
-+java -version+). Now that Sun has open-sourced Java, this will
-hopefully improve in the future, and we’ll get the Sun JRE and JDK by
-default even in purist Linux distributions. Until that day, you may
-need to do some of your own downloading.
+releases downloaded from the Oracle web site. 
 
 [[installation-sect-maven-download]]
 === Downloading Maven
@@ -50,7 +47,7 @@ http://maven.apache.org/download.html[http://maven.apache.org/download.html].
 When downloading Maven, you can download the latest available version
 the latest available version of Maven 3 in various branches. The
 latest version of Maven 3 when this book was last updated was Maven
-3.2.5. If you are not familiar with the Apache Software License, you
+3.3.3. If you are not familiar with the Apache Software License, you
 should familiarize yourself with the terms of the license before you
 start using the product. More information on the Apache Software
 License can be found in <<installation-sect-license>>.
@@ -74,8 +71,8 @@ Maven on all of these operating systems is relatively painless and
 straightforward. The following sections outline the recommended
 best-practice for installing Maven on a variety of operating systems.
 
-[[installation-sect-maven-osx]]
-==== Installing Maven on Mac OSX
+[[installation-sect-maven-nix]]
+==== Installing Maven on Linux, BSD or Mac OSX
 
 You can download a binary release of Maven from
 http://maven.apache.org/download.html[http://maven.apache.org/download.html].
@@ -134,18 +131,6 @@ System environment variables through the control panel, you'll have to
 execute these two lines every time you log into your system. You
 should modify both of these variables through the Control Panel in
 Microsoft Windows.
-
-[[installation-sect-maven-linux]]
-==== Installing Maven on Linux
-
-To install Maven on a Linux machine follow the exact procedure
-outlined in <<installation-sect-maven-osx>>.
-
-[[installation-sect-bsd]]
-==== Installing Maven on FreeBSD or OpenBSD
-
-To install Maven on a FreeBSD or OpenBSD machine, follow the exact
-procedure outlined in <<installation-sect-maven-osx>>.
 
 [[installation-sect-test-install]]
 === Testing a Maven Installation
@@ -245,8 +230,7 @@ operating system's equivalent.
 ==== Upgrading a Maven Installation
 
 If you've installed Maven on a Mac OSX or Unix machine according to
-the details in <<installation-sect-maven-osx>> and
-<<installation-sect-maven-linux>>, it should be easy to upgrade to
+the details in <<installation-sect-maven-nix>>, it should be easy to upgrade to
 newer versions of Maven when they become available. Simply install the
 newer version of Maven ('/opt/maven-3.future') next to the
 existing version of Maven ('/opt/maven-3.2.5'). Then switch the
