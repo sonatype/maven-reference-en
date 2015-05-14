@@ -1,7 +1,10 @@
 #!/bin/bash
 
-rm -rf target/site/reference
-rm -rf target/site/pdf
+html=target/site/reference
+pdf=target/site/pdf
+
+rm -rf $html
+rm -rf $pdf
 
 mkdir -p target/site/reference
 mkdir -p target/site/pdf
@@ -10,16 +13,10 @@ mkdir -p target/site/pdf
 # with a separate build step
 cp examples/target/mvnref-book-examples-1.0-SNAPSHOT-project.zip target/site/mvnref-examples.zip
 
-cp -r target/book-mvnref.chunked/* target/site/reference
-cp target/book-mvnref.pdf target/site/pdf/mvnref-pdf.pdf
+cp -r target/book-mvnref.chunked/* $html
+cp target/book-mvnref.pdf $pdf/mvnref-pdf.pdf
 
 echo "Invoking templating process"
-../documentation-wrapper/apply-template.sh ../maven-reference-en/target/site/reference "Maven: The Complete Reference" "017156762307045728421:e5xgzsj0rjw"
+../documentation-wrapper/apply-template.sh ../maven-reference-en/$html "Maven: The Complete Reference" "017156762307045728421:e5xgzsj0rjw"
 
-
-#laf=../documentation-wrapper
-#cp -r $laf/* target/site/reference
-
-
-#python template.py -l=$laf/template.html
-#cp target/site/reference/index.html target/site/reference/public-book.html
+cp $html/index.html $html/public-book.html
