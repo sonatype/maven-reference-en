@@ -1373,7 +1373,7 @@ as pom.
 
 If you later decide to switch to a different JDBC driver (for example,
 JTDS), just replace the dependencies in the +persistence-deps+ project
-to use +net.++sourceforge.jtds:jtds+ instead of
+to use +net.sourceforge.jtds:jtds+ instead of
 +mysql:mysql-java-connector+ and update the version number. All
 projects depending on +persistence-deps+ will use JTDS if they decide
 to update to the newer version. Consolidating related dependencies is
