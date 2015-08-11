@@ -1164,7 +1164,7 @@ classifier::
 
 When we talk of dependencies in this book, we often use the following
 shorthand notation to describe a dependency:
-+groupId+:+artifactId+:+version+. To refer to the 2.5 release of the
++groupId:artifactId:version+. To refer to the 2.5 release of the
 Spring Framework, we would refer to it as
 +org.springframework:spring:2.5+. When you ask Maven to print out a
 list of dependencies with the Maven Dependency plugin, you will also
