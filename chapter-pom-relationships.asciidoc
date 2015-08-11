@@ -880,11 +880,11 @@ test scope usually do not affect a project.
 Transitive dependencies which are compile and runtime scoped
 usually affect a project regardless of the scope of a direct
 dependency. Transitive dependencies which are compile scoped will have
-the same scope regardless of the scope of the direct
-dependency. Transitive dependencies which are runtime scoped will
+the same scope of the direct dependency . Transitive dependencies which 
+are runtime scoped will
 generally have the same scope of the direct dependency except when the
 direct dependency has a scope of compile. When a transitive dependency
-is runtime scoped and a direct is compile scoped the direct dependency
+is runtime scoped and the direct dependency is compile scoped, 
 the transitive dependency will have an effective scope of runtime.
 
 [[pom-relationships-sect-conflict]]
