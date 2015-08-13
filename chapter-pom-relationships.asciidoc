@@ -473,7 +473,8 @@ development only.
 [[pom-relationships-sect-property-refs]]
 ==== Property References
 
-preceded by a dollar sign and surrounded by two curly braces. For
+The syntax for using a property in Maven is to surround the property name
+with two curly braces and precede it with a dollar symbol. For
 example, consider the following POM:
 
 ----
