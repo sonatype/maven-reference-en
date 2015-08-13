@@ -820,8 +820,8 @@ owner can write to directories in this set.
 The +fileSet+ entry offers some other options as well. First, it
 allows for an +excludes+ section with a form identical to the
 +includes+ section. These exclusion patterns allow you to exclude
-specific file patterns from a +fileSet+. Include patterns take
-precedence over exclude patterns. Additionally, you can set the
+specific file patterns from a +fileSet+. Exclude patterns take
+precedence over include patterns. Additionally, you can set the
 +filtering+ flag to true if you want to substitute property values for
 expressions within the included files. Expressions can be delimited
 either by +${+ and +}+ (standard Maven expressions like
