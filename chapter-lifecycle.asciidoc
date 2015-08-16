@@ -146,7 +146,7 @@ produce output similar to the following:
 [INFO] ------------------------------------------------------------------------
 ----
 
-In addition to configuring Maven to run a goal during the+ pre-clean+
+In addition to configuring Maven to run a goal during the +pre-clean+
 phase, you can also customize the Clean plugin to delete files in
 addition to the build output directory. You can configure the plugin
 to remove specific files in a +fileSet+. The example below configures
