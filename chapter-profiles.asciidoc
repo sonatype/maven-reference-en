@@ -151,7 +151,7 @@ transition from using the output of a build to running a build. They
 have to first become a developer, and if it is difficult to learn how
 to build a project, this end-user has a disincentive to take the time
 to contribute to a project. In a widely portable project, an end-user
-doesn't have to follow a set or arcane build instructions to start
+doesn't have to follow a set of arcane build instructions to start
 becoming a developer, they can download the source, modify the source,
 build, and submit a contribution without asking someone to help them
 set up a build environment. When the cost of contributing source back
