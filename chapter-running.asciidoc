@@ -513,9 +513,9 @@ Maven profiles, display an effective POM, print the effective
 settings, or list the attributes of a Maven plugin.
 
 The Maven Help plugin has four goals. The first three
-goals—+active-profiles+, +effective-pom+, and
-+effective-settings+—describe a particular project and must be run in
-the base directory of a project. The last goal—+describe+—is slightly
+goals — +active-profiles+, +effective-pom+, and
++effective-settings+ — describe a particular project and must be run in
+the base directory of a project. The last goal — +describe+ — is slightly
 more complex, showing you information about a plugin or a plugin
 goal. The following commands provide some general information about
 the four goals:
