@@ -761,10 +761,11 @@ benefit from the transitive dependency.
 [[pom-relationships-sect-version-ranges]]
 ==== Dependency Version Ranges
 
-dependency; you can specify a range of versions that would satisfy a
+Instead of a specific version for each dependency, you can alternatively
+specify a range of versions that would satisfy a
 given dependency. For example, you can specify that your project
 depends on version 3.8 or greater of JUnit, or anything between
-versions 1.2.10 and 1.2.14 of JUnit. You do this by surrounding one or
+versions 4.5 and 4.10 of JUnit. You do this by surrounding one or
 more version numbers with the following characters:
 
 (, )::
