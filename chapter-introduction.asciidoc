@@ -47,7 +47,7 @@ have started to adhere to these principles in reaction to the
 configuration complexity of frameworks such as the initial EJB 2.1
 specifications. An illustration of convention over configuration is
 something like EJB3 persistence: all you need to do to make a
-particular bean persistent is to annotate that class with +@Entity. +
+particular bean persistent is to annotate that class with +@Entity+.
 The framework assumes table and column names based on the name of the
 class and the names of the properties. Hooks are provided for you to
 override these default, assumed names if the need arises, but, in most
