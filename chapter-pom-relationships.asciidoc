@@ -742,7 +742,7 @@ EHCache implementation, you would need to add the following
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
-            <artifactId>swarmcache</artifactId>
+            <artifactId>ehcache</artifactId>
             <version>1.4.1</version>
         </dependency>
     </dependencies>
