@@ -303,29 +303,29 @@ the Maven Site plugin.
 ----
 sample-project
 +- src/
-+- site/
-+- apt/
-|  +- index.apt
-|  +- about.apt
-|  |
-|  +- developer/
-| +- embedding.apt
-|
-+- fml/
-|  +- faq.fml
-|
-+- resources/
-|  +- images/
-|  |  +- banner-left.png
-|  |  +- banner-right.png
-|  |
-|  +- architecture.html
-|  +- jira-roadmap-export-2007-03-26.html
-|
-+- xdoc/
-|  +- xml-example.xml
-|
-+- site.xml
+   +- site/
+      +- apt/
+      |  +- index.apt
+      |  +- about.apt
+      |  |
+      |  +- developer/
+      |  +- embedding.apt
+      |
+      +- fml/
+      |  +- faq.fml
+      |
+      +- resources/
+      |  +- images/
+      |  |  +- banner-left.png
+      |  |  +- banner-right.png
+      |  |
+      |  +- architecture.html
+      |  +- jira-roadmap-export-2007-03-26.html
+      |
+      +- xdoc/
+      |  +- xml-example.xml
+      |
+      +- site.xml
 
 ----
 
