@@ -515,7 +515,7 @@ deployment, we'll include the following in '$HOME/.m2/settings.xml':
 The server authentication section can contain a number of
 authentication elements. In the event you're using SCP for deployment,
 you may wish to use public-key authentication. To do this, specify the
-+publicKey+ and+ passphrase+ elements, instead of the password
++publicKey+ and +passphrase+ elements, instead of the password
 element. You may still want to configure the username element,
 depending on your server's configuration.
 
@@ -904,7 +904,7 @@ templates:
 
 *  Maven Default Skin - +org.apache.maven.skins:maven-default-skin:1.0+ 
 
-*  Maven Stylus Skin - org.apache.maven.skins:maven-stylus-skin:1.0.1  
+*  Maven Stylus Skin - +org.apache.maven.skins:maven-stylus-skin:1.0.1+ 
 
 You can find an up-to-date and comprehensive listing in the Maven
 repository:
