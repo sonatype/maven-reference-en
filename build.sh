@@ -14,7 +14,7 @@ cp -r figs target
 cp -r images target
 cp -r promos/* target
 
-a2x -v -k -fpdf -dbook --dblatex-opts=" -P doc.publisher.show=0 -P latex.output.revhistory=0  -s ./latex/custom-docbook.sty" -D target book-mvnref.asciidoc
+a2x -v -k -fpdf -dbook --dblatex-opts=" -P doc.publisher.show=0 -P latex.output.revhistory=0  -s ./latex/custom-docbook.sty" -D target book-mvnref.asciidoc -a gitrevision=`git describe --dirty`
 
 # Build the Chunked HTML
 a2x -v -k -fchunked --xsl-file=docbook-xsl/custom-chunked.xsl \
