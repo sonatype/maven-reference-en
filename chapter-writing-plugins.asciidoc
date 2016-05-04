@@ -583,7 +583,7 @@ my-first-plugin which contains the following POM.
 </project>
 ----
 
-The most import element in a plugin project's POM is the packaging
+The most important element in a plugin project's POM is the packaging
 element which has a value of +maven-plugin+. This packaging element
 customizes the Maven lifecycle to include the necessary goals to
 create a plugin descriptor. The plugin lifecycle was introduced in
