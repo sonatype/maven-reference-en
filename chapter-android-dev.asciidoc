@@ -135,7 +135,7 @@ repository server that is available to all users. If you are not
 currently using a repository manager, you should download Nexus and
 configure a user with permission to deploy artifacts to a
 repository. To get started with Nexus, read the
-http://www.sonatype.com/books/nexus-book/reference/install.html[Nexus
+http://books.sonatype.com/nexus-book/reference/install.html[Nexus
 Installation chapter] in the free, online Nexus book.
 
 As a first step you will need to edit the +repo.url+ property in the

@@ -321,7 +321,7 @@ advanced reactor options. This section’s example project may be
 downloaded with the book’s example code at:
 
 ----
-http://www.sonatype.com/books/mvnref-book/mvnref-examples.zip
+http://books.sonatype.com/mvnref-book/mvnref-examples.zip
 ----
 
 Unzip this archive in any directory, and then go to the 'ch-running/'

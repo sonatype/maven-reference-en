@@ -26,7 +26,7 @@ API documentation alongside source and compiled binaries like jar
 files. Assemblies usually come in handy when you are building the
 final distribution of a product. For example, products like Nexus
 introduced in
-http://www.sonatype.com/books/nexus-book/reference/[Repository
+http://books.sonatype.com/nexus-book/reference/[Repository
 Management with Nexus], are the product of large multi-module Maven
 products, and the final archive you download from Sonatype was created
 using a Maven Assembly.
