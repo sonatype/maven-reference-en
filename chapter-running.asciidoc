@@ -425,8 +425,8 @@ $ mvn --projects sample-client-connector,sample-rest install
 ==== Making a Subset of Projects
 
 If you wanted to run a portion of the larger build, you would use the
-+-pl+ or +--projects+ option with the +-am+ or +--also-make
-option+. When you specify a project with the +-am+ option, Maven will
++-pl+ or +--projects+ option with the +-am+ or +--also-make+
+option. When you specify a project with the +-am+ option, Maven will
 build all of the projects that the specified project depends upon
 (either directly or indirectly). Maven will examine the list of
 projects and walk down the dependency tree, finding all of the
