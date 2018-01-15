@@ -35,7 +35,7 @@ features. A property is always surrounded by '+++${+++' and
 one would write:
 
 ----
-1.0 
+${project.version} 
 ----
 
 There are some implicit properties available in any Maven project,
