@@ -1,8 +1,13 @@
-Maven: The Complete Reference
+## Maven: The Complete Reference
 
-Hello there.  Maven: The Complete Reference in an asciidoc format.  To
-edit asciidoc, use Emacs, use vi, use TextMate, use Notepad.  There's
-really just a single file you need to worry about:
+Hello there.  Maven: The Complete Reference in an asciidoc format.  
+
+To edit asciidoc, use Emacs, use vi, use TextMate, use Notepad.  
+
+To just view you can use live preview tool like
+[book-mvnref.asciidoc](https://previewhub.github.io/asciidoc/?https://raw.githubusercontent.com/sonatype/maven-reference-en/master/book-mvnref.asciidoc)
+
+There'sreally just a single file you need to worry about:
 
 * book-mvnref.asciidoc
 
