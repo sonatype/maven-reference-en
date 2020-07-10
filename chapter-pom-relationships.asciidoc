@@ -984,8 +984,10 @@ replace transitive dependencies:
   licensing and a time-consuming manual install into a custom
   repository (Sun's JTA JAR) versus a freely distributed version of
   the same API available in the central Maven repository (Geronimo's
-  JTA implementation).  [[pom-relationships-sect-dep-manage]] ====
-  Dependency Management
+  JTA implementation).
+
+[[pom-relationships-sect-dep-manage]]
+==== Dependency Management
 
 Once you've adopted Maven at your super complex enterprise and you
 have two hundred and twenty inter-related Maven projects, you are
